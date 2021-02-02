@@ -4,16 +4,24 @@ import * as csv from "fast-csv";
 import { add, resetIndex } from "./elastic";
 import { Enterprise, mapEnterprise } from "./enterprise";
 
-const enterprises: Enterprise[] = [];
-
 const parseEnterprises = () => {
   const stream = fs.createReadStream(path.resolve("./siret-idcc.csv"));
+
+  const BUFFER_SIZE = 500;
+  let enterprisesBuffer: Enterprise[] = [];
+
   stream
     .pipe(csv.parse({ headers: true }))
     .on("error", (error) => console.error(error))
-    .on("data", (e) => {
-      enterprises.push(e);
-      //   if (enterprises.length > 10) stream.destroy();
+    .on("data", async (e) => {
+      enterprisesBuffer.push(e);
+
+      if (enterprisesBuffer.length >= BUFFER_SIZE) {
+        // create an immutable copy of the array
+        const batch = enterprisesBuffer.slice();
+        enterprisesBuffer = [];
+        await add(batch);
+      }
     })
     .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
 
@@ -22,9 +30,4 @@ const parseEnterprises = () => {
   );
 };
 
-const ingestEnterprises = async () => {
-  await resetIndex();
-  await add(enterprises);
-};
-
-parseEnterprises().then(() => ingestEnterprises());
+resetIndex().then(() => parseEnterprises());

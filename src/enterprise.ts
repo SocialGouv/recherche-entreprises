@@ -12,11 +12,12 @@ export type Enterprise = {
   activitePrincipaleUniteLegale: string;
   // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
   siret: number;
-  codePostalEtablissement: number;
+  codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
   // etatAdministratifEtablissement: 'A',
   // MOIS: '2020-07',
   idcc: number;
+  geo_adresse: string;
   // DATE_MAJ: '2020/08/28'
 };
 
@@ -36,7 +37,17 @@ export const mappings = {
     denominationUsuelle3UniteLegale: { type: "keyword" },
     idcc: { type: "keyword" },
 
-    rawText: {
+    villeCp: {
+      analyzer: "french_indexing",
+      search_analyzer: "french",
+      type: "text",
+    },
+    address: {
+      analyzer: "french_indexing",
+      search_analyzer: "french",
+      type: "text",
+    },
+    naming: {
       analyzer: "french_indexing",
       search_analyzer: "french",
       type: "text",
@@ -46,19 +57,28 @@ export const mappings = {
 
 export const mapEnterprise = (enterprise: Enterprise) => {
   // ranking feature cannot be 0
-  if (enterprise.trancheEffectifsUniteLegale == 0)
+  if (
+    !Number.parseFloat(
+      (enterprise.trancheEffectifsUniteLegale as unknown) as string
+    )
+  )
     enterprise.trancheEffectifsUniteLegale = 0.1;
 
   return {
-    rawText: [
+    address: enterprise.geo_adresse,
+    villeCp: [
+      enterprise.codePostalEtablissement,
+      enterprise.libelleCommuneEtablissement,
+    ]
+      .filter((t) => t)
+      .join(" "),
+    naming: [
       enterprise.nomUniteLegale,
       enterprise.nomUsageUniteLegale,
       enterprise.denominationUniteLegale,
       enterprise.denominationUsuelle1UniteLegale,
       enterprise.denominationUsuelle2UniteLegale,
       enterprise.denominationUsuelle3UniteLegale,
-      enterprise.codePostalEtablissement,
-      enterprise.libelleCommuneEtablissement,
     ]
       .filter((t) => t)
       .join(" "),

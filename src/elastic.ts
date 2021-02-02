@@ -5,7 +5,7 @@ const ELASTICSEARCH_URL =
   process.env.ELASTICSEARCH_URL || "http://localhost:9200";
 const API_KEY = process.env.API_KEY;
 
-const indexName = "siren";
+const indexName = "cdtn-siren";
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
