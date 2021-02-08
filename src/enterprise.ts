@@ -8,6 +8,12 @@ export type Enterprise = {
   denominationUsuelle1UniteLegale: string;
   denominationUsuelle2UniteLegale: string;
   denominationUsuelle3UniteLegale: string;
+
+  enseigne1Etablissement: string;
+  enseigne2Etablissement: string;
+  enseigne3Etablissement: string;
+  denominationUsuelleEtablissement: string;
+
   // categorieJuridiqueUniteLegale: '5599',
   activitePrincipaleUniteLegale: string;
   // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
@@ -37,7 +43,10 @@ export const mappings = {
     denominationUsuelle3UniteLegale: { type: "keyword" },
     idcc: { type: "keyword" },
 
-    villeCp: {
+    cp: {
+      type: "keyword",
+    },
+    ville: {
       analyzer: "french_indexing",
       search_analyzer: "french",
       type: "text",
@@ -66,20 +75,25 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   return {
     address: enterprise.geo_adresse,
-    villeCp: [
-      enterprise.codePostalEtablissement,
-      enterprise.libelleCommuneEtablissement,
-    ]
-      .filter((t) => t)
-      .join(" "),
-    naming: [
-      enterprise.nomUniteLegale,
-      enterprise.nomUsageUniteLegale,
-      enterprise.denominationUniteLegale,
-      enterprise.denominationUsuelle1UniteLegale,
-      enterprise.denominationUsuelle2UniteLegale,
-      enterprise.denominationUsuelle3UniteLegale,
-    ]
+    cp: enterprise.codePostalEtablissement,
+    ville: enterprise.libelleCommuneEtablissement,
+    naming: Array.from(
+      new Set([
+        enterprise.nomUniteLegale,
+        enterprise.nomUsageUniteLegale,
+        enterprise.denominationUniteLegale,
+        enterprise.denominationUsuelle1UniteLegale,
+        enterprise.denominationUsuelle2UniteLegale,
+        enterprise.denominationUsuelle3UniteLegale,
+
+        enterprise.enseigne1Etablissement,
+        enterprise.enseigne2Etablissement,
+        enterprise.enseigne3Etablissement,
+        enterprise.denominationUsuelleEtablissement,
+
+        enterprise.codePostalEtablissement,
+      ])
+    )
       .filter((t) => t)
       .join(" "),
     ...Object.fromEntries(
