@@ -49,7 +49,24 @@ const analysis = {
   analyzer: {
     french_indexing: {
       tokenizer: "standard",
-      filter: ["french_elision", "lowercase", "french_stop", "french_stemmer"],
+      filter: [
+        "french_elision",
+        "lowercase",
+        "french_stop",
+        "french_stemmer",
+        // very important filter in order to remove duplication between
+        // the different naming fields (nom, enseigne, denomination...)
+        "unique",
+      ],
+    },
+  },
+};
+
+const index = {
+  similarity: {
+    bm25_no_norm_length: {
+      type: "BM25",
+      b: 0,
     },
   },
 };
@@ -103,8 +120,7 @@ export const resetIndex = async () => {
   const newIndex = `${indexName}-${id}`;
   const indexPattern = `${indexName}-*`;
 
-  const body = { mappings, settings: { analysis } };
-  console.log(JSON.stringify(body));
+  const body = { mappings, settings: { analysis, index } };
 
   await esClient.indices.create({
     index: newIndex,

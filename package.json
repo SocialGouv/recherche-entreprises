@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.12.13",
     "@elastic/elasticsearch": "^7.10.0",
-    "fast-csv": "^4.3.6"
+    "danfojs-node": "^0.2.0",
+    "fast-csv": "^4.3.6",
+    "tslab": "^1.0.15"
   },
   "devDependencies": {
     "ts-node": "^9.1.1",
