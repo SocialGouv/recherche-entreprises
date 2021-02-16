@@ -6,7 +6,8 @@ include:
 stages:
   - register
   - download
-  -
+  - assemble
+  - index
 
 Register image:
   stage: register
