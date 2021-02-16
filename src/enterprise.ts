@@ -5,6 +5,7 @@ export type Enterprise = {
   // categorieEntreprise: 'PME',
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
+  sigleUniteLegale: string;
 
   denominationUniteLegale: string;
   denominationUsuelle1UniteLegale: string;
@@ -44,6 +45,7 @@ export const mappings = {
 
     nomUniteLegale: { type: "keyword" },
     nomUsageUniteLegale: { type: "keyword" },
+    sigleUniteLegale: { type: "keyword" },
 
     denominationUniteLegale: { type: "keyword" },
     denominationUsuelle1UniteLegale: { type: "keyword" },
@@ -93,6 +95,8 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     new Set([
       enterprise.nomUniteLegale,
       enterprise.nomUsageUniteLegale,
+      enterprise.sigleUniteLegale,
+
       enterprise.denominationUniteLegale,
       enterprise.denominationUsuelle1UniteLegale,
       enterprise.denominationUsuelle2UniteLegale,

@@ -1,0 +1,45 @@
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_register_stage.yml
+    ref: v17.19.0
+  #
+stages:
+  - register
+  - download
+  -
+
+Register image:
+  stage: register
+  extends: .base_register_stage
+  variables:
+    CONTEXT: . # The folder where the Dockerfile is
+    IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
+
+Download CSV data:
+  stage: download
+  script:
+    - bash ./scripts/download_data.sh
+  artifacts:
+    paths:
+      - data/
+    expire_in: 1 hour
+
+Assemble CSV:
+  stage: assemble
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  artifacts:
+    paths:
+      - data/
+    expire_in: 1 hour
+  script:
+    - python3 assemble_data.py data/StockUniteLegale_utf8.zip  data/geo/ data/WEEZ.csv assembly.csv
+
+Run Elastic indexation:
+  stage: index
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  artifacts:
+    paths:
+      - data/
+    expire_in: 1 hour
+  script:
+    - less data/assembly.csv

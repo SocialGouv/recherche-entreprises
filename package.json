@@ -14,6 +14,8 @@
     "@babel/runtime": "^7.12.13",
     "@elastic/elasticsearch": "^7.10.0",
     "danfojs-node": "^0.2.0",
+    "data-forge": "^1.8.17",
+    "data-forge-fs": "0.0.9",
     "fast-csv": "^4.3.6",
     "tslab": "^1.0.15"
   },
