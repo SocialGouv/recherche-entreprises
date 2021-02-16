@@ -3,8 +3,8 @@
 # borrowed from annuaire entreprise  :
 # https://github.com/etalab/api-annuaire-entreprises/tree/master/db/init
 
-dir="data/"
-geodir=$dir"geo/"
+dir="./data"
+geodir=$dir"/geo"
 
 wget https://files.data.gouv.fr/insee-sirene/StockUniteLegale_utf8.zip --directory-prefix=$dir
 
@@ -27,3 +27,5 @@ done
 
 # WEEZ data
 wget https://github.com/SocialGouv/siret2idcc/blob/master/data/WEEZ.csv?raw=true --directory-prefix=$dir
+
+python3 assemble_data.py ${dir}/StockUniteLegale_utf8.zip  ${geodir} ${dir}/WEEZ.csv ${dir}/assembly.csv
