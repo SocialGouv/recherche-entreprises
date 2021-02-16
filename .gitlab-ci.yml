@@ -23,13 +23,15 @@ Download and assemble CSV data:
   artifacts:
     paths:
       - data/
-    expire_in: 1 hour
+    expire_in: 4 hour
 
 Run Elastic indexation:
   stage: index
   artifacts:
     paths:
       - data/
-    expire_in: 1 hour
+    expire_in: 4 hour
   script:
-    - less data/assembly.csv
+    - yarn install
+    - yarn build
+    - node dist/index.js
