@@ -25,16 +25,19 @@ def read_siren(stock_unite_legale_file):
         a Pandas dataframe containing the list of all companies that are still open
         and employ people
     """
-    raw = pd.read_csv(stock_unite_legale_file)
-    is_ouvert = raw["etatAdministratifUniteLegale"] == "A"
-    is_employeur = raw["caractereEmployeurUniteLegale"] == "O"
-    is_admin = raw["etatAdministratifUniteLegale"] == "A"
-
-    employeurs = raw[is_ouvert & is_employeur & is_admin]
 
     selection = ["siren", "sigleUniteLegale", "trancheEffectifsUniteLegale", "categorieEntreprise", 'nomUniteLegale', 'nomUsageUniteLegale', 'denominationUniteLegale',
                  'denominationUsuelle1UniteLegale', 'denominationUsuelle2UniteLegale',
                  'denominationUsuelle3UniteLegale', "categorieJuridiqueUniteLegale", "activitePrincipaleUniteLegale", "nomenclatureActivitePrincipaleUniteLegale"]
+    etatAdmin = "etatAdministratifUniteLegale"
+    caractereEmployeur = "caractereEmployeurUniteLegale"
+    cols = selection + [etatAdmin, caractereEmployeur]
+    raw = pd.read_csv(stock_unite_legale_file, usecols=cols)
+    is_ouvert = raw[etatAdmin] == "A"
+    is_employeur = raw[caractereEmployeur] == "O"
+    is_admin = raw[etatAdmin] == "A"
+
+    employeurs = raw[is_ouvert & is_employeur & is_admin]
 
     return employeurs[selection]
 
@@ -59,7 +62,8 @@ def read_geo(geo_directory):
     geo = {}
     for file in geo_files:
         geo[file] = pd.read_csv(
-            geo_directory + file, dtype={"codePostalEtablissement": np.dtype(str)})[geo_selection]
+            geo_directory + file, dtype={"codePostalEtablissement": np.dtype(str)}, usecols=geo_selection
+        )
 
     all_geo = pd.concat(geo.values(), ignore_index=True).dropna(
         subset=['siret'])
@@ -81,7 +85,7 @@ def read_idcc(idcc_file):
     idccs
         a Pandas dataframe containing siret / idcc associations
     """
-    idccs = pd.read_csv(idcc_file).rename(
+    idccs = pd.read_csv(idcc_file, usecols=["SIRET", "IDCC"]).rename(
         columns={"SIRET": "siret", "IDCC": "idcc"})
     return idccs
 
@@ -120,10 +124,16 @@ def main():
 
     args = parser.parse_args()
 
+    print("Read SIREN data")
     siren = read_siren(args.siren_file)
+
+    print("Read GEO data")
     geo = read_geo(args.geo_directory)
+
+    print("Read IDCC data")
     idcc = read_idcc(args.idcc_file)
 
+    print("Assemble datasets")
     assemble(siren, geo, idcc, args.output_file)
 
 

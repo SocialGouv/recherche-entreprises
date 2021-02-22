@@ -2,10 +2,12 @@ import * as fs from "fs";
 import * as path from "path";
 import * as csv from "fast-csv";
 import { add, resetIndex } from "./elastic";
-import { Enterprise, mapEnterprise } from "./enterprise";
+import { Enterprise } from "./enterprise";
+
+const ASSEMBLY_FILE = process.env.ASSEMBLY_FILE || "../output/assembly.csv";
 
 const parseEnterprises = () => {
-  const stream = fs.createReadStream(path.resolve("./siret-idcc.csv"));
+  const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
 
   const BUFFER_SIZE = 500;
   let enterprisesBuffer: Enterprise[] = [];
