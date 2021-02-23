@@ -28,7 +28,7 @@ export type Enterprise = {
   // etatAdministratifEtablissement: 'A',
   // MOIS: '2020-07',
 
-  idcc: number;
+  idcc: number | undefined;
   geo_adresse: string;
 
   // DATE_MAJ: '2020/08/28'
@@ -57,6 +57,7 @@ export const mappings = {
     enseigne3Etablissement: { type: "keyword" },
     denominationUsuelleEtablissement: { type: "keyword" },
 
+    withIdcc: { type: "boolean" },
     idcc: { type: "keyword" },
 
     cp: { type: "keyword" },
@@ -106,8 +107,6 @@ export const mapEnterprise = (enterprise: Enterprise) => {
       enterprise.enseigne2Etablissement,
       enterprise.enseigne3Etablissement,
       enterprise.denominationUsuelleEtablissement,
-
-      enterprise.codePostalEtablissement,
     ])
   )
     .filter((t) => t)
@@ -115,9 +114,13 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   return {
     address: enterprise.geo_adresse,
-    cp: enterprise.codePostalEtablissement,
+    cp: enterprise.codePostalEtablissement || undefined,
     ville: enterprise.libelleCommuneEtablissement,
     naming,
+    withIdcc:
+      enterprise.idcc !== undefined &&
+      enterprise.idcc !== null &&
+      enterprise.idcc != 0,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),

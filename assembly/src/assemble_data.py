@@ -93,10 +93,7 @@ def read_idcc(idcc_file):
 def assemble(siren, geo, idcc, output):
     sirenGeo = pd.merge(siren, geo, on='siren')
     merged = pd.merge(sirenGeo, idcc, how='left', on='siret')
-    merged_with_cc = merged[merged["idcc"].notnull()]
-    merged_with_cc = merged_with_cc[merged_with_cc.codePostalEtablissement.notnull()].astype({
-        'idcc': 'int'})
-    merged_with_cc.to_csv(output)
+    merged.astype({'idcc': 'Int64'}).to_csv(output)
 
 
 def main():
