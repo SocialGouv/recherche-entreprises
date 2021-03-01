@@ -23,6 +23,9 @@ const parseEnterprises = () => {
         const batch = enterprisesBuffer.slice();
         enterprisesBuffer = [];
         await add(batch);
+
+        // to run experiments
+        // stream.destroy();
       }
     })
     .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));

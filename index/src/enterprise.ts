@@ -1,3 +1,5 @@
+import { codesNaf } from "./naf";
+
 export type Enterprise = {
   siren: number;
   trancheEffectifsUniteLegale: number;
@@ -18,7 +20,8 @@ export type Enterprise = {
   denominationUsuelleEtablissement: string;
 
   // categorieJuridiqueUniteLegale: '5599',
-  // activitePrincipaleUniteLegale: string;
+  activitePrincipaleUniteLegale: string;
+  activitePrincipaleEtablissement: string;
 
   // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
   siret: number;
@@ -80,6 +83,8 @@ export const mappings = {
       type: "text",
       similarity: "bm25_no_norm_length",
     },
+
+    activitePrincipale: { type: "keyword" },
   },
 };
 
@@ -112,11 +117,24 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     .filter((t) => t)
     .join(" ");
 
+  const codeActivitePrincipale = [
+    enterprise.activitePrincipaleEtablissement,
+    enterprise.activitePrincipaleUniteLegale,
+  ]
+    .map((c) => c.replace(".", ""))
+    .find((s) => s);
+
+  const activitePrincipale =
+    codeActivitePrincipale !== undefined
+      ? codesNaf.get(codeActivitePrincipale)
+      : undefined;
+
   return {
     address: enterprise.geo_adresse,
     cp: enterprise.codePostalEtablissement || undefined,
     ville: enterprise.libelleCommuneEtablissement,
     naming,
+    activitePrincipale,
     withIdcc:
       enterprise.idcc !== undefined &&
       enterprise.idcc !== null &&

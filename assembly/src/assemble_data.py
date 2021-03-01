@@ -57,7 +57,7 @@ def read_geo(geo_directory):
     """
     geo_files = [f for f in listdir(
         geo_directory) if isfile(join(geo_directory, f))]
-    geo_selection = ["enseigne1Etablissement", "enseigne2Etablissement", "enseigne3Etablissement", "denominationUsuelleEtablissement",
+    geo_selection = ["enseigne1Etablissement", "enseigne2Etablissement", "enseigne3Etablissement", "denominationUsuelleEtablissement", "activitePrincipaleEtablissement",
                      'siren', 'siret', 'codePostalEtablissement', 'libelleCommuneEtablissement', "etatAdministratifEtablissement", "geo_adresse"]
     geo = {}
     for file in geo_files:
