@@ -1,4 +1,10 @@
 import { codesNaf } from "./naf";
+import { getAgreements } from "@socialgouv/kali-data";
+
+const agreements = getAgreements();
+const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
+
+const idccs = [...ccMap.keys()];
 
 export type Enterprise = {
   siren: number;
@@ -31,7 +37,7 @@ export type Enterprise = {
   // etatAdministratifEtablissement: 'A',
   // MOIS: '2020-07',
 
-  idcc: number | undefined;
+  idcc: string | undefined;
   geo_adresse: string;
 
   // DATE_MAJ: '2020/08/28'
@@ -85,6 +91,7 @@ export const mappings = {
     },
 
     activitePrincipale: { type: "keyword" },
+    convention: { type: "keyword" },
   },
 };
 
@@ -129,16 +136,26 @@ export const mapEnterprise = (enterprise: Enterprise) => {
       ? codesNaf.get(codeActivitePrincipale)
       : undefined;
 
+  const convention = enterprise.idcc
+    ? ccMap.get(parseInt(enterprise.idcc))?.shortTitle
+    : undefined;
+
+  const withIdcc =
+    (enterprise.idcc !== undefined &&
+      enterprise.idcc !== null &&
+      enterprise.idcc !== "" &&
+      parseInt(enterprise.idcc) !== 0 &&
+      enterprise.idcc !== "0") ||
+    false;
+
   return {
     address: enterprise.geo_adresse,
     cp: enterprise.codePostalEtablissement || undefined,
     ville: enterprise.libelleCommuneEtablissement,
     naming,
     activitePrincipale,
-    withIdcc:
-      enterprise.idcc !== undefined &&
-      enterprise.idcc !== null &&
-      enterprise.idcc != 0,
+    convention,
+    withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
