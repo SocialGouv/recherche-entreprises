@@ -25,6 +25,8 @@ export type Enterprise = {
   enseigne3Etablissement: string;
   denominationUsuelleEtablissement: string;
 
+  etablissements: number;
+
   // categorieJuridiqueUniteLegale: '5599',
   activitePrincipaleUniteLegale: string;
   activitePrincipaleEtablissement: string;
@@ -46,6 +48,8 @@ export type Enterprise = {
 export const mappings = {
   properties: {
     trancheEffectifsUniteLegale: { type: "rank_feature" },
+
+    etablissements: { type: "rank_feature" },
 
     siret: { type: "keyword" },
     siren: { type: "keyword" },
