@@ -96,7 +96,14 @@ def read_idcc(idcc_file):
 def assemble(siren, geo, idcc, output):
     sirenGeo = pd.merge(siren, geo, on='siren')
     merged = pd.merge(sirenGeo, idcc, how='left', on='siret')
-    merged.astype({'idcc': 'Int64'}).to_csv(output)
+
+    # add etablissement counts
+    etsCounts = merged.siren.value_counts().rename_axis(
+        'siren').reset_index(name='etablissements')
+    withEts = pd.merge(merged, etsCounts, on='siren')
+
+    # persits as CSV file
+    withEts.astype({'idcc': 'Int64'}).to_csv(output)
 
 
 def main():
