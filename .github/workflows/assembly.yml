@@ -10,13 +10,24 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Fetch data
+      - name: Fetch data 🌍
         run: |
           export DATA_DIR="./data"
+          export OUTPUT_DIR="./output"
           mkdir $DATA_DIR || true
+          mkdir $OUTPUT_DIR || true
           ./assembly/scripts/get-data.sh
+          echo "--"
           ls $DATA_DIR
+          echo "--"
           ls
+          echo "--"
           ./assembly/scripts/assemble.sh
+          echo "--"
           ls $DATA_DIR
-          ls
+          echo "--"
+          ls $OUTPUT_DIR
+          echo "--"
+          ls -la
+          tar -czvf $OUTPUT_DIR/assembly.tgz $OUTPUT_DIR/assembly.csv
+          ls -la
