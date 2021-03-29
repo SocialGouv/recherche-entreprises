@@ -1,8 +1,6 @@
 # cdtn-entreprises : recherche d'entreprises
 
-Ces scripts permettent de générer un index Elastic Search qui regroupe toutes les informations utiles pour rechercher un établissement ou une entreprise.
-
-Exemple de requête par : établissement, raison sociale, code postal, ville, siret/siren, groupé par SIREN et trié par effectif
+Ces scripts permettent de générer un index Elastic Search qui regroupe toutes les informations utiles pour rechercher un établissement ou une entreprise par établissement, raison sociale, code postal, ville, siret/siren, effectif, convention collective...
 
 ## Stages :
 
