@@ -12,7 +12,7 @@ Download and assemble CSV data:
   stage: assemble
   image: ubuntu:20.04
   script: |
-    apt-get install -y wget
+    apt-get --update install -y wget
     export DATA_DIR="./data"
     export OUTPUT_DIR="./output"
     mkdir $DATA_DIR
