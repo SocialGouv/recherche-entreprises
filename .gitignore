@@ -3,3 +3,4 @@ data/
 python-env/
 node_modules
 siret-idcc.csv
+api/dist

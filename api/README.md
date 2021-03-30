@@ -1,5 +1,7 @@
 # API recherche d'entreprises
 
+Exemple d'API qui exploite l'index ElasticSearch [recherche-entreprises](https://github.com/socialgouv/recherche-entreprises)
+
 ```sh
 yarn install
 yarn build

@@ -1,7 +1,8 @@
 {
-  "name": "enterprises",
+  "name": "@socialgouv/recherche-enterprises-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sample API for recherche-entreprises",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "dev": "node -r ts-node/register src/index.ts",
@@ -9,17 +10,10 @@
     "start": "node dist/index.js",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "@babel/runtime": "^7.12.13",
     "@elastic/elasticsearch": "^7.12.0",
-    "@socialgouv/kali-data": "^2.55.0",
-    "danfojs-node": "^0.2.0",
-    "data-forge": "^1.8.17",
-    "data-forge-fs": "0.0.9",
-    "fast-csv": "^4.3.6",
     "koa": "^2.13.1",
     "koa-router": "^10.0.0",
     "tslab": "^1.0.15"
@@ -29,6 +23,7 @@
     "@types/koa": "^2.13.1",
     "@types/koa-router": "^7.4.1",
     "@types/supertest": "^2.0.10",
+    "@vercel/ncc": "^0.28.2",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "supertest": "^6.1.3",
