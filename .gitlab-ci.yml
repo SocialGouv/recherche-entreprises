@@ -1,37 +1,38 @@
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_register_stage.yml
-    ref: v17.19.0
-  #
+# include:
+#   - project: SocialGouv/gitlab-ci-yml
+#     file: /base_register_stage.yml
+#     ref: v17.19.0
+#
 stages:
-  - register
+  #- register
   - assemble
-  - index
-
-Register image:
-  stage: register
-  extends: .base_register_stage
-  variables:
-    CONTEXT: . # The folder where the Dockerfile is
-    IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
+  #- index
 
 Download and assemble CSV data:
   stage: assemble
-  image: $CI_REGISTRY_IMAGE-assembly:$CI_COMMIT_SHA
-  script:
-    - bash ./scripts/download_data.sh
+  image: ubuntu:20.04
+  script: |
+    export DATA_DIR="./data"
+    export OUTPUT_DIR="./data"
+    mkdir $DATA_DIR
+    mkdir $OUTPUT_DIR
+    ./assembly/scripts/get-data.sh
+    pip install -r ./assembly/requirements.txt
+    python3 ./assembly/src/assemble_data.py ${DATA_DIR}/StockUniteLegale_utf8.zip  ${DATA_DIR}/geo/ ${DATA_DIR}/WEEZ.csv ${OUTPUT_DIR}/assembly.csv
+    ls -la $OUTPUT_DIR
+    tar -czfz $OUTPUT_DIR/assembly.tgz $OUTPUT_DIR/assembly.csv
+    ls -la $OUTPUT_DIR
   artifacts:
     paths:
       - data/
     expire_in: 4 hour
-
-Run Elastic indexation:
-  stage: index
-  artifacts:
-    paths:
-      - data/
-    expire_in: 4 hour
-  script:
-    - yarn install
-    - yarn build
-    - node dist/index.js
+# Run Elastic indexation:
+#   stage: index
+#   artifacts:
+#     paths:
+#       - data/
+#     expire_in: 4 hour
+#   script:
+#     - yarn install
+#     - yarn build
+#     - node dist/index.js
