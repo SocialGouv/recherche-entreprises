@@ -13,7 +13,7 @@ Download and assemble CSV data:
   image: ubuntu:20.04
   script: |
     export DATA_DIR="./data"
-    export OUTPUT_DIR="./data"
+    export OUTPUT_DIR="./output"
     mkdir $DATA_DIR
     mkdir $OUTPUT_DIR
     ./assembly/scripts/get-data.sh
