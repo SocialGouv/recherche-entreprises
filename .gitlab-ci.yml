@@ -8,11 +8,16 @@ stages:
   - assemble
   #- index
 
+cache:
+  paths:
+    - .cache/pip
+    - .apt/
+
 Download and assemble CSV data:
   stage: assemble
   image: ubuntu:20.04
   script: |
-    apt-get --update install -y wget
+    apt-get update -y && apt-get install -y python-scipy python-numpy python-panda
     export DATA_DIR="./data"
     export OUTPUT_DIR="./output"
     mkdir $DATA_DIR
