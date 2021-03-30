@@ -22,7 +22,7 @@ Download and assemble CSV data:
     export OUTPUT_DIR="./output"
     mkdir $DATA_DIR
     mkdir $OUTPUT_DIR
-    ./assembly/scripts/get-data.sh
+    #./assembly/scripts/get-data.sh
     pip3 install -r ./assembly/requirements.txt
     python3 ./assembly/src/assemble_data.py ${DATA_DIR}/StockUniteLegale_utf8.zip  ${DATA_DIR}/geo/ ${DATA_DIR}/WEEZ.csv ${OUTPUT_DIR}/assembly.csv
     ls -la $OUTPUT_DIR
