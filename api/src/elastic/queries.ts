@@ -1,6 +1,8 @@
 const pre = "<b><u>";
 const post = "</b></u>";
 
+const defaultLimit = 20;
+
 // we remove deduplicate tokens to compose company's label
 const formatLabel = (naming: string[]) => {
   const labelTokens = naming
@@ -51,24 +53,26 @@ export const mapHit = ({
 
   const matching = inner_hits.matchingEtablissements.hits.total.value;
 
-  const conventions = inner_hits.matchingEtablissements.hits.hits.reduce(
-    (
-      acc: any,
-      {
-        fields: { convention, idcc },
-      }: { fields: { convention: string[]; idcc: string } }
-    ) => {
-      const o = {
-        num: parseInt(idcc),
-        shortTitle: convention ? convention[0] : "",
-      };
-      if (!acc.has(o.num)) {
-        acc.set(o.num, o);
-      }
-      return acc;
-    },
-    new Map()
-  );
+  const conventions = inner_hits.matchingEtablissements.hits.hits
+    .filter((h: any) => h.fields)
+    .reduce(
+      (
+        acc: any,
+        {
+          fields: { convention, idcc },
+        }: { fields: { convention: string[]; idcc: string } }
+      ) => {
+        const o = {
+          num: parseInt(idcc),
+          shortTitle: convention ? convention[0] : "",
+        };
+        if (!acc.has(o.num)) {
+          acc.set(o.num, o);
+        }
+        return acc;
+      },
+      new Map()
+    );
 
   // take first by priority
   const simpleLabel = [
@@ -94,8 +98,6 @@ export const mapHit = ({
     siret,
   };
 };
-
-const size = 20;
 
 const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
 
@@ -133,11 +135,12 @@ export const entrepriseSearchBody = (
   query: string,
   address: string | undefined,
   // return convention of every etablissements associated to the main company
-  withAllConventions: boolean,
+  addAllConventions: boolean,
   // only search for etablissements with convention attached
-  withIdcc = true
+  onlyWithConvention: boolean,
+  size: number | undefined = defaultLimit
 ) => ({
-  collapse: collapse(withAllConventions),
+  collapse: collapse(addAllConventions),
   highlight: {
     fields: {
       naming: { post_tags: [post], pre_tags: [pre] },
@@ -145,7 +148,9 @@ export const entrepriseSearchBody = (
   },
   query: {
     bool: {
-      filter: [{ term: { withIdcc } }],
+      filter: onlyWithConvention
+        ? [{ term: { withIdcc: onlyWithConvention } }]
+        : undefined,
       must: [
         {
           bool: {
@@ -166,5 +171,5 @@ export const entrepriseSearchBody = (
       should: [{ rank_feature }],
     },
   },
-  size,
+  size: size ? size : defaultLimit,
 });

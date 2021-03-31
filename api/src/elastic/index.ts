@@ -3,11 +3,7 @@ const ELASTICSEARCH_URL =
   process.env.ELASTICSEARCH_URL || "http://localhost:9200";
 const API_KEY = process.env.API_KEY;
 
-// const auth = API_KEY ? { apiKey: API_KEY } : undefined;
-const auth = {
-  password: process.env.ELASTICSEARCH_PWD,
-  username: process.env.ELASTICSEARCH_USER || "elastic",
-};
+const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
 export const ELASTICSEARCH_INDEX =
   process.env.ELASTICSEARCH_INDEX || "cdtn-siren";
