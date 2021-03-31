@@ -17,7 +17,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       query as string,
       address as string,
       parseInt(limit as string),
-      false,
+      true,
       true
     );
     ctx.body = { entreprises };

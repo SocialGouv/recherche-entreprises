@@ -3,45 +3,69 @@
 exports[`Test entreprise search correct siren 1`] = `
 Object {
   "activitePrincipale": "Fabrication et rechapage de pneumatiques",
-  "address": "Rue de Cataroux 63100 Clermont-Ferrand",
   "conventions": Array [
     Object {
-      "num": 45,
+      "idcc": 45,
       "shortTitle": "Caoutchouc",
     },
     Object {
-      "num": 1486,
+      "idcc": 1486,
       "shortTitle": "Bureaux d'études techniques, cabinets d'ingénieurs-conseils et sociétés de conseils",
     },
   ],
   "etablissements": 28,
   "highlightLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
-  "id": "855200507",
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 26,
+  "matchingEtablissement": Object {
+    "address": "Rue de Cataroux 63100 Clermont-Ferrand",
+    "siret": "85520050700454",
+  },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
-  "siret": "85520050700454",
+}
+`;
+
+exports[`Test etablissement search correct siret 1`] = `
+Object {
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "address": "16 Rue de Toutlemonde 49300 Cholet",
+  "convention": Object {
+    "idcc": 45,
+    "shortTitle": "Caoutchouc",
+  },
+  "etablissements": 28,
+  "highlightLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
+  "label": "MANUF FRANC PNEUMATIQ MICHELIN",
+  "matching": 1,
+  "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
+  "siren": "855200507",
+  "siret": "85520050700710",
 }
 `;
 
 exports[`Test search generic search 1`] = `
 Object {
   "activitePrincipale": "Fabrication et rechapage de pneumatiques",
-  "address": "16 Rue de Toutlemonde 49300 Cholet",
   "conventions": Array [
     Object {
-      "num": 45,
+      "idcc": 45,
       "shortTitle": "Caoutchouc",
+    },
+    Object {
+      "idcc": 1486,
+      "shortTitle": "Bureaux d'études techniques, cabinets d'ingénieurs-conseils et sociétés de conseils",
     },
   ],
   "etablissements": 28,
   "highlightLabel": "MANUF FRANC PNEUMATIQ <b><u>MICHELIN</b></u>",
-  "id": "855200507",
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 18,
+  "matchingEtablissement": Object {
+    "address": "16 Rue de Toutlemonde 49300 Cholet",
+    "siret": "85520050700710",
+  },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
-  "siret": "85520050700710",
 }
 `;

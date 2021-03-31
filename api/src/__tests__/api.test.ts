@@ -31,7 +31,9 @@ describe("Test search", () => {
     expect(status).toBe(200);
     expect(body.entreprises).toBeDefined();
     expect(body.entreprises.length).toEqual(20);
-    expect(body.entreprises[0].siret).toEqual(michelinSiret);
+    expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
+      michelinSiret
+    );
     expect(body.entreprises[0]).toMatchSnapshot();
   });
 
@@ -43,24 +45,30 @@ describe("Test search", () => {
 
   test("search with postal code and city", async () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
-    expect(b1.entreprises[0].address).toMatchInlineSnapshot(
-      `"16 Rue de Toutlemonde 49300 Cholet"`
-    );
+    expect(
+      b1.entreprises[0].matchingEtablissement.address
+    ).toMatchInlineSnapshot(`"16 Rue de Toutlemonde 49300 Cholet"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
-    expect(b2.entreprises[0].address).toMatchInlineSnapshot(
+    expect(
+      b2.entreprises[0].matchingEtablissement.address
+    ).toMatchInlineSnapshot(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
     const { body: b3 } = await searchCall("michelin", "clermont", undefined);
-    expect(b3.entreprises[0].address).toMatchInlineSnapshot(
+    expect(
+      b3.entreprises[0].matchingEtablissement.address
+    ).toMatchInlineSnapshot(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
   });
 
   test("search with siret", async () => {
     const { body } = await searchCall(michelinSiret, undefined, undefined);
-    expect(body.entreprises[0].siret).toEqual(michelinSiret);
+    expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
+      michelinSiret
+    );
   });
 });
 
@@ -71,6 +79,7 @@ describe("Test etablissement search", () => {
     );
     expect(status).toEqual(200);
     expect(body.siret).toEqual(michelinSiret);
+    expect(body).toMatchSnapshot();
   });
 
   test("unexisting siret", async () => {

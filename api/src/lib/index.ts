@@ -58,7 +58,19 @@ export const searchEtablissement = async (siret: string) => {
   const matches = response.body.hits.hits.map(mapHit);
 
   if (matches && matches.length >= 1) {
-    return matches[0];
+    const etablissement = matches[0];
+
+    // update some fields related to etablissement
+    const convention = etablissement.conventions[0]
+      ? etablissement.conventions[0]
+      : undefined;
+    delete etablissement.conventions;
+    etablissement["convention"] = convention;
+    etablissement.siret = etablissement.matchingEtablissement.siret;
+    etablissement.address = etablissement.matchingEtablissement.address;
+    delete etablissement.matchingEtablissement;
+
+    return etablissement;
   } else {
     return undefined;
   }

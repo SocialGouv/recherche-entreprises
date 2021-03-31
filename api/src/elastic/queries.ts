@@ -63,11 +63,11 @@ export const mapHit = ({
         }: { fields: { convention: string[]; idcc: string } }
       ) => {
         const o = {
-          num: parseInt(idcc),
+          idcc: parseInt(idcc),
           shortTitle: convention ? convention[0] : "",
         };
-        if (!acc.has(o.num)) {
-          acc.set(o.num, o);
+        if (!acc.has(o.idcc)) {
+          acc.set(o.idcc, o);
         }
         return acc;
       },
@@ -86,16 +86,17 @@ export const mapHit = ({
 
   return {
     activitePrincipale,
-    address,
     conventions: Array.from(conventions.values()),
     etablissements: parseInt(etablissements),
     highlightLabel,
-    id: siren,
     label,
     matching,
     simpleLabel,
     siren,
-    siret,
+    matchingEtablissement: {
+      siret,
+      address,
+    },
   };
 };
 
