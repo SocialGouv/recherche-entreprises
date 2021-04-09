@@ -1,7 +1,5 @@
-const codesNaf = require("@socialgouv/codes-naf");
-
-// convert list of nafs to object
-const codesNafObject = codesNaf.reduce((a, c) => ({...a, [c.id]: c.label}), {})
+// borrowed from annuaire entreprise, find a better way to share this data
+// https://github.com/etalab/annuaire-entreprises.data.gouv.fr/blob/main/utils/codes-NAF.js
 
 export const codesNaf = new Map(
   Object.entries({
