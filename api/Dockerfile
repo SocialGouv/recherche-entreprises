@@ -15,6 +15,7 @@ FROM node:15-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/dist/ .
+COPY package.json .
 USER node
 
 ENTRYPOINT ["yarn", "start"]
