@@ -1,37 +1,53 @@
-# include:
-#   - project: SocialGouv/gitlab-ci-yml
-#     file: /base_register_stage.yml
-#     ref: v17.19.0
-#
-stages:
-  #- register
-  - assemble
-  #- index
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v21.0.0
 
-cache:
-  paths:
-    - .cache/pip
-    - .apt/
+variables:
+  AUTO_DEVOPS_TEST_DISABLED: "🛑"
+  AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+  AUTO_DEVOPS_KANIKO: "🛑"
+  AUTO_DEVOPS_ENABLE_KAPP: "🛑"
+  AUTO_DEVOPS_RELEASE_AUTO: "🚀"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+  
+Register image:
+  stage: register
+  extends: .base_register_stage
+  variables:
+    CONTEXT: ./index
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/index
 
-Download and assemble CSV data:
-  stage: assemble
-  image: ubuntu:20.04
-  script: |
-    apt-get update -y && apt-get install -y wget python3-pip
-    export DATA_DIR="./data"
-    export OUTPUT_DIR="./output"
-    mkdir $DATA_DIR
-    mkdir $OUTPUT_DIR
-    ./assembly/scripts/get-data.sh
-    pip3 install -r ./assembly/requirements.txt
-    python3 ./assembly/src/assemble_data.py ${DATA_DIR}/StockUniteLegale_utf8.zip  ${DATA_DIR}/geo/ ${DATA_DIR}/WEEZ.csv ${OUTPUT_DIR}/assembly.csv
-    ls -la $OUTPUT_DIR
-    tar -czvf $OUTPUT_DIR/assembly.tgz $OUTPUT_DIR/assembly.csv
-    ls -la $OUTPUT_DIR
-  artifacts:
-    paths:
-      - data/
-    expire_in: 4 hour
+Register API image:
+  stage: register
+  extends: .base_register_stage
+  variables:
+    CONTEXT: ./api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+# Download and assemble CSV data:
+#   stage: assemble
+#   image: ubuntu:20.04
+#   rules:
+#     if: $TRIGGER == "ASSEMBLE" # todo
+#   script: |
+#     apt-get update -y && apt-get install -y wget python3-pip
+#     export DATA_DIR="./data"
+#     export OUTPUT_DIR="./output"
+#     mkdir $DATA_DIR
+#     mkdir $OUTPUT_DIR
+#     ./assembly/scripts/get-data.sh
+#     pip3 install -r ./assembly/requirements.txt
+#     python3 ./assembly/src/assemble_data.py ${DATA_DIR}/StockUniteLegale_utf8.zip  ${DATA_DIR}/geo/ ${DATA_DIR}/WEEZ.csv ${OUTPUT_DIR}/assembly.csv
+#     ls -la $OUTPUT_DIR
+#     tar -czvf $OUTPUT_DIR/assembly.tgz $OUTPUT_DIR/assembly.csv
+#     ls -la $OUTPUT_DIR
+#   artifacts:
+#     paths:
+#       - data/
+#     expire_in: 4 hour
+
+
 # Run Elastic indexation:
 #   stage: index
 #   artifacts:
