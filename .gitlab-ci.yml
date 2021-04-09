@@ -12,13 +12,13 @@ variables:
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
   
 Register image:
-  extends: .base_register_stage
+  extends: .autodevops_register_kaniko_image
   variables:
     CONTEXT: ./index
     IMAGE_NAME: recherche-entreprises-index
 
 Register API image:
-  extends: .base_register_stage
+  extends: .autodevops_register_kaniko_image
   variables:
     CONTEXT: ./api
     IMAGE_NAME: recherche-entreprises-api
