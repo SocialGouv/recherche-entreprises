@@ -4,7 +4,7 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 
 const manifests = create("recherche-entreprises-api", {
   config: {
-    containerPort: 8080,
+    containerPort: 3000,
   },
   deployment: {
     image: getHarborImagePath({ name: "recherche-entreprises-api" })

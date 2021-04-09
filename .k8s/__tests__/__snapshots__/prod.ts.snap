@@ -52,7 +52,7 @@ spec:
             timeoutSeconds: 5
           name: recherche-entreprises-api
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
               name: http
           readinessProbe:
             failureThreshold: 15
@@ -98,7 +98,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 8080
+      targetPort: 3000
   selector:
     app: recherche-entreprises-api
   type: ClusterIP
