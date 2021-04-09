@@ -13,8 +13,8 @@ variables:
   
 Build:
   rules:
-    when: never
-    
+    - when: never
+
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
