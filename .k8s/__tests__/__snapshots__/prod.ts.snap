@@ -141,7 +141,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: default
-  namespace: ''
+  namespace: recherche-entreprises
 spec:
   podSelector: {}
   policyTypes:
@@ -150,7 +150,7 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              network-policy/namespace: ''
+              network-policy/namespace: recherche-entreprises
     - from:
         - namespaceSelector:
             matchLabels:
