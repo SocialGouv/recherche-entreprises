@@ -16,14 +16,14 @@ Register image:
   extends: .base_register_stage
   variables:
     CONTEXT: ./index
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/index
+    IMAGE_NAME: recherche-entreprises-index
 
 Register API image:
   stage: register
   extends: .base_register_stage
   variables:
     CONTEXT: ./api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    IMAGE_NAME: recherche-entreprises-api
 
 # Download and assemble CSV data:
 #   stage: assemble
