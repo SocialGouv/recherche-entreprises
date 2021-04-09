@@ -11,6 +11,10 @@ variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🚀"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
   
+Build:
+  rules:
+    when: never
+    
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
