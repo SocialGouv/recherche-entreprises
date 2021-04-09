@@ -11,7 +11,7 @@ variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🚀"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
   
-Register image:
+Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
     CONTEXT: ./index
