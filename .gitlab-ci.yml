@@ -17,12 +17,14 @@ Build:
 
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
+  needs: []
   variables:
     CONTEXT: ./index
     IMAGE_NAME: recherche-entreprises-index
 
 Register API image:
   extends: .autodevops_register_kaniko_image
+  needs: []
   variables:
     CONTEXT: ./api
     IMAGE_NAME: recherche-entreprises-api
