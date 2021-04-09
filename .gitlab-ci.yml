@@ -12,14 +12,12 @@ variables:
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
   
 Register image:
-  stage: register
   extends: .base_register_stage
   variables:
     CONTEXT: ./index
     IMAGE_NAME: recherche-entreprises-index
 
 Register API image:
-  stage: register
   extends: .base_register_stage
   variables:
     CONTEXT: ./api
