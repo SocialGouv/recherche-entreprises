@@ -10,3 +10,6 @@ COPY ./src/ src/
 RUN yarn install --production
 
 CMD ["yarn", "start"]
+
+
+
