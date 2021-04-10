@@ -15,8 +15,7 @@
     "@babel/runtime": "^7.12.13",
     "@elastic/elasticsearch": "^7.12.0",
     "koa": "^2.13.1",
-    "koa-router": "^10.0.0",
-    "tslab": "^1.0.15"
+    "koa-router": "^10.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
