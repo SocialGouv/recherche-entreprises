@@ -1,6 +1,8 @@
 import Router from "koa-router";
 import { search, searchEntreprise, searchEtablissement } from "../lib";
 
+import pkg from "../../package.json";
+
 export const router = new Router();
 
 export const API_PREFIX = "/api/v1";
@@ -83,4 +85,17 @@ router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
       ctx.throw(500);
     }
   }
+});
+
+// kubernetes probe
+router.get(`/healthz`, (ctx) => {
+  ctx.body = { hello: "world" };
+});
+
+router.get(`/`, (ctx) => {
+  ctx.body = {
+    success: true,
+    version: pkg.version,
+    about: "https://github.com/SocialGouv/recherche-entreprises",
+  };
 });

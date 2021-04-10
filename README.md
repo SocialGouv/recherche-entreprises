@@ -2,7 +2,7 @@
 
 Ces scripts permettent de générer un index Elastic Search qui regroupe toutes les informations utiles pour rechercher un établissement ou une entreprise par établissement, raison sociale, code postal, ville, siret/siren, effectif, convention collective...
 
-Les données sont issues de [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh)
+Les données sont issues de [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data) .
 
 Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qui exploite cet index Elastic Search, avec différents exemples de requêtes.
 

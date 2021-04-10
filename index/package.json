@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --max_old_space_size=8192 -r ts-node/register src/index.ts",
-    "build": "ncc build src/index.ts -o dist",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' ncc build src/index.ts -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,13 +15,11 @@
     "@babel/runtime": "^7.12.13",
     "@elastic/elasticsearch": "^7.10.0",
     "@socialgouv/kali-data": "^2.55.0",
-    "danfojs-node": "^0.2.0",
-    "data-forge": "^1.8.17",
-    "data-forge-fs": "0.0.9",
     "fast-csv": "^4.3.6",
     "tslab": "^1.0.15"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.28.2",
     "ts-node": "^9.1.1",
     "tslint": "^6.1.3",
     "typescript": "^4.1.3"
