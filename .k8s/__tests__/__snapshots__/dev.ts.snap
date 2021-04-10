@@ -8,18 +8,18 @@ metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-bd7z2:p-7ms8p
-    git/branch: e2e-branch
+    git/branch: gitlab3
     git/remote: git@github.com:SocialGouv/recherche-entreprises.git
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   labels:
     azure-pg-admin-user: recherche-entreprises
-    application: e2e-branch-42-recherche-entreprises
+    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-24-e2e-branch-42
+  name: recherche-entreprises-209-gitlab3-dev2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,16 +28,16 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   labels:
     app: recherche-entreprises-api
-    application: e2e-branch-42-recherche-entreprises
+    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-24-e2e-branch-42
+  namespace: recherche-entreprises-209-gitlab3-dev2
 spec:
   replicas: 1
   selector:
@@ -49,18 +49,18 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: e2e-branch-42
-        app.gitlab.com/env.name: e2e-branch-dev2
+        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+        app.gitlab.com/env.name: gitlab3-dev2
       labels:
         app: recherche-entreprises-api
-        application: e2e-branch-42-recherche-entreprises
+        application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/undefined/recherche-entreprises-api:8843083edb7f873cad1d1420731a60773594ffae
+            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:ccff889cbbc4e513aeaecbe22429a73fd02eb8ea
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -101,7 +101,7 @@ kind: Service
 metadata:
   labels:
     app: recherche-entreprises-api
-    application: e2e-branch-42-recherche-entreprises
+    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -110,9 +110,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
-  namespace: recherche-entreprises-24-e2e-branch-42
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
+  namespace: recherche-entreprises-209-gitlab3-dev2
 spec:
   ports:
     - name: http
@@ -130,19 +130,20 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   labels:
     app: recherche-entreprises-api
-    application: e2e-branch-42-recherche-entreprises
+    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-24-e2e-branch-42
+  namespace: recherche-entreprises-209-gitlab3-dev2
 spec:
   rules:
-    - host: e2e-branch-42-recherche-entreprises.dev2.fabrique.social.gouv.fr
+    - host: >-
+        recherche-entreprises-209-gitlab3-dev2-recherche-entreprises.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -151,7 +152,8 @@ spec:
             path: /
   tls:
     - hosts:
-        - e2e-branch-42-recherche-entreprises.dev2.fabrique.social.gouv.fr
+        - >-
+          recherche-entreprises-209-gitlab3-dev2-recherche-entreprises.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

@@ -9,8 +9,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
@@ -30,8 +30,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: e2e-branch-42
-        app.gitlab.com/env.name: e2e-branch-dev2
+        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+        app.gitlab.com/env.name: gitlab3-dev2
       labels:
         app: recherche-entreprises-api
         application: recherche-entreprises
@@ -40,8 +40,7 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/undefined/recherche-entreprises-api:1.2.3
+        - image: harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -91,8 +90,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   namespace: recherche-entreprises
 spec:
   ports:
@@ -113,8 +112,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: e2e-branch-42
-    app.gitlab.com/env.name: e2e-branch-dev2
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises

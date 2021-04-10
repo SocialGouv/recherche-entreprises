@@ -9,7 +9,7 @@ export const ELASTICSEARCH_INDEX =
   process.env.ELASTICSEARCH_INDEX || "recherche-entreprises";
 
 const esClientConfig = {
-  node: `${ELASTICSEARCH_URL}`,
+  node: ELASTICSEARCH_URL,
   auth,
 };
 
