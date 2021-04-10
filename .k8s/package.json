@@ -14,7 +14,7 @@
     "kosko": "1.0.3",
     "kubernetes-models": "1.0.3",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.2.4"
   },
   "resolutions": {
     "@kosko/cli": "1.1.0"
