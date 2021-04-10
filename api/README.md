@@ -5,7 +5,7 @@ Exemple d'API qui exploite l'index ElasticSearch [recherche-entreprises](https:/
 ```sh
 yarn install
 yarn build
-ELASTICSEARCH_URL=http://localhost:9200 API_KEY=key yarn start
+ELASTICSEARCH_URL=http://localhost:9200 ELASTICSEARCH_API_KEY=key yarn start
 ```
 
 ## **Generic search**

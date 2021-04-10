@@ -35,4 +35,6 @@ const parseEnterprises = () => {
   );
 };
 
-resetIndex().then(() => parseEnterprises());
+if (require.main === module) {
+  resetIndex().then(() => parseEnterprises());
+}
