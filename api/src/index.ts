@@ -8,3 +8,4 @@ app.use(router.routes());
 app.listen(port);
 
 console.log(`API started on port ${port}`);
+console.log('ES host:', process.env.ELASTICSEARCH_URL)
