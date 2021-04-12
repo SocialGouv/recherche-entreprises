@@ -66,6 +66,11 @@
     lodash.isundefined "^3.0.1"
     lodash.uniq "^4.5.0"
 
+"@socialgouv/codes-naf@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@socialgouv/codes-naf/-/codes-naf-1.0.5.tgz#fa64c00b6299d0d41e1e88a4422ca72cb688e08c"
+  integrity sha512-unWkbh6qcG/9B+Oa2LsES6+xFYRK+KMyfa+NNszaEE7JYxSAibRnICTEkRUjriufrRXREV0fiB3MR0ytk7uAMA==
+
 "@socialgouv/kali-data@^2.61.0":
   version "2.61.0"
   resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.61.0.tgz#8e83bca951c99a0cf000c5e8298d309b378d6bcc"
