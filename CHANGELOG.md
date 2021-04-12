@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.0...v1.0.1) (2021-04-12)
+
+
+### Bug Fixes
+
+* **kosko:** add jobs/index placeholder ([f147404](https://github.com/SocialGouv/recherche-entreprises/commit/f147404b997b3c0a27685e861cab5ff5221e3ab1))
+
 # 1.0.0 (2021-04-12)
 
 
