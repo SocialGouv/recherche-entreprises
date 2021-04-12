@@ -11,6 +11,15 @@ import { IIoK8sApiCoreV1PodSpec } from "kubernetes-models/api/core/v1/PodSpec";
 import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
 import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
 
+/**
+ * 
+ * This creates a kubernetes job that fetch datasets and publish it to some Elastic search
+ * 
+ * An initContainer is used to fetch and assemble the fresh data it before starting the indexation process in a pod
+ * 
+ */
+
+
 const baseName = (localFile: string) => localFile.split("/").reverse()[0];
 const read = (filePath: string) => fs.readFileSync(filePath).toString();
 
@@ -30,6 +39,7 @@ const secrets = {
   },
 };
 
+// return a sealed-secret manifest
 const getSealedSecret = (
   env: string,
   values: Record<string, string>
@@ -72,8 +82,6 @@ const jobSpec = {
     {
       name: "update-index",
       image: getHarborImagePath({ name: "recherche-entreprises-index" }),
-      //command: ["sh"],
-      //args: ["-c", jobScript],
       volumeMounts: [
         {
           name: "data",
@@ -123,7 +131,7 @@ echo "running assemble_data.py..."
 python3 /mnt/scripts/assemble_data.py $DATA_DIR/StockUniteLegale_utf8.zip  $DATA_DIR/geo/ $DATA_DIR/WEEZ.csv $DATA_DIR/assembly.csv
 `;
 
-// initContainer definition, run above script and store data in a mount
+// initContainer definition, run above script and store data in a temp mount
 const initContainer = new Container({
   args: ["-c", initContainerScript],
   command: ["sh"],
