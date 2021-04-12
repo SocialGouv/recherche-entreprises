@@ -1,5 +1,6 @@
 {
   "name": "@socialgouv/recherche-entreprises",
+  "repository": "https://github.com/SocialGouv/recherche-entreprises",
   "private": true,
   "scripts": {
     "k8s": "yarn --silent --cwd .k8s"
