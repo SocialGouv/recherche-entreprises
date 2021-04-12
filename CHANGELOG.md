@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.1...v1.0.2) (2021-04-12)
+
+
+### Bug Fixes
+
+* **k8s:** prod secrets ([192cd25](https://github.com/SocialGouv/recherche-entreprises/commit/192cd256c52798d31bc15d4ed8418f17590320a3))
+
 ## [1.0.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.0...v1.0.1) (2021-04-12)
 
 
