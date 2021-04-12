@@ -22,7 +22,7 @@ const parseEnterprises = () => {
         // create an immutable copy of the array
         const batch = enterprisesBuffer.slice();
         enterprisesBuffer = [];
-        await add(batch);
+        await add(batch)
 
         // to run experiments
         // stream.destroy();
@@ -35,4 +35,6 @@ const parseEnterprises = () => {
   );
 };
 
-resetIndex().then(() => parseEnterprises());
+if (require.main === module) {
+  resetIndex().then(() => parseEnterprises());
+}

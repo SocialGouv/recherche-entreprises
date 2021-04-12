@@ -33,5 +33,7 @@ Now we use the assembled CSV file to populate an Elastic index. Within the `inde
 yarn install
 yarn build
 
-ELASTICSEARCH_URL=https://elastic_url:9200 API_KEY=key_with_writing_rights ASSEMBLY_FILE=/path_to/assembly.csv node dist/index.js
+ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=/path_to/assembly.csv node dist/index.js
 ```
+
+The default `ELASTICSEARCH_INDEX_NAME` is `recherche-entreprises`

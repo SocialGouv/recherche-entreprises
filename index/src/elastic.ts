@@ -3,15 +3,15 @@ import { Enterprise, mapEnterprise, mappings } from "./enterprise";
 
 const ELASTICSEARCH_URL =
   process.env.ELASTICSEARCH_URL || "http://localhost:9200";
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.ELASTICSEARCH_API_KEY;
 
-const indexName = "cdtn-siren";
+const indexName = process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises-test";
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
 const esClientConfig: ClientOptions = {
   auth,
-  node: `${ELASTICSEARCH_URL}`,
+  node: ELASTICSEARCH_URL,
 };
 
 const esClient = new Client(esClientConfig);

@@ -1,0 +1,350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kosko generate --dev 1`] = `
+"---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: elastic-recherche-entreprises-write
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    app.gitlab.com/app: socialgouv-recherche-entreprises
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
+  labels:
+    application: v1-2-3-recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  namespace: recherche-entreprises-209-gitlab3-dev2
+spec:
+  encryptedData:
+    ELASTICSEARCH_URL: >-
+      AgDGWiSE5kUv0Mv4Dot8KfbSGm5XVlyi4V9yLiMI97deZctFWRd2T31MtTUz/XgT4VlFH4NUhK+dQonLEILE2P9rs4MMDaY09cc3NZiDLB9GJoBcWnWsa02QV4Xykk8UthTHQPFC4g+0ElFU4UewbIc3Zc2ZqIk5Y803TnYkRuAF1bM1ZdpWGnm+yh7+lXnbRMmFo62vhPVB8lnl9Z/RVxhs1jx6xnbIFyTjvelM4/sySiyHZ0h74fL61DAvOcNBgCTd49RRBBzcAhp6a8KL45FL1eAYyOqS8vW5uNeFu59Cu9ByRruhyTELjpPtLesjsBUHiqmfBh09esKw+mdtMmfYxIsy+JGPS50N8GiNj+n0A5XXtLQkm9oT884r4LEQip35YHyenh20NmueHX8RGMOXRT05PWnbL70NtZHqUwzFdc21vdFhXAb/MVaMgqcKG4RPkRS+qljn+pQjJ8DkY0EqgWOCfSyjB+jKJ65peSqqORq+B8zTDgpv9ZaN+xSDsfi+PckPPJqKOjaTkQW/VdfwpT6ipOUpNgznUOGy7XN9vxAQR9P79n6KlIyMsme4hN7OHX5ko0xWQZcCyfHbSbT7JHY5UpmTv+c0NtyrV755FQN75HDFRhQYHtgLnhR9PuBCZ8Gvtg2T/Nr63GsTMC5e52bj2zIRlOUTrsvxEIYKQoBPILoueEIcMz64/UiMAZ9RwH308wRHOrZtch5gclzUQWZEgI5Vx2cJQ/zr9iqBaedg2v8GqvESeKw1e7pgXoLE6pFKJtQa7cMwQgmrBkkxrEfePcRDP4yAMVQaiM8DoqIjVg==
+    ELASTICSEARCH_API_KEY: >-
+      AgDE1F8SFMKtRpPd9BKozxXC5YcwVae1SRc+ECX/9EUhLSaqxGXenqVbtE2tj6kovFcru8sSMgPQZIOGDel4QIpwGC9HozNQWGXkEf9AABjulJ82hwlyo/22XOYodqAs3FuZc0tiodEK6+GUw9KKVf6I2P3Y55AzwfZNuar319LG1H0OmkvJbaXjkQwuELjBeU0OG1hPSf3LSIX4F6hc9JlunyDgWFT+vqe7FN+0Q/BmRgbY9SJ4ZqD+TZxzLfKCmWAtGFWW2eFf5jJDmuXp5A4QK+jSd1vonJGjFn16fEgA32tOnBxaA+7TpcBqVq/oOqYvBckuXlDUrBIXkfKRK/FqjvFCxtkhpzrYRe6FFntA6MFmnYvzhsUEoIOSrn3O8Unlaae//am/sukctTkqTum4IF0316k5UwUjcEsd/1qTFM84l3mcPBeU656t1B0sAaTK5JEPSOkJvz1nk9Ei1RUXPJCVTp3i64hia5OeWgEaTWUsP1udhMhC1eGSt0tf5QtNnnDlpASebmI7oubuSiOLveXg/+RcHNXTztrbc3xSNAUIML8GTXNbA4TJXorvZKdecvVbmtsbH7u+4awna7J+SuAysKNdWdTeMsT0uMdFA0o4fez+PQVXc9+IF0DqU0T8EDeLfz62663aW1R7rQ2KEjK/2Vvy8W6EUjXIdY1DEPv1BmHpI9xRJJ8P8sTucaXBmohjPJb1lXzh+/9AmeIRhy/mDJTnCox/UOfyRrpx+FcU/Vi6TvJvV8ab7JZbufOVmo1iEPnP3Wx3rcQ=
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        app.gitlab.com/app: socialgouv-recherche-entreprises
+        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+        app.gitlab.com/env.name: gitlab3-dev2
+      name: elastic-recherche-entreprises-write
+      labels:
+        application: v1-2-3-recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+        cert: wildcard
+    type: Opaque
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  get-data.sh: >-
+    #!/bin/bash
+
+
+    # borrowed from annuaire entreprise  :
+
+    # https://github.com/etalab/api-annuaire-entreprises/tree/master/db/init
+
+
+    geodir=\${DATA_DIR}/geo
+
+
+    mkdir -p $geodir
+
+
+    echo \\"-- Download datasets\\"
+
+
+    for d in \`seq -w 1 19\` 2A 2B \`seq 21 74\` \`seq 76 95\` 98 \\"\\"; do
+      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_$d.csv.gz --directory-prefix=$geodir
+      gunzip \${geodir}/geo_siret_$d.csv.gz
+    done
+
+
+    #Cas particulier Paris
+
+    for d in \`seq -w 1 20\`; do
+      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_751$d.csv.gz --directory-prefix=$geodir
+      gunzip \${geodir}/geo_siret_751$d.csv.gz
+    done
+
+
+    #Cas particulier DOM
+
+    for d in \`seq -w 1 8\`; do
+      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_97$d.csv.gz --directory-prefix=$geodir
+      gunzip \${geodir}/geo_siret_97$d.csv.gz
+    done
+
+
+    # SIRET data
+
+    wget --progress=bar:force:noscroll -q --show-progress
+    https://files.data.gouv.fr/insee-sirene/StockUniteLegale_utf8.zip
+    --directory-prefix=$DATA_DIR
+
+
+    # WEEZ data
+
+    wget --progress=bar:force:noscroll -q --show-progress
+    https://github.com/SocialGouv/siret2idcc/blob/master/data/WEEZ.csv?raw=true
+    -O \${DATA_DIR}/WEEZ.csv
+  assemble_data.py: |
+    \\"\\"\\"CDTN Entreprises data assembler
+
+    This script assembles data from different places and creates a new file that
+    will be used as source for our search index.
+
+    \\"\\"\\"
+    import argparse
+    import pandas as pd
+    import numpy as np
+    from os import listdir
+    from os.path import isfile, join
+
+
+    def read_siren(stock_unite_legale_file):
+        \\"\\"\\" Read SIREN Stock Unite Legale
+
+        Parameters
+        ----------
+        stock_unite_legale_file: str
+            The location of the CSV or ZIP file
+
+        Returns
+        -------
+        employeurs
+            a Pandas dataframe containing the list of all companies that are still open
+            and employ people
+        \\"\\"\\"
+
+        selection = [\\"siren\\", \\"sigleUniteLegale\\", \\"trancheEffectifsUniteLegale\\", \\"categorieEntreprise\\", 'nomUniteLegale', 'nomUsageUniteLegale', 'denominationUniteLegale',
+                     'denominationUsuelle1UniteLegale', 'denominationUsuelle2UniteLegale',
+                     'denominationUsuelle3UniteLegale', \\"categorieJuridiqueUniteLegale\\", \\"activitePrincipaleUniteLegale\\", \\"nomenclatureActivitePrincipaleUniteLegale\\"]
+        etatAdmin = \\"etatAdministratifUniteLegale\\"
+        caractereEmployeur = \\"caractereEmployeurUniteLegale\\"
+        cols = selection + [etatAdmin, caractereEmployeur]
+        raw = pd.read_csv(stock_unite_legale_file, usecols=cols)
+        is_ouvert = raw[etatAdmin] == \\"A\\"
+        is_employeur = raw[caractereEmployeur] == \\"O\\"
+        is_admin = raw[etatAdmin] == \\"A\\"
+
+        employeurs = raw[is_ouvert & is_employeur & is_admin]
+
+        return employeurs[selection]
+
+
+    def read_geo(geo_directory):
+        \\"\\"\\" Read GEO data
+
+        Parameters
+        ----------
+        geo_directory: str
+            The directory containing geo data for all regions
+
+        Returns
+        -------
+        all_geo
+            a Pandas dataframe containing geo information for all open companies
+        \\"\\"\\"
+        geo_files = [f for f in listdir(
+            geo_directory) if isfile(join(geo_directory, f))]
+        geo_selection = [\\"enseigne1Etablissement\\", \\"enseigne2Etablissement\\", \\"enseigne3Etablissement\\", \\"denominationUsuelleEtablissement\\", \\"activitePrincipaleEtablissement\\",
+                         'siren', 'siret', 'codePostalEtablissement', 'libelleCommuneEtablissement', \\"etatAdministratifEtablissement\\", \\"geo_adresse\\"]
+        geo = {}
+        for file in geo_files:
+            geo[file] = pd.read_csv(
+                geo_directory + file, dtype={\\"codePostalEtablissement\\": np.dtype(str)}, usecols=geo_selection
+            )
+
+        all_geo = pd.concat(geo.values(), ignore_index=True).dropna(
+            subset=['siret'])
+        all_geo = all_geo[all_geo[\\"etatAdministratifEtablissement\\"] == \\"A\\"]
+
+        return all_geo
+
+
+    def read_idcc(idcc_file):
+        \\"\\"\\" Read IDCC data
+
+        Parameters
+        ----------
+        idcc_file: str
+            The location of the CSV file containing associations between companies and their \\"convention collectives\\", (aka WEEZ)
+
+        Returns
+        -------
+        idccs
+            a Pandas dataframe containing siret / idcc associations
+        \\"\\"\\"
+        idccs = pd.read_csv(idcc_file, usecols=[\\"SIRET\\", \\"IDCC\\"]).rename(
+            columns={\\"SIRET\\": \\"siret\\", \\"IDCC\\": \\"idcc\\"})
+        # drop unknown
+        unknown = idccs[\\"idcc\\"] == 9999
+        idccs = idccs.drop(idccs[unknown].index)
+        return idccs
+
+
+    def assemble(siren, geo, idcc, output):
+        sirenGeo = pd.merge(siren, geo, on='siren')
+        merged = pd.merge(sirenGeo, idcc, how='left', on='siret')
+
+        # add etablissement counts
+        etsCounts = merged.siren.value_counts().rename_axis(
+            'siren').reset_index(name='etablissements')
+        withEts = pd.merge(merged, etsCounts, on='siren')
+
+        # persits as CSV file
+        withEts.astype({'idcc': 'Int64'}).to_csv(output)
+
+
+    def main():
+        parser = argparse.ArgumentParser(description=__doc__)
+        parser.add_argument(
+            'siren_file',
+            type=str,
+            help=\\"Location of the StockUniteLegale CSV or ZIP file\\"
+        )
+        parser.add_argument(
+            'geo_directory',
+            type=str,
+            help=\\"Location of the directory containing all the Geo CSV files\\"
+        )
+        parser.add_argument(
+            'idcc_file',
+            type=str,
+            help=\\"Location of the siret/idcc CSV file (aka WEEZ)\\"
+        )
+        parser.add_argument(
+            'output_file',
+            type=str,
+            help=\\"Location of the output file\\"
+        )
+
+        args = parser.parse_args()
+
+        print(\\"Read SIREN data\\")
+        siren = read_siren(args.siren_file)
+
+        print(\\"Read GEO data\\")
+        geo = read_geo(args.geo_directory)
+
+        print(\\"Read IDCC data\\")
+        idcc = read_idcc(args.idcc_file)
+
+        print(\\"Assemble datasets\\")
+        assemble(siren, geo, idcc, args.output_file)
+
+
+    if __name__ == \\"__main__\\":
+        main()
+  requirements.txt: |
+    numpy
+    pandas
+metadata:
+  name: config-map-files-ccff889
+  annotations:
+    app.gitlab.com/app: socialgouv-recherche-entreprises
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
+  labels:
+    application: v1-2-3-recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  namespace: recherche-entreprises-209-gitlab3-dev2
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: update-index
+  annotations:
+    app.gitlab.com/app: socialgouv-recherche-entreprises
+    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env.name: gitlab3-dev2
+  labels:
+    application: v1-2-3-recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  namespace: recherche-entreprises-209-gitlab3-dev2
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+        - name: update-index
+          image: >-
+            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-index:1.2.3
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          env:
+            - name: ASSEMBLY_FILE
+              value: /data/assembly.csv
+          envFrom:
+            - secretRef:
+                name: elastic-recherche-entreprises-write
+      restartPolicy: Never
+      volumes:
+        - name: data
+          emptyDir: {}
+        - configMap:
+            name: config-map-files-ccff889
+            defaultMode: 511
+          name: local-files
+      initContainers:
+        - args:
+            - '-c'
+            - >
+
+              apt-get update -y && apt-get install -y wget 
+
+
+              export DATA_DIR=\\"/data\\"
+
+
+              cd /data
+
+
+              echo \\"running get-data.sh...\\"
+
+
+              /mnt/scripts/get-data.sh
+
+
+              pip3 install -r /mnt/scripts/requirements.txt
+
+
+              echo \\"running assemble_data.py...\\"
+
+
+              python3 /mnt/scripts/assemble_data.py
+              $DATA_DIR/StockUniteLegale_utf8.zip  $DATA_DIR/geo/
+              $DATA_DIR/WEEZ.csv $DATA_DIR/assembly.csv
+          command:
+            - sh
+          image: python:3.9.4
+          imagePullPolicy: Always
+          name: download-data
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - mountPath: /mnt/scripts
+              name: local-files
+    metadata:
+      annotations:
+        app.gitlab.com/app: socialgouv-recherche-entreprises
+        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
+        app.gitlab.com/env.name: gitlab3-dev2
+      labels:
+        application: v1-2-3-recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+        cert: wildcard
+"
+`;
