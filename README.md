@@ -1,4 +1,4 @@
-# cdtn-entreprises : recherche d'entreprises
+# recherche-entreprises
 
 Ce projet permet de générer un index Elastic Search qui regroupe toutes les informations utiles pour rechercher un établissement ou une entreprise par établissement, raison sociale, code postal, ville, siret/siren, effectif, convention collective...
 
