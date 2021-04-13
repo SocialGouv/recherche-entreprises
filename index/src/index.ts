@@ -1,12 +1,12 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as csv from "fast-csv";
-import { add, resetIndex } from "./elastic";
+import { add, createIndex, updateAlias, deleteOldIndices } from "./elastic";
 import { Enterprise } from "./enterprise";
 
 const ASSEMBLY_FILE = process.env.ASSEMBLY_FILE || "../output/assembly.csv";
 
-const parseEnterprises = () => {
+const insertEntreprises = (indexName: string) => {
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
 
   const BUFFER_SIZE = 500;
@@ -22,7 +22,7 @@ const parseEnterprises = () => {
         // create an immutable copy of the array
         const batch = enterprisesBuffer.slice();
         enterprisesBuffer = [];
-        await add(batch)
+        await add(batch, indexName);
 
         // to run experiments
         // stream.destroy();
@@ -36,5 +36,10 @@ const parseEnterprises = () => {
 };
 
 if (require.main === module) {
-  resetIndex().then(() => parseEnterprises());
+  // use elastic alias feature to prevent downtimes
+  createIndex().then(async (indexName) =>
+    insertEntreprises(indexName)
+      .then(() => updateAlias(indexName))
+      .then(() => deleteOldIndices(indexName))
+  );
 }

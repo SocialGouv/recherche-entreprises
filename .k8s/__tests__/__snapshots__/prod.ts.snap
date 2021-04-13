@@ -165,7 +165,7 @@ metadata:
   namespace: recherche-entreprises
 spec:
   rules:
-    - host: recherche-entreprises.dev2.fabrique.social.gouv.fr
+    - host: api-recherche-entreprises.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -174,7 +174,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - recherche-entreprises.dev2.fabrique.social.gouv.fr
+        - api-recherche-entreprises.dev2.fabrique.social.gouv.fr
       secretName: recherche-entreprises-api-crt
 ---
 apiVersion: networking.k8s.io/v1
