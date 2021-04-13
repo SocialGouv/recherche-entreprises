@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.1.0...v1.1.1) (2021-04-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @elastic/elasticsearch to ^7.12.0 ([#18](https://github.com/SocialGouv/recherche-entreprises/issues/18)) ([889dbf7](https://github.com/SocialGouv/recherche-entreprises/commit/889dbf77eedc9df5a8aa97b8a9acc8ee44b146ad))
+* **deps:** update dependency @types/node to ^14.14.37 ([#19](https://github.com/SocialGouv/recherche-entreprises/issues/19)) ([17796c8](https://github.com/SocialGouv/recherche-entreprises/commit/17796c868d7d490857ff0cb4ef182d4d537417e2))
+
 # [1.1.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.2...v1.1.0) (2021-04-13)
 
 
