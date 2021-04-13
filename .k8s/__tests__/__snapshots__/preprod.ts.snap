@@ -184,7 +184,7 @@ metadata:
   namespace: recherche-entreprises-209-gitlab3-dev2
 spec:
   rules:
-    - host: v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
+    - host: api-v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -193,7 +193,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
+        - api-v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
