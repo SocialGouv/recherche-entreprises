@@ -7,7 +7,7 @@ const ELASTICSEARCH_URL =
 const API_KEY = process.env.ELASTICSEARCH_API_KEY;
 
 const INDEX_NAME =
-  process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises-test";
+  process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises";
 const indexPattern = `${INDEX_NAME}-*`;
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
