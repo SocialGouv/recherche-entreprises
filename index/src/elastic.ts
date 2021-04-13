@@ -120,7 +120,7 @@ export const updateAlias = (newIndexName: string) =>
   });
 
 export const createIndex = async () => {
-  const id = Math.floor(Math.random() * 100001);
+  const id = Math.floor(Math.random() * 10e8);
   const newIndexName = `${INDEX_NAME}-${id}`;
   const body = { mappings, settings: { analysis, index } };
   await esClient.indices.create({
@@ -157,6 +157,7 @@ const bulkInsert = async (enterprises: Enterprise[], indexName: string) => {
       console.error(`Errors during indexation : ${JSON.stringify(errorDocs)}`);
     }
     console.info(`Index ${enterprises.length} documents.`);
+    return resp;
   } catch (error) {
     console.error("index documents", error.body.error);
   }
@@ -175,6 +176,6 @@ export const add = async (enterprises: Enterprise[], indexName: string) => {
 
   return pAll(
     batches.map((batch) => () => bulkInsert(batch, indexName)),
-    { concurrency: 2 }
+    { concurrency: 5 }
   );
 };
