@@ -20,7 +20,7 @@
     "@kosko/cli": "1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.17",
+    "@babel/core": "^7.13.15",
     "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "@socialgouv/eslint-config-typescript": "^1.67.0",
     "@types/jest": "^26.0.22",
