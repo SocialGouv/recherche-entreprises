@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.2...v1.1.0) (2021-04-13)
+
+
+### Features
+
+* smooth elastic indexation ([#24](https://github.com/SocialGouv/recherche-entreprises/issues/24)) ([844091a](https://github.com/SocialGouv/recherche-entreprises/commit/844091aca8036f0c787ab65e1b1c062bd3aa44fd)), closes [#9](https://github.com/SocialGouv/recherche-entreprises/issues/9)
+
 ## [1.0.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.0.1...v1.0.2) (2021-04-12)
 
 
