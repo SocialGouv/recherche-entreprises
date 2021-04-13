@@ -185,7 +185,7 @@ const configMap = new ConfigMap({
 // create the final job
 const job = new Job({
   metadata: {
-    name: "update-index",
+    name: `update-index-${process.env.CI_COMMIT_SHORT_SHA}`,
   },
   spec: {
     backoffLimit: 3,

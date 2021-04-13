@@ -261,7 +261,7 @@ metadata:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index
+  name: update-index-ccff889
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
     app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2

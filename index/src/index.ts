@@ -1,7 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as csv from "fast-csv";
-import { add, createIndex, updateAlias, deleteOldIndices } from "./elastic";
+import {
+  add,
+  createIndex,
+  updateAlias,
+  deleteOldIndices,
+  getDocsCount,
+} from "./elastic";
 import { Enterprise } from "./enterprise";
 
 const ASSEMBLY_FILE = process.env.ASSEMBLY_FILE || "../output/assembly.csv";
@@ -39,6 +45,15 @@ if (require.main === module) {
   // use elastic alias feature to prevent downtimes
   createIndex().then(async (indexName) =>
     insertEntreprises(indexName)
+      .then(async () => {
+        // ensure we have some data
+        const docsCount = await getDocsCount(indexName);
+        if (!docsCount) {
+          throw new Error(`No document created in index ${indexName}, skip aliasing`);
+        } else {
+          console.log(`Created ${docsCount} documents in index ${indexName}`);
+        }
+      })
       .then(() => updateAlias(indexName))
       .then(() => deleteOldIndices(indexName))
   );
