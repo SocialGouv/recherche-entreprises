@@ -66,10 +66,10 @@
     lodash.isundefined "^3.0.1"
     lodash.uniq "^4.5.0"
 
-"@socialgouv/kali-data@^2.55.0":
-  version "2.60.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.60.0.tgz#f01d448243cb886d66d414ec219c525040b9372a"
-  integrity sha512-n0fXFKEGIYyxcsr/XJqSM1lbx/Sf0H3MGuQc1aGaBqDTq/Sy63x+DxERiEAryXubi6wb6KBFmpryOC0C1vKZFQ==
+"@socialgouv/kali-data@^2.61.0":
+  version "2.61.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.61.0.tgz#8e83bca951c99a0cf000c5e8298d309b378d6bcc"
+  integrity sha512-UF52CdyoxcZYT6Xi1wb8+IUIi1Aw2qRkreddTA+SvYNnLbhyvlmpoEKNGMTvesGugdkZTu9y2egJLOJduAcW3w==
   dependencies:
     unist-util-find "1.0.2"
     unist-util-flat-filter "1.0.0"
