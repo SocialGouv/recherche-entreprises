@@ -1,11 +1,14 @@
 import { Client, ClientOptions } from "@elastic/elasticsearch";
 import { Enterprise, mapEnterprise, mappings } from "./enterprise";
+import pAll from "p-all";
 
 const ELASTICSEARCH_URL =
   process.env.ELASTICSEARCH_URL || "http://localhost:9200";
 const API_KEY = process.env.ELASTICSEARCH_API_KEY;
 
-const indexName = process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises-test";
+const INDEX_NAME =
+  process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises-test";
+const indexPattern = `${INDEX_NAME}-*`;
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
@@ -71,7 +74,7 @@ const index = {
   },
 };
 
-const deleteOldIndices = async (alias: string, indexToKeep: string) => {
+export const deleteOldIndices = async (indexToKeep: string) => {
   const allIndices: string[] = await esClient.cat
     .indices({ format: "json" })
     .then(({ body }: { body: any }) =>
@@ -80,7 +83,9 @@ const deleteOldIndices = async (alias: string, indexToKeep: string) => {
 
   // list indices to delete
   const matchingIndices = allIndices.filter(
-    (index) => index.startsWith(alias) && index != indexToKeep
+    (index) =>
+      index.startsWith(indexPattern.substring(0, indexPattern.length - 2)) &&
+      index != indexToKeep
   );
 
   const deletePromises = matchingIndices.map((index) =>
@@ -94,44 +99,38 @@ const deleteOldIndices = async (alias: string, indexToKeep: string) => {
     );
 };
 
-const updateAlias = (indexPattern: string, newIndex: string, alias: string) =>
+export const updateAlias = (newIndexName: string) =>
   esClient.indices.updateAliases({
     body: {
       actions: [
         {
           remove: {
-            alias,
+            alias: INDEX_NAME,
             index: indexPattern,
           },
         },
         {
           add: {
-            alias: alias,
-            index: newIndex,
+            alias: INDEX_NAME,
+            index: newIndexName,
           },
         },
       ],
     },
   });
 
-export const resetIndex = async () => {
+export const createIndex = async () => {
   const id = Math.floor(Math.random() * 100001);
-
-  const newIndex = `${indexName}-${id}`;
-  const indexPattern = `${indexName}-*`;
-
+  const newIndexName = `${INDEX_NAME}-${id}`;
   const body = { mappings, settings: { analysis, index } };
-
   await esClient.indices.create({
-    index: newIndex,
+    index: newIndexName,
     body,
   });
-
-  await updateAlias(indexPattern, newIndex, indexName);
-  await deleteOldIndices(indexPattern, newIndex);
+  return newIndexName;
 };
 
-const bulkInsert = async (enterprises: Enterprise[]) => {
+const bulkInsert = async (enterprises: Enterprise[], indexName: string) => {
   // async function bulkIndexDocuments({ client, indexName, documents }) {
   try {
     const resp = await esClient.bulk({
@@ -149,8 +148,6 @@ const bulkInsert = async (enterprises: Enterprise[]) => {
           ),
         []
       ),
-
-      //   body: enterprises.map(mapEnterprise),
       index: indexName,
     });
     if (resp.body.errors) {
@@ -165,7 +162,7 @@ const bulkInsert = async (enterprises: Enterprise[]) => {
   }
 };
 
-export const add = async (enterprises: Enterprise[]) => {
+export const add = async (enterprises: Enterprise[], indexName: string) => {
   const batches = [];
   let i = 0;
 
@@ -176,11 +173,8 @@ export const add = async (enterprises: Enterprise[]) => {
 
   console.log(`${batches.length} batches`);
 
-  return batches
-    .map(bulkInsert)
-    .reduce((prev, cur, i) => prev.then(cur as any), Promise.resolve());
-};
-
-export const query = (query: string): Enterprise[] => {
-  return [];
+  return pAll(
+    batches.map((batch) => () => bulkInsert(batch, indexName)),
+    { concurrency: 2 }
+  );
 };
