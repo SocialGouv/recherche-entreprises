@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.12.13",
-    "@elastic/elasticsearch": "^7.10.0",
+    "@elastic/elasticsearch": "^7.12.0",
     "@socialgouv/kali-data": "^2.55.0",
     "fast-csv": "^4.3.6",
     "p-all": "^3.0.0",
