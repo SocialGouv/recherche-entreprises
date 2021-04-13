@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.1.1...v1.2.0) (2021-04-13)
+
+
+### Features
+
+* use @socialgouv/codes-naf fix [#5](https://github.com/SocialGouv/recherche-entreprises/issues/5) ([#23](https://github.com/SocialGouv/recherche-entreprises/issues/23)) ([2c4a498](https://github.com/SocialGouv/recherche-entreprises/commit/2c4a4982deebe1bceda5945ad09b9a961f6b4665))
+
 ## [1.1.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.1.0...v1.1.1) (2021-04-13)
 
 
