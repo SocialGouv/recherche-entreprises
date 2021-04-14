@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.1...v1.2.2) (2021-04-14)
+
+
+### Bug Fixes
+
+* use preprod env to update prod cluster due to ram usage ([#31](https://github.com/SocialGouv/recherche-entreprises/issues/31)) ([5fbace6](https://github.com/SocialGouv/recherche-entreprises/commit/5fbace689acf11bf0d6f1092627009394243488c))
+
 ## [1.2.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.0...v1.2.1) (2021-04-14)
 
 
