@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.0...v1.2.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* **k8s:** use prod.nodeSelector ([#28](https://github.com/SocialGouv/recherche-entreprises/issues/28)) ([9d5f7db](https://github.com/SocialGouv/recherche-entreprises/commit/9d5f7dbb5837ea708238e2fe273bd3179c726f45))
+
 # [1.2.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.1.1...v1.2.0) (2021-04-13)
 
 
