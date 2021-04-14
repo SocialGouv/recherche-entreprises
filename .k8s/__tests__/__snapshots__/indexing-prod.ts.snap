@@ -295,8 +295,6 @@ spec:
             name: config-map-files-ccff889
             defaultMode: 511
           name: local-files
-      nodeSelector:
-        kubernetes.io/hostname: aks-system0-38313369-vmss000001
       initContainers:
         - args:
             - '-c'
