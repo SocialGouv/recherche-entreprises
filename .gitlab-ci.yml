@@ -60,8 +60,9 @@ Download and Index (prod):
     - if: "$CI_COMMIT_TAG"
       when: manual
   variables:
-    KOSKO_GENERATE_ARGS: --env prod jobs/indexing
+    # the preprod env is used for production index
+    # so it runs on the dev cluster
+    KOSKO_GENERATE_ARGS: --env preprod jobs/indexing
   environment:
-    name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
-    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
- 
+    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
