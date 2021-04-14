@@ -8,6 +8,7 @@ import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContaine
 import { Container } from "kubernetes-models/v1/Container";
 import { ConfigMap } from "kubernetes-models/_definitions/IoK8sApiCoreV1ConfigMap";
 import { IIoK8sApiCoreV1PodSpec } from "kubernetes-models/api/core/v1/PodSpec";
+import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
 import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
 import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
 
@@ -32,6 +33,12 @@ const secrets = {
     ELASTICSEARCH_API_KEY:
       "AgDE1F8SFMKtRpPd9BKozxXC5YcwVae1SRc+ECX/9EUhLSaqxGXenqVbtE2tj6kovFcru8sSMgPQZIOGDel4QIpwGC9HozNQWGXkEf9AABjulJ82hwlyo/22XOYodqAs3FuZc0tiodEK6+GUw9KKVf6I2P3Y55AzwfZNuar319LG1H0OmkvJbaXjkQwuELjBeU0OG1hPSf3LSIX4F6hc9JlunyDgWFT+vqe7FN+0Q/BmRgbY9SJ4ZqD+TZxzLfKCmWAtGFWW2eFf5jJDmuXp5A4QK+jSd1vonJGjFn16fEgA32tOnBxaA+7TpcBqVq/oOqYvBckuXlDUrBIXkfKRK/FqjvFCxtkhpzrYRe6FFntA6MFmnYvzhsUEoIOSrn3O8Unlaae//am/sukctTkqTum4IF0316k5UwUjcEsd/1qTFM84l3mcPBeU656t1B0sAaTK5JEPSOkJvz1nk9Ei1RUXPJCVTp3i64hia5OeWgEaTWUsP1udhMhC1eGSt0tf5QtNnnDlpASebmI7oubuSiOLveXg/+RcHNXTztrbc3xSNAUIML8GTXNbA4TJXorvZKdecvVbmtsbH7u+4awna7J+SuAysKNdWdTeMsT0uMdFA0o4fez+PQVXc9+IF0DqU0T8EDeLfz62663aW1R7rQ2KEjK/2Vvy8W6EUjXIdY1DEPv1BmHpI9xRJJ8P8sTucaXBmohjPJb1lXzh+/9AmeIRhy/mDJTnCox/UOfyRrpx+FcU/Vi6TvJvV8ab7JZbufOVmo1iEPnP3Wx3rcQ=",
   },
+  preprod: {
+    ELASTICSEARCH_URL:
+      "AgAkda1Xa3iLWJ4vUT1aDprWjzLi+LS+ZBZiiH5LY2ZZparvRLxs4yja0r38mhe/1yCoVGJXfeLrviMOLj5mCytkSQJqj5AxmHpa8Uw21moy5bRBgyBYqLuU/cBiDRNQSKvurPfcipvy8UgzAlnfkgXJxqqJRIzNccdrw6RN09Zi0B6QzoVA4uInuIKij7Z9jt2LGwOXVLG/sIVvCkdFyZVAlW6dwQAl19B03oNEc4Tdc8ol+aoVMb/fW9GjGVsanPYNBCrH00xFYG3EMY6D5ZjXlOpXbEl38+Zv5MIbSrW4mbLAZPGTGrgD94b/70i/Rx7rT/9og5sFG5o+dfYRTdYtoRIJVwbfyL+/VZZZBd9e4WmBOXlJGQ9y2TYpqIo3vZIUKxpaXkwsX0YTVhKBPaEY+qH8nOmkftWtTHyoSFpGr6uc4y6DPrlluv11/58aQ5kBqd9mZmu1KHv2lR3ZGzMuY8X1EVov7B2Md6ngwZIJ3C1KiZs5hqaIhCzwdj/+mLTZEKkY7Q246yaX1t1G0uKqA+pvL6udbx+wnAIQUoYjUPbtnddaZ17fIgwaTc8A+PlFrebMRRQnRGIs0aq/nl17vOwtmslpmfBx1Z1eGk7HAaV4a+Gtlir3Si0N7TXjUzLfZDZb45Qkbb8/dOIN7rU27KRrogEiSPSq7naVdTga9L6Sfit+V/AS53eSwZ/h+9rFqUbOqC53qF2hiwqYVgHWedpzhux8vIIbQmHM4o8gwJ+h6zsVGZTk7gGFh60iiVLVyEcRwUYov+6XtnIsbXfOT3DNBe1lzYA+2ofE5MBnxQ==",
+    ELASTICSEARCH_API_KEY:
+      "AgCa0qjNwuEDvwpE470GOhBZWWbxZm/GP7kC8UwC4ZFAnWRrf8jsjqynS68ETPaAZQNYSxYFlcwX2Nwo5NcxxtB1zrg353rTVKLZX9NNTkBJ5xZ1P1CuyaI6Y81DzJm7jvoGIMxFHLjaaLdW9RTlKdM+2Q9XmnHtvjFGQ74ncA6+v7ndC4XzrQeTIPkcz36xFyq464zP2y9jX8IG1sEMAKGu17hkoXhDrE+kf+XAUr/nhIxy6b5Jz+4xgsacpkOURQ1Zao7CJdLPTCaZSCJeF61t+lQ/Zk6+6kgvH6G4d3hu4TbxgsVH3WH1clBsHGC5BsffYHt1OrVduAt8PGb2SX905+NrzlyBl+dY8tBk9ps3U8KBz6xeksoJgEwv3+fklKNJ+VpP/ulA+ANYqwBzuw/LiO0hC1JV5y/SngihduKdcOubVEpTUjq/AhZOk6Fz0hdw9y95pokJZuljOqdILr5r32jeMCY5s2npobBgd83wTzqlqCqZo8S2mVuRJKjscOrJd/VEuIPaiIfKxzYjDBSmYhzl0Lcpa05JP97mXT4o03cubUpD7CYB5/VHbGj1QX9jG2pde0zq+xBeJpbjgWEYwvFUBmiIGxzyz7X4h5T2quKGlJIxaQsNd1Vq2tx2289olBsfyyr2Qj5v5NJVBZtWfskBtqnPuGJwNANyf2zYl9Umrv9Gos4lzK1EccTtWjPnHjkGPdZXIHyJezc9ct9xJ60coUsFazd+j1fRBIXSuEAgxqHvX4Cc3/5tEgTwj7mIVHVnnRqJbXG3fko=",
+  },
   prod: {
     ELASTICSEARCH_URL:
       "AgA0evdMnmx3uImqSzGIHorhP2zdv0hFREYZt0FLKi9Eg389OmU1f8CKgpOJp5LPedSAghc8HEd//YeqYRvhQZhfclkw15FZJX7xxz3H75wYJMuNxnLPz8cEyruuA2NrqVoCNuf8p06aI1hfhjNlIKnPjewR14hK5tdKVmsRc1bfPOygUhslbp+aDCbyCFAVFamhaHYHYKdBKZ4B3V+pgLfQvJl2Xfnm3ChXO9Y7ptnI7IJjyzpResdQwasAppc6onvOrGAdms4wW0TZQOsrRV/3JwFHwbqwiX8DzdwkvLlK37HwV7XddiHOQsa3Z+ONI5y9Uhbw2+3ynMi0h8dVOxHmjeq4iPVBqSTWgRfqomz7MR+MSQfNwaE/D20qlt1fzrFvNezc07XxwYxogUS9QFVe8vgXbeoOFmgUA25pKUsOVgjs+ulA5uH7fMv9JhF5H93250FE+/VcHS1wtUAZw67w9GndnpEgs/kmqR9juD4qVEslrEb36OmsZi4hkgNKh8kK2GybTTaTw4I5xSuWu0mpQqZR3i5M8biT/B0YStW1EkajX02obUyQKSJk8VjLwXIFQ726kse5sMh8Ste+z1lKEIfq6jOKZZ7sUiSTwuLuGTmEqy5mdcmkyeCgp4paYOyzKHhYDNXaoZkKguZP9DuOY+44g4uch9Uj3hGvZb+4dV41FGIJ3PB0YZbbxgHF3UA6iHGkZcITwxhn4lJADU7yJyQcrziDXccKa1yiGe9BOOjGn2+WOLF0lrLsA6Uxk70sEiwZygYJQCJGN6KsHPz7Resz6aF/YTY3K+m65VeI4g==",
@@ -42,27 +49,19 @@ const secrets = {
 
 // return a sealed-secret manifest
 const getSealedSecret = (
-  env: string,
-  values: Record<string, string>
+  values: Record<string, string>,
+  annotations?: IIoK8sApimachineryPkgApisMetaV1ObjectMeta["annotations"]
 ): SealedSecret =>
   new SealedSecret({
     metadata: {
       name: "elastic-recherche-entreprises-write",
-      annotations:
-        (env === "dev" && {
-          "sealedsecrets.bitnami.com/cluster-wide": "true",
-        }) ||
-        {},
+      annotations,
     },
     spec: {
       encryptedData: values,
       template: {
         metadata: {
-          annotations:
-            (env === "dev" && {
-              "sealedsecrets.bitnami.com/cluster-wide": "true",
-            }) ||
-            {},
+          annotations,
           name: "elastic-recherche-entreprises-write",
         },
         type: "Opaque",
@@ -71,10 +70,14 @@ const getSealedSecret = (
   });
 
 // create a sealed secret for the indexing job
-const sealedSecretContext = env.env === "prod" ? "prod" : "dev";
+const sealedSecretSecrets =
+  env.env === "prod" ? "prod" : env.env === "preprod" ? "preprod" : "dev";
 const sealedSecret = getSealedSecret(
-  sealedSecretContext,
-  secrets[sealedSecretContext]
+  secrets[sealedSecretSecrets],
+  (env.env === "dev" && {
+    "sealedsecrets.bitnami.com/cluster-wide": "true",
+  }) ||
+    {}
 );
 
 // base definition of the job
