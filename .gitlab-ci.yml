@@ -7,7 +7,7 @@ variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
   AUTO_DEVOPS_KANIKO: "🛑"
-  #AUTO_DEVOPS_ENABLE_KAPP: "🛑"
+  AUTO_DEVOPS_ENABLE_KAPP: "🛑"
   AUTO_DEVOPS_RELEASE_AUTO: "🚀"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
@@ -64,5 +64,5 @@ Download and Index (prod):
     # so it runs on the dev cluster
     KOSKO_GENERATE_ARGS: --env preprod jobs/indexing
   environment:
-    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
+    url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
