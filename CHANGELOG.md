@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.2...v1.2.3) (2021-04-15)
+
+
+### Bug Fixes
+
+* **ci:** gitlab-ci ([11976ee](https://github.com/SocialGouv/recherche-entreprises/commit/11976eea54a82ace6532e3a549988a2b2c940f25))
+
 ## [1.2.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.1...v1.2.2) (2021-04-14)
 
 
