@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.3...v1.3.0) (2021-04-15)
+
+
+### Features
+
+* add conventions data ([#32](https://github.com/SocialGouv/recherche-entreprises/issues/32)) ([021ed24](https://github.com/SocialGouv/recherche-entreprises/commit/021ed24c6c9540a90c73e2c3a24600dcee4155b2))
+
 ## [1.2.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.2...v1.2.3) (2021-04-15)
 
 
