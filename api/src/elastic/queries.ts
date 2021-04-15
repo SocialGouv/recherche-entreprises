@@ -1,3 +1,5 @@
+import kaliConventions from "@socialgouv/kali-data/data/index.json";
+
 const pre = "<b><u>";
 const post = "</b></u>";
 
@@ -62,9 +64,11 @@ export const mapHit = ({
           fields: { convention, idcc },
         }: { fields: { convention: string[]; idcc: string } }
       ) => {
+        const kaliConvention = kaliConventions.find(cv => cv.num === parseInt(idcc)) || {}
         const o = {
           idcc: parseInt(idcc),
           shortTitle: convention ? convention[0] : "",
+          ...kaliConvention
         };
         if (!acc.has(o.idcc)) {
           acc.set(o.idcc, o);
