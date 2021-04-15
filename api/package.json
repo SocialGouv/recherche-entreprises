@@ -25,6 +25,7 @@
     "@types/koa": "^2.13.1",
     "@types/koa-router": "^7.4.1",
     "@types/koa__cors": "^3.0.2",
+    "@types/lodash.pick": "^4.4.6",
     "@types/supertest": "^2.0.11",
     "@vercel/ncc": "^0.28.3",
     "jest": "^26.6.3",
