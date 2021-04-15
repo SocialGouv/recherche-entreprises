@@ -8,7 +8,9 @@ Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qu
 
 Un frontend de démo est disponible ici : https://p8dyl.csb.app/
 
-Et vous pouvez utiliser librement l'API disponible sur https://api-recherche-entreprises.fabrique.social.gouv.fr
+Et vous pouvez utiliser librement l'API disponible sur https://api-recherche-entreprises.fabrique.social.gouv.fr cf [doc API](./api/README.md)
+
+Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fabrique.social.gouv.fr/api/v1/search?q=plume&a=paris)
 
 ## Étapes :
 
