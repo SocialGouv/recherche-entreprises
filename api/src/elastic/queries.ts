@@ -1,3 +1,6 @@
+import kaliConventions from "@socialgouv/kali-data/data/index.json";
+import pick from "lodash.pick"
+
 const pre = "<b><u>";
 const post = "</b></u>";
 
@@ -62,9 +65,12 @@ export const mapHit = ({
           fields: { convention, idcc },
         }: { fields: { convention: string[]; idcc: string } }
       ) => {
+        const kaliConvention = kaliConventions.find(cv => cv.num === parseInt(idcc)) || {}
+        const kaliData = kaliConvention && pick(kaliConvention, ["etat", "id", "mtime", "texte_de_base", "url", "title"]) || {}
         const o = {
           idcc: parseInt(idcc),
           shortTitle: convention ? convention[0] : "",
+          ...kaliData
         };
         if (!acc.has(o.idcc)) {
           acc.set(o.idcc, o);
