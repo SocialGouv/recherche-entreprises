@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.0...v1.3.1) (2021-04-22)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (patch) ([#33](https://github.com/SocialGouv/recherche-entreprises/issues/33)) ([314fc07](https://github.com/SocialGouv/recherche-entreprises/commit/314fc07e9168377b9098b03db629e66174793635))
+
 # [1.3.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.2.3...v1.3.0) (2021-04-15)
 
 
