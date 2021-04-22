@@ -1,7 +1,7 @@
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v21.0.0
+    ref: v21.0.2
 
 variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
