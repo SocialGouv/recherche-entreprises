@@ -12,8 +12,8 @@ variables:
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
 Install:
-  rules:
-    - when: never
+  script:
+    - echo "no install"
 
 Build:
   rules:
