@@ -1,10 +1,16 @@
 import kaliConventions from "@socialgouv/kali-data/data/index.json";
-import pick from "lodash.pick"
 
 const pre = "<b><u>";
 const post = "</b></u>";
 
 const defaultLimit = 20;
+
+const conventionsSet = Object.fromEntries(
+  kaliConventions.map((c) => {
+    const { num, etat, id, mtime, texte_de_base, url, title } = c;
+    return [num, { etat, id, mtime, texte_de_base, url, title }];
+  })
+);
 
 // we remove deduplicate tokens to compose company's label
 const formatLabel = (naming: string[]) => {
@@ -65,12 +71,11 @@ export const mapHit = ({
           fields: { convention, idcc },
         }: { fields: { convention: string[]; idcc: string } }
       ) => {
-        const kaliConvention = kaliConventions.find(cv => cv.num === parseInt(idcc)) || {}
-        const kaliData = kaliConvention && pick(kaliConvention, ["etat", "id", "mtime", "texte_de_base", "url", "title"]) || {}
+        const kaliData = idcc ? conventionsSet[idcc] : undefined;
         const o = {
           idcc: parseInt(idcc),
           shortTitle: convention ? convention[0] : "",
-          ...kaliData
+          ...kaliData,
         };
         if (!acc.has(o.idcc)) {
           acc.set(o.idcc, o);
