@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.1...v1.3.2) (2021-04-26)
+
+
+### Reverts
+
+* Revert "chore(deps): update all dependencies (patch)" (#38) ([6b418c2](https://github.com/SocialGouv/recherche-entreprises/commit/6b418c205d441e7ac83f83a4c32d0077a8fe5753)), closes [#38](https://github.com/SocialGouv/recherche-entreprises/issues/38) [#35](https://github.com/SocialGouv/recherche-entreprises/issues/35)
+
 ## [1.3.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.0...v1.3.1) (2021-04-22)
 
 
