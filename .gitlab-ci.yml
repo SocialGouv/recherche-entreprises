@@ -4,7 +4,7 @@ include:
     ref: v22.0.0
 
 variables:
-  AUTO_DEVOPS_TEST_DISABLED: "🛑"
+#  AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
   AUTO_DEVOPS_KANIKO: "🛑"
   AUTO_DEVOPS_ENABLE_KAPP: "🛑"
