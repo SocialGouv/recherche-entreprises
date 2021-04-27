@@ -119,14 +119,32 @@ data:
             a Pandas dataframe containing the list of all companies that are still open
             and employ people
         \\"\\"\\"
+        trancheEffectifsUniteLegale = \\"trancheEffectifsUniteLegale\\"
+        categorieJuridiqueUniteLegale = \\"categorieJuridiqueUniteLegale\\"
+        nomenclatureActivitePrincipaleUniteLegale = \\"nomenclatureActivitePrincipaleUniteLegale\\"
+        categorieEntreprise = \\"categorieEntreprise\\"
+        activitePrincipaleUniteLegale = \\"activitePrincipaleUniteLegale\\"
 
-        selection = [\\"siren\\", \\"sigleUniteLegale\\", \\"trancheEffectifsUniteLegale\\", \\"categorieEntreprise\\", 'nomUniteLegale', 'nomUsageUniteLegale', 'denominationUniteLegale',
-                     'denominationUsuelle1UniteLegale', 'denominationUsuelle2UniteLegale',
-                     'denominationUsuelle3UniteLegale', \\"categorieJuridiqueUniteLegale\\", \\"activitePrincipaleUniteLegale\\", \\"nomenclatureActivitePrincipaleUniteLegale\\"]
+        selection = [\\"siren\\", \\"sigleUniteLegale\\", \\"nomUniteLegale\\", \\"nomUsageUniteLegale\\",
+                     'denominationUniteLegale', \\"denominationUsuelle1UniteLegale\\", \\"denominationUsuelle2UniteLegale\\",
+                     \\"denominationUsuelle3UniteLegale\\", activitePrincipaleUniteLegale,
+                     trancheEffectifsUniteLegale, categorieJuridiqueUniteLegale,
+                     nomenclatureActivitePrincipaleUniteLegale, categorieEntreprise]
+
         etatAdmin = \\"etatAdministratifUniteLegale\\"
         caractereEmployeur = \\"caractereEmployeurUniteLegale\\"
+
+        # we only select columns in use and convert to categorical dtype
+        # in order to decrease the dataframe memory footprint
         cols = selection + [etatAdmin, caractereEmployeur]
-        raw = pd.read_csv(stock_unite_legale_file, usecols=cols)
+        raw = pd.read_csv(stock_unite_legale_file, usecols=cols,
+                          dtype={etatAdmin: \\"category\\", caractereEmployeur: \\"category\\",
+                                 trancheEffectifsUniteLegale: \\"category\\",
+                                 categorieJuridiqueUniteLegale: \\"category\\",
+                                 nomenclatureActivitePrincipaleUniteLegale: \\"category\\",
+                                 activitePrincipaleUniteLegale: \\"category\\",
+                                 categorieEntreprise: \\"category\\"}, )
+
         is_ouvert = raw[etatAdmin] == \\"A\\"
         is_employeur = raw[caractereEmployeur] == \\"O\\"
         is_admin = raw[etatAdmin] == \\"A\\"
@@ -156,11 +174,20 @@ data:
         geo = {}
         for file in geo_files:
             geo[file] = pd.read_csv(
-                geo_directory + file, dtype={\\"codePostalEtablissement\\": np.dtype(str)}, usecols=geo_selection
+                geo_directory + file, dtype={\\"codePostalEtablissement\\": np.dtype(str),
+                                             \\"etatAdministratifEtablissement\\": \\"category\\",
+                                             \\"activitePrincipaleEtablissement\\": \\"category\\"
+                                             }, usecols=geo_selection
             )
 
         all_geo = pd.concat(geo.values(), ignore_index=True).dropna(
             subset=['siret'])
+
+        all_geo = all_geo.astype(dtype={\\"codePostalEtablissement\\": np.dtype(str),
+                                        \\"etatAdministratifEtablissement\\": \\"category\\",
+                                        \\"activitePrincipaleEtablissement\\": \\"category\\",
+                                        })
+
         all_geo = all_geo[all_geo[\\"etatAdministratifEtablissement\\"] == \\"A\\"]
 
         return all_geo
