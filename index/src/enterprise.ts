@@ -77,19 +77,16 @@ export const mappings = {
 
     ville: {
       analyzer: "french_indexing",
-      search_analyzer: "french",
       type: "text",
     },
 
     address: {
       analyzer: "french_indexing",
-      search_analyzer: "french",
       type: "text",
     },
 
     naming: {
       analyzer: "french_indexing",
-      search_analyzer: "french",
       type: "text",
       similarity: "bm25_no_norm_length",
     },

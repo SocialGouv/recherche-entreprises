@@ -172,8 +172,8 @@ export const entrepriseSearchBody = (
             should: [
               { fuzzy: { naming: { boost: 0.6, value: query } } },
               { match: { naming: query } },
-              { match: { siret: query } },
-              { match: { siren: query } },
+              { match: { siret: query.replace(/\D/g, "") } },
+              { match: { siren: query.replace(/\D/g, "") } },
             ],
           },
         },
