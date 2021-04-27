@@ -2,6 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -29,8 +30,8 @@ Object {
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 26,
   "matchingEtablissement": Object {
-    "address": "Route d'Arles 13300 Salon-de-Provence",
-    "siret": "85520050703094",
+    "address": "16 Rue de Toutlemonde 49300 Cholet",
+    "siret": "85520050700710",
   },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
@@ -39,7 +40,8 @@ Object {
 
 exports[`Test etablissement search correct siret 1`] = `
 Object {
-  "address": "Route d'Arles 13300 Salon-de-Provence",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "address": "16 Rue de Toutlemonde 49300 Cholet",
   "convention": Object {
     "etat": "VIGUEUR_ETEN",
     "id": "KALICONT000005635597",
@@ -56,12 +58,13 @@ Object {
   "matching": 1,
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
-  "siret": "85520050703094",
+  "siret": "85520050700710",
 }
 `;
 
 exports[`Test search generic search 1`] = `
 Object {
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -89,8 +92,8 @@ Object {
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 18,
   "matchingEtablissement": Object {
-    "address": "Route d'Arles 13300 Salon-de-Provence",
-    "siret": "85520050703094",
+    "address": "16 Rue de Toutlemonde 49300 Cholet",
+    "siret": "85520050700710",
   },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",

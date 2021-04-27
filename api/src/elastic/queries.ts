@@ -178,7 +178,12 @@ export const entrepriseSearchBody = (
           },
         },
       ],
-      should: [{ rank_feature }],
+      should: [
+        { rank_feature },
+        // rank by siret with minimum boosting in order to ensure results appear in the same order
+        // useful to always have the same first etablissement when no address passed
+        { rank_feature: { field: "siretRank", boost: 0.1 } },
+      ],
     },
   },
   size: size ? size : defaultLimit,

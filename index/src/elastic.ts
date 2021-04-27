@@ -55,6 +55,8 @@ const analysis = {
       filter: [
         "french_elision",
         "lowercase",
+        // company labels do not include diatrics
+        "asciifolding",
         "french_stop",
         "french_stemmer",
         // very important filter in order to remove duplication between

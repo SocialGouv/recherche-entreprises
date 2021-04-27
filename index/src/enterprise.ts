@@ -48,7 +48,7 @@ export type Enterprise = {
 export const mappings = {
   properties: {
     trancheEffectifsUniteLegale: { type: "rank_feature" },
-
+    siretRank: { type: "rank_feature" },
     etablissements: { type: "rank_feature" },
 
     siret: { type: "keyword" },
@@ -105,8 +105,11 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     !Number.parseFloat(
       (enterprise.trancheEffectifsUniteLegale as unknown) as string
     )
-  )
+  ) {
     enterprise.trancheEffectifsUniteLegale = 0.1;
+  }
+
+  const siretRank = enterprise.siret;
 
   const naming = Array.from(
     new Set([
@@ -160,6 +163,7 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     activitePrincipale,
     convention,
     withIdcc,
+    siretRank,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),

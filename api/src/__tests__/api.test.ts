@@ -23,7 +23,7 @@ const searchCall = (
 };
 
 const michelinSiren = "855200507";
-const michelinSiret = `${michelinSiren}03094`;
+const michelinSiret = `${michelinSiren}00710`;
 
 describe("Test search", () => {
   test("generic search", async () => {
@@ -47,7 +47,7 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"Route d'Arles 13300 Salon-de-Provence"`);
+    ).toMatchInlineSnapshot(`"16 Rue de Toutlemonde 49300 Cholet"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(
@@ -62,6 +62,22 @@ describe("Test search", () => {
     ).toMatchInlineSnapshot(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
+
+    const { body: b4 } = await searchCall("michelin", "63", undefined);
+    expect(
+      b4.entreprises[0].matchingEtablissement.address
+    ).toMatchInlineSnapshot(
+      `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+    );
+  });
+
+  test("search with daitrics", async () => {
+    const { body: b1 } = await searchCall("michelin", undefined, undefined);
+    const { body: b2 } = await searchCall("michélin", undefined, undefined);
+    const { body: b3 } = await searchCall("Mîchèlin", undefined, undefined);
+
+    expect(b1).toStrictEqual(b2);
+    expect(b1).toStrictEqual(b3);
   });
 
   test("search with siret", async () => {
