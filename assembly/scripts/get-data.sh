@@ -30,4 +30,4 @@ done
 wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/insee-sirene/StockUniteLegale_utf8.zip --directory-prefix=$DATA_DIR
 
 # WEEZ data
-wget --progress=bar:force:noscroll -q --show-progress https://github.com/SocialGouv/siret2idcc/blob/master/data/WEEZ.csv?raw=true -O ${DATA_DIR}/WEEZ.csv
+wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e -O ${DATA_DIR}/WEEZ.csv
