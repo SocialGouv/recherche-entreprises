@@ -49,7 +49,9 @@ if (require.main === module) {
         // ensure we have some data
         const docsCount = await getDocsCount(indexName);
         if (!docsCount) {
-          throw new Error(`No document created in index ${indexName}, skip aliasing`);
+          throw new Error(
+            `No document created in index ${indexName}, skip aliasing`
+          );
         } else {
           console.log(`Created ${docsCount} documents in index ${indexName}`);
         }

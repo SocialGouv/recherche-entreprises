@@ -181,6 +181,6 @@ export const add = async (enterprises: Enterprise[], indexName: string) => {
 };
 
 export const getDocsCount = async (indexName: string): Promise<number> => {
-  const stats = await esClient.indices.stats({index: indexName});
+  const stats = await esClient.indices.stats({ index: indexName });
   return stats.body._all.primaries.docs.count;
-}
+};

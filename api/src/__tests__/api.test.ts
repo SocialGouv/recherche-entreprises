@@ -23,7 +23,7 @@ const searchCall = (
 };
 
 const michelinSiren = "855200507";
-const michelinSiret = `${michelinSiren}00710`;
+const michelinSiret = `${michelinSiren}03094`;
 
 describe("Test search", () => {
   test("generic search", async () => {
@@ -47,7 +47,7 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"16 Rue de Toutlemonde 49300 Cholet"`);
+    ).toMatchInlineSnapshot(`"Route d'Arles 13300 Salon-de-Provence"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(
