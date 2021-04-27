@@ -127,10 +127,8 @@ const addressFilter = (address: string | undefined) =>
   address
     ? [
         {
-          match: {
-            cp: {
-              query: address ? address.replace(/\D/g, "") : "",
-            },
+          prefix: {
+            cp: address ? address.replace(/\D/g, "") : "",
           },
         },
         {
