@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.2...v1.4.0) (2021-04-27)
+
+
+### Bug Fixes
+
+* use indexed conventions in mapHit ([526d11e](https://github.com/SocialGouv/recherche-entreprises/commit/526d11eab9a6ae2755da92e80b4f8329d141f70b))
+
+
+### Features
+
+* ignore diatrics [#36](https://github.com/SocialGouv/recherche-entreprises/issues/36) ([6b3c8e8](https://github.com/SocialGouv/recherche-entreprises/commit/6b3c8e88706963df5b3e7afdbd7a95fb71fef808))
+* prefix CP query [#26](https://github.com/SocialGouv/recherche-entreprises/issues/26) ([645f122](https://github.com/SocialGouv/recherche-entreprises/commit/645f122e73990356c4591c7221dc682cd410dd58))
+* reduce assembly memory footprint ([e6116e9](https://github.com/SocialGouv/recherche-entreprises/commit/e6116e9d6c566a32b7befcf5484c42b79d90fd3d))
+
 ## [1.3.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.1...v1.3.2) (2021-04-26)
 
 
