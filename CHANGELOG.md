@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.0...v1.4.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* fix preprod indexing secrets + snapshots ([#39](https://github.com/SocialGouv/recherche-entreprises/issues/39)) ([fa4b095](https://github.com/SocialGouv/recherche-entreprises/commit/fa4b0957a6e5f48041dbcefa58b36b7ce530d38c))
+* typo in analyzer name ([aada84d](https://github.com/SocialGouv/recherche-entreprises/commit/aada84d998aedbd9445376b3f5332351ab14d6df))
+* update WEEZ path [#6](https://github.com/SocialGouv/recherche-entreprises/issues/6) ([5dcf62e](https://github.com/SocialGouv/recherche-entreprises/commit/5dcf62e686ed5f2793fec31dd8aa33fc9500c7bd))
+
 # [1.4.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.3.2...v1.4.0) (2021-04-27)
 
 
