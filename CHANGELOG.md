@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.1...v1.4.2) (2021-04-28)
+
+
+### Bug Fixes
+
+* dummy release ([fa07869](https://github.com/SocialGouv/recherche-entreprises/commit/fa07869aa20aaa7d6dfd8a78f922b13f7caaaf57))
+
 ## [1.4.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.0...v1.4.1) (2021-04-28)
 
 
