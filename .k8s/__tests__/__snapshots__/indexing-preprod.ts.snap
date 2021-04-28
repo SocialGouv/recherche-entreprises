@@ -19,9 +19,9 @@ metadata:
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
-      AgAkda1Xa3iLWJ4vUT1aDprWjzLi+LS+ZBZiiH5LY2ZZparvRLxs4yja0r38mhe/1yCoVGJXfeLrviMOLj5mCytkSQJqj5AxmHpa8Uw21moy5bRBgyBYqLuU/cBiDRNQSKvurPfcipvy8UgzAlnfkgXJxqqJRIzNccdrw6RN09Zi0B6QzoVA4uInuIKij7Z9jt2LGwOXVLG/sIVvCkdFyZVAlW6dwQAl19B03oNEc4Tdc8ol+aoVMb/fW9GjGVsanPYNBCrH00xFYG3EMY6D5ZjXlOpXbEl38+Zv5MIbSrW4mbLAZPGTGrgD94b/70i/Rx7rT/9og5sFG5o+dfYRTdYtoRIJVwbfyL+/VZZZBd9e4WmBOXlJGQ9y2TYpqIo3vZIUKxpaXkwsX0YTVhKBPaEY+qH8nOmkftWtTHyoSFpGr6uc4y6DPrlluv11/58aQ5kBqd9mZmu1KHv2lR3ZGzMuY8X1EVov7B2Md6ngwZIJ3C1KiZs5hqaIhCzwdj/+mLTZEKkY7Q246yaX1t1G0uKqA+pvL6udbx+wnAIQUoYjUPbtnddaZ17fIgwaTc8A+PlFrebMRRQnRGIs0aq/nl17vOwtmslpmfBx1Z1eGk7HAaV4a+Gtlir3Si0N7TXjUzLfZDZb45Qkbb8/dOIN7rU27KRrogEiSPSq7naVdTga9L6Sfit+V/AS53eSwZ/h+9rFqUbOqC53qF2hiwqYVgHWedpzhux8vIIbQmHM4o8gwJ+h6zsVGZTk7gGFh60iiVLVyEcRwUYov+6XtnIsbXfOT3DNBe1lzYA+2ofE5MBnxQ==
+      AgB82d7LnDA/6RxRlks/7cRtmWuz6Ql1p4gCwdghu3X85Ek4FqSL6ui1tIBiuM1pZcaiwM6ZizsKA0ofq5iBafUwRQOzTFc3XAMy7XltrymG/QwBRmYKS4w4Ub1DPuYpVxEUC6Jngyex7OvhCKUK7pugjG6Q8FXO6i9iyVVEpKnAcSVLaUe+olmlOrO2RMjIK3mgKX/xOFT+2FYiN5/LJob+w/+p0hPlZaMsLrLOl/i5N4LuI5ckg+FawifD2MnN057fsLbwt0m63g7ZHvXtGT66tbTcQgpWfy5kLe2m7oIbzdk+oPoh4FS8PnyU6nMC8sOkC3v/GUMK91qCas01RBoyPRTTs11yX3gbYHti5Nc3zDt36YHPhrqfRQHQ8xONYkx5SkAylnDr1JoXyfrKDwZUBvLQ6Xh3gGI7qu909LxZ2ryWd9WRslpB1+8bOLN0tV20slAesGYFC/W6e5GT0AhwWqwJ9usGLf0dM7GE+IXJegIlconcM+2x/FW3RQ5XnK5kI/coiha5pxBkK0p8pbwmLnOwH5c2QoBD5xgLCZ3wleMcbTWdSynzm/LSYkWZzL15M3dy4m8c+qXc88LCbAHTZ2UaAH/XF7pcuMvOF33ZesjgaWLumFoUvhtaG1gZN97eU2/K1xLwo+x/vt06P6vUbU2Emj9cEziTaQqx1ZPUI4Hsp5ZNpbAGRsLMhCf7G7YvxZkpxh+7GAKvW1JmhF1DYgBapCen2bxQN/XK/pNniL89T0hiKSwh/Fo8yDOnqAGova3T1Nq6fLFcRYNxtKFVlsn5zsUgyVPCtyn+cUKIFw==
     ELASTICSEARCH_API_KEY: >-
-      AgCa0qjNwuEDvwpE470GOhBZWWbxZm/GP7kC8UwC4ZFAnWRrf8jsjqynS68ETPaAZQNYSxYFlcwX2Nwo5NcxxtB1zrg353rTVKLZX9NNTkBJ5xZ1P1CuyaI6Y81DzJm7jvoGIMxFHLjaaLdW9RTlKdM+2Q9XmnHtvjFGQ74ncA6+v7ndC4XzrQeTIPkcz36xFyq464zP2y9jX8IG1sEMAKGu17hkoXhDrE+kf+XAUr/nhIxy6b5Jz+4xgsacpkOURQ1Zao7CJdLPTCaZSCJeF61t+lQ/Zk6+6kgvH6G4d3hu4TbxgsVH3WH1clBsHGC5BsffYHt1OrVduAt8PGb2SX905+NrzlyBl+dY8tBk9ps3U8KBz6xeksoJgEwv3+fklKNJ+VpP/ulA+ANYqwBzuw/LiO0hC1JV5y/SngihduKdcOubVEpTUjq/AhZOk6Fz0hdw9y95pokJZuljOqdILr5r32jeMCY5s2npobBgd83wTzqlqCqZo8S2mVuRJKjscOrJd/VEuIPaiIfKxzYjDBSmYhzl0Lcpa05JP97mXT4o03cubUpD7CYB5/VHbGj1QX9jG2pde0zq+xBeJpbjgWEYwvFUBmiIGxzyz7X4h5T2quKGlJIxaQsNd1Vq2tx2289olBsfyyr2Qj5v5NJVBZtWfskBtqnPuGJwNANyf2zYl9Umrv9Gos4lzK1EccTtWjPnHjkGPdZXIHyJezc9ct9xJ60coUsFazd+j1fRBIXSuEAgxqHvX4Cc3/5tEgTwj7mIVHVnnRqJbXG3fko=
+      AgCWc+7OMggEJuNUXxL8CufezAMvJaT3svLkFi9KiKost/avFQNBoXDGixl7vERoCDVvDxnPlcn7m7MIjveP5oIfewhJzYQua9WmQrSMTab1soqUIjMHWj+2A8y0qSYg4s21w/X6bc+H0/O4+ax0QNVtm/MWc30vnCOF+uVibM2WcDkSY/FGE2bE7hcmQWeDbsmnRxDaZTY10ME2ycZpv9eAMoXshCQ98k4LFT9DM0D51az4BibLJjUtsW/vMn/FNKv9/teOGiCAFE/pfoyeZ4QN7ZsoFzCSHwj++Rd0hWScX8VCvbS5pgmfioz8SHmQFrxrN994CAPlr2Rw7mxfkzSETrDgzQVmzKD+j49PZL6cz77cCh9DGE70Pco91szWbsaUQ/lcWUTlFm39Z0Xmf6uV1eCSbyPcM3ogMx95Rjb3MnGa2zrt4OPLMMA2YfyqMtrrVTcq2aJ4fGvWAmVZHH3k2QMcPiYLGHQ8gnVsjI6LYGJEM27RVj99/ppZpoPWeims00fBHMclr3/4czfQCBKcr8GFouxfcKVYGJ4gRNdH0Qn5gZIPXOOiRKUVS0ik0zuT1Xu9u9kU6Df2RVOQawiIOy14+5RrMqt0li1PuCFZjRTqbsLGogOzJQfaXKOafNjxswUqXSn4gR3pVBmm0tPJx+9iFdSrkavvGBrQeSDrNzY5UjeZwIgz9hveUUe1dxARBK8iXu0Q8P6W+VnFActyQs0gnoc4Zzb3jJNfxgDWv1LF/MK22b5G2YcZ3bk5LSsGxP1KICJ0J1MMSL8=
   template:
     metadata:
       annotations:
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 data:
-  get-data.sh: >-
+  get-data.sh: >
     #!/bin/bash
 
 
@@ -89,7 +89,7 @@ data:
     # WEEZ data
 
     wget --progress=bar:force:noscroll -q --show-progress
-    https://github.com/SocialGouv/siret2idcc/blob/master/data/WEEZ.csv?raw=true
+    https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e
     -O \${DATA_DIR}/WEEZ.csv
   assemble_data.py: |
     \\"\\"\\"CDTN Entreprises data assembler
