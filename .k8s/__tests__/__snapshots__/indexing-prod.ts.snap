@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 data:
-  get-data.sh: >-
+  get-data.sh: >
     #!/bin/bash
 
 
@@ -89,7 +89,7 @@ data:
     # WEEZ data
 
     wget --progress=bar:force:noscroll -q --show-progress
-    https://github.com/SocialGouv/siret2idcc/blob/master/data/WEEZ.csv?raw=true
+    https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e
     -O \${DATA_DIR}/WEEZ.csv
   assemble_data.py: |
     \\"\\"\\"CDTN Entreprises data assembler
