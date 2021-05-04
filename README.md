@@ -16,21 +16,7 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5QeUFzc2VtYmx5wqBcbmdlb19zaXJldC5jc3YtLT5QeUFzc2VtYmx5wqBcbnNpcmV0MmlkY2MuY3N2LS0-UHlBc3NlbWJsecKgXG5QeUFzc2VtYmx5LS0-YXNzZW1ibHkuY3N2LS0-aW5kZXgtLT5FbGFzdGljU2VhcmNoLS0-QVBJW0FQSSBIVFRQMV1cbkVsYXN0aWNTZWFyY2gtLT5BUEkyW0FQSSBIVFRQMl1cbkVsYXN0aWNTZWFyY2gtLT5DbGllbnRbQ2xpZW50IEVTXSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
-## Assemblage
-
-Le CSV est généré en deux étapes dans le dossier `assembly/` :
-
-- Téléchargement des datasets (8GB)
-
-  `DATA_DIR=./data2/ scripts/get-data.sh`
-
-- Assemblage des fichiers avec Python (numpy & pandas)
-
-  `pip install -r requirements.txt`
-
-  `DATA_DIR=./data2/ OUTPUT_DIR=./ scripts/assemble.sh`
-
-Au final, le fichier CSV fait environ 600Mo
+## Données :
 
 | Dataset                                                                                                                                                                        | usage                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
@@ -39,6 +25,22 @@ Au final, le fichier CSV fait environ 600Mo
 | [siret2idcc](https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/#_)                                                                   | Lien vers la convention collective                       |
 | [kali-data](https://github.com/SocialGouv/kali-data)                                                                                                                           | Informations sur les conventions collectives             |
 | [codes-naf](https://github.com/SocialGouv/codes-naf)                                                                                                                           | Liste des codes NAF (Nomenclature d’activités française) |
+
+## Assemblage
+
+Le CSV est généré en deux étapes dans le dossier `assembly/` :
+
+- Téléchargement des datasets (8GB)
+
+  `DATA_DIR=./data/ scripts/get-data.sh`
+
+- Assemblage des fichiers avec Python (numpy & pandas)
+
+  `pip install -r requirements.txt`
+
+  `DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh`
+
+Au final, le fichier `./output/assembly.csv` fait environ 600Mo
 
 ## Indexation Elastic Search
 
@@ -53,8 +55,7 @@ Pour lancer une indexation :
 ```sh
 yarn install
 
-ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=/path_to/assembly.csv yarn start
+ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./output/assembly.csv yarn start
 ```
 
 The default `ELASTICSEARCH_INDEX_NAME` is `recherche-entreprises`
-
