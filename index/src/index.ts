@@ -10,7 +10,8 @@ import {
 } from "./elastic";
 import { Enterprise } from "./enterprise";
 
-const ASSEMBLY_FILE = process.env.ASSEMBLY_FILE || "../output/assembly.csv";
+const ASSEMBLY_FILE =
+  process.env.ASSEMBLY_FILE || "../assembly/output/assembly.csv";
 
 const insertEntreprises = (indexName: string) => {
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));

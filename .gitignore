@@ -1,5 +1,6 @@
 .ipynb_checkpoints/
 data/
+output/
 python-env/
 node_modules
 siret-idcc.csv
