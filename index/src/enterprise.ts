@@ -144,11 +144,9 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     : undefined;
 
   const withIdcc =
-    (enterprise.idcc !== undefined &&
-      enterprise.idcc !== null &&
-      enterprise.idcc !== "" &&
+    (enterprise.idcc &&
       parseInt(enterprise.idcc) !== 0 &&
-      enterprise.idcc !== "0") ||
+      parseInt(enterprise.idcc) !== 9999) ||
     false;
 
   return {

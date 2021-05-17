@@ -1,4 +1,5 @@
 import kaliConventions from "@socialgouv/kali-data/data/index.json";
+import type { IndexedAgreement } from "@socialgouv/kali-data";
 
 const pre = "<b><u>";
 const post = "</b></u>";
@@ -159,7 +160,10 @@ export const entrepriseSearchBody = (
   query: {
     bool: {
       filter: onlyWithConvention
-        ? [{ term: { withIdcc: onlyWithConvention } }]
+        ? [
+            { term: { withIdcc: onlyWithConvention } },
+            { range: { idcc: { lt: 5001 } } },
+          ]
         : undefined,
       must: [
         {
