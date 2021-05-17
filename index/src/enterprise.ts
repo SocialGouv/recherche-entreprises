@@ -70,7 +70,14 @@ export const mappings = {
     denominationUsuelleEtablissement: { type: "keyword" },
 
     withIdcc: { type: "boolean" },
-    idcc: { type: "keyword" },
+    idcc: {
+      type: "keyword",
+      fields: {
+        number: {
+          type: "integer",
+        },
+      },
+    },
 
     cp: { type: "keyword" },
 

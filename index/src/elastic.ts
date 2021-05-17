@@ -169,7 +169,7 @@ export const add = async (enterprises: Enterprise[], indexName: string) => {
   const batches = [];
   let i = 0;
 
-  const batchSize = 100;
+  const batchSize = 500;
   while (i < enterprises.length) {
     batches.push(enterprises.slice(i, (i += batchSize)));
   }
