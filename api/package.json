@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "node -r ts-node/register src/index.ts",
+    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore '__tests__' --exec 'ts-node src/index.ts'",
     "build": "ncc build src/index.ts -o dist",
     "start": "node dist/index.js",
     "test": "jest"
@@ -28,6 +28,7 @@
     "@types/supertest": "^2.0.11",
     "@vercel/ncc": "^0.28.3",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.5",

@@ -114,9 +114,7 @@ def read_idcc(idcc_file):
     """
     idccs = pd.read_csv(idcc_file, usecols=["SIRET", "IDCC"]).rename(
         columns={"SIRET": "siret", "IDCC": "idcc"})
-    # drop unknown
-    unknown = idccs["idcc"] == 9999
-    idccs = idccs.drop(idccs[unknown].index)
+  
     return idccs
 
 

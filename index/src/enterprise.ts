@@ -1,7 +1,6 @@
 import { codesNaf } from "./naf";
-import { getAgreements } from "@socialgouv/kali-data";
+import agreements from "@socialgouv/kali-data/data/index.json";
 
-const agreements = getAgreements();
 const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
 
 const idccs = [...ccMap.keys()];
@@ -71,7 +70,14 @@ export const mappings = {
     denominationUsuelleEtablissement: { type: "keyword" },
 
     withIdcc: { type: "boolean" },
-    idcc: { type: "keyword" },
+    idcc: {
+      type: "keyword",
+      fields: {
+        number: {
+          type: "integer",
+        },
+      },
+    },
 
     cp: { type: "keyword" },
 
@@ -100,7 +106,7 @@ export const mapEnterprise = (enterprise: Enterprise) => {
   // ranking feature cannot be 0
   if (
     !Number.parseFloat(
-      (enterprise.trancheEffectifsUniteLegale as unknown) as string
+      enterprise.trancheEffectifsUniteLegale as unknown as string
     )
   ) {
     enterprise.trancheEffectifsUniteLegale = 0.1;
@@ -132,8 +138,8 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     enterprise.activitePrincipaleEtablissement,
     enterprise.activitePrincipaleUniteLegale,
   ]
-    .map((c) => c.replace(".", ""))
-    .find((s) => s);
+    .map((code) => code.replace(/\w$/, ""))
+    .find((s) => !s.startsWith("00.00")); // 00.00Z is a temporary code
 
   const activitePrincipale =
     codeActivitePrincipale !== undefined
@@ -145,11 +151,9 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     : undefined;
 
   const withIdcc =
-    (enterprise.idcc !== undefined &&
-      enterprise.idcc !== null &&
-      enterprise.idcc !== "" &&
+    (enterprise.idcc &&
       parseInt(enterprise.idcc) !== 0 &&
-      enterprise.idcc !== "0") ||
+      parseInt(enterprise.idcc) !== 9999) ||
     false;
 
   return {

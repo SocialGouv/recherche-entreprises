@@ -159,7 +159,10 @@ export const entrepriseSearchBody = (
   query: {
     bool: {
       filter: onlyWithConvention
-        ? [{ term: { withIdcc: onlyWithConvention } }]
+        ? [
+            { term: { withIdcc: onlyWithConvention } },
+            { range: { "idcc.number": { lt: 5001 } } },
+          ]
         : undefined,
       must: [
         {
