@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.2...v1.4.3) (2021-05-18)
+
+
+### Bug Fixes
+
+* **data:** remove fake idcc results and fix codenaf ([#45](https://github.com/SocialGouv/recherche-entreprises/issues/45)) ([7fde2ec](https://github.com/SocialGouv/recherche-entreprises/commit/7fde2ec32a20aed1a461abea434508e549f2e905))
+
 ## [1.4.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.1...v1.4.2) (2021-04-28)
 
 
