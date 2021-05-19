@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.3...v1.4.4) (2021-05-19)
+
+
+### Bug Fixes
+
+* **api:** add collapse flag to api ([#48](https://github.com/SocialGouv/recherche-entreprises/issues/48)) ([5b6eb71](https://github.com/SocialGouv/recherche-entreprises/commit/5b6eb71bec9d065614d7174513b8213ca6294ac9))
+
 ## [1.4.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.2...v1.4.3) (2021-05-18)
 
 
