@@ -19,11 +19,13 @@ const searchCall = (
   const addressQP = address ? `&a=${address}` : "";
   const limitQP = limit ? `&l=${limit}` : "";
 
-  return apptest.get(`${API_PREFIX}/search?q=${query}${addressQP}${limitQP}`);
+  return apptest.get(
+    `${API_PREFIX}/search?onlyWithConvention=true&q=${query}${addressQP}${limitQP}`
+  );
 };
 
 const michelinSiren = "855200507";
-const michelinSiret = `${michelinSiren}00710`;
+const michelinSiret = `${michelinSiren}03169`;
 
 describe("Test search", () => {
   test("generic search", async () => {
@@ -47,7 +49,7 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"16 Rue de Toutlemonde 49300 Cholet"`);
+    ).toMatchInlineSnapshot(`"107 Rue Servient 69003 Lyon"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(

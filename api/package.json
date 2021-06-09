@@ -37,7 +37,7 @@
     "typescript": "^4.1.5"
   },
   "jest": {
-    "testTimeout": 3000,
+    "testTimeout": 10000,
     "roots": [
       "<rootDir>/src"
     ],

@@ -1,20 +1,21 @@
 import { elasticsearchClient, ELASTICSEARCH_INDEX } from "../elastic";
 import { entrepriseSearchBody, mapHit } from "../elastic/queries";
+import type { SearchArgs } from "../elastic/queries";
 
-export const search = async (
-  query: string,
-  address: string | undefined,
-  limit: number | undefined,
-  addAllConventions: boolean,
-  onlyWithConvention: boolean
-) => {
-  const body = entrepriseSearchBody(
+export const search = async ({
+  query,
+  address,
+  addAllConventions,
+  onlyWithConvention,
+  limit,
+}: SearchArgs) => {
+  const body = entrepriseSearchBody({
     query,
     address,
     addAllConventions,
     onlyWithConvention,
-    limit
-  );
+    limit,
+  });
 
   const response = await elasticsearchClient.search({
     body,
@@ -31,7 +32,12 @@ export const search = async (
 };
 
 export const searchEntreprise = async (siren: string) => {
-  const body = entrepriseSearchBody(siren, undefined, true, false, 1);
+  const body = entrepriseSearchBody({
+    query: siren,
+    addAllConventions: true,
+    onlyWithConvention: false,
+    limit: 1,
+  });
 
   const response = await elasticsearchClient.search({
     body,
@@ -48,7 +54,12 @@ export const searchEntreprise = async (siren: string) => {
 };
 
 export const searchEtablissement = async (siret: string) => {
-  const body = entrepriseSearchBody(siret, undefined, false, false, 1);
+  const body = entrepriseSearchBody({
+    query: siret,
+    addAllConventions: false,
+    onlyWithConvention: false,
+    limit: 1,
+  });
 
   const response = await elasticsearchClient.search({
     body,

@@ -141,15 +141,23 @@ const addressFilter = (address: string | undefined) =>
       ]
     : [{ match_all: {} }];
 
-export const entrepriseSearchBody = (
-  query: string,
-  address: string | undefined,
+export type SearchArgs = {
+  query: string;
+  address?: string | undefined;
   // return convention of every etablissements associated to the main company
-  addAllConventions: boolean,
+  addAllConventions?: boolean;
   // only search for etablissements with convention attached
-  onlyWithConvention: boolean,
-  size: number | undefined = defaultLimit
-) => ({
+  onlyWithConvention?: boolean;
+  limit?: number | undefined;
+};
+
+export const entrepriseSearchBody = ({
+  query,
+  address,
+  addAllConventions = true,
+  onlyWithConvention = true,
+  limit = defaultLimit,
+}: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
     fields: {
@@ -189,5 +197,5 @@ export const entrepriseSearchBody = (
       ],
     },
   },
-  size: size ? size : defaultLimit,
+  size: limit ? limit : defaultLimit,
 });

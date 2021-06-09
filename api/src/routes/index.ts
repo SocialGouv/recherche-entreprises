@@ -8,20 +8,20 @@ export const router = new Router();
 export const API_PREFIX = "/api/v1";
 
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { q: query, a: address, l: limit } = ctx.query;
+  const { q: query, a: address, l: limit, onlyWithConvention } = ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter q is required`);
   }
 
   try {
-    const entreprises = await search(
-      query as string,
-      address as string,
-      parseInt(limit as string),
-      true,
-      true
-    );
+    const entreprises = await search({
+      query: query as string,
+      address: address as string,
+      limit: parseInt(limit as string),
+      onlyWithConvention: !!onlyWithConvention,
+      addAllConventions: true
+    });
     ctx.body = { entreprises };
   } catch (err) {
     console.log(JSON.stringify(err));
