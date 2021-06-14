@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.0...v1.5.1) (2021-06-14)
+
+
+### Reverts
+
+* Revert "chore(deps): update dependency ts-jest to v27 (#60)" (#65) ([a6caefd](https://github.com/SocialGouv/recherche-entreprises/commit/a6caefd3efc046d14dab6d0f1fa407e1c585df1f)), closes [#60](https://github.com/SocialGouv/recherche-entreprises/issues/60) [#65](https://github.com/SocialGouv/recherche-entreprises/issues/65)
+
 # [1.5.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.4...v1.5.0) (2021-06-14)
 
 
