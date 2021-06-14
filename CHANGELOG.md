@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.4...v1.5.0) (2021-06-14)
+
+
+### Features
+
+* **api:** add onlyWithConvention flag ([#53](https://github.com/SocialGouv/recherche-entreprises/issues/53)) ([530ae5d](https://github.com/SocialGouv/recherche-entreprises/commit/530ae5d995e444da467c431a7aea024abd85e9f8))
+
 ## [1.4.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.4.3...v1.4.4) (2021-05-19)
 
 
