@@ -9,14 +9,14 @@ metadata:
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
-    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
+    application: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-master-dev42
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -28,11 +28,11 @@ spec:
       annotations:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       name: elastic-recherche-entreprises-write
       labels:
-        application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
+        application: master-dev42-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -271,32 +271,32 @@ data:
     numpy
     pandas
 metadata:
-  name: config-map-files-ccff889
+  name: config-map-files-0123456
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
-    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
+    application: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-master-dev42
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-ccff889
+  name: update-index-0123456
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
-    application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
+    application: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-master-dev42
 spec:
   backoffLimit: 3
   template:
@@ -304,7 +304,7 @@ spec:
       containers:
         - name: update-index
           image: >-
-            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-index:ccff889cbbc4e513aeaecbe22429a73fd02eb8ea
+            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-index:0123456789abcdefghijklmnopqrstuvwxyz0123
           volumeMounts:
             - name: data
               mountPath: /data
@@ -319,7 +319,7 @@ spec:
         - name: data
           emptyDir: {}
         - configMap:
-            name: config-map-files-ccff889
+            name: config-map-files-0123456
             defaultMode: 511
           name: local-files
       initContainers:
@@ -364,10 +364,10 @@ spec:
     metadata:
       annotations:
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       labels:
-        application: recherche-entreprises-209-gitlab3-dev2-recherche-entreprises
+        application: master-dev42-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard

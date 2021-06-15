@@ -9,14 +9,13 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
   name: recherche-entreprises-api
   namespace: recherche-entreprises
 spec:
@@ -30,14 +29,13 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       labels:
         app: recherche-entreprises-api
         application: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
-        cert: wildcard
     spec:
       containers:
         - image: harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:1.2.3
@@ -87,13 +85,12 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     application: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
   namespace: recherche-entreprises
 spec:
   encryptedData:
@@ -108,13 +105,12 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       labels:
         application: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
-        cert: wildcard
     type: Opaque
 ---
 apiVersion: v1
@@ -125,14 +121,13 @@ metadata:
     application: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
   name: recherche-entreprises-api
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   namespace: recherche-entreprises
 spec:
   ports:
@@ -153,19 +148,18 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
   name: recherche-entreprises-api
   namespace: recherche-entreprises
 spec:
   rules:
-    - host: api-recherche-entreprises.dev2.fabrique.social.gouv.fr
+    - host: api-recherche-entreprises.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -174,7 +168,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - api-recherche-entreprises.dev2.fabrique.social.gouv.fr
+        - api-recherche-entreprises.fabrique.social.gouv.fr
       secretName: recherche-entreprises-api-crt
 ---
 apiVersion: networking.k8s.io/v1

@@ -8,14 +8,14 @@ metadata:
   name: elastic-recherche-entreprises-write
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -26,8 +26,8 @@ spec:
     metadata:
       annotations:
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       name: elastic-recherche-entreprises-write
       labels:
         application: v1-2-3-recherche-entreprises
@@ -269,32 +269,32 @@ data:
     numpy
     pandas
 metadata:
-  name: config-map-files-ccff889
+  name: config-map-files-0123456
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-ccff889
+  name: update-index-0123456
   annotations:
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   backoffLimit: 3
   template:
@@ -317,7 +317,7 @@ spec:
         - name: data
           emptyDir: {}
         - configMap:
-            name: config-map-files-ccff889
+            name: config-map-files-0123456
             defaultMode: 511
           name: local-files
       nodeSelector:
@@ -364,8 +364,8 @@ spec:
     metadata:
       annotations:
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       labels:
         application: v1-2-3-recherche-entreprises
         owner: recherche-entreprises
