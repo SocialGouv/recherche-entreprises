@@ -665,7 +665,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@socialgouv/kosko-charts@^6.1.0":
+"@socialgouv/kosko-charts@^6.1.6":
   version "6.1.6"
   resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-6.1.6.tgz#e54f3c6ec79b10ea2ac555897116577046d6a6ee"
   integrity sha512-JQiRwrOOM4wI3kceOtF184QtkytjQSzV2S2C4GwWHrzsuptfNqlHzZ4karMY91x+F00ocZnHHJsyCWWrf9OMRQ==
