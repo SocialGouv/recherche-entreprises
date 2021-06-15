@@ -8,18 +8,19 @@ metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-bd7z2:p-7ms8p
-    git/branch: gitlab3
-    git/remote: git@github.com:SocialGouv/recherche-entreprises.git
+    git/branch: v1.2.3
+    git/remote: >-
+      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/recherche-entreprises.git
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     azure-pg-admin-user: recherche-entreprises
     application: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-209-gitlab3-dev2
+  name: recherche-entreprises-85-preprod-dev42
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,8 +29,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: recherche-entreprises-api
     application: v1-2-3-recherche-entreprises
@@ -37,7 +38,7 @@ metadata:
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   replicas: 1
   selector:
@@ -49,8 +50,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       labels:
         app: recherche-entreprises-api
         application: v1-2-3-recherche-entreprises
@@ -107,14 +108,14 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -128,8 +129,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-        app.gitlab.com/env.name: gitlab3-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       name: elastic-recherche-entreprises-read
       labels:
         application: v1-2-3-recherche-entreprises
@@ -152,9 +153,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
-  namespace: recherche-entreprises-209-gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   ports:
     - name: http
@@ -172,8 +173,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: recherche-entreprises-209-gitlab3-dev2
-    app.gitlab.com/env.name: gitlab3-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: recherche-entreprises-api
     application: v1-2-3-recherche-entreprises
@@ -181,10 +182,10 @@ metadata:
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-209-gitlab3-dev2
+  namespace: recherche-entreprises-85-preprod-dev42
 spec:
   rules:
-    - host: api-v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
+    - host: api-preprod-recherche-entreprises.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -193,7 +194,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - api-v1-2-3-recherche-entreprises.dev2.fabrique.social.gouv.fr
+        - api-preprod-recherche-entreprises.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
