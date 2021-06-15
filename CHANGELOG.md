@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.1...v1.5.2) (2021-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update kosko monorepo (major) ([#27](https://github.com/SocialGouv/recherche-entreprises/issues/27)) ([c27362e](https://github.com/SocialGouv/recherche-entreprises/commit/c27362eeaa517f2e791340d37c65b3e6f09ae716))
+
 ## [1.5.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.0...v1.5.1) (2021-06-14)
 
 
