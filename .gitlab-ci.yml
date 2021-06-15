@@ -1,20 +1,20 @@
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v23.0.0
+    ref: v23.0.1
 
 variables:
- # AUTO_DEVOPS_TEST_DISABLED: "🛑"
+  # AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
   AUTO_DEVOPS_KANIKO: "🛑"
- # AUTO_DEVOPS_ENABLE_KAPP: "🛑"
+  # AUTO_DEVOPS_ENABLE_KAPP: "🛑"
   AUTO_DEVOPS_RELEASE_AUTO: "🚀"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
 Install:
   script:
     - echo "no install"
-    
+
 Test:
   script:
     - echo "no test"
@@ -36,7 +36,6 @@ Register API image:
   variables:
     CONTEXT: ./api
     IMAGE_NAME: recherche-entreprises-api
-
 
 .indexing_job:
   stage: Deploy
