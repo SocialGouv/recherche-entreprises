@@ -1,16 +1,16 @@
-import fs from "fs";
-import path from "path";
 import env, { Environment } from "@kosko/env";
-import { Job } from "kubernetes-models/batch/v1/Job";
-import { updateMetadata } from "@socialgouv/kosko-charts/utils/updateMetadata";
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
+import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
+import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
-import { Container } from "kubernetes-models/v1/Container";
-import { ConfigMap } from "kubernetes-models/_definitions/IoK8sApiCoreV1ConfigMap";
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
+import { updateMetadata } from "@socialgouv/kosko-charts/utils/updateMetadata";
+import fs from "fs";
 import { IIoK8sApiCoreV1PodSpec } from "kubernetes-models/api/core/v1/PodSpec";
 import { IIoK8sApimachineryPkgApisMetaV1ObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
-import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
-import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
+import { Job } from "kubernetes-models/batch/v1/Job";
+import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
+import { Container } from "kubernetes-models/v1/Container";
+import path from "path";
 
 /**
  *
@@ -81,7 +81,7 @@ const sealedSecret = getSealedSecret(
 );
 
 // base definition of the job
-const jobSpec = {
+const jobSpec: IIoK8sApiCoreV1PodSpec = {
   containers: [
     {
       name: "update-index",
@@ -114,7 +114,7 @@ const jobSpec = {
       emptyDir: {},
     },
   ],
-} as IIoK8sApiCoreV1PodSpec;
+};
 
 if (env.env === "prod") {
   jobSpec.nodeSelector = {
