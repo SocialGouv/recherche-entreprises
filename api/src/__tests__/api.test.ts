@@ -20,7 +20,7 @@ const searchCall = (
   const limitQP = limit ? `&l=${limit}` : "";
 
   return apptest.get(
-    `${API_PREFIX}/search?onlyWithConvention=true&addAllConventions=true&q=${query}${addressQP}${limitQP}`
+    `${API_PREFIX}/search?onlyWithConvention=true&collapseSiren=true&q=${query}${addressQP}${limitQP}`
   );
 };
 
@@ -49,7 +49,7 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"107 Rue Servient 69003 Lyon"`);
+    ).toMatchInlineSnapshot(`"Rue du Xay 88190 Golbey"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(

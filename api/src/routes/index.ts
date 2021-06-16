@@ -13,7 +13,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
     a: address,
     l: limit,
     onlyWithConvention,
-    addAllConventions,
+    collapseSiren,
   } = ctx.query;
 
   if (!query) {
@@ -26,7 +26,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       address: address as string,
       limit: parseInt(limit as string),
       onlyWithConvention: onlyWithConvention === "true",
-      addAllConventions: addAllConventions === "true",
+      collapseSiren: collapseSiren === "true",
     });
     ctx.body = { entreprises };
   } catch (err) {
