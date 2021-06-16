@@ -20,7 +20,7 @@ const searchCall = (
   const limitQP = limit ? `&l=${limit}` : "";
 
   return apptest.get(
-    `${API_PREFIX}/search?onlyWithConvention=true&q=${query}${addressQP}${limitQP}`
+    `${API_PREFIX}/search?onlyWithConvention=true&addAllConventions=true&q=${query}${addressQP}${limitQP}`
   );
 };
 
