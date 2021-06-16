@@ -25,7 +25,7 @@ const searchCall = (
 };
 
 const michelinSiren = "855200507";
-const michelinSiret = `${michelinSiren}03169`;
+const michelinSiret = `${michelinSiren}00108`;
 
 describe("Test search", () => {
   test("generic search", async () => {
