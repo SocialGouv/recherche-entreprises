@@ -20,7 +20,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       address: address as string,
       limit: parseInt(limit as string),
       onlyWithConvention: !!onlyWithConvention,
-      addAllConventions: true
+      addAllConventions: true,
     });
     ctx.body = { entreprises };
   } catch (err) {

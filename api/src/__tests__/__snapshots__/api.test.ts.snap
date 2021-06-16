@@ -2,7 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
-  "activitePrincipale": "Traitement de données, hébergement et activités connexes",
+  "activitePrincipale": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -23,10 +23,6 @@ Object {
   "highlightLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 26,
-  "matchingEtablissement": Object {
-    "address": "31 Rue de Cuire 69004 Lyon",
-    "siret": "85520050703151",
-  },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
 }
@@ -58,7 +54,7 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Traitement de données, hébergement et activités connexes",
+  "activitePrincipale": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -76,8 +72,8 @@ Object {
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 14,
   "matchingEtablissement": Object {
-    "address": "107 Rue Servient 69003 Lyon",
-    "siret": "85520050703169",
+    "address": "Rue du Xay 88190 Golbey",
+    "siret": "85520050700108",
   },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
