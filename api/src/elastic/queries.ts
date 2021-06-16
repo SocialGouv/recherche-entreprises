@@ -158,7 +158,7 @@ export const entrepriseSearchBody = ({
   onlyWithConvention = true,
   limit = defaultLimit,
 }: SearchArgs) => ({
-  collapse: collapse(addAllConventions),
+  collapse: addAllConventions && collapse(addAllConventions),
   highlight: {
     fields: {
       naming: { post_tags: [post], pre_tags: [pre] },
