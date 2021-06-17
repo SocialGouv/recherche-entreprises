@@ -2,44 +2,43 @@ import * as fs from "fs";
 import * as path from "path";
 import * as csv from "fast-csv";
 import {
-  add,
+  esClient,
   createIndex,
   updateAlias,
   deleteOldIndices,
   getDocsCount,
 } from "./elastic";
-import { Enterprise } from "./enterprise";
+import { Enterprise, mapEnterprise } from "./enterprise";
 
 const ASSEMBLY_FILE =
   process.env.ASSEMBLY_FILE || "../assembly/output/assembly.csv";
 
-const insertEntreprises = (indexName: string) => {
+async function * manipulate (stream: any) {
+  for await (const enterprise of stream) {
+    yield mapEnterprise(enterprise)
+  }
+}
+
+
+// apply mapEntreprise to the CSV stream
+// then bulk insert with Es client
+const insertEntreprises = async (indexName: string) => {
+
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
+  const csvStream = csv.parseStream(stream, {headers:true});
 
-  const BUFFER_SIZE = 500;
-  let enterprisesBuffer: Enterprise[] = [];
-
-  stream
-    .pipe(csv.parse({ headers: true }))
-    .on("error", (error) => console.error(error))
-    .on("data", async (e) => {
-      enterprisesBuffer.push(e);
-
-      if (enterprisesBuffer.length >= BUFFER_SIZE) {
-        // create an immutable copy of the array
-        const batch = enterprisesBuffer.slice();
-        enterprisesBuffer = [];
-        await add(batch, indexName);
-
-        // to run experiments
-        // stream.destroy();
-      }
-    })
-    .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
-
-  return new Promise((fulfill) =>
-    stream.on("finish", fulfill).on("close", fulfill)
-  );
+  return esClient.helpers.bulk({
+    //@ts-expect-error
+    datasource: manipulate(csvStream),
+    onDocument: (enterprise: Enterprise) => {
+      return  {
+          index: {
+            _index: indexName,
+            _id: enterprise.siret,
+          },
+        }
+    },
+  });
 };
 
 if (require.main === module) {
