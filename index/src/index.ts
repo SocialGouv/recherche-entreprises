@@ -13,31 +13,27 @@ import { Enterprise, mapEnterprise } from "./enterprise";
 const ASSEMBLY_FILE =
   process.env.ASSEMBLY_FILE || "../assembly/output/assembly.csv";
 
-async function * manipulate (stream: any) {
+async function* manipulate(stream: any) {
   for await (const enterprise of stream) {
-    yield mapEnterprise(enterprise)
+    yield mapEnterprise(enterprise);
   }
 }
-
 
 // apply mapEntreprise to the CSV stream
 // then bulk insert with Es client
 const insertEntreprises = async (indexName: string) => {
-
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
-  const csvStream = csv.parseStream(stream, {headers:true});
+  const csvStream = csv.parseStream(stream, { headers: true });
 
   return esClient.helpers.bulk({
     //@ts-expect-error
     datasource: manipulate(csvStream),
-    onDocument: (enterprise: Enterprise) => {
-      return  {
-          index: {
-            _index: indexName,
-            _id: enterprise.siret,
-          },
-        }
-    },
+    onDocument: (enterprise: Enterprise) => ({
+      index: {
+        _index: indexName,
+        _id: enterprise.siret,
+      },
+    }),
   });
 };
 
