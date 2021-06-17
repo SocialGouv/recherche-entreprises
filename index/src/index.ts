@@ -28,6 +28,7 @@ const insertEntreprises = async (indexName: string) => {
   return esClient.helpers.bulk({
     //@ts-expect-error
     datasource: manipulate(csvStream),
+    refreshOnCompletion: true,
     onDocument: (enterprise: Enterprise) => ({
       index: {
         _index: indexName,
@@ -39,9 +40,12 @@ const insertEntreprises = async (indexName: string) => {
 
 if (require.main === module) {
   // use elastic alias feature to prevent downtimes
-  createIndex().then(async (indexName) =>
-    insertEntreprises(indexName)
+  console.log(`Creating index`);
+  createIndex().then(async (indexName) => {
+    console.log(`Starting indexation...`);
+    return insertEntreprises(indexName)
       .then(async () => {
+        console.log(`Indexation complete`);
         // ensure we have some data
         const docsCount = await getDocsCount(indexName);
         if (!docsCount) {
@@ -53,6 +57,6 @@ if (require.main === module) {
         }
       })
       .then(() => updateAlias(indexName))
-      .then(() => deleteOldIndices(indexName))
-  );
+      .then(() => deleteOldIndices(indexName));
+  });
 }
