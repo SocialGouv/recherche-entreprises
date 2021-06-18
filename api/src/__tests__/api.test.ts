@@ -47,7 +47,7 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"Rue du Xay 88190 Golbey"`);
+    ).toMatchInlineSnapshot(`"Rue de Charlieu 42300 Roanne"`);
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(

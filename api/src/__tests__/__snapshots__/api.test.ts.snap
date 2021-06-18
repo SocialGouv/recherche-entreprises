@@ -2,7 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
-  "activitePrincipale": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -18,11 +18,21 @@ Object {
       "idcc": 9999,
       "shortTitle": "",
     },
+    Object {
+      "etat": "VIGUEUR_ETEN",
+      "id": "KALICONT000005635173",
+      "idcc": 1486,
+      "mtime": 1556652289,
+      "shortTitle": "Bureaux d'études techniques, cabinets d'ingénieurs-conseils et sociétés de conseils",
+      "texte_de_base": "KALITEXT000005679895",
+      "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987. ",
+      "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
+    },
   ],
   "etablissements": 36,
   "highlightLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
-  "matching": 26,
+  "matching": 36,
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
 }
@@ -54,7 +64,7 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -66,14 +76,24 @@ Object {
       "title": "Convention collective nationale du caoutchouc du 6 mars 1953. Étendue par arrêté du 29 mai 1969 JORF 18 juin 1969 ",
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635597",
     },
+    Object {
+      "etat": "VIGUEUR_ETEN",
+      "id": "KALICONT000005635173",
+      "idcc": 1486,
+      "mtime": 1556652289,
+      "shortTitle": "Bureaux d'études techniques, cabinets d'ingénieurs-conseils et sociétés de conseils",
+      "texte_de_base": "KALITEXT000005679895",
+      "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987. ",
+      "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
+    },
   ],
   "etablissements": 36,
   "highlightLabel": "MANUF FRANC PNEUMATIQ <b><u>MICHELIN</b></u>",
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
-  "matching": 14,
+  "matching": 20,
   "matchingEtablissement": Object {
-    "address": "Rue du Xay 88190 Golbey",
-    "siret": "85520050700108",
+    "address": "Rue de Charlieu 42300 Roanne",
+    "siret": "85520050701445",
   },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
