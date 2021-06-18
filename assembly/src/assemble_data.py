@@ -44,7 +44,7 @@ def read_siren(stock_unite_legale_file):
     # in order to decrease the dataframe memory footprint
     cols = selection + [etatAdmin, caractereEmployeur]
     raw = pd.read_csv(stock_unite_legale_file, usecols=cols,
-                      dtype={etatAdmin: "category", caractereEmployeur: "category",
+                      dtype={ "siren": np.dtype(str), etatAdmin: "category", caractereEmployeur: "category",
                              trancheEffectifsUniteLegale: "category",
                              categorieJuridiqueUniteLegale: "category",
                              nomenclatureActivitePrincipaleUniteLegale: "category",
@@ -82,7 +82,9 @@ def read_geo(geo_directory):
         geo[file] = pd.read_csv(
             geo_directory + file, dtype={"codePostalEtablissement": np.dtype(str),
                                          "etatAdministratifEtablissement": "category",
-                                         "activitePrincipaleEtablissement": "category"
+                                         "activitePrincipaleEtablissement": "category",
+                                         "siret": np.dtype(str),
+                                         "siren": np.dtype(str),
                                          }, usecols=geo_selection
         )
 
@@ -92,6 +94,8 @@ def read_geo(geo_directory):
     all_geo = all_geo.astype(dtype={"codePostalEtablissement": np.dtype(str),
                                     "etatAdministratifEtablissement": "category",
                                     "activitePrincipaleEtablissement": "category",
+                                    "siret": np.dtype(str),
+                                    "siren": np.dtype(str),
                                     })
 
     all_geo = all_geo[all_geo["etatAdministratifEtablissement"] == "A"]
@@ -112,15 +116,15 @@ def read_idcc(idcc_file):
     idccs
         a Pandas dataframe containing siret / idcc associations
     """
-    idccs = pd.read_csv(idcc_file, usecols=["SIRET", "IDCC"]).rename(
+    idccs = pd.read_csv(idcc_file, dtype={"SIRET": np.dtype(str)}, usecols=["SIRET", "IDCC"]).rename(
         columns={"SIRET": "siret", "IDCC": "idcc"})
   
     return idccs
 
 
 def assemble(siren, geo, idcc, output):
-    sirenGeo = pd.merge(siren, geo, on='siren')
-    merged = pd.merge(sirenGeo, idcc, how='left', on='siret')
+    sirenGeo = pd.merge(siren, geo, on='siren') 
+    merged = pd.merge(sirenGeo, idcc, how='left', on='siret') 
 
     # add etablissement counts
     etsCounts = merged.siren.value_counts().rename_axis(
