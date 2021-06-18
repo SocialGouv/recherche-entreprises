@@ -32,7 +32,7 @@ const insertEntreprises = async (indexName: string) => {
     onDocument: (enterprise: Enterprise) => ({
       index: {
         _index: indexName,
-        _id: enterprise.siret,
+        _id: `${enterprise.siret}-${enterprise.idcc}`,
       },
     }),
   });
