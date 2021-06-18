@@ -47,7 +47,9 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"Rue de Charlieu 42300 Roanne"`);
+    ).toMatchInlineSnapshot(
+      `"27 Cours de l'Ile Seguin 92100 Boulogne-Billancourt"`
+    );
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(

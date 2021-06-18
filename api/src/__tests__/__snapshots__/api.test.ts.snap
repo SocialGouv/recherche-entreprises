@@ -2,7 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
-  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "activitePrincipale": "Édition de livres",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -64,7 +64,7 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "activitePrincipale": "Édition de livres",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -92,8 +92,8 @@ Object {
   "label": "MANUF FRANC PNEUMATIQ MICHELIN",
   "matching": 20,
   "matchingEtablissement": Object {
-    "address": "Rue de Charlieu 42300 Roanne",
-    "siret": "85520050701445",
+    "address": "27 Cours de l'Ile Seguin 92100 Boulogne-Billancourt",
+    "siret": "85520050703144",
   },
   "simpleLabel": "MANUF FRANC PNEUMATIQ MICHELIN",
   "siren": "855200507",
