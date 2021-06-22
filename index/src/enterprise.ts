@@ -6,7 +6,7 @@ const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
 const idccs = [...ccMap.keys()];
 
 export type Enterprise = {
-  siren: number;
+  siren: string;
   trancheEffectifsUniteLegale: number;
 
   // categorieEntreprise: 'PME',
@@ -31,7 +31,7 @@ export type Enterprise = {
   activitePrincipaleEtablissement: string;
 
   // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
-  siret: number;
+  siret: string;
   codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
 

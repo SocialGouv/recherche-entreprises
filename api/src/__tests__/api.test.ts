@@ -33,9 +33,7 @@ describe("Test search", () => {
     expect(status).toBe(200);
     expect(body.entreprises).toBeDefined();
     expect(body.entreprises.length).toEqual(20);
-    expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
-      michelinSiret
-    );
+    expect(body.entreprises[0].siren).toEqual(michelinSiren);
     expect(body.entreprises[0]).toMatchSnapshot();
   });
 
@@ -49,7 +47,9 @@ describe("Test search", () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     expect(
       b1.entreprises[0].matchingEtablissement.address
-    ).toMatchInlineSnapshot(`"107 Rue Servient 69003 Lyon"`);
+    ).toMatchInlineSnapshot(
+      `"27 Cours de l'Ile Seguin 92100 Boulogne-Billancourt"`
+    );
 
     const { body: b2 } = await searchCall("michelin", "63 000", undefined);
     expect(
@@ -120,6 +120,8 @@ describe("Test entreprise search", () => {
     const { body, status } = await apptest.get(
       `${API_PREFIX}/entreprise/${michelinSiren}`
     );
+    // We delete matchingEtablissement since it comes from collapse wich is non deterministic
+    delete body.matchingEtablissement;
     expect(status).toEqual(200);
     expect(body.siren).toEqual(michelinSiren);
     expect(body).toMatchSnapshot();
