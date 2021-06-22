@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.2...v1.5.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* upgrade kosko ([#72](https://github.com/SocialGouv/recherche-entreprises/issues/72)) ([1180ffd](https://github.com/SocialGouv/recherche-entreprises/commit/1180ffd08f36e69ca1cfbc9e61ccc17ec2bb4b0c))
+
 ## [1.5.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.1...v1.5.2) (2021-06-15)
 
 
