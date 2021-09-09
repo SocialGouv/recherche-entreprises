@@ -6,6 +6,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
+    socialgouv/creator: autodevops
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-bd7z2:p-7ms8p
     git/branch: v1.2.3
@@ -17,6 +18,7 @@ metadata:
   labels:
     azure-pg-admin-user: recherche-entreprises
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -34,6 +36,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -55,6 +58,7 @@ spec:
       labels:
         app: recherche-entreprises-api
         application: v1-2-3-recherche-entreprises
+        component: v1-2-3-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -112,6 +116,7 @@ metadata:
     app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -134,6 +139,7 @@ spec:
       name: elastic-recherche-entreprises-read
       labels:
         application: v1-2-3-recherche-entreprises
+        component: v1-2-3-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -145,6 +151,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -165,7 +172,7 @@ spec:
     app: recherche-entreprises-api
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -178,6 +185,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -189,9 +197,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: recherche-entreprises-api
-              servicePort: 80
+              service:
+                name: recherche-entreprises-api
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
         - api-preprod-recherche-entreprises.dev42.fabrique.social.gouv.fr

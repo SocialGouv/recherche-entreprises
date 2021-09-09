@@ -12,6 +12,7 @@ metadata:
     app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -31,6 +32,7 @@ spec:
       name: elastic-recherche-entreprises-write
       labels:
         application: v1-2-3-recherche-entreprises
+        component: v1-2-3-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -280,6 +282,7 @@ metadata:
     app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -295,6 +298,7 @@ metadata:
     app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-recherche-entreprises
+    component: v1-2-3-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -370,6 +374,7 @@ spec:
         app.gitlab.com/env.name: preprod-dev42
       labels:
         application: v1-2-3-recherche-entreprises
+        component: v1-2-3-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard

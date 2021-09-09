@@ -207,21 +207,21 @@ const job = new Job({
 const envParams = gitlab(process.env);
 
 updateMetadata(configMap, {
-  annotations: envParams.annotations ?? {},
-  labels: envParams.labels ?? {},
-  namespace: envParams.namespace,
+  annotations: envParams.metadata.annotations ?? {},
+  labels: envParams.metadata.labels ?? {},
+  namespace: envParams.metadata.namespace,
 });
 
 updateMetadata(job, {
-  annotations: envParams.annotations ?? {},
-  labels: envParams.labels ?? {},
-  namespace: envParams.namespace,
+  annotations: envParams.metadata.annotations ?? {},
+  labels: envParams.metadata.labels ?? {},
+  namespace: envParams.metadata.namespace,
 });
 
 updateMetadata(sealedSecret, {
-  annotations: envParams.annotations ?? {},
-  labels: envParams.labels ?? {},
-  namespace: envParams.namespace,
+  annotations: envParams.metadata.annotations ?? {},
+  labels: envParams.metadata.labels ?? {},
+  namespace: envParams.metadata.namespace,
 });
 
 addInitContainer(job, initContainer);
