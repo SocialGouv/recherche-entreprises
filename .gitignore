@@ -3,6 +3,7 @@ data/
 output/
 python-env/
 node_modules
-siret-idcc.csv
+*.csv
 api/dist
 index/dist
+.idea/
