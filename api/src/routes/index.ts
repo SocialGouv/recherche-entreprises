@@ -49,7 +49,7 @@ router.get(`${API_PREFIX}/etablissement/:siret`, async (ctx) => {
       ctx.throw(404);
     }
   } catch (err) {
-    if (err.status) {
+    if ((err as any).status) {
       throw err;
     } else {
       console.log(JSON.stringify(err));
@@ -78,7 +78,7 @@ router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
       ctx.throw(404);
     }
   } catch (err) {
-    if (err.status) {
+    if ((err as any).status) {
       throw err;
     } else {
       console.log(JSON.stringify(err));
