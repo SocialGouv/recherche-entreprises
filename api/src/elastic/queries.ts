@@ -8,7 +8,7 @@ const defaultLimit = 20;
 const conventionsSet = Object.fromEntries(
   kaliConventions.map((c) => {
     const { num, etat, id, mtime, texte_de_base, url, title } = c;
-    return [num, { etat, id, mtime, texte_de_base, url, title }];
+    return [num, { etat, id, mtime, texte_de_base, title, url }];
   })
 );
 
@@ -102,12 +102,12 @@ export const mapHit = ({
     highlightLabel,
     label,
     matching,
+    matchingEtablissement: {
+      address,
+      siret,
+    },
     simpleLabel,
     siren,
-    matchingEtablissement: {
-      siret,
-      address,
-    },
   };
 };
 
@@ -193,7 +193,7 @@ export const entrepriseSearchBody = ({
         { rank_feature },
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
-        { rank_feature: { field: "siretRank", boost: 0.1 } },
+        { rank_feature: { boost: 0.1, field: "siretRank" } },
       ],
     },
   },
