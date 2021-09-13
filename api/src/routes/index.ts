@@ -1,7 +1,7 @@
 import Router from "koa-router";
-import { search, searchEntreprise, searchEtablissement } from "../lib";
 
 import pkg from "../../package.json";
+import { search, searchEntreprise, searchEtablissement } from "../lib";
 
 export const router = new Router();
 
@@ -16,11 +16,11 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
 
   try {
     const entreprises = await search({
-      query: query as string,
+      addAllConventions: true,
       address: address as string,
       limit: parseInt(limit as string),
       onlyWithConvention: !!onlyWithConvention,
-      addAllConventions: true,
+      query: query as string,
     });
     ctx.body = { entreprises };
   } catch (err) {
@@ -94,8 +94,8 @@ router.get(`/healthz`, (ctx) => {
 
 router.get(`/`, (ctx) => {
   ctx.body = {
+    about: "https://github.com/SocialGouv/recherche-entreprises",
     success: true,
     version: pkg.version,
-    about: "https://github.com/SocialGouv/recherche-entreprises",
   };
 });

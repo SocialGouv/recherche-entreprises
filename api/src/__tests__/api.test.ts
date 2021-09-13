@@ -1,9 +1,10 @@
-import supertest from "supertest";
 import * as http from "http";
 import Koa from "koa";
+import supertest from "supertest";
+
 import { API_PREFIX, router } from "../routes";
 
-export const app = new Koa();
+const app = new Koa();
 app.use(router.routes());
 // .on("error", (err, ctx) => {
 // console.error("server error", err, ctx);
@@ -34,11 +35,12 @@ describe("Test search", () => {
     expect(body.entreprises).toBeDefined();
     expect(body.entreprises.length).toEqual(20);
     expect(body.entreprises[0].siren).toEqual(michelinSiren);
+    // eslint-disable-next-line no-unused-vars
     const { matchingEtablissement, ...partialBody } = body.entreprises[0];
     expect(partialBody).toMatchSnapshot();
   });
 
-  test("test with limit", async () => {
+  test("with limit", async () => {
     const limit = 50;
     const { body } = await searchCall("michelin", undefined, limit);
     expect(body.entreprises.length).toEqual(limit);

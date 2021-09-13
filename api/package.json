@@ -8,33 +8,40 @@
     "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore '__tests__' --exec 'ts-node src/index.ts'",
     "build": "ncc build src/index.ts -o dist",
     "start": "node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src/**/*.ts"
   },
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/runtime": "^7.12.18",
     "@elastic/elasticsearch": "^7.12.0",
     "@koa/cors": "^3.1.0",
-    "@socialgouv/kali-data": "^2.61.0",
+    "@socialgouv/kali-data": "^2.132.0",
     "koa": "^2.13.1",
     "koa-router": "^10.0.0"
   },
   "devDependencies": {
+    "@socialgouv/eslint-config-recommended": "^1.75.0",
     "@types/jest": "^26.0.23",
     "@types/koa": "^2.13.3",
     "@types/koa-router": "^7.4.2",
     "@types/koa__cors": "^3.0.2",
     "@types/lodash.pick": "^4.4.6",
     "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.1",
     "@vercel/ncc": "^0.28.6",
+    "eslint": "^7.31.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.6",
-    "ts-node": "^9.1.1",
-    "tslint": "^6.1.3",
-    "typescript": "^4.1.5"
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.1"
   },
   "jest": {
     "testTimeout": 10000,
