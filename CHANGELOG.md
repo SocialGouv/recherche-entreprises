@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.4...v1.5.5) (2021-09-13)
+
+
+### Bug Fixes
+
+* **deps:** use eslint, update dependencies ([#87](https://github.com/SocialGouv/recherche-entreprises/issues/87)) ([22691ff](https://github.com/SocialGouv/recherche-entreprises/commit/22691ff2262a3d8d08eafcfde5ab842b3e0720ce))
+
 ## [1.5.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.3...v1.5.4) (2021-09-13)
 
 
