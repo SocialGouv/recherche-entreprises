@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.3...v1.5.4) (2021-09-13)
+
+
+### Bug Fixes
+
+* **build:** remove tests from CI & update deps ([1b964f6](https://github.com/SocialGouv/recherche-entreprises/commit/1b964f64a57aad0c813fe328310eec7388c8a4ee))
+
 ## [1.5.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.2...v1.5.3) (2021-06-22)
 
 
