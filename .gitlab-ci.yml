@@ -43,6 +43,12 @@ Register API image:
     - .base_deploy_kosko_stage
   allow_failure: true
 
+##############
+#
+# Note: these memory intensive jobs cannot run on public Github actions runners
+#
+##############
+
 Download and Index (dev):
   extends:
     - .indexing_job
