@@ -1,9 +1,8 @@
-import { codesNaf } from "./naf";
 import agreements from "@socialgouv/kali-data/data/index.json";
 
-const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
+import { codesNaf } from "./naf";
 
-const idccs = [...ccMap.keys()];
+const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
 
 export type Enterprise = {
   siren: string;
@@ -46,59 +45,59 @@ export type Enterprise = {
 
 export const mappings = {
   properties: {
-    trancheEffectifsUniteLegale: { type: "rank_feature" },
-    siretRank: { type: "rank_feature" },
-    etablissements: { type: "rank_feature" },
-
-    siret: { type: "keyword" },
-    siren: { type: "keyword" },
+    activitePrincipale: { type: "keyword" },
+    address: {
+      analyzer: "french_indexing",
+      type: "text",
+    },
     codePostalEtablissement: { type: "keyword" },
-    libelleCommuneEtablissement: { type: "keyword" },
 
-    nomUniteLegale: { type: "keyword" },
-    nomUsageUniteLegale: { type: "keyword" },
-    sigleUniteLegale: { type: "keyword" },
-
+    convention: { type: "keyword" },
+    cp: { type: "keyword" },
     denominationUniteLegale: { type: "keyword" },
     denominationUsuelle1UniteLegale: { type: "keyword" },
+
     denominationUsuelle2UniteLegale: { type: "keyword" },
     denominationUsuelle3UniteLegale: { type: "keyword" },
+    denominationUsuelleEtablissement: { type: "keyword" },
 
     enseigne1Etablissement: { type: "keyword" },
     enseigne2Etablissement: { type: "keyword" },
     enseigne3Etablissement: { type: "keyword" },
-    denominationUsuelleEtablissement: { type: "keyword" },
+    etablissements: { type: "rank_feature" },
 
-    withIdcc: { type: "boolean" },
     idcc: {
-      type: "keyword",
       fields: {
         number: {
           type: "integer",
         },
       },
+      type: "keyword",
     },
+    libelleCommuneEtablissement: { type: "keyword" },
+    naming: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
+    nomUniteLegale: { type: "keyword" },
 
-    cp: { type: "keyword" },
+    nomUsageUniteLegale: { type: "keyword" },
+    sigleUniteLegale: { type: "keyword" },
+
+    siren: { type: "keyword" },
+
+    siret: { type: "keyword" },
+
+    siretRank: { type: "rank_feature" },
+
+    trancheEffectifsUniteLegale: { type: "rank_feature" },
 
     ville: {
       analyzer: "french_indexing",
       type: "text",
     },
-
-    address: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
-
-    naming: {
-      analyzer: "french_indexing",
-      type: "text",
-      similarity: "bm25_no_norm_length",
-    },
-
-    activitePrincipale: { type: "keyword" },
-    convention: { type: "keyword" },
+    withIdcc: { type: "boolean" },
   },
 };
 
@@ -157,14 +156,14 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     false;
 
   return {
-    address: enterprise.geo_adresse,
-    cp: enterprise.codePostalEtablissement || undefined,
-    ville: enterprise.libelleCommuneEtablissement,
-    naming,
     activitePrincipale,
+    address: enterprise.geo_adresse,
     convention,
-    withIdcc,
+    cp: enterprise.codePostalEtablissement || undefined,
+    naming,
     siretRank,
+    ville: enterprise.libelleCommuneEtablissement,
+    withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),

@@ -74,7 +74,7 @@ describe("Test search", () => {
     );
   });
 
-  test("search with daitrics", async () => {
+  test("search with diatrics", async () => {
     const { body: b1 } = await searchCall("michelin", undefined, undefined);
     const { body: b2 } = await searchCall("michélin", undefined, undefined);
     const { body: b3 } = await searchCall("Mîchèlin", undefined, undefined);
@@ -89,6 +89,8 @@ describe("Test search", () => {
       michelinSiret
     );
   });
+
+  // test with siret starting with 0
 });
 
 describe("Test etablissement search", () => {

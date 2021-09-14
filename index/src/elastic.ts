@@ -1,6 +1,6 @@
 import { Client, ClientOptions } from "@elastic/elasticsearch";
-import { Enterprise, mapEnterprise, mappings } from "./enterprise";
-import pAll from "p-all";
+
+import { mappings } from "./enterprise";
 
 const ELASTICSEARCH_URL =
   process.env.ELASTICSEARCH_URL || "http://localhost:9200";
@@ -20,10 +20,24 @@ const esClientConfig: ClientOptions = {
 export const esClient = new Client(esClientConfig);
 
 const analysis = {
+  analyzer: {
+    french_indexing: {
+      filter: [
+        "french_elision",
+        "lowercase",
+        // company labels do not include diatrics
+        "asciifolding",
+        "french_stop",
+        "french_stemmer",
+        // very important filter in order to remove duplication between
+        // the different naming fields (nom, enseigne, denomination...)
+        "unique",
+      ],
+      tokenizer: "standard",
+    },
+  },
   filter: {
     french_elision: {
-      type: "elision",
-      articles_case: true,
       articles: [
         "l",
         "m",
@@ -39,30 +53,16 @@ const analysis = {
         "lorsqu",
         "puisqu",
       ],
-    },
-    french_stop: {
-      type: "stop",
-      stopwords: "_french_",
+      articles_case: true,
+      type: "elision",
     },
     french_stemmer: {
-      type: "stemmer",
       language: "light_french",
+      type: "stemmer",
     },
-  },
-  analyzer: {
-    french_indexing: {
-      tokenizer: "standard",
-      filter: [
-        "french_elision",
-        "lowercase",
-        // company labels do not include diatrics
-        "asciifolding",
-        "french_stop",
-        "french_stemmer",
-        // very important filter in order to remove duplication between
-        // the different naming fields (nom, enseigne, denomination...)
-        "unique",
-      ],
+    french_stop: {
+      stopwords: "_french_",
+      type: "stop",
     },
   },
 };
@@ -70,18 +70,16 @@ const analysis = {
 const index = {
   similarity: {
     bm25_no_norm_length: {
-      type: "BM25",
       b: 0,
+      type: "BM25",
     },
   },
 };
 
-export const deleteOldIndices = async (indexToKeep: string) => {
+export const deleteOldIndices = async (indexToKeep: string): Promise<void> => {
   const allIndices: string[] = await esClient.cat
     .indices({ format: "json" })
-    .then(({ body }: { body: any }) =>
-      body.map(({ index }: { index: string }) => index)
-    );
+    .then(({ body }) => body.map(({ index }: { index: string }) => index));
 
   // list indices to delete
   const matchingIndices = allIndices.filter(
@@ -121,13 +119,13 @@ export const updateAlias = (newIndexName: string) =>
     },
   });
 
-export const createIndex = async () => {
+export const createIndex = async (): Promise<string> => {
   const id = Math.floor(Math.random() * 10e8);
   const newIndexName = `${INDEX_NAME}-${id}`;
   const body = { mappings, settings: { analysis, index } };
   await esClient.indices.create({
-    index: newIndexName,
     body,
+    index: newIndexName,
   });
   return newIndexName;
 };
