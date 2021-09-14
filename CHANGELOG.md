@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.5...v1.5.6) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** upgrade kube 1.2 ([#85](https://github.com/SocialGouv/recherche-entreprises/issues/85)) ([5aeabc5](https://github.com/SocialGouv/recherche-entreprises/commit/5aeabc583108d871438d847d7d1e85248d568790))
+
 ## [1.5.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.4...v1.5.5) (2021-09-13)
 
 
