@@ -14,6 +14,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
   name: recherche-entreprises-api
@@ -34,6 +35,7 @@ spec:
       labels:
         app: recherche-entreprises-api
         application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
     spec:
@@ -89,6 +91,7 @@ metadata:
     app.gitlab.com/env.name: prod
   labels:
     application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
   namespace: recherche-entreprises
@@ -109,6 +112,7 @@ spec:
         app.gitlab.com/env.name: prod
       labels:
         application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
     type: Opaque
@@ -119,6 +123,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
   name: recherche-entreprises-api
@@ -138,12 +143,12 @@ spec:
     app: recherche-entreprises-api
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -153,6 +158,7 @@ metadata:
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
   name: recherche-entreprises-api
@@ -163,9 +169,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: recherche-entreprises-api
-              servicePort: 80
+              service:
+                name: recherche-entreprises-api
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
         - api-recherche-entreprises.fabrique.social.gouv.fr
@@ -177,9 +186,6 @@ metadata:
   name: default
   namespace: recherche-entreprises
 spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -193,5 +199,8 @@ spec:
         - namespaceSelector:
             matchLabels:
               network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
 "
 `;

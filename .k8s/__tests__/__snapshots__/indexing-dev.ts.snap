@@ -13,6 +13,7 @@ metadata:
     app.gitlab.com/env.name: master-dev42
   labels:
     application: master-dev42-recherche-entreprises
+    component: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -33,6 +34,7 @@ spec:
       name: elastic-recherche-entreprises-write
       labels:
         application: master-dev42-recherche-entreprises
+        component: master-dev42-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -282,6 +284,7 @@ metadata:
     app.gitlab.com/env.name: master-dev42
   labels:
     application: master-dev42-recherche-entreprises
+    component: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -297,6 +300,7 @@ metadata:
     app.gitlab.com/env.name: master-dev42
   labels:
     application: master-dev42-recherche-entreprises
+    component: master-dev42-recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -372,6 +376,7 @@ spec:
         app.gitlab.com/env.name: master-dev42
       labels:
         application: master-dev42-recherche-entreprises
+        component: master-dev42-recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
