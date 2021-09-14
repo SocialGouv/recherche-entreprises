@@ -59,4 +59,3 @@ ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writin
 ```
 
 The default `ELASTICSEARCH_INDEX_NAME` is `recherche-entreprises`
-
