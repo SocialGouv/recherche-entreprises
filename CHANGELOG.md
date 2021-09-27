@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.6...v1.5.7) (2021-09-27)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#93](https://github.com/SocialGouv/recherche-entreprises/issues/93)) ([9121982](https://github.com/SocialGouv/recherche-entreprises/commit/912198206ead14cba2b1884d89275abfa38ece36))
+
 ## [1.5.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.5...v1.5.6) (2021-09-14)
 
 
