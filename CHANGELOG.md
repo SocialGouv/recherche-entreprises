@@ -1,3 +1,10 @@
+## [1.5.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.7...v1.5.8) (2021-09-28)
+
+
+### Bug Fixes
+
+* **k8s:** fix requests ([#95](https://github.com/SocialGouv/recherche-entreprises/issues/95)) ([270cafb](https://github.com/SocialGouv/recherche-entreprises/commit/270cafb9232ca66b66fa4e7f76dc7f41c510295c))
+
 ## [1.5.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.6...v1.5.7) (2021-09-27)
 
 
