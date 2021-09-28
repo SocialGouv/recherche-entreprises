@@ -126,11 +126,6 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
   ],
 };
 
-if (env.env === "prod") {
-  jobSpec.nodeSelector = {
-    "kubernetes.io/hostname": "aks-system0-38313369-vmss000001",
-  };
-}
 // script for the initContainer of the index image
 const initContainerScript = `
 apt-get update -y && apt-get install -y wget 
