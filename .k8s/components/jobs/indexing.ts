@@ -105,6 +105,12 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
           },
         },
       ],
+      resources: {
+        requests: {
+          cpu: "1",
+          memory: "14Gi",
+        },
+      },
     },
   ],
   restartPolicy: "Never",
