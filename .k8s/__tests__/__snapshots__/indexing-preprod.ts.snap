@@ -320,6 +320,10 @@ spec:
           envFrom:
             - secretRef:
                 name: elastic-recherche-entreprises-write
+          resources:
+            requests:
+              cpu: '1'
+              memory: 14Gi
       restartPolicy: Never
       volumes:
         - name: data
