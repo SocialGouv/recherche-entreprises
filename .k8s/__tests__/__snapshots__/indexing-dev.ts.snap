@@ -323,6 +323,9 @@ spec:
             - secretRef:
                 name: elastic-recherche-entreprises-write
           resources:
+            limits:
+              cpu: '2'
+              memory: 18Gi
             requests:
               cpu: '1'
               memory: 14Gi
