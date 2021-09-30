@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.89.0",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.2",
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
     "@types/koa__cors": "^3.0.3",
