@@ -26,36 +26,95 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 | [kali-data](https://github.com/SocialGouv/kali-data)                                                                                                                           | Informations sur les conventions collectives             |
 | [codes-naf](https://github.com/SocialGouv/codes-naf)                                                                                                                           | Liste des codes NAF (Nomenclature d’activités française) |
 
-## Assemblage
+## Lancer le projet
 
-Le CSV est généré en deux étapes dans le dossier `assembly/` :
+### Pré-requis
 
-- Téléchargement des datasets (8GB)
+Pour lancer les différentes parties du projet, un certain nombre d'outil doivent être présent sur la machine:
 
-  `DATA_DIR=./data/ scripts/get-data.sh`
+- node
+- yarn
+- docker et docker-compose
+- python3 et pip
+- wget
 
-- Assemblage des fichiers avec Python (numpy & pandas)
+### Assemblage des données
 
-  `pip install -r requirements.txt`
+Cette étape génère un fichier CSV qui aggrège les différentes sources de données.
 
-  `DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh`
+Cette étape doit être réalisée dans le répertoire `assembly`
+
+```sh
+cd assembly
+
+# Téléchargement des datasets (8GB)
+DATA_DIR=./data scripts/get-data.sh
+
+# installation des dépendance
+python3 -m pip install -r requirements.txt
+
+# Création du répertoire qui va recevoir le fichier assemblé
+mkdir output
+
+# Assemblage des fichiers avec Python (numpy & pandas)
+DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh
+```
 
 Au final, le fichier `./output/assembly.csv` fait environ 600Mo
 
-## Indexation Elastic Search
+### Indexation dans Elastic Search
 
-Le dossier `index/` contient les scripts qui injectent le fichier `assembly.csv` dans un index `recherche-entreprises` ElasticSearch.
+Cette étape permet de mettre à jour les données dans l'index ElasticSearch à partir du fichier `assembly.csv` généré à l'étape précédente.
+
+Cette étape se déroule dans le répertoire `index`.
 
 La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-aliases.html) d'ElasticSearch pour éviter les downtimes.
 
-Le script `scripts/create-es-keys.sh` permet de créer des token pour lire/écrire sur ces index.
+Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écrire sur ces index. **Cette étape n'est pas nécessaire pour le développement local.**
+
+Pour lancer le serveur :
+
+```sh
+# en partant de la racine du projet
+
+# Lancement avec logs
+docker-compose up
+
+# ou pour lancer le serveur en mode démon
+docker-compose up --detach
+```
 
 Pour lancer une indexation :
 
 ```sh
-yarn install
+# en partant de la racine du projet
+cd assembly
 
-ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./output/assembly.csv yarn start
+yarn install
+yarn start
 ```
 
-The default `ELASTICSEARCH_INDEX_NAME` is `recherche-entreprises`
+Le script lancé avec `yarn start` peut être configuré avec des variables d'énvironements :
+
+| Nom                      | Description                      | Valeur par défaut                 |
+| ------------------------ | -------------------------------- | --------------------------------- |
+| ELASTICSEARCH_URL        | URL d'ES                         | http://localhost:92000            |
+| ELASTICSEARCH_API_KEY    | API avec droit d'écriture        | '' _ne pas utiliser en local_     |
+| ELASTICSEARCH_INDEX_NAME | Nom de l'index                   | 'recherche-entreprises'           |
+| ASSEMBLY_FILE            | chemin vers le fichier consolidé | `../assembly/output/assembly.csv` |
+
+### Lancement de l'API
+
+Cette étape permet de lancer l'API qui va servir les requêtes jusqu'à ElasticSearch.
+
+Cette étape s'effectue dans le dossier `api` et le serveur doit être préalablement lancé (voir étape précédente)
+
+```sh
+# En partant de la racine du projet
+cd api
+
+yarn install
+yarn build
+
+ELASTICSEARCH_URL=http://localhost:9200 yarn start
+```
