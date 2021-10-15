@@ -108,11 +108,11 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
       resources: {
         limits: {
           cpu: "2",
-          memory: "18Gi",
+          memory: "25Gi",
         },
         requests: {
           cpu: "1",
-          memory: "14Gi",
+          memory: "15Gi",
         },
       },
     },
