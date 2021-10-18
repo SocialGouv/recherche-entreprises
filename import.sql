@@ -1,4 +1,4 @@
---- sqlite3 -echo db.sqlite ".read import-sqlite.sql"
+--- sqlite3 -echo db.sqlite ".read import.sql"
 ---
 --- import local CSVs to sqlite database
 ---
