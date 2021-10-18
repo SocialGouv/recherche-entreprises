@@ -1,15 +1,15 @@
-name: Indexing (dev)
+name: Indexing (prod)
 
 on:
   workflow_dispatch:
 
 concurrency:
   cancel-in-progress: true
-  group: indexing
+  group: indexing-prod
 
 jobs:
   index:
-    name: Index
+    name: Index Prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -26,7 +26,8 @@ jobs:
 
       - name: Generate indexing job
         shell: bash
-        run: yarn --cwd .k8s --silent generate --env dev jobs/indexing > indexing.yml
+        # HACK: we use preprod to run the job on the dev cluster
+        run: yarn --cwd .k8s --silent generate --env preprod jobs/indexing > indexing.yml
         env:
           RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
