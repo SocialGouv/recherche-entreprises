@@ -66,5 +66,8 @@ if (require.main === module) {
         .then(() => updateAlias(indexName))
         .then(() => deleteOldIndices(indexName));
     })
-    .catch((err) => console.log("Error " + JSON.stringify(err, null, 2)));
+    .catch((err) => {
+      console.log("Error " + JSON.stringify(err, null, 2))
+      throw err
+    });
 }
