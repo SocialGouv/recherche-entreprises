@@ -139,13 +139,16 @@ data:
     echo \\"-- Import CSV datasets to sqlite\\"
 
 
-    sqlite3 -echo \\"\${DATA_DIR}/db.sqlite\\" \\".read import.sql\\"
+    cd \\"\${DATA_DIR}/..\\"
+
+
+    sqlite3 -echo \\"db.sqlite\\" \\".read import.sql\\"
 
 
     echo \\"-- Export sqlite data to CSV\\"
 
 
-    sqlite3 -header -csv \\"\${DATA_DIR}/db.sqlite\\" \\".read export.sql\\" >
+    sqlite3 -header -csv \\"db.sqlite\\" \\".read export.sql\\" >
     \\"\${DATA_DIR}/output.csv\\"
   import.sql: |-
     --- sqlite3 -echo db.sqlite \\".read import-sqlite.sql\\"

@@ -62,8 +62,10 @@ wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/f
 
 echo "-- Import CSV datasets to sqlite"
 
-sqlite3 -echo "${DATA_DIR}/db.sqlite" ".read import.sql"
+cd "${DATA_DIR}/.."
+
+sqlite3 -echo "db.sqlite" ".read import.sql"
 
 echo "-- Export sqlite data to CSV"
 
-sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/output.csv"
+sqlite3 -header -csv "db.sqlite" ".read export.sql" > "${DATA_DIR}/output.csv"
