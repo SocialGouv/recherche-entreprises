@@ -41,7 +41,7 @@ jobs:
         uses: mikefarah/yq@master
         id: namespace
         with:
-          cmd: yq eval '.metadata.namespace' indexing.yml
+          cmd: yq eval ".metadata.namespace" indexing.yml | head -n 1
 
       - name: Create kubernetes config
         shell: bash
