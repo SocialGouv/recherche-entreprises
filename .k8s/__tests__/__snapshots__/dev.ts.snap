@@ -10,20 +10,21 @@ metadata:
     janitor/ttl: 15d
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-bd7z2:p-7ms8p
-    git/branch: master
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/recherche-entreprises.git
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    git/branch: refs/heads/mybranch
+    git/remote: socialgouv/recherche-entreprises
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     azure-pg-admin-user: recherche-entreprises
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-85-master-dev42
+  name: recherche-entreprises-mybranch
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,18 +32,20 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 spec:
   replicas: 1
   selector:
@@ -53,20 +56,22 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         app: recherche-entreprises-api
-        application: master-dev42-recherche-entreprises
-        component: master-dev42-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:0123456789abcdefghijklmnopqrstuvwxyz0123
+            ghcr.io/socialgouv/recherche-entreprises/api:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -113,16 +118,18 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -135,13 +142,15 @@ spec:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: elastic-recherche-entreprises-read
       labels:
-        application: master-dev42-recherche-entreprises
-        component: master-dev42-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -152,8 +161,8 @@ kind: Service
 metadata:
   labels:
     app: recherche-entreprises-api
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -161,10 +170,12 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
-  namespace: recherche-entreprises-85-master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: recherche-entreprises-mybranch
 spec:
   ports:
     - name: http
@@ -181,21 +192,23 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 spec:
   rules:
-    - host: api-master-dev42-recherche-entreprises.dev42.fabrique.social.gouv.fr
+    - host: api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -207,7 +220,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-master-dev42-recherche-entreprises.dev42.fabrique.social.gouv.fr
+        - api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

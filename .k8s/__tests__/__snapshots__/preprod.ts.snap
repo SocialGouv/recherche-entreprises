@@ -9,20 +9,21 @@ metadata:
     socialgouv/creator: autodevops
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-bd7z2:p-7ms8p
-    git/branch: v1.2.3
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/recherche-entreprises.git
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    git/branch: refs/tags/v1.2.3
+    git/remote: socialgouv/recherche-entreprises
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     azure-pg-admin-user: recherche-entreprises
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-85-preprod-dev42
+  name: recherche-entreprises-preprod
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,18 +31,20 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   replicas: 1
   selector:
@@ -52,19 +55,21 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         app: recherche-entreprises-api
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:1.2.3
+        - image: ghcr.io/socialgouv/recherche-entreprises/api:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -111,16 +116,18 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -133,13 +140,15 @@ spec:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: elastic-recherche-entreprises-read
       labels:
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -150,8 +159,8 @@ kind: Service
 metadata:
   labels:
     app: recherche-entreprises-api
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
@@ -159,10 +168,12 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
-  namespace: recherche-entreprises-85-preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: recherche-entreprises-preprod
 spec:
   ports:
     - name: http
@@ -179,21 +190,23 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
   name: recherche-entreprises-api
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   rules:
-    - host: api-preprod-recherche-entreprises.dev42.fabrique.social.gouv.fr
+    - host: api-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -205,7 +218,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-preprod-recherche-entreprises.dev42.fabrique.social.gouv.fr
+        - api-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

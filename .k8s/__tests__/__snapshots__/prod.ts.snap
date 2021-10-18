@@ -8,9 +8,11 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
@@ -29,9 +31,11 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: prod
-        app.gitlab.com/env.name: prod
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         app: recherche-entreprises-api
         application: recherche-entreprises
@@ -40,7 +44,7 @@ spec:
         team: recherche-entreprises
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:1.2.3
+        - image: ghcr.io/socialgouv/recherche-entreprises/api:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -86,9 +90,11 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     application: recherche-entreprises
     component: recherche-entreprises
@@ -107,9 +113,11 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: prod
-        app.gitlab.com/env.name: prod
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
         application: recherche-entreprises
         component: recherche-entreprises
@@ -130,9 +138,11 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   namespace: recherche-entreprises
 spec:
   ports:
@@ -152,9 +162,11 @@ metadata:
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: prod
-    app.gitlab.com/env.name: prod
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
     app: recherche-entreprises-api
     application: recherche-entreprises
