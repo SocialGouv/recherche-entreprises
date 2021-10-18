@@ -1,0 +1,17 @@
+name: Indexing (dev)
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  cancel-in-progress: true
+  group: indexing
+
+jobs:
+  index:
+    name: Index
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        shell: bash
+        run: echo "Hello, world"
