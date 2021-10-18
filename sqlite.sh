@@ -6,6 +6,9 @@ DATA_DIR=${DATA_DIR:-"./data"}
 
 mkdir -p "$DATA_DIR" || true
 
+echo "-- Working in $(dirname "$0")"
+cd "$(dirname "$0")" || exit
+
 echo "-- Download datasets"
 
 # install sqlite3 if not exists
