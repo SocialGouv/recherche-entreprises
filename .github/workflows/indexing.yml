@@ -1,0 +1,61 @@
+name: Indexing (dev)
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  cancel-in-progress: true
+  group: indexing
+
+jobs:
+  index:
+    name: Index
+    runs-on: ubuntu-latest
+    steps:
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Yarn cache setup
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: .k8s
+
+    - name: Install kosko-charts dependencies
+      shell: bash
+      run: yarn --cwd .k8s install --frozen-lockfile --prefer-offline
+
+    - name: Generate indexing job
+      shell: bash
+      run: yarn --cwd .k8s --silent generate --env dev jobs/indexing > indexing.yml
+      env:
+        RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
+        SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
+
+    - name: Archive indexing job
+      uses: actions/upload-artifact@v2
+      with:
+        name: indexing.yml
+        path: indexing.yml
+
+    - name: Get namespace name
+      uses: mikefarah/yq@master
+      id: namespace
+      with:
+        cmd: yq eval '.metadata.namespace' indexing.yml
+
+    - name: Create kubernetes config
+      shell: bash
+      run: |
+        mkdir ~/.kube
+        touch ~/.kube/config
+        echo ${{ secrets.KUBECONFIG }} | base64 -d > ~/.kube/config
+
+    - name: Launch indexing Job
+      shell: bash
+      run: |
+        kubectl delete -f indexing.yml --namespace ${{ steps.namespace.outputs.result }} || true
+        kubectl apply -f indexing.yml --namespace ${{ steps.namespace.outputs.result }}
