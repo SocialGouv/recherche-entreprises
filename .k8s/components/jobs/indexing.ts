@@ -1,6 +1,6 @@
-import env, { Environment } from "@kosko/env";
+import env from "@kosko/env";
 import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
-import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
+import github from "@socialgouv/kosko-charts/environments/github";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
 import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
 import { updateMetadata } from "@socialgouv/kosko-charts/utils/updateMetadata";
@@ -80,7 +80,7 @@ const sealedSecret = getSealedSecret(
     {}
 );
 
-const envParams = gitlab(process.env);
+const envParams = github(process.env);
 
 // base definition of the job
 const jobSpec: IIoK8sApiCoreV1PodSpec = {
@@ -168,7 +168,7 @@ if (!jobSpec.volumes) {
 }
 jobSpec.volumes.push({
   configMap: {
-    name: `config-map-files-${process.env.CI_COMMIT_SHORT_SHA}`,
+    name: `config-map-files-${process.env.GITHUB_SHA}`,
     defaultMode: 0o777,
   },
   name: "local-files",
@@ -184,14 +184,14 @@ const configMap = new ConfigMap({
     {}
   ),
   metadata: {
-    name: `config-map-files-${process.env.CI_COMMIT_SHORT_SHA}`,
+    name: `config-map-files-${process.env.GITHUB_SHA}`,
   },
 });
 
 // create the final job
 const job = new Job({
   metadata: {
-    name: `update-index-${process.env.CI_COMMIT_SHORT_SHA}`,
+    name: `update-index-${process.env.GITHUB_SHA}`,
   },
   spec: {
     backoffLimit: 3,

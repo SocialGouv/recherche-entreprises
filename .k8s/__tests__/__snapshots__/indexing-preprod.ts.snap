@@ -7,16 +7,18 @@ kind: SealedSecret
 metadata:
   name: elastic-recherche-entreprises-write
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -26,13 +28,15 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: elastic-recherche-entreprises-write
       labels:
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -336,41 +340,45 @@ data:
 
 
 metadata:
-  name: config-map-files-0123456
+  name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-0123456
+  name: update-index-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   backoffLimit: 3
   template:
     spec:
       containers:
         - name: update-index
-          image: ghcr.io/socialgouv/recherche-entreprises/index:v1.2.3
+          image: ghcr.io/socialgouv/recherche-entreprises/index:1.2.3
           volumeMounts:
             - name: data
               mountPath: /data
@@ -392,7 +400,7 @@ spec:
         - name: data
           emptyDir: {}
         - configMap:
-            name: config-map-files-0123456
+            name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
             defaultMode: 511
           name: local-files
       initContainers:
@@ -413,12 +421,14 @@ spec:
               name: local-files
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard

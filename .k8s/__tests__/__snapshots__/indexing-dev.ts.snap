@@ -8,16 +8,18 @@ metadata:
   name: elastic-recherche-entreprises-write
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -28,13 +30,15 @@ spec:
     metadata:
       annotations:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: elastic-recherche-entreprises-write
       labels:
-        application: master-dev42-recherche-entreprises
-        component: master-dev42-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -338,41 +342,46 @@ data:
 
 
 metadata:
-  name: config-map-files-0123456
+  name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-0123456
+  name: update-index-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: master-dev42-recherche-entreprises
-    component: master-dev42-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-master-dev42
+  namespace: recherche-entreprises-mybranch
 spec:
   backoffLimit: 3
   template:
     spec:
       containers:
         - name: update-index
-          image: 'ghcr.io/socialgouv/recherche-entreprises/index:'
+          image: >-
+            ghcr.io/socialgouv/recherche-entreprises/index:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
           volumeMounts:
             - name: data
               mountPath: /data
@@ -394,7 +403,7 @@ spec:
         - name: data
           emptyDir: {}
         - configMap:
-            name: config-map-files-0123456
+            name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
             defaultMode: 511
           name: local-files
       initContainers:
@@ -415,12 +424,14 @@ spec:
               name: local-files
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
-        application: master-dev42-recherche-entreprises
-        component: master-dev42-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
