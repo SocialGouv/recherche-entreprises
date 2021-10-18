@@ -53,5 +53,4 @@ jobs:
       - name: Launch indexing Job
         shell: bash
         run: |
-          kubectl delete -f indexing.yml --namespace ${{ steps.namespace.outputs.result }} || true
           kubectl apply -f indexing.yml --namespace ${{ steps.namespace.outputs.result }}
