@@ -14,7 +14,7 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ## Étapes :
 
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5QeUFzc2VtYmx5wqBcbmdlb19zaXJldC5jc3YtLT5QeUFzc2VtYmx5wqBcbnNpcmV0MmlkY2MuY3N2LS0-UHlBc3NlbWJsecKgXG5QeUFzc2VtYmx5LS0-YXNzZW1ibHkuY3N2LS0-aW5kZXgtLT5FbGFzdGljU2VhcmNoLS0-QVBJW0FQSSBIVFRQMV1cbkVsYXN0aWNTZWFyY2gtLT5BUEkyW0FQSSBIVFRQMl1cbkVsYXN0aWNTZWFyY2gtLT5DbGllbnRbQ2xpZW50IEVTXSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjoie30iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
 
 ## Données :
 
@@ -28,19 +28,9 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ## Assemblage
 
-Le CSV est généré en deux étapes dans le dossier `assembly/` :
+Le script `sqlite.sh` permet de permet de télécharger les CSV, les importer dans SQLite puis les re-exporter en CSV pour une indexation dans ElasticSearch.
 
-- Téléchargement des datasets (8GB)
-
-  `DATA_DIR=./data/ scripts/get-data.sh`
-
-- Assemblage des fichiers avec Python (numpy & pandas)
-
-  `pip install -r requirements.txt`
-
-  `DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh`
-
-Au final, le fichier `./output/assembly.csv` fait environ 600Mo
+Au final, le fichier `./output/assembly.csv` fait environ 5Go avec plus de 30 millions de lignes.
 
 ## Indexation Elastic Search
 

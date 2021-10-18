@@ -151,11 +151,11 @@ data:
     sqlite3 -echo \\"\${DATA_DIR}/db.sqlite\\" \\".read import.sql\\"
 
 
-    echo \\"-- Export sqlite data to CSV\\"
+    echo \\"-- Export sqlite data to \${DATA_DIR}/assembly.csv\\"
 
 
     sqlite3 -header -csv \\"\${DATA_DIR}/db.sqlite\\" \\".read export.sql\\" >
-    \\"\${DATA_DIR}/output.csv\\"
+    \\"\${DATA_DIR}/assembly.csv\\"
   import.sql: |-
     --- sqlite3 -echo db.sqlite \\".read import.sql\\"
     ---
@@ -389,7 +389,7 @@ spec:
               mountPath: /data
           env:
             - name: ASSEMBLY_FILE
-              value: /data/output.csv
+              value: /data/assembly.csv
           envFrom:
             - secretRef:
                 name: elastic-recherche-entreprises-write

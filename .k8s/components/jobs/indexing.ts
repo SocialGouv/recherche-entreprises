@@ -100,7 +100,7 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
       env: [
         {
           name: "ASSEMBLY_FILE",
-          value: "/data/output.csv",
+          value: "/data/assembly.csv",
         },
       ],
       envFrom: [

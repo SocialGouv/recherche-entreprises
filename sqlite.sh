@@ -67,6 +67,6 @@ echo "-- Import CSV datasets to sqlite"
 
 sqlite3 -echo "${DATA_DIR}/db.sqlite" ".read import.sql"
 
-echo "-- Export sqlite data to CSV"
+echo "-- Export sqlite data to ${DATA_DIR}/assembly.csv"
 
-sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/output.csv"
+sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/assembly.csv"
