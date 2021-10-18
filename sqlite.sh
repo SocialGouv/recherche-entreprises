@@ -15,6 +15,20 @@ then
     apt-get update -y
     apt-get install -y sqlite3
 fi
+# install wget if not exists
+if ! command -v wget &> /dev/null
+then
+    echo "wget could not be found"
+    apt-get update -y
+    apt-get install -y wget
+fi
+# install unzip if not exists
+if ! command -v unzip &> /dev/null
+then
+    echo "unzip could not be found"
+    apt-get update -y
+    apt-get install -y unzip
+fi
 
 for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 ""; do
   wget --progress=bar:force:noscroll -q --show-progress "https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_$d.csv.gz" --directory-prefix="$DATA_DIR"
