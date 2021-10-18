@@ -80,6 +80,8 @@ const sealedSecret = getSealedSecret(
     {}
 );
 
+const envParams = gitlab(process.env);
+
 // base definition of the job
 const jobSpec: IIoK8sApiCoreV1PodSpec = {
   containers: [
@@ -95,7 +97,7 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
       env: [
         {
           name: "ASSEMBLY_FILE",
-          value: "/data/assembly.csv",
+          value: "/data/output.csv",
         },
       ],
       envFrom: [
@@ -107,12 +109,12 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
       ],
       resources: {
         limits: {
-          cpu: "2",
-          memory: "18Gi",
+          cpu: "4",
+          memory: "5Gi",
         },
         requests: {
-          cpu: "1",
-          memory: "14Gi",
+          cpu: "2",
+          memory: "2Gi",
         },
       },
     },
@@ -126,32 +128,13 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
   ],
 };
 
-// script for the initContainer of the index image
-const initContainerScript = `
-apt-get update -y && apt-get install -y wget 
-
-export DATA_DIR="/data"
-
-cd /data
-
-echo "running get-data.sh..."
-
-/mnt/scripts/get-data.sh
-
-pip3 install -r /mnt/scripts/requirements.txt
-
-echo "running assemble_data.py..."
-
-python3 /mnt/scripts/assemble_data.py $DATA_DIR/StockUniteLegale_utf8.zip  $DATA_DIR/geo/ $DATA_DIR/WEEZ.csv $DATA_DIR/assembly.csv
-`;
-
 // initContainer definition, run above script and store data in a temp mount
 const initContainer = new Container({
-  args: ["-c", initContainerScript],
+  args: ["/mnt/scripts/sqlite.sh"],
   command: ["sh"],
-  image: `python:3.9.4`,
+  image: `ubuntu:18.04`,
   imagePullPolicy: "Always",
-  name: `download-data`,
+  name: `download-build-data`,
   volumeMounts: [
     {
       name: "data",
@@ -166,9 +149,9 @@ const initContainer = new Container({
 
 // add local files as volume to the initContainer
 const localFiles = [
-  path.join(__dirname, "../../../assembly/scripts/get-data.sh"),
-  path.join(__dirname, "../../../assembly/src/assemble_data.py"),
-  path.join(__dirname, "../../../assembly/requirements.txt"),
+  path.join(__dirname, "../../../sqlite.sh"),
+  path.join(__dirname, "../../../import.sql"),
+  path.join(__dirname, "../../../export.sql"),
 ];
 
 if (!jobSpec.volumes) {
@@ -208,8 +191,6 @@ const job = new Job({
     },
   },
 });
-
-const envParams = gitlab(process.env);
 
 updateMetadata(configMap, {
   annotations: envParams.metadata.annotations ?? {},
