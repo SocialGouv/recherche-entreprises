@@ -65,8 +65,8 @@ ls -la
 
 echo "-- Import CSV datasets to sqlite"
 
-sqlite3 -echo db.sqlite ".read import.sql"
+sqlite3 -echo ./db.sqlite ".read import.sql"
 
 echo "-- Export sqlite data to CSV"
 
-sqlite3 -header -csv db.sqlite ".read export.sql" > "${DATA_DIR}/output.csv"
+sqlite3 -header -csv ./db.sqlite ".read export.sql" > "${DATA_DIR}/output.csv"
