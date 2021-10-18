@@ -64,7 +64,7 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Édition de livres",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
