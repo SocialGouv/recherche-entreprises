@@ -14,7 +14,6 @@ then
     echo "sqlite3 could not be found"
     apt-get update -y
     apt-get install -y sqlite3
-    exit
 fi
 
 for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 ""; do

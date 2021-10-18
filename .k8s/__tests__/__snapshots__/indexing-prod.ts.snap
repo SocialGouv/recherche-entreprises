@@ -65,7 +65,6 @@ data:
         echo \\"sqlite3 could not be found\\"
         apt-get update -y
         apt-get install -y sqlite3
-        exit
     fi
 
 
