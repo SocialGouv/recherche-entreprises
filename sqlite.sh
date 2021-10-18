@@ -60,13 +60,16 @@ unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
 # WEEZ data
 wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e -O "${DATA_DIR}/WEEZ.csv"
 
+sleep 100000
+
 pwd
 ls -la
+ls -la data
 
 echo "-- Import CSV datasets to sqlite"
 
-sqlite3 -echo ./db.sqlite ".read import.sql"
+sqlite3 -echo db.sqlite ".read import.sql"
 
 echo "-- Export sqlite data to CSV"
 
-sqlite3 -header -csv ./db.sqlite ".read export.sql" > "${DATA_DIR}/output.csv"
+sqlite3 -header -csv db.sqlite ".read export.sql" > "${DATA_DIR}/output.csv"
