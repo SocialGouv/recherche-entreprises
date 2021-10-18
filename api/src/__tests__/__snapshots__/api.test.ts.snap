@@ -2,7 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
-  "activitePrincipale": "Édition de livres",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -15,6 +15,10 @@ Object {
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635597",
     },
     Object {
+      "idcc": 9999,
+      "shortTitle": "",
+    },
+    Object {
       "etat": "VIGUEUR_ETEN",
       "id": "KALICONT000005635173",
       "idcc": 1486,
@@ -23,10 +27,6 @@ Object {
       "texte_de_base": "KALITEXT000005679895",
       "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987. ",
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
-    },
-    Object {
-      "idcc": 9999,
-      "shortTitle": "",
     },
   ],
   "etablissements": 35,
