@@ -14,25 +14,28 @@ cd "$(dirname "$0")" || exit
 
 echo "-- Download datasets"
 
+
+if command -v apt-get &> /dev/null
+then
+  apt-get update -y
+fi
+
 # install sqlite3 if not exists
 if ! command -v sqlite3 &> /dev/null
 then
     echo "sqlite3 could not be found"
-    apt-get update -y
     apt-get install -y sqlite3
 fi
 # install wget if not exists
 if ! command -v wget &> /dev/null
 then
     echo "wget could not be found"
-    apt-get update -y
     apt-get install -y wget
 fi
 # install unzip if not exists
 if ! command -v unzip &> /dev/null
 then
     echo "unzip could not be found"
-    apt-get update -y
     apt-get install -y unzip
 fi
 
@@ -60,16 +63,10 @@ unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
 # WEEZ data
 wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e -O "${DATA_DIR}/WEEZ.csv"
 
-sleep 100000
-
-pwd
-ls -la
-ls -la data
-
 echo "-- Import CSV datasets to sqlite"
 
-sqlite3 -echo db.sqlite ".read import.sql"
+sqlite3 -echo "${DATA_DIR}/db.sqlite" ".read import.sql"
 
 echo "-- Export sqlite data to CSV"
 
-sqlite3 -header -csv db.sqlite ".read export.sql" > "${DATA_DIR}/output.csv"
+sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/output.csv"
