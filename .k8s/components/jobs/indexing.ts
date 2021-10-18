@@ -135,6 +135,12 @@ const initContainer = new Container({
   image: `ubuntu:18.04`,
   imagePullPolicy: "Always",
   name: `download-build-data`,
+  env: [
+    {
+      name: "DATA_DIR",
+      value: "/data",
+    },
+  ],
   volumeMounts: [
     {
       name: "data",
