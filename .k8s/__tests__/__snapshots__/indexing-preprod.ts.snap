@@ -139,9 +139,6 @@ data:
     echo \\"-- Import CSV datasets to sqlite\\"
 
 
-    cd \\"\${DATA_DIR}/..\\"
-
-
     sqlite3 -echo \\"db.sqlite\\" \\".read import.sql\\"
 
 
@@ -373,8 +370,7 @@ spec:
     spec:
       containers:
         - name: update-index
-          image: >-
-            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-index:1.2.3
+          image: ghcr.io/socialgouv/recherche-entreprises/index:v1.2.3
           volumeMounts:
             - name: data
               mountPath: /data
@@ -409,10 +405,10 @@ spec:
           name: download-build-data
           env:
             - name: DATA_DIR
-              value: /data
+              value: /mnt/scripts/data
           volumeMounts:
             - name: data
-              mountPath: /data
+              mountPath: /mnt/scripts/data
             - mountPath: /mnt/scripts
               name: local-files
     metadata:

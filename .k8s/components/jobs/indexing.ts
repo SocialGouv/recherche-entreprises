@@ -141,13 +141,13 @@ const initContainer = new Container({
   env: [
     {
       name: "DATA_DIR",
-      value: "/data",
+      value: "/mnt/scripts/data",
     },
   ],
   volumeMounts: [
     {
       name: "data",
-      mountPath: "/data",
+      mountPath: "/mnt/scripts/data",
     },
     {
       mountPath: "/mnt/scripts",
