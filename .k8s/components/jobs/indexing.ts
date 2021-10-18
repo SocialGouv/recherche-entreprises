@@ -2,7 +2,7 @@ import env, { Environment } from "@kosko/env";
 import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
 import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
+import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
 import { updateMetadata } from "@socialgouv/kosko-charts/utils/updateMetadata";
 import fs from "fs";
 import { IIoK8sApiCoreV1PodSpec } from "kubernetes-models/api/core/v1/PodSpec";
@@ -87,7 +87,10 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
   containers: [
     {
       name: "update-index",
-      image: getHarborImagePath({ name: "recherche-entreprises-index" }),
+      image: getGithubRegistryImagePath({
+        name: "index",
+        project: "recherche-entreprises",
+      }),
       volumeMounts: [
         {
           name: "data",
