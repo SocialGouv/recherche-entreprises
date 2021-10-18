@@ -30,7 +30,7 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 Le script `sqlite.sh` permet de permet de télécharger les CSV, les importer dans SQLite puis les re-exporter en CSV pour une indexation dans ElasticSearch.
 
-Au final, le fichier `./output/assembly.csv` fait environ 5Go avec plus de 30 millions de lignes.
+Au final, le fichier `./output/assembly.csv` fait environ 5Go avec plus de 30 millions de lignes. Cette opération dure environ 30 minutes.
 
 ## Indexation Elastic Search
 
