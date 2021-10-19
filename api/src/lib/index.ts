@@ -41,7 +41,7 @@ export const searchEntreprise = async (siren: string) => {
     employeur: false,
     limit: 1,
     onlyWithConvention: false,
-    open: false,
+    open: true,
     query: siren,
   });
 

@@ -46,6 +46,10 @@ export const mapHit = ({
     denominationUsuelle1UniteLegale,
     denominationUsuelle2UniteLegale,
     denominationUsuelle3UniteLegale,
+    etatAdministratifEtablissement,
+    categorieEntreprise,
+    etatAdministratifUniteLegale,
+    caractereEmployeurUniteLegale,
     activitePrincipale,
     etablissements,
     siret,
@@ -68,12 +72,13 @@ export const mapHit = ({
       (
         acc: any,
         {
-          fields: { convention, idcc },
+          fields: { convention, idcc: idccString },
         }: { fields: { convention: string[]; idcc: string } }
       ) => {
+        const idcc = parseInt(idccString);
         const kaliData = idcc ? conventionsSet[idcc] : undefined;
         const o = {
-          idcc: parseInt(idcc),
+          idcc,
           shortTitle: convention ? convention[0] : "",
           ...kaliData,
         };
@@ -97,13 +102,17 @@ export const mapHit = ({
 
   return {
     activitePrincipale,
+    caractereEmployeurUniteLegale,
     conventions: Array.from(conventions.values()),
     etablissements: parseInt(etablissements),
+    etatAdministratifEtablissement,
+    etatAdministratifUniteLegale,
     highlightLabel,
     label,
     matching,
     matchingEtablissement: {
       address: geo_adresse,
+      categorieEntreprise,
       siret,
     },
     simpleLabel,
@@ -176,8 +185,6 @@ const makeFilters = (
   open: boolean,
   employeur: boolean
 ) => {
-  console.log({ employeur, onlyWithConvention, open });
-
   const filters = [];
 
   if (onlyWithConvention) {
@@ -191,8 +198,6 @@ const makeFilters = (
   if (employeur) {
     filters.push(employeurFilter);
   }
-
-  console.log(filters);
 
   return filters;
 };

@@ -29,6 +29,11 @@ SELECT
     geo_siret.denominationUsuelleEtablissement,
     geo_siret.activitePrincipaleEtablissement,
     geo_siret.geo_adresse,
+    geo_siret.complementAdresseEtablissement,
+    geo_siret.numeroVoieEtablissement,
+    geo_siret.indiceRepetitionEtablissement,
+    geo_siret.typeVoieEtablissement,
+    geo_siret.libelleVoieEtablissement,
     weez.IDCC as idcc,
     (select count(*) FROM geo_siret where siren=stock.siren) etablissements
     from stock, geo_siret

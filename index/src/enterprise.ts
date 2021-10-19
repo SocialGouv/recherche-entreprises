@@ -43,6 +43,12 @@ export type Enterprise = {
   etatAdministratifUniteLegale: string;
   caractereEmployeurUniteLegale: string;
   etatAdministratifEtablissement: string;
+
+  complementAdresseEtablissement: string;
+  numeroVoieEtablissement: string;
+  indiceRepetitionEtablissement: string;
+  typeVoieEtablissement: string;
+  libelleVoieEtablissement: string;
 };
 
 // geo_siret.geo_adresse,
@@ -77,7 +83,7 @@ export const mappings = {
     etatAdministratifEtablissement: { type: "keyword" },
     etatAdministratifUniteLegale: { type: "keyword" },
 
-    geo_address: {
+    geo_adresse: {
       analyzer: "french_indexing",
       type: "text",
     },
@@ -91,7 +97,10 @@ export const mappings = {
       type: "keyword",
     },
 
-    libelleCommuneEtablissement: { type: "keyword" },
+    libelleCommuneEtablissement: {
+      analyzer: "french_indexing",
+      type: "text",
+    },
 
     naming: {
       analyzer: "french_indexing",
@@ -110,12 +119,37 @@ export const mappings = {
 
     siretRank: { type: "rank_feature" },
     trancheEffectifsUniteLegale: { type: "rank_feature" },
-    ville: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
+
     withIdcc: { type: "boolean" },
   },
+};
+
+const buildAddress = (enterprise: Enterprise) => {
+  if (enterprise.geo_adresse) {
+    return enterprise.geo_adresse;
+  } else {
+    const {
+      complementAdresseEtablissement,
+      numeroVoieEtablissement,
+      indiceRepetitionEtablissement,
+      typeVoieEtablissement,
+      libelleVoieEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
+    } = enterprise;
+
+    return [
+      complementAdresseEtablissement,
+      numeroVoieEtablissement,
+      indiceRepetitionEtablissement,
+      typeVoieEtablissement,
+      libelleVoieEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
+    ]
+      .filter((e) => e)
+      .join(" ");
+  }
 };
 
 export const mapEnterprise = (enterprise: Enterprise) => {
@@ -166,20 +200,22 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     ? ccMap.get(parseInt(enterprise.idcc))?.shortTitle
     : undefined;
 
+  // TODO should we filter deprecated IDCC ? #105
   const withIdcc =
     (enterprise.idcc &&
       parseInt(enterprise.idcc) !== 0 &&
       parseInt(enterprise.idcc) !== 9999) ||
     false;
 
+  enterprise.idcc = enterprise.idcc?.trim();
+
+  enterprise.geo_adresse = buildAddress(enterprise);
+
   return {
     activitePrincipale,
-    // address: enterprise.geo_adresse,
     convention,
-    // cp: enterprise.codePostalEtablissement || undefined,
     naming,
     siretRank,
-    // ville: enterprise.libelleCommuneEtablissement,
     withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)

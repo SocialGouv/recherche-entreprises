@@ -12,16 +12,31 @@ app.use(router.routes());
 
 const apptest = supertest(http.createServer(app.callback()));
 
-const searchCall = (
-  query: string,
-  address: string | undefined,
-  limit: number | undefined
-) => {
+const searchCall = ({
+  query,
+  address,
+  limit,
+  open,
+  employeur,
+  onlyWithConvention,
+}: {
+  query: string;
+  address?: string;
+  limit?: number;
+  open?: boolean;
+  employeur?: boolean;
+  onlyWithConvention?: boolean;
+}) => {
   const addressQP = address ? `&a=${address}` : "";
   const limitQP = limit ? `&l=${limit}` : "";
 
+  const openQP = open ? `&open=${open}` : "";
+  const employeurQP = employeur ? `&employeur=${employeur}` : "";
+
   return apptest.get(
-    `${API_PREFIX}/search?onlyWithConvention=true&q=${query}${addressQP}${limitQP}`
+    `${API_PREFIX}/search?onlyWithConvention=${
+      onlyWithConvention || true
+    }&q=${query}${addressQP}${limitQP}${openQP}${employeurQP}`
   );
 };
 
@@ -30,7 +45,8 @@ const michelinSiret = `${michelinSiren}03169`;
 
 describe("Test search", () => {
   test("generic search", async () => {
-    const { status, body } = await searchCall("michelin", undefined, undefined);
+    const { status, body } = await searchCall({ query: "michelin" });
+
     expect(status).toBe(200);
     expect(body.entreprises).toBeDefined();
     expect(body.entreprises.length).toEqual(20);
@@ -42,31 +58,37 @@ describe("Test search", () => {
 
   test("with limit", async () => {
     const limit = 50;
-    const { body } = await searchCall("michelin", undefined, limit);
+    const { body } = await searchCall({ limit, query: "michelin" });
     expect(body.entreprises.length).toEqual(limit);
   });
 
   test("search with postal code and city", async () => {
-    const { body: b1 } = await searchCall("michelin", undefined, undefined);
+    const { body: b1 } = await searchCall({ query: "michelin" });
     expect(b1.entreprises[0].matchingEtablissement.address).not.toBe(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
-    const { body: b2 } = await searchCall("michelin", "63 000", undefined);
+    const { body: b2 } = await searchCall({
+      address: "63 000",
+      query: "michelin",
+    });
     expect(
       b2.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
-    const { body: b3 } = await searchCall("michelin", "clermont", undefined);
+    const { body: b3 } = await searchCall({
+      address: "clermont",
+      query: "michelin",
+    });
     expect(
       b3.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
-    const { body: b4 } = await searchCall("michelin", "63", undefined);
+    const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
       b4.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
@@ -75,16 +97,16 @@ describe("Test search", () => {
   });
 
   test("search with diatrics", async () => {
-    const { body: b1 } = await searchCall("michelin", undefined, undefined);
-    const { body: b2 } = await searchCall("michélin", undefined, undefined);
-    const { body: b3 } = await searchCall("Mîchèlin", undefined, undefined);
+    const { body: b1 } = await searchCall({ query: "michelin" });
+    const { body: b2 } = await searchCall({ query: "michélin" });
+    const { body: b3 } = await searchCall({ query: "Mîchèlin" });
 
     expect(b1).toStrictEqual(b2);
     expect(b1).toStrictEqual(b3);
   });
 
   test("search with siret", async () => {
-    const { body } = await searchCall(michelinSiret, undefined, undefined);
+    const { body } = await searchCall({ query: michelinSiret });
     expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
       michelinSiret
     );
@@ -143,4 +165,25 @@ describe("Test entreprise search", () => {
   });
 });
 
-describe("Test api params", async () => {});
+describe("Test api params", () => {
+  test("not only open", async () => {
+    const { body: b1 } = await searchCall({ open: false, query: "michelin" });
+    expect(b1).toMatchSnapshot();
+  });
+
+  test("not only employeur", async () => {
+    const { body: b1 } = await searchCall({
+      employeur: false,
+      query: "michelin",
+    });
+    expect(b1).toMatchSnapshot();
+  });
+
+  test("not with convention", async () => {
+    const { body: b1 } = await searchCall({
+      onlyWithConvention: false,
+      query: "michelin",
+    });
+    expect(b1).toMatchSnapshot();
+  });
+});
