@@ -34,10 +34,16 @@ Returns json data about companies matching search parameters
 
   `l=[integer]` result limit
 
+  `open=[boolean]` only return open etablissements, default to true
+
+  `employeur=[boolean]` only return etablissements with declared employees, default to false
+
+  `onlyWithConvention=[boolean]` only return etablissement attached to a "Convention Collective", default to false
+
 - **Sample Call:**
 
   ```sh
-  curl --request GET --url 'http://localhost:3000/api/v1/search?q=michelin&a=clermont&l=3'
+  curl --request GET --url 'http://localhost:3000/api/v1/search?q=michelin&a=clermont&l=3&open=false'
   ```
 
 - **Success Response:**

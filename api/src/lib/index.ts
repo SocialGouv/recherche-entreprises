@@ -8,12 +8,16 @@ export const search = async ({
   addAllConventions,
   onlyWithConvention,
   limit,
+  open,
+  employeur,
 }: SearchArgs) => {
   const body = entrepriseSearchBody({
     addAllConventions,
     address,
+    employeur,
     limit,
     onlyWithConvention,
+    open,
     query,
   });
 
@@ -22,11 +26,11 @@ export const search = async ({
     index: ELASTICSEARCH_INDEX,
   });
 
-  //   console.log(JSON.stringify(body, null, 2));
+  // console.log(JSON.stringify(body, null, 2));
 
   const entreprises = response.body.hits.hits.map(mapHit);
 
-  //   console.log(JSON.stringify(entreprises, null, 2));
+  // console.log(JSON.stringify(entreprises, null, 2));
 
   return entreprises;
 };
@@ -34,8 +38,10 @@ export const search = async ({
 export const searchEntreprise = async (siren: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: true,
+    employeur: false,
     limit: 1,
     onlyWithConvention: false,
+    open: false,
     query: siren,
   });
 
@@ -56,8 +62,10 @@ export const searchEntreprise = async (siren: string) => {
 export const searchEtablissement = async (siret: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: false,
+    employeur: false,
     limit: 1,
     onlyWithConvention: false,
+    open: false,
     query: siret,
   });
 

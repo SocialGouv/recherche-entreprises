@@ -8,7 +8,6 @@ export type Enterprise = {
   siren: string;
   trancheEffectifsUniteLegale: number;
 
-  // categorieEntreprise: 'PME',
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
   sigleUniteLegale: string;
@@ -25,46 +24,63 @@ export type Enterprise = {
 
   etablissements: number;
 
-  // categorieJuridiqueUniteLegale: '5599',
+  categorieJuridiqueUniteLegale: string;
   activitePrincipaleUniteLegale: string;
   activitePrincipaleEtablissement: string;
 
-  // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
+  nomenclatureActivitePrincipaleUniteLegale: string;
   siret: string;
   codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
 
-  // etatAdministratifEtablissement: 'A',
   // MOIS: '2020-07',
+  // DATE_MAJ: '2020/08/28'
 
   idcc: string | undefined;
   geo_adresse: string;
 
-  // DATE_MAJ: '2020/08/28'
+  categorieEntreprise: string;
+  etatAdministratifUniteLegale: string;
+  caractereEmployeurUniteLegale: string;
+  etatAdministratifEtablissement: string;
 };
+
+// geo_siret.geo_adresse,
 
 export const mappings = {
   properties: {
     activitePrincipale: { type: "keyword" },
-    address: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
-    codePostalEtablissement: { type: "keyword" },
+    activitePrincipaleEtablissement: { type: "keyword" },
+    activitePrincipaleUniteLegale: { type: "keyword" },
 
+    caractereEmployeurUniteLegale: { type: "keyword" },
+    categorieEntreprise: { type: "keyword" },
+
+    categorieJuridiqueUniteLegale: { type: "keyword" },
+    codePostalEtablissement: { type: "keyword" },
     convention: { type: "keyword" },
     cp: { type: "keyword" },
     denominationUniteLegale: { type: "keyword" },
-    denominationUsuelle1UniteLegale: { type: "keyword" },
 
+    denominationUsuelle1UniteLegale: { type: "keyword" },
     denominationUsuelle2UniteLegale: { type: "keyword" },
     denominationUsuelle3UniteLegale: { type: "keyword" },
     denominationUsuelleEtablissement: { type: "keyword" },
 
     enseigne1Etablissement: { type: "keyword" },
+
     enseigne2Etablissement: { type: "keyword" },
     enseigne3Etablissement: { type: "keyword" },
+
     etablissements: { type: "rank_feature" },
+
+    etatAdministratifEtablissement: { type: "keyword" },
+    etatAdministratifUniteLegale: { type: "keyword" },
+
+    geo_address: {
+      analyzer: "french_indexing",
+      type: "text",
+    },
 
     idcc: {
       fields: {
@@ -74,25 +90,26 @@ export const mappings = {
       },
       type: "keyword",
     },
+
     libelleCommuneEtablissement: { type: "keyword" },
+
     naming: {
       analyzer: "french_indexing",
       similarity: "bm25_no_norm_length",
       type: "text",
     },
+
     nomUniteLegale: { type: "keyword" },
 
     nomUsageUniteLegale: { type: "keyword" },
+
+    nomenclatureActivitePrincipaleUniteLegale: { type: "keyword" },
     sigleUniteLegale: { type: "keyword" },
-
     siren: { type: "keyword" },
-
     siret: { type: "keyword" },
 
     siretRank: { type: "rank_feature" },
-
     trancheEffectifsUniteLegale: { type: "rank_feature" },
-
     ville: {
       analyzer: "french_indexing",
       type: "text",
@@ -157,12 +174,12 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   return {
     activitePrincipale,
-    address: enterprise.geo_adresse,
+    // address: enterprise.geo_adresse,
     convention,
-    cp: enterprise.codePostalEtablissement || undefined,
+    // cp: enterprise.codePostalEtablissement || undefined,
     naming,
     siretRank,
-    ville: enterprise.libelleCommuneEtablissement,
+    // ville: enterprise.libelleCommuneEtablissement,
     withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)

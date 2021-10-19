@@ -7,8 +7,18 @@ export const router = new Router();
 
 export const API_PREFIX = "/api/v1";
 
+const parseBoolean = (param: string, defaultz = true) =>
+  param === undefined ? defaultz : param.toLowerCase() !== "false";
+
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { q: query, a: address, l: limit, onlyWithConvention } = ctx.query;
+  const {
+    q: query,
+    a: address,
+    l: limit,
+    onlyWithConvention,
+    open,
+    employeur,
+  } = ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter q is required`);
@@ -18,8 +28,10 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
     const entreprises = await search({
       addAllConventions: true,
       address: address as string,
+      employeur: parseBoolean(employeur as string, false),
       limit: parseInt(limit as string),
-      onlyWithConvention: !!onlyWithConvention,
+      onlyWithConvention: parseBoolean(onlyWithConvention as string, false),
+      open: parseBoolean(open as string, true),
       query: query as string,
     });
     ctx.body = { entreprises };

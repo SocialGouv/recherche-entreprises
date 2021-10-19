@@ -49,7 +49,7 @@ export const mapHit = ({
     activitePrincipale,
     etablissements,
     siret,
-    address,
+    geo_adresse,
     naming,
   },
   inner_hits,
@@ -103,7 +103,7 @@ export const mapHit = ({
     label,
     matching,
     matchingEtablissement: {
-      address,
+      address: geo_adresse,
       siret,
     },
     simpleLabel,
@@ -128,12 +128,12 @@ const addressFilter = (address: string | undefined) =>
     ? [
         {
           prefix: {
-            cp: address ? address.replace(/\D/g, "") : "",
+            codePostalEtablissement: address ? address.replace(/\D/g, "") : "",
           },
         },
         {
           match: {
-            ville: {
+            libelleCommuneEtablissement: {
               query: address,
             },
           },
@@ -147,16 +147,64 @@ export type SearchArgs = {
   // return convention of every etablissements associated to the main company
   addAllConventions?: boolean;
   // only search for etablissements with convention attached
-  onlyWithConvention?: boolean;
+  onlyWithConvention: boolean;
   limit?: number | undefined;
+  // etablissement still open
+  open: boolean;
+  // etablissement employeur
+  employeur: boolean;
+};
+
+const onlyConventionFilters = [
+  { term: { withIdcc: true } },
+  { range: { "idcc.number": { lt: 5001 } } },
+];
+
+const openFilters = [
+  { term: { etatAdministratifUniteLegale: "A" } },
+  { term: { etatAdministratifEtablissement: "A" } },
+];
+
+const employeurFilter = {
+  term: {
+    caractereEmployeurUniteLegale: "O",
+  },
+};
+
+const makeFilters = (
+  onlyWithConvention: boolean,
+  open: boolean,
+  employeur: boolean
+) => {
+  console.log({ employeur, onlyWithConvention, open });
+
+  const filters = [];
+
+  if (onlyWithConvention) {
+    filters.push(...onlyConventionFilters);
+  }
+
+  if (open) {
+    filters.push(...openFilters);
+  }
+
+  if (employeur) {
+    filters.push(employeurFilter);
+  }
+
+  console.log(filters);
+
+  return filters;
 };
 
 export const entrepriseSearchBody = ({
   query,
   address,
   addAllConventions = true,
-  onlyWithConvention = true,
+  onlyWithConvention,
   limit = defaultLimit,
+  open,
+  employeur,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -166,12 +214,7 @@ export const entrepriseSearchBody = ({
   },
   query: {
     bool: {
-      filter: onlyWithConvention
-        ? [
-            { term: { withIdcc: onlyWithConvention } },
-            { range: { "idcc.number": { lt: 5001 } } },
-          ]
-        : undefined,
+      filter: makeFilters(onlyWithConvention, open, employeur),
       must: [
         {
           bool: {

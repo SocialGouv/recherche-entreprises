@@ -142,3 +142,5 @@ describe("Test entreprise search", () => {
     expect(status).toEqual(400);
   });
 });
+
+describe("Test api params", async () => {});
