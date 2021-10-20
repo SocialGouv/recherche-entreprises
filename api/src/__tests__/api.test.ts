@@ -17,26 +17,26 @@ const searchCall = ({
   address,
   limit,
   open,
-  employeur,
+  employer,
   onlyWithConvention,
 }: {
   query: string;
   address?: string;
   limit?: number;
   open?: boolean;
-  employeur?: boolean;
+  employer?: boolean;
   onlyWithConvention?: boolean;
 }) => {
-  const addressQP = address ? `&a=${address}` : "";
-  const limitQP = limit ? `&l=${limit}` : "";
+  const addressQP = address ? `&address=${address}` : "";
+  const limitQP = limit ? `&limit=${limit}` : "";
 
   const openQP = open ? `&open=${open}` : "";
-  const employeurQP = employeur ? `&employeur=${employeur}` : "";
+  const employerQP = employer ? `&employer=${employer}` : "";
 
   return apptest.get(
     `${API_PREFIX}/search?onlyWithConvention=${
       onlyWithConvention || true
-    }&q=${query}${addressQP}${limitQP}${openQP}${employeurQP}`
+    }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}`
   );
 };
 
@@ -173,7 +173,7 @@ describe("Test api params", () => {
 
   test("not only employeur", async () => {
     const { body: b1 } = await searchCall({
-      employeur: false,
+      employer: false,
       query: "michelin",
     });
     expect(b1).toMatchSnapshot();

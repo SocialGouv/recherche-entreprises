@@ -9,12 +9,12 @@ export const search = async ({
   onlyWithConvention,
   limit,
   open,
-  employeur,
+  employer,
 }: SearchArgs) => {
   const body = entrepriseSearchBody({
     addAllConventions,
     address,
-    employeur,
+    employer,
     limit,
     onlyWithConvention,
     open,
@@ -38,10 +38,10 @@ export const search = async ({
 export const searchEntreprise = async (siren: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: true,
-    employeur: false,
+    employer: false,
     limit: 1,
     onlyWithConvention: false,
-    open: true,
+    open: false,
     query: siren,
   });
 
@@ -62,7 +62,7 @@ export const searchEntreprise = async (siren: string) => {
 export const searchEtablissement = async (siret: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: false,
-    employeur: false,
+    employer: false,
     limit: 1,
     onlyWithConvention: false,
     open: false,

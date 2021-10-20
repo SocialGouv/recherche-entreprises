@@ -26,13 +26,13 @@ Returns json data about companies matching search parameters
 
   **Required:**
 
-  `q=[string]` query used to perform the search on company names
+  `query=[string]` query used to perform the search on company names
 
   **Optional:**
 
-  `a=[string]` city or postal code
+  `address=[string]` city or postal code
 
-  `l=[integer]` result limit
+  `limit=[integer]` result limit
 
   `open=[boolean]` only return open etablissements, default to true
 
@@ -43,7 +43,7 @@ Returns json data about companies matching search parameters
 - **Sample Call:**
 
   ```sh
-  curl --request GET --url 'http://localhost:3000/api/v1/search?q=michelin&a=clermont&l=3&open=false'
+  curl --request GET --url 'http://localhost:3000/api/v1/search?query=michelin&address=clermont&limit=3&open=false'
   ```
 
 - **Success Response:**

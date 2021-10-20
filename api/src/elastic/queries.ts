@@ -161,7 +161,7 @@ export type SearchArgs = {
   // etablissement still open
   open: boolean;
   // etablissement employeur
-  employeur: boolean;
+  employer: boolean;
 };
 
 const onlyConventionFilters = [
@@ -174,7 +174,7 @@ const openFilters = [
   { term: { etatAdministratifEtablissement: "A" } },
 ];
 
-const employeurFilter = {
+const employerFilter = {
   term: {
     caractereEmployeurUniteLegale: "O",
   },
@@ -183,7 +183,7 @@ const employeurFilter = {
 const makeFilters = (
   onlyWithConvention: boolean,
   open: boolean,
-  employeur: boolean
+  employer: boolean
 ) => {
   const filters = [];
 
@@ -195,8 +195,8 @@ const makeFilters = (
     filters.push(...openFilters);
   }
 
-  if (employeur) {
-    filters.push(employeurFilter);
+  if (employer) {
+    filters.push(employerFilter);
   }
 
   return filters;
@@ -209,7 +209,7 @@ export const entrepriseSearchBody = ({
   onlyWithConvention,
   limit = defaultLimit,
   open,
-  employeur,
+  employer,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -219,7 +219,7 @@ export const entrepriseSearchBody = ({
   },
   query: {
     bool: {
-      filter: makeFilters(onlyWithConvention, open, employeur),
+      filter: makeFilters(onlyWithConvention, open, employer),
       must: [
         {
           bool: {
