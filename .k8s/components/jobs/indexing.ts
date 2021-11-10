@@ -144,6 +144,16 @@ const initContainer = new Container({
       value: "/mnt/scripts/data",
     },
   ],
+  resources: {
+    limits: {
+      cpu: "4",
+      memory: "2Gi",
+    },
+    requests: {
+      cpu: "2",
+      memory: "1Gi",
+    },
+  },
   volumeMounts: [
     {
       name: "data",
