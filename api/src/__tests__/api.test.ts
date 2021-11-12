@@ -75,7 +75,7 @@ describe("Test search", () => {
     expect(
       b2.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
     const { body: b3 } = await searchCall({
@@ -85,14 +85,14 @@ describe("Test search", () => {
     expect(
       b3.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
     const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
       b4.entreprises[0].matchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
   });
 
