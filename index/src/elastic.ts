@@ -18,8 +18,8 @@ const esClientConfig: ClientOptions = {
   auth,
   node: ELASTICSEARCH_URL,
   agent: false,
-  maxRetries: 20,
-  requestTimeout: 10000,
+  maxRetries: 50,
+  requestTimeout: 30000,
   disablePrototypePoisoningProtection: true,
 };
 

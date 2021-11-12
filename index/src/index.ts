@@ -57,8 +57,7 @@ const insertEntreprises = async (indexName: string) => {
       console.log(`dropped ${doc}`);
     },
     refreshOnCompletion: true,
-    concurrency: 10,
-    // flushBytes: 500000,
+    concurrency: 5,
   });
 
   console.log("result:", JSON.stringify(result));
