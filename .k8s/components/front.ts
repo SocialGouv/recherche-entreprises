@@ -28,7 +28,7 @@ const getManifests = async () => {
   addEnvs({
     deployment,
     data: {
-      REACT_APP_API_URL: `https://${apiUrl}`,
+      REACT_APP_API_URL: `https://${apiUrl}/api/v1`,
     },
   });
 

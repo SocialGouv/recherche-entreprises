@@ -4,10 +4,10 @@ WORKDIR /app
 RUN chown node:node /app
 COPY package.json .
 COPY yarn.lock .
-RUN yarn
+RUN yarn --frozen-lockfile
 COPY . .
 RUN yarn build
-
+RUN yarn --frozen-lockfile --production
 # ---
 
 FROM node:15-alpine
@@ -15,8 +15,10 @@ FROM node:15-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/dist ./dist
-COPY package.json .
-COPY openapi.yaml .
+COPY --from=builder /app/node_modules ./node_modules
+
+WORKDIR /app/dist
+
 USER node
 
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["node", "./src/index.js"]

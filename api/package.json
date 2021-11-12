@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "Sample API for recherche-entreprises",
   "private": true,
-  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore '__tests__' --exec 'ts-node src/index.ts'",
-    "build": "ncc build src/index.ts -o dist",
-    "start": "node dist/index.js",
+    "build": "tsc --outDir dist && cp openapi.yaml ./dist && cp -a ./swagger-ui ./dist",
+    "start": "node dist/src/index.js",
     "test": "jest",
     "lint": "eslint src/**/*.ts"
   },
@@ -35,7 +34,6 @@
     "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
-    "@vercel/ncc": "^0.28.6",
     "eslint": "^7.32.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.24.2",
