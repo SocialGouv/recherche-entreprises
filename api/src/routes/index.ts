@@ -1,5 +1,4 @@
 import Router from "koa-router";
-import { koaSwagger } from "koa2-swagger-ui";
 import yamljs from "yamljs";
 
 import pkg from "../../package.json";
@@ -13,14 +12,8 @@ const parseBoolean = (param: string, defaultz = true) =>
   param === undefined ? defaultz : param.toLowerCase() !== "false";
 
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const {
-    query,
-    address,
-    limit,
-    onlyWithConvention,
-    open,
-    employer,
-  } = ctx.query;
+  const { query, address, limit, onlyWithConvention, open, employer } =
+    ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter query is required`);
@@ -116,4 +109,6 @@ router.get(`/version`, (ctx) => {
 
 const spec = yamljs.load("./openapi.yaml");
 
-router.get("/", koaSwagger({ routePrefix: false, swaggerOptions: { spec } }));
+router.get("/swagger.json", (ctx) => {
+  ctx.body = spec;
+});
