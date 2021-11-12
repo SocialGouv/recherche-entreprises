@@ -12,8 +12,7 @@ const parseBoolean = (param: string, defaultz = true) =>
   param === undefined ? defaultz : param.toLowerCase() !== "false";
 
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { query, address, limit, onlyWithConvention, open, employer } =
-    ctx.query;
+  const { query, address, limit, convention, open, employer } = ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter query is required`);
@@ -25,7 +24,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       address: address as string,
       employer: parseBoolean(employer as string, false),
       limit: parseInt(limit as string),
-      onlyWithConvention: parseBoolean(onlyWithConvention as string, false),
+      convention: parseBoolean(convention as string, false),
       open: parseBoolean(open as string, true),
       query: query as string,
     });

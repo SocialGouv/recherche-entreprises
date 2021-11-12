@@ -55,7 +55,7 @@ paths:
           default: true
           type: boolean
         - in: "query"
-          name: "employeur"
+          name: "employer"
           description: "Retourne uniquement les établissements avec des employés déclarés"
           required: false
           example: false
@@ -63,7 +63,7 @@ paths:
           default: false
           type: boolean
         - in: "query"
-          name: "onlyWithConvention"
+          name: "convention"
           description: "Retourne uniquement les établissements avec une convention collective déclarée"
           required: false
           example: false

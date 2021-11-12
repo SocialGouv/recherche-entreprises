@@ -6,7 +6,7 @@ export const search = async ({
   query,
   address,
   addAllConventions,
-  onlyWithConvention,
+  convention,
   limit,
   open,
   employer,
@@ -16,7 +16,7 @@ export const search = async ({
     address,
     employer,
     limit,
-    onlyWithConvention,
+    convention,
     open,
     query,
   });
@@ -40,7 +40,7 @@ export const searchEntreprise = async (siren: string) => {
     addAllConventions: true,
     employer: false,
     limit: 1,
-    onlyWithConvention: false,
+    convention: false,
     open: false,
     query: siren,
   });
@@ -64,7 +64,7 @@ export const searchEtablissement = async (siret: string) => {
     addAllConventions: false,
     employer: false,
     limit: 1,
-    onlyWithConvention: false,
+    convention: false,
     open: false,
     query: siret,
   });

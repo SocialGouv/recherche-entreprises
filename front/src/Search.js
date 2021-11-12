@@ -11,11 +11,13 @@ const API_URL =
 
 // make the API call and show results accordingly
 // using SWR magic https://swr.vercel.app
-const Results = ({ query, location }) => {
+const Results = ({ query, address, open, convention, employer }) => {
   const { data, error } = useSWR(
     `${API_URL}/search?query=${encodeURIComponent(
       query
-    )}&address=${encodeURIComponent(location)}`
+    )}&address=${encodeURIComponent(
+      address
+    )}&open=${open}&convention=${convention}&employer=${employer}`
   );
   if (error) return <div>failed to load</div>;
   if (!data)
@@ -46,22 +48,46 @@ const Results = ({ query, location }) => {
 
 // handle form state
 export const Search = () => {
-  const [query, setQuery] = React.useState("");
-  const [location, setLocation] = React.useState("");
-  const [debouncedQuery] = useDebounce(query, 250);
-  const [debouncedLocation] = useDebounce(location, 250);
+  // const [query, setQuery] = React.useState("");
+  // const [location, setLocation] = React.useState("");
+  const [searchParams, setSearchParams] = React.useState({
+    query: "",
+    address: "",
+    open: false,
+    convention: false,
+    employer: false,
+  });
+
+  //  const [debouncedQuery] = useDebounce(query, 250);
+  // const [debouncedLocation] = useDebounce(location, 250);
+  const [debouncedParams] = useDebounce(searchParams, 250);
 
   const onQueryChange = (e) => {
     const newQuery = e.target.value;
-    if (query !== newQuery) {
-      setQuery(newQuery);
+    if (searchParams.query !== newQuery) {
+      //setQuery(newQuery);
+      setSearchParams({
+        ...searchParams,
+        query: newQuery,
+      });
     }
   };
   const onLocationChange = (e) => {
     const newLocation = e.target.value;
-    if (location !== newLocation) {
-      setLocation(newLocation);
+    if (searchParams.address !== newLocation) {
+      //  setLocation(newLocation);
+      setSearchParams({
+        ...searchParams,
+        address: newLocation,
+      });
     }
+  };
+  const onCheckBoxChange = (radio) => (e) => {
+    const newStatus = e.target.checked;
+    setSearchParams({
+      ...searchParams,
+      [radio]: newStatus,
+    });
   };
   return (
     <div>
@@ -92,8 +118,29 @@ export const Search = () => {
             placeholder="Précisez une ville ou code postal"
           />
         </Col>
+        <Col sm={12}>
+          <Form.Check
+            type="checkbox"
+            id="open"
+            onChange={onCheckBoxChange("open")}
+            label="Uniquement les entreprises encore ouvertes"
+          />
+          <Form.Check
+            type="checkbox"
+            id="employer"
+            onChange={onCheckBoxChange("employer")}
+            label="Uniquement les entreprises avec des employés"
+          />
+
+          <Form.Check
+            type="checkbox"
+            id="convention"
+            onChange={onCheckBoxChange("convention")}
+            label="Uniquement les entreprises avec une convention collective connue"
+          />
+        </Col>
       </Row>
-      {query && <Results query={debouncedQuery} location={debouncedLocation} />}
+      {searchParams.query && <Results {...debouncedParams} />}
     </div>
   );
 };

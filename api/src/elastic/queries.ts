@@ -156,7 +156,7 @@ export type SearchArgs = {
   // return convention of every etablissements associated to the main company
   addAllConventions?: boolean;
   // only search for etablissements with convention attached
-  onlyWithConvention: boolean;
+  convention: boolean;
   limit?: number | undefined;
   // etablissement still open
   open: boolean;
@@ -180,14 +180,10 @@ const employerFilter = {
   },
 };
 
-const makeFilters = (
-  onlyWithConvention: boolean,
-  open: boolean,
-  employer: boolean
-) => {
+const makeFilters = (convention: boolean, open: boolean, employer: boolean) => {
   const filters = [];
 
-  if (onlyWithConvention) {
+  if (convention) {
     filters.push(...onlyConventionFilters);
   }
 
@@ -206,7 +202,7 @@ export const entrepriseSearchBody = ({
   query,
   address,
   addAllConventions = true,
-  onlyWithConvention,
+  convention,
   limit = defaultLimit,
   open,
   employer,
@@ -219,7 +215,7 @@ export const entrepriseSearchBody = ({
   },
   query: {
     bool: {
-      filter: makeFilters(onlyWithConvention, open, employer),
+      filter: makeFilters(convention, open, employer),
       must: [
         {
           bool: {
