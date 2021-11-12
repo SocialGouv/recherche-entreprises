@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sample API for recherche-entreprises",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore '__tests__' --exec 'ts-node src/index.ts'",
     "build": "ncc build src/index.ts -o dist",
@@ -18,7 +18,9 @@
     "@koa/cors": "^3.1.0",
     "@socialgouv/kali-data": "^2.132.0",
     "koa": "^2.13.3",
-    "koa-router": "^10.1.1"
+    "koa-router": "^10.1.1",
+    "koa2-swagger-ui": "^5.2.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.89.0",
@@ -29,6 +31,7 @@
     "@types/lodash.pick": "^4.4.6",
     "@types/node": "^10.17.60",
     "@types/supertest": "^2.0.11",
+    "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "@vercel/ncc": "^0.28.6",

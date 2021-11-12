@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  description: "Document de l'API recherche-entreprises"
+  version: "1.0.0"
+  title: "API recherche-entreprises"
+  termsOfService: "https://github.com/SocialGouv/recherche-entreprises/terms/"
+  contact:
+    email: "codedutravailnumerique@travail.gouv.fr"
+  license:
+    name: "Apache-2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api.recherche-entreprises.fabrique.social.gouv.fr"
+basePath: "/v2"
+schemes:
+  - "https"
+  - "http"
+definitions:
+  SearchQuery:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+paths:
+  /search:
+    get:
+      summary: "Recherche entreprise"
+      description: "Reherche d'entreprise par nom d'établissement, raison sociale"
+      operationId: "search"
+      tags:
+        - "Recherche"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          name: "query"
+          description: "Texte de la recherche"
+          required: true
+          type: string
+          example: "Michelin"
+          value: "Michelin"
+        - in: "query"
+          name: "address"
+          description: "Localisation de l'entreprise"
+          required: false
+          example: "Lyon"
+          value: "Lyon"
+          type: string
+        - in: "query"
+          name: "limit"
+          description: "Nombre de résultats max"
+          required: false
+          example: 100
+          value: 100
+          default: 100
+          type: integer
+        - in: "query"
+          name: "open"
+          description: "Retourne uniquement les établissements ouverts"
+          required: false
+          example: false
+          value: false
+          default: true
+          type: boolean
+        - in: "query"
+          name: "employeur"
+          description: "Retourne uniquement les établissements avec des employés déclarés"
+          required: false
+          example: false
+          value: false
+          default: false
+          type: boolean
+        - in: "query"
+          name: "onlyWithConvention"
+          description: "Retourne uniquement les établissements avec une convention collective déclarée"
+          required: false
+          example: false
+          value: false
+          default: false
+          type: boolean
+      responses:
+        "500":
+          description: "Unexpexted error occured"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

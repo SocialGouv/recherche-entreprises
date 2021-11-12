@@ -2,45 +2,11 @@
 
 Exemple d'API qui exploite l'index ElasticSearch [recherche-entreprises](https://github.com/socialgouv/recherche-entreprises)
 
-```sh
-yarn install
-yarn build
-ELASTICSEARCH_URL=http://localhost:9200 ELASTICSEARCH_API_KEY=key yarn start
-```
+## API Documentation
 
-## **Generic search**
+Documentation [swagger / OpenAPI](./openapi.yaml)
 
----
-
-Returns json data about companies matching search parameters
-
-- **URL**
-
-  /api/v1/search
-
-- **Method:**
-
-  `GET`
-
-- **Query Params**
-
-  **Required:**
-
-  `query=[string]` query used to perform the search on company names
-
-  **Optional:**
-
-  `address=[string]` city or postal code
-
-  `limit=[integer]` result limit
-
-  `open=[boolean]` only return open etablissements, default to true
-
-  `employeur=[boolean]` only return etablissements with declared employees, default to false
-
-  `onlyWithConvention=[boolean]` only return etablissement attached to a "Convention Collective", default to false
-
-- **Sample Call:**
+- **Exemple:**
 
   ```sh
   curl --request GET --url 'http://localhost:3000/api/v1/search?query=michelin&address=clermont&limit=3&open=false'
@@ -220,3 +186,11 @@ Returns etablissement details for a given **siret**
       "siret": "85520050700710"
     }
     ```
+
+## Dev
+
+```sh
+yarn install
+yarn build
+ELASTICSEARCH_URL=http://localhost:9200 ELASTICSEARCH_API_KEY=key yarn start
+```

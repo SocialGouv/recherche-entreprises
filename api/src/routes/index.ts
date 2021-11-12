@@ -1,4 +1,6 @@
 import Router from "koa-router";
+import { koaSwagger } from "koa2-swagger-ui";
+import yamljs from "yamljs";
 
 import pkg from "../../package.json";
 import { search, searchEntreprise, searchEtablissement } from "../lib";
@@ -11,8 +13,14 @@ const parseBoolean = (param: string, defaultz = true) =>
   param === undefined ? defaultz : param.toLowerCase() !== "false";
 
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { query, address, limit, onlyWithConvention, open, employer } =
-    ctx.query;
+  const {
+    query,
+    address,
+    limit,
+    onlyWithConvention,
+    open,
+    employer,
+  } = ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter query is required`);
@@ -98,10 +106,14 @@ router.get(`/healthz`, (ctx) => {
   ctx.body = { hello: "world" };
 });
 
-router.get(`/`, (ctx) => {
+router.get(`/version`, (ctx) => {
   ctx.body = {
     about: "https://github.com/SocialGouv/recherche-entreprises",
     success: true,
     version: pkg.version,
   };
 });
+
+const spec = yamljs.load("./openapi.yaml");
+
+router.get("/", koaSwagger({ routePrefix: false, swaggerOptions: { spec } }));
