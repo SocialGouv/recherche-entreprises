@@ -3,7 +3,6 @@ info:
   description: "Document de l'API recherche-entreprises"
   version: "1.0.0"
   title: "API recherche-entreprises"
-  termsOfService: "https://github.com/SocialGouv/recherche-entreprises/terms/"
   contact:
     email: "codedutravailnumerique@travail.gouv.fr"
   license:
@@ -14,8 +13,6 @@ basePath: "/api/v1"
 schemes:
   - "https"
   - "http"
-definitions:
-
 paths:
   /search:
     get:
