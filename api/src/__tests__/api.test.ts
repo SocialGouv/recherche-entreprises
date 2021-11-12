@@ -18,14 +18,14 @@ const searchCall = ({
   limit,
   open,
   employer,
-  onlyWithConvention,
+  convention,
 }: {
   query: string;
   address?: string;
   limit?: number;
   open?: boolean;
   employer?: boolean;
-  onlyWithConvention?: boolean;
+  convention?: boolean;
 }) => {
   const addressQP = address ? `&address=${address}` : "";
   const limitQP = limit ? `&limit=${limit}` : "";
@@ -34,8 +34,8 @@ const searchCall = ({
   const employerQP = employer ? `&employer=${employer}` : "";
 
   return apptest.get(
-    `${API_PREFIX}/search?onlyWithConvention=${
-      onlyWithConvention || true
+    `${API_PREFIX}/search?convention=${
+      convention || true
     }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}`
   );
 };
@@ -181,7 +181,7 @@ describe("Test api params", () => {
 
   test("not with convention", async () => {
     const { body: b1 } = await searchCall({
-      onlyWithConvention: false,
+      convention: false,
       query: "michelin",
     });
     expect(b1).toMatchSnapshot();
