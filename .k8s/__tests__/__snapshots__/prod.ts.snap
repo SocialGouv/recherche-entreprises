@@ -270,7 +270,7 @@ spec:
               port: http
             periodSeconds: 5
           env:
-            - name: API_URL
+            - name: REACT_APP_API_URL
               value: https://api-recherche-entreprises.fabrique.social.gouv.fr
 ---
 apiVersion: v1

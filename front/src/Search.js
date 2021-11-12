@@ -13,9 +13,9 @@ const API_URL =
 // using SWR magic https://swr.vercel.app
 const Results = ({ query, location }) => {
   const { data, error } = useSWR(
-    `${API_URL}/search?q=${encodeURIComponent(query)}&a=${encodeURIComponent(
-      location
-    )}`
+    `${API_URL}/search?query=${encodeURIComponent(
+      query
+    )}&address=${encodeURIComponent(location)}`
   );
   if (error) return <div>failed to load</div>;
   if (!data)
@@ -23,7 +23,7 @@ const Results = ({ query, location }) => {
       <div>
         <br />
         <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
+          <span className="visually-hidden">Loading...</span>
         </Spinner>
       </div>
     );
