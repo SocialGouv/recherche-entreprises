@@ -222,5 +222,157 @@ spec:
     - hosts:
         - api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  name: recherche-entreprises-front
+  namespace: recherche-entreprises-mybranch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recherche-entreprises-front
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: recherche-entreprises-front
+        application: recherche-entreprises
+        component: recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+        cert: wildcard
+    spec:
+      containers:
+        - image: >-
+            ghcr.io/socialgouv/recherche-entreprises/front:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: recherche-entreprises-front
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          env:
+            - name: API_URL
+              value: >-
+                https://api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  name: recherche-entreprises-front
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: recherche-entreprises-mybranch
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: recherche-entreprises-front
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+    cert: wildcard
+  name: recherche-entreprises-front
+  namespace: recherche-entreprises-mybranch
+spec:
+  rules:
+    - host: recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: recherche-entreprises-front
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
 "
 `;

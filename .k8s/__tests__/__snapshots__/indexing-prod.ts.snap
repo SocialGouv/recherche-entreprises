@@ -113,7 +113,7 @@ data:
     done
 
 
-    #Cas particulier Paris
+    #C as particulier Paris
 
     for d in $(seq -w 1 20); do
       wget --progress=bar:force:noscroll -q --show-progress \\"https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_751$d.csv.gz\\" --directory-prefix=\\"$DATA_DIR\\"
@@ -121,7 +121,7 @@ data:
     done
 
 
-    #Cas particulier DOM
+    # Cas particulier DOM
 
     for d in $(seq -w 1 8); do
       wget --progress=bar:force:noscroll -q --show-progress \\"https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_97$d.csv.gz\\" --directory-prefix=\\"$DATA_DIR\\"

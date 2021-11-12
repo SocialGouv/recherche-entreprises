@@ -192,6 +192,154 @@ spec:
         - api-recherche-entreprises.fabrique.social.gouv.fr
       secretName: recherche-entreprises-api-crt
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-front
+  namespace: recherche-entreprises
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recherche-entreprises-front
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: recherche-entreprises-front
+        application: recherche-entreprises
+        component: recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+    spec:
+      containers:
+        - image: ghcr.io/socialgouv/recherche-entreprises/front:1.2.3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: recherche-entreprises-front
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          env:
+            - name: API_URL
+              value: https://api-recherche-entreprises.fabrique.social.gouv.fr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-front
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: recherche-entreprises
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: recherche-entreprises-front
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-front
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-front
+  namespace: recherche-entreprises
+spec:
+  rules:
+    - host: recherche-entreprises.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: recherche-entreprises-front
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - recherche-entreprises.fabrique.social.gouv.fr
+      secretName: recherche-entreprises-front-crt
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:

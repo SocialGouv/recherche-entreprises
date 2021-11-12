@@ -21,12 +21,32 @@ jobs:
         run: |
           echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
-      - name: Application
+      - name: API
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
           project: ${{ env.project }}
-          imageName: ${{ env.project }}/app
+          imageName: ${{ env.project }}/api
           token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: ./api/Dockerfile
+          dockercontext: ./api
+
+      - name: Frontend (demo)
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          project: ${{ env.project }}
+          imageName: ${{ env.project }}/front
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: ./front/Dockerfile
+          dockercontext: ./front
+
+      - name: Indexing
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          project: ${{ env.project }}
+          imageName: ${{ env.project }}/index
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: ./index/Dockerfile
+          dockercontext: ./index
 
   ##############################################################################
   ## GENERATE PREPRODUCTION MANIFESTS
