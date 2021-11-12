@@ -4,7 +4,7 @@ Exemple d'API qui exploite l'index ElasticSearch [recherche-entreprises](https:/
 
 ## API Documentation
 
-Documentation [swagger / OpenAPI](./openapi.yaml)
+Documentation [swagger / OpenAPI](./openapi.yaml) : https://api.recherche-entreprises.fabrique.social.gouv.fr
 
 - **Exemple:**
 
