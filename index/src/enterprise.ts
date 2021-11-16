@@ -82,6 +82,8 @@ export const mappings = {
 
     etatAdministratifEtablissement: { type: "keyword" },
     etatAdministratifUniteLegale: { type: "keyword" },
+    codeCommuneEtablissement: { type: "keyword" },
+    departementEtablissement: { type: "keyword" },
 
     geo_adresse: {
       analyzer: "french_indexing",
@@ -127,40 +129,37 @@ export const mappings = {
 const buildAddress = (enterprise: Enterprise) => {
   if (enterprise.geo_adresse) {
     return enterprise.geo_adresse;
-  } else {
-    const {
-      complementAdresseEtablissement,
-      numeroVoieEtablissement,
-      indiceRepetitionEtablissement,
-      typeVoieEtablissement,
-      libelleVoieEtablissement,
-      codePostalEtablissement,
-      libelleCommuneEtablissement,
-    } = enterprise;
-
-    return [
-      complementAdresseEtablissement,
-      numeroVoieEtablissement,
-      indiceRepetitionEtablissement,
-      typeVoieEtablissement,
-      libelleVoieEtablissement,
-      codePostalEtablissement,
-      libelleCommuneEtablissement,
-    ]
-      .filter((e) => e)
-      .join(" ");
   }
+
+  const {
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
+  } = enterprise;
+
+  return [
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
+  ]
+    .filter((e) => e)
+    .join(" ");
 };
 
 export const mapEnterprise = (enterprise: Enterprise) => {
   // ranking feature cannot be 0
-  if (
-    !Number.parseFloat(
-      enterprise.trancheEffectifsUniteLegale as unknown as string
-    )
-  ) {
-    enterprise.trancheEffectifsUniteLegale = 0.1;
-  }
+
+  enterprise.trancheEffectifsUniteLegale = Number.parseFloat(
+    enterprise.trancheEffectifsUniteLegale as unknown as string
+  ) || 0.1;
 
   const siretRank = enterprise.siret;
 
@@ -211,12 +210,18 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   enterprise.geo_adresse = buildAddress(enterprise);
 
+  const departementEtablissement = enterprise.codePostalEtablissement.slice(
+    0,
+    +enterprise.codePostalEtablissement.slice(0, 2) > 95 ? 3 : 2
+  );
+
   return {
     activitePrincipale,
     convention,
     naming,
     siretRank,
     withIdcc,
+    departementEtablissement,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
