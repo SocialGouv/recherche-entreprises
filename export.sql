@@ -34,10 +34,9 @@ SELECT
     geo_siret.indiceRepetitionEtablissement,
     geo_siret.typeVoieEtablissement,
     geo_siret.libelleVoieEtablissement,
+    geo_siret.etablissementSiege,
     weez.IDCC as idcc,
     (select count(*) FROM geo_siret where siren=stock.siren) etablissements
     from stock, geo_siret
         left join weez on weez.SIRET=geo_siret.siret
         where stock.siren=geo_siret.siren;
-
-

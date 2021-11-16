@@ -44,7 +44,8 @@ Pour lancer une indexation :
 
 ```sh
 yarn
-ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./data/assembly.csv yarn start
+yarn build
+ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=../data/assembly.csv yarn start
 ```
 
 Le script `scripts/create-es-keys.sh` permet de créer des token pour lire/écrire sur ces index.

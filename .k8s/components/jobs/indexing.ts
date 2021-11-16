@@ -77,7 +77,7 @@ const sealedSecret = getSealedSecret(
   (env.env === "dev" && {
     "sealedsecrets.bitnami.com/cluster-wide": "true",
   }) ||
-    {}
+  {}
 );
 
 const envParams = github(process.env);
@@ -101,6 +101,10 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
         {
           name: "ASSEMBLY_FILE",
           value: "/data/assembly.csv",
+        },
+        {
+          name: "ELASTICSEARCH_INDEX_NAME",
+          value: "recherche-entreprises-fce",
         },
       ],
       envFrom: [
