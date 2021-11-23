@@ -227,6 +227,21 @@ export const entrepriseSearchBody = ({
             should: [
               { fuzzy: { naming: { boost: 0.6, value: query } } },
               { match: { naming: query } },
+              {
+                match: {
+                  denominationUniteLegale: {
+                    query: query.toUpperCase(),
+                  },
+                },
+              },
+              {
+                match: {
+                  nomUniteLegale: {
+                    query: query.toUpperCase(),
+                  },
+                },
+              },
+
               { match: { siret: query.replace(/\D/g, "") } },
               { match: { siren: query.replace(/\D/g, "") } },
             ],
