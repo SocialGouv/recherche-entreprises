@@ -10,19 +10,22 @@ export const search = async ({
   limit,
   open,
   employer,
+  ranked,
 }: SearchArgs) => {
   const body = entrepriseSearchBody({
     addAllConventions,
     address,
+    convention,
     employer,
     limit,
-    convention,
     open,
     query,
+    ranked,
   });
 
   const response = await elasticsearchClient.search({
     body,
+    // explain: true,
     index: ELASTICSEARCH_INDEX,
   });
 
@@ -30,7 +33,7 @@ export const search = async ({
 
   const entreprises = response.body.hits.hits.map(mapHit);
 
-  // console.log(JSON.stringify(entreprises, null, 2));
+  // console.log(JSON.stringify(response, null, 2));
 
   return entreprises;
 };
@@ -38,11 +41,12 @@ export const search = async ({
 export const searchEntreprise = async (siren: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: true,
+    convention: false,
     employer: false,
     limit: 1,
-    convention: false,
     open: false,
     query: siren,
+    ranked: true,
   });
 
   const response = await elasticsearchClient.search({
@@ -62,11 +66,12 @@ export const searchEntreprise = async (siren: string) => {
 export const searchEtablissement = async (siret: string) => {
   const body = entrepriseSearchBody({
     addAllConventions: false,
+    convention: false,
     employer: false,
     limit: 1,
-    convention: false,
     open: false,
     query: siret,
+    ranked: true,
   });
 
   const response = await elasticsearchClient.search({

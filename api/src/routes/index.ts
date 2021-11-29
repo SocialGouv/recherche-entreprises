@@ -12,7 +12,8 @@ const parseBoolean = (param: string, defaultz = true) =>
   param === undefined ? defaultz : param.toLowerCase() !== "false";
 
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { query, address, limit, convention, open, employer } = ctx.query;
+  const { query, address, limit, convention, open, employer, ranked } =
+    ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter query is required`);
@@ -22,11 +23,12 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
     const entreprises = await search({
       addAllConventions: true,
       address: address as string,
+      convention: parseBoolean(convention as string, false),
       employer: parseBoolean(employer as string, false),
       limit: parseInt(limit as string),
-      convention: parseBoolean(convention as string, false),
       open: parseBoolean(open as string, true),
       query: query as string,
+      ranked: parseBoolean(ranked as string, true),
     });
     ctx.body = { entreprises };
   } catch (err) {

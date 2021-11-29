@@ -2050,3 +2050,34 @@ Object {
   "siren": "855200507",
 }
 `;
+
+exports[`Test search unranked search 1`] = `
+Object {
+  "activitePrincipale": "Autres activités auxiliaires de services financiers, hors assurance et caisses de retraite",
+  "caractereEmployeurUniteLegale": "O",
+  "conventions": Array [
+    Object {
+      "etat": "VIGUEUR_ETEN",
+      "id": "KALICONT000005635409",
+      "idcc": 1147,
+      "mtime": 1562096111,
+      "shortTitle": "Personnel des cabinets médicaux",
+      "texte_de_base": "KALITEXT000005681857",
+      "title": "Convention collective nationale du personnel des cabinets médicaux  du 14 octobre 1981",
+      "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635409",
+    },
+  ],
+  "etablissements": 1,
+  "etatAdministratifEtablissement": "A",
+  "etatAdministratifUniteLegale": "A",
+  "highlightLabel": "SCM PIERRE FIGUEREDO ET <b><u>MICHELINE</b></u>",
+  "label": "SCM PIERRE FIGUEREDO ET MICHELINE",
+  "matching": 1,
+  "matchingEtablissement": Object {
+    "address": "105 Rue Jean Monnet 06210 Mandelieu-la-Napoule",
+    "siret": "89334473900014",
+  },
+  "simpleLabel": "SCM PIERRE FIGUEREDO ET MICHELINE FIGUEREDO",
+  "siren": "893344739",
+}
+`;

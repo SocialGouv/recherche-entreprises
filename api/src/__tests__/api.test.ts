@@ -19,6 +19,7 @@ const searchCall = ({
   open,
   employer,
   convention,
+  ranked,
 }: {
   query: string;
   address?: string;
@@ -26,6 +27,7 @@ const searchCall = ({
   open?: boolean;
   employer?: boolean;
   convention?: boolean;
+  ranked?: string;
 }) => {
   const addressQP = address ? `&address=${address}` : "";
   const limitQP = limit ? `&limit=${limit}` : "";
@@ -33,10 +35,12 @@ const searchCall = ({
   const openQP = open ? `&open=${open}` : "";
   const employerQP = employer ? `&employer=${employer}` : "";
 
+  const rankedQP = ranked ? `&ranked=${ranked}` : "";
+
   return apptest.get(
     `${API_PREFIX}/search?convention=${
       convention || true
-    }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}`
+    }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}${rankedQP}`
   );
 };
 
@@ -94,7 +98,7 @@ describe("Test search", () => {
     ).toMatchInlineSnapshot(
       `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
-  });
+  }, 15000);
 
   test("search with diatrics", async () => {
     const { body: b1 } = await searchCall({ query: "michelin" });
@@ -110,6 +114,19 @@ describe("Test search", () => {
     expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
       michelinSiret
     );
+  });
+
+  test("unranked search", async () => {
+    const {
+      body: { entreprises: ranked },
+    } = await searchCall({ query: "michelin" });
+
+    const {
+      body: { entreprises: unranked },
+    } = await searchCall({ query: "michelin", ranked: "false" });
+
+    expect(unranked).not.toStrictEqual(ranked);
+    expect(unranked[0]).toMatchSnapshot();
   });
 
   // test with siret starting with 0

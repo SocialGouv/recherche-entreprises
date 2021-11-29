@@ -70,6 +70,14 @@ paths:
           value: false
           default: false
           type: boolean
+        - in: "query"
+          name: "ranked"
+          description: "Si 'true', ordonne les résultats par taille d'établissement, basée sur la tranche effectif de l'unité légale. Si 'false', ordonné par SIRET décroissant."
+          required: false
+          example: true
+          value: true
+          default: true
+          type: boolean
       responses:
         "500":
           description: "Unexpexted error occured"

@@ -12,7 +12,7 @@ const conventionsSet = Object.fromEntries(
   })
 );
 
-// we remove deduplicate tokens to compose company's label
+// we remove duplicated tokens to compose company's label
 const formatLabel = (naming: string[]) => {
   const labelTokens = naming
     .join(" ")
@@ -120,6 +120,7 @@ export const mapHit = ({
   };
 };
 
+// rank by "effectif"
 const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
 
 const collapse = (withAllConventions: boolean) => ({
@@ -162,6 +163,8 @@ export type SearchArgs = {
   open: boolean;
   // etablissement employeur
   employer: boolean;
+  // rank by effectif ?
+  ranked: boolean;
 };
 
 const onlyConventionFilters = [
@@ -206,6 +209,7 @@ export const entrepriseSearchBody = ({
   limit = defaultLimit,
   open,
   employer,
+  ranked,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -234,7 +238,7 @@ export const entrepriseSearchBody = ({
         },
       ],
       should: [
-        { rank_feature },
+        ranked ? { rank_feature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },
