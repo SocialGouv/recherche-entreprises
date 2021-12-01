@@ -8,6 +8,7 @@ export type Enterprise = {
   siren: string;
   trancheEffectifsUniteLegale: number;
 
+  prenom1UniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
   sigleUniteLegale: string;
@@ -115,8 +116,8 @@ export const mappings = {
       type: "text",
     },
 
+    prenom1UniteLegale: { type: "keyword" },
     nomUniteLegale: { type: "keyword" },
-
     nomUsageUniteLegale: { type: "keyword" },
 
     nomenclatureActivitePrincipaleUniteLegale: { type: "keyword" },
@@ -174,6 +175,8 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   const naming = Array.from(
     new Set([
+      enterprise.prenom1UniteLegale,
+
       enterprise.nomUniteLegale,
       enterprise.nomUsageUniteLegale,
       enterprise.sigleUniteLegale,

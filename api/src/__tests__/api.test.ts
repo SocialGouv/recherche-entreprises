@@ -56,7 +56,7 @@ describe("Test search", () => {
     expect(body.entreprises.length).toEqual(20);
     expect(body.entreprises[0].siren).toEqual(michelinSiren);
     // eslint-disable-next-line no-unused-vars
-    const { matchingEtablissement, ...partialBody } = body.entreprises[0];
+    const { firstMatchingEtablissement, ...partialBody } = body.entreprises[0];
     expect(partialBody).toMatchSnapshot();
   });
 
@@ -68,7 +68,7 @@ describe("Test search", () => {
 
   test("search with postal code and city", async () => {
     const { body: b1 } = await searchCall({ query: "michelin" });
-    expect(b1.entreprises[0].matchingEtablissement.address).not.toBe(
+    expect(b1.entreprises[0].firstMatchingEtablissement.address).not.toBe(
       `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
@@ -77,7 +77,7 @@ describe("Test search", () => {
       query: "michelin",
     });
     expect(
-      b2.entreprises[0].matchingEtablissement.address
+      b2.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
       `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
@@ -87,14 +87,14 @@ describe("Test search", () => {
       query: "michelin",
     });
     expect(
-      b3.entreprises[0].matchingEtablissement.address
+      b3.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
       `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
 
     const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
-      b4.entreprises[0].matchingEtablissement.address
+      b4.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
       `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
     );
@@ -111,7 +111,7 @@ describe("Test search", () => {
 
   test("search with siret", async () => {
     const { body } = await searchCall({ query: michelinSiret });
-    expect(body.entreprises[0].matchingEtablissement.siret).toEqual(
+    expect(body.entreprises[0].firstMatchingEtablissement.siret).toEqual(
       michelinSiret
     );
   });
@@ -162,8 +162,9 @@ describe("Test entreprise search", () => {
     const { body, status } = await apptest.get(
       `${API_PREFIX}/entreprise/${michelinSiren}`
     );
-    // We delete matchingEtablissement since it comes from collapse wich is non deterministic
-    delete body.matchingEtablissement;
+    // We delete matching etablissement since it comes from collapse which is non deterministic
+    delete body.firstMatchingEtablissement;
+    delete body.allMatchingEtablissements;
     expect(status).toEqual(200);
     expect(body.siren).toEqual(michelinSiren);
     expect(body).toMatchSnapshot();
@@ -204,3 +205,10 @@ describe("Test api params", () => {
     expect(b1).toMatchSnapshot();
   });
 });
+
+/*
+TODO add tests :
+- addresses
+- multiple ccs
+- not ranked
+ */

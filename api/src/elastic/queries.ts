@@ -7,8 +7,8 @@ const defaultLimit = 20;
 
 const conventionsSet = Object.fromEntries(
   kaliConventions.map((c) => {
-    const { num, etat, id, mtime, texte_de_base, url, title } = c;
-    return [num, { etat, id, mtime, texte_de_base, title, url }];
+    const { num, etat, id, mtime, texte_de_base, url, title, shortTitle } = c;
+    return [num, { etat, id, mtime, texte_de_base, title, url, shortTitle }];
   })
 );
 
@@ -81,12 +81,12 @@ export const mapHit = ({
           if (idccNum) {
             const kaliData = conventionsSet[idccNum];
             const o = {
-              idccNum,
-              shortTitle: convention ? convention[0] : "",
+              idcc: idccNum,
+              // shortTitle: convention ? convention[0] : "",
               ...kaliData,
             };
-            if (!acc.has(o.idccNum)) {
-              acc.set(o.idccNum, o);
+            if (!acc.has(o.idcc)) {
+              acc.set(o.idcc, o);
             }
           }
         });

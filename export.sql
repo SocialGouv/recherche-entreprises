@@ -7,6 +7,7 @@ SELECT
     stock.siren,
     stock.sigleUniteLegale,
     stock.nomUniteLegale,
+    stock.prenom1UniteLegale,
     stock.nomUsageUniteLegale,
     stock.denominationUniteLegale,
     stock.denominationUsuelle1UniteLegale,
