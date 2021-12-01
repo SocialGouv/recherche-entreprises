@@ -36,7 +36,8 @@ export type Enterprise = {
   // MOIS: '2020-07',
   // DATE_MAJ: '2020/08/28'
 
-  idcc: string | undefined;
+  idccs: string[];
+
   geo_adresse: string;
 
   categorieEntreprise: string;
@@ -51,8 +52,6 @@ export type Enterprise = {
   libelleVoieEtablissement: string;
 };
 
-// geo_siret.geo_adresse,
-
 export const mappings = {
   properties: {
     activitePrincipale: { type: "keyword" },
@@ -65,7 +64,6 @@ export const mappings = {
     categorieJuridiqueUniteLegale: { type: "keyword" },
     codePostalEtablissement: { type: "keyword" },
     convention: { type: "keyword" },
-    cp: { type: "keyword" },
     denominationUniteLegale: { type: "keyword" },
 
     denominationUsuelle1UniteLegale: { type: "keyword" },
@@ -86,20 +84,29 @@ export const mappings = {
     geo_adresse: {
       analyzer: "french_indexing",
       type: "text",
-    },
-
-    idcc: {
       fields: {
-        number: {
-          type: "integer",
+        keyword: {
+          type: "keyword",
         },
       },
+    },
+
+    idccs: {
+      type: "keyword",
+    },
+
+    conventions: {
       type: "keyword",
     },
 
     libelleCommuneEtablissement: {
       analyzer: "french_indexing",
       type: "text",
+      fields: {
+        keyword: {
+          type: "keyword",
+        },
+      },
     },
 
     naming: {
@@ -126,7 +133,8 @@ export const mappings = {
 
 const buildAddress = (enterprise: Enterprise) => {
   if (enterprise.geo_adresse) {
-    return enterprise.geo_adresse;
+    // the second option is upper case, so we make it uppercase too
+    return enterprise.geo_adresse.toUpperCase();
   } else {
     const {
       complementAdresseEtablissement,
@@ -196,24 +204,24 @@ export const mapEnterprise = (enterprise: Enterprise) => {
       ? codesNaf.get(codeActivitePrincipale)
       : undefined;
 
-  const convention = enterprise.idcc
-    ? ccMap.get(parseInt(enterprise.idcc))?.shortTitle
+  const conventions = enterprise.idccs
+    ? enterprise.idccs.map((idcc) => ccMap.get(parseInt(idcc))?.shortTitle)
     : undefined;
 
   // TODO should we filter deprecated IDCC ? #105
+  // for now, filter lower than 5001
   const withIdcc =
-    (enterprise.idcc &&
-      parseInt(enterprise.idcc) !== 0 &&
-      parseInt(enterprise.idcc) !== 9999) ||
+    (enterprise.idccs &&
+      enterprise.idccs
+        .map((idcc) => parseInt(idcc))
+        .find((idcc) => idcc < 5001 && idcc > 0) !== undefined) ||
     false;
-
-  enterprise.idcc = enterprise.idcc?.trim();
 
   enterprise.geo_adresse = buildAddress(enterprise);
 
   return {
     activitePrincipale,
-    convention,
+    conventions,
     naming,
     siretRank,
     withIdcc,

@@ -23,17 +23,54 @@ async function* manipulate(
   >
 ) {
   let countDone = 0;
+
+  // keep track of last etablissement
+  let last: { siret: string; idccs: string[]; data: any } = {
+    siret: "init",
+    idccs: [],
+    data: undefined,
+  };
+
+  const addIdcc = (idcc: string) => {
+    if (idcc) {
+      last.idccs.push(idcc.trim());
+    }
+  };
+
   for await (const enterprise of stream) {
     countDone++;
     if (countDone % 10000 === 0) {
       console.log(`created ${countDone} records`);
     }
-    yield mapEnterprise(enterprise);
+
+    const siret = enterprise.siret;
+
+    // deal with etablissements with multiple idccs (conventions collectives)
+    // case different siret than previous occurence
+    // we return previous and keep track of new one
+    if (last.siret !== siret) {
+      // unless init case, yielding last
+      if (last.data) {
+        // console.log("yield", { siret: last.siret, idccs: last.idccs });
+        yield mapEnterprise({ ...last.data, idccs: last.idccs });
+      }
+      last = { siret, data: enterprise, idccs: [] };
+      addIdcc(enterprise.idcc);
+    }
+    // case same siret than last occurence
+    // we add idcc to last one
+    else {
+      addIdcc(enterprise.idcc);
+    }
+
     // allow short-circuit in dev
     if (INDEXATION_LIMIT && countDone === parseInt(INDEXATION_LIMIT)) {
       break;
     }
   }
+
+  // yield last one
+  yield mapEnterprise(last.data);
 }
 
 const formatMs = (ms: number) => `${(ms / 1000).toFixed(2)} seconds.`;

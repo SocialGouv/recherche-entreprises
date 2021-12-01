@@ -55,6 +55,7 @@ export const mapHit = ({
     siret,
     geo_adresse,
     naming,
+    idccs,
   },
   inner_hits,
   highlight,
@@ -72,22 +73,37 @@ export const mapHit = ({
       (
         acc: any,
         {
-          fields: { convention, idcc: idccString },
-        }: { fields: { convention: string[]; idcc: string } }
+          fields: { convention, idccs },
+        }: { fields: { convention: string[]; idccs: string[] } }
       ) => {
-        const idcc = parseInt(idccString);
-        const kaliData = idcc ? conventionsSet[idcc] : undefined;
-        const o = {
-          idcc,
-          shortTitle: convention ? convention[0] : "",
-          ...kaliData,
-        };
-        if (!acc.has(o.idcc)) {
-          acc.set(o.idcc, o);
-        }
+        idccs?.forEach((idcc) => {
+          const idccNum = parseInt(idcc);
+          if (idccNum) {
+            const kaliData = conventionsSet[idccNum];
+            const o = {
+              idccNum,
+              shortTitle: convention ? convention[0] : "",
+              ...kaliData,
+            };
+            if (!acc.has(o.idccNum)) {
+              acc.set(o.idccNum, o);
+            }
+          }
+        });
+
         return acc;
       },
       new Map()
+    );
+
+  const allMatchingEtablissements = inner_hits.matchingEtablissements.hits.hits
+    .filter((h: any) => h.fields)
+    .map(
+      ({ fields: { "geo_adresse.keyword": address, siret, idccs } }: any) => ({
+        address: address[0],
+        siret: siret[0],
+        idccs,
+      })
     );
 
   // take first by priority
@@ -110,11 +126,13 @@ export const mapHit = ({
     highlightLabel,
     label,
     matching,
-    matchingEtablissement: {
+    firstMatchingEtablissement: {
       address: geo_adresse,
+      idccs,
       categorieEntreprise,
       siret,
     },
+    allMatchingEtablissements,
     simpleLabel,
     siren,
   };
@@ -127,29 +145,30 @@ const collapse = (withAllConventions: boolean) => ({
   field: "siren",
   inner_hits: {
     _source: false,
-    docvalue_fields: ["idcc", "convention"],
+    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs"],
     name: "matchingEtablissements",
     size: withAllConventions ? 10000 : 1,
   },
 });
 
-const addressFilter = (address: string | undefined) =>
-  address
-    ? [
-        {
-          prefix: {
-            codePostalEtablissement: address ? address.replace(/\D/g, "") : "",
+const addressFilter = (address: string) => {
+  // check if address filter is code postal or commune
+  const cp = parseInt(address);
+
+  return cp
+    ? {
+        prefix: {
+          codePostalEtablissement: cp.toString(),
+        },
+      }
+    : {
+        match: {
+          libelleCommuneEtablissement: {
+            query: address,
           },
         },
-        {
-          match: {
-            libelleCommuneEtablissement: {
-              query: address,
-            },
-          },
-        },
-      ]
-    : [{ match_all: {} }];
+      };
+};
 
 export type SearchArgs = {
   query: string;
@@ -167,10 +186,7 @@ export type SearchArgs = {
   ranked: boolean;
 };
 
-const onlyConventionFilters = [
-  { term: { withIdcc: true } },
-  { range: { "idcc.number": { lt: 5001 } } },
-];
+const onlyConventionFilter = { term: { withIdcc: true } };
 
 const openFilters = [
   { term: { etatAdministratifUniteLegale: "A" } },
@@ -183,11 +199,16 @@ const employerFilter = {
   },
 };
 
-const makeFilters = (convention: boolean, open: boolean, employer: boolean) => {
+const makeFilters = (
+  convention: boolean,
+  open: boolean,
+  employer: boolean,
+  address: string | undefined
+) => {
   const filters = [];
 
   if (convention) {
-    filters.push(...onlyConventionFilters);
+    filters.push(onlyConventionFilter);
   }
 
   if (open) {
@@ -196,6 +217,10 @@ const makeFilters = (convention: boolean, open: boolean, employer: boolean) => {
 
   if (employer) {
     filters.push(employerFilter);
+  }
+
+  if (address) {
+    filters.push(addressFilter(address));
   }
 
   return filters;
@@ -219,13 +244,8 @@ export const entrepriseSearchBody = ({
   },
   query: {
     bool: {
-      filter: makeFilters(convention, open, employer),
+      filter: makeFilters(convention, open, employer, address),
       must: [
-        {
-          bool: {
-            should: addressFilter(address),
-          },
-        },
         {
           bool: {
             should: [
