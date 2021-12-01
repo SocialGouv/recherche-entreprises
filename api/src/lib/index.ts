@@ -1,4 +1,4 @@
-import { ELASTICSEARCH_INDEX, elasticsearchClient } from "../elastic";
+import { ELASTICSEARCH_INDEX_NAME, elasticsearchClient } from "../elastic";
 import type { SearchArgs } from "../elastic/queries";
 import { entrepriseSearchBody, mapHit } from "../elastic/queries";
 
@@ -26,7 +26,7 @@ export const search = async ({
   const response = await elasticsearchClient.search({
     body,
     // explain: true,
-    index: ELASTICSEARCH_INDEX,
+    index: ELASTICSEARCH_INDEX_NAME,
   });
 
   // console.log(JSON.stringify(body, null, 2));
@@ -51,7 +51,7 @@ export const searchEntreprise = async (siren: string) => {
 
   const response = await elasticsearchClient.search({
     body,
-    index: ELASTICSEARCH_INDEX,
+    index: ELASTICSEARCH_INDEX_NAME,
   });
 
   const matches = response.body.hits.hits.map(mapHit);
@@ -76,7 +76,7 @@ export const searchEtablissement = async (siret: string) => {
 
   const response = await elasticsearchClient.search({
     body,
-    index: ELASTICSEARCH_INDEX,
+    index: ELASTICSEARCH_INDEX_NAME,
   });
 
   const matches = response.body.hits.hits.map(mapHit);

@@ -23,7 +23,7 @@ const getManifests = async () => {
     env,
   });
   const deployment = getDeployment(manifests);
-  const apiManifests = await api;
+  const apiManifests = await api();
   const apiUrl = getIngressHost(apiManifests);
   addEnvs({
     deployment,

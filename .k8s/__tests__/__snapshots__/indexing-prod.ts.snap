@@ -397,6 +397,8 @@ spec:
           env:
             - name: ASSEMBLY_FILE
               value: /data/assembly.csv
+            - name: ELASTICSEARCH_INDEX_NAME
+              value: search-entreprises
           envFrom:
             - secretRef:
                 name: elastic-recherche-entreprises-write

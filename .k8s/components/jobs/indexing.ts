@@ -102,6 +102,10 @@ const jobSpec: IIoK8sApiCoreV1PodSpec = {
           name: "ASSEMBLY_FILE",
           value: "/data/assembly.csv",
         },
+        {
+          name: "ELASTICSEARCH_INDEX_NAME",
+          value: "search-entreprises",
+        },
       ],
       envFrom: [
         {

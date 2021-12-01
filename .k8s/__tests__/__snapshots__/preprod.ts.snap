@@ -69,7 +69,7 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: ghcr.io/socialgouv/recherche-entreprises/api:1.2.3
+        - image: ghcr.io/socialgouv/recherche-entreprises/search:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -107,6 +107,9 @@ spec:
           envFrom:
             - secretRef:
                 name: elastic-recherche-entreprises-read
+          env:
+            - name: ELASTICSEARCH_INDEX_NAME
+              value: search-entreprises
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -206,7 +209,7 @@ metadata:
   namespace: recherche-entreprises-preprod
 spec:
   rules:
-    - host: api-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
+    - host: search-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -218,7 +221,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
+        - search-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: apps/v1
@@ -276,7 +279,7 @@ spec:
             timeoutSeconds: 5
           name: recherche-entreprises-front
           ports:
-            - containerPort: 3000
+            - containerPort: 80
               name: http
           readinessProbe:
             failureThreshold: 15
@@ -303,7 +306,7 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: >-
-                https://api-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
+                https://search-recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr/api/v1
 ---
 apiVersion: v1
 kind: Service
@@ -329,7 +332,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 3000
+      targetPort: 80
   selector:
     app: recherche-entreprises-front
   type: ClusterIP
