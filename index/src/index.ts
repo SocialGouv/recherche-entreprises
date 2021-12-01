@@ -1,6 +1,7 @@
 import * as csv from "fast-csv";
 import * as fs from "fs";
 import * as path from "path";
+import { Transform } from "stream";
 
 import {
   createIndex,
@@ -15,7 +16,7 @@ const ASSEMBLY_FILE =
   process.env.ASSEMBLY_FILE || "../assembly/output/assembly.csv";
 
 const INDEXATION_LIMIT = process.env.INDEXATION_LIMIT || 0;
-
+let prevSiret = "";
 async function* manipulate(
   stream: csv.CsvParserStream<
     csv.ParserRow<Enterprise>,
@@ -24,6 +25,7 @@ async function* manipulate(
 ) {
   let countDone = 0;
   for await (const enterprise of stream) {
+    prevSiret = enterprise.eta_siret;
     countDone++;
     if (countDone % 10000 === 0) {
       console.log(`created ${countDone} records`);
@@ -38,11 +40,19 @@ async function* manipulate(
 
 const formatMs = (ms: number) => `${(ms / 1000).toFixed(2)} seconds.`;
 
+let lastRow = "";
+
 // apply mapEntreprise to the CSV stream
 // then bulk insert with Es client
 const insertEntreprises = async (indexName: string) => {
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
-  const csvStream = csv.parseStream(stream, { headers: true });
+  
+  const csvStream = csv
+    .parseStream(stream, { headers: true }).on("error", (err) => {
+      console.error(prevSiret, err.name, err.message);
+      console.error(err);
+      console.error(lastRow);
+    });
 
   const result = await esClient.helpers.bulk({
     //@ts-expect-error(expected)
@@ -53,8 +63,8 @@ const insertEntreprises = async (indexName: string) => {
         _index: indexName,
       },
     }),
-    onDrop(doc) {
-      console.log(`dropped ${doc}`);
+    onDrop({ status, error }) {
+      console.log(`dropped`, status, error);
     },
     refreshOnCompletion: true,
     concurrency: 5,

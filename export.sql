@@ -21,6 +21,7 @@ SELECT
     stock.caractereEmployeurUniteLegale,
     geo_siret.siret,
     geo_siret.codePostalEtablissement,
+    geo_siret.codeCommuneEtablissement,
     geo_siret.libelleCommuneEtablissement,
     geo_siret.etatAdministratifEtablissement,
     geo_siret.enseigne1Etablissement,

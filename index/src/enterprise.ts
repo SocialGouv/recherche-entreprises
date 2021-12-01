@@ -4,6 +4,108 @@ import { codesNaf } from "./naf";
 
 const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
 
+export type BceEtablissement = {
+  eta_nic: string;
+  eta_siren: string;
+  eta_siret: string;
+  eta_statutDiffusionEtablissement: string;
+  eta_dateCreationEtablissement: string;
+  eta_trancheEffectifsEtablissement: string;
+  eta_anneeEffectifsEtablissement: string;
+  eta_activitePrincipaleRegistreMetiersEtablissement: string;
+  eta_dateDernierTraitementEtablissement: string;
+  eta_etablissementSiege: string;
+  eta_nombrePeriodesEtablissement: string;
+  eta_complementAdresseEtablissement: string;
+  eta_numeroVoieEtablissement: string;
+  eta_indiceRepetitionEtablissement: string;
+  eta_typeVoieEtablissement: string;
+  eta_libelleVoieEtablissement: string;
+  eta_codePostalEtablissement: string;
+  eta_libelleCommuneEtablissement: string;
+  eta_libelleCommuneEtrangerEtablissement: string;
+  eta_distributionSpecialeEtablissement: string;
+  eta_codeCommuneEtablissement: string;
+  eta_codeCedexEtablissement: string;
+  eta_libelleCedexEtablissement: string;
+  eta_codePaysEtrangerEtablissement: string;
+  eta_libellePaysEtrangerEtablissement: string;
+  eta_complementAdresse2Etablissement: string;
+  eta_numeroVoie2Etablissement: string;
+  eta_indiceRepetition2Etablissement: string;
+  eta_typeVoie2Etablissement: string;
+  eta_libelleVoie2Etablissement: string;
+  eta_codePostal2Etablissement: string;
+  eta_libelleCommune2Etablissement: string;
+  eta_libelleCommuneEtranger2Etablissement: string;
+  eta_distributionSpeciale2Etablissement: string;
+  eta_codeCommune2Etablissement: string;
+  eta_codeCedex2Etablissement: string;
+  eta_libelleCedex2Etablissement: string;
+  eta_codePaysEtranger2Etablissement: string;
+  eta_libellePaysEtranger2Etablissement: string;
+  eta_dateDebut: string;
+  eta_etatAdministratifEtablissement: string;
+  eta_enseigne1Etablissement: string;
+  eta_enseigne2Etablissement: string;
+  eta_enseigne3Etablissement: string;
+  eta_denominationUsuelleEtablissement: string;
+  eta_activitePrincipaleEtablissement: string;
+  eta_nomenclatureActivitePrincipaleEtablissement: string;
+  eta_caractereEmployeurEtablissement: string;
+  ent_siren: string;
+  ent_statutDiffusionUniteLegale: string;
+  ent_unitePurgeeUniteLegale: string;
+  ent_dateCreationUniteLegale: string;
+  ent_sigleUniteLegale: string;
+  ent_sexeUniteLegale: string;
+  ent_prenom1UniteLegale: string;
+  ent_prenom2UniteLegale: string;
+  ent_prenom3UniteLegale: string;
+  ent_prenom4UniteLegale: string;
+  ent_prenomUsuelUniteLegale: string;
+  ent_pseudonymeUniteLegale: string;
+  ent_identifiantAssociationUniteLegale: string;
+  ent_trancheEffectifsUniteLegale: string;
+  ent_anneeEffectifsUniteLegale: string;
+  ent_dateDernierTraitementUniteLegale: string;
+  ent_nombrePeriodesUniteLegale: string;
+  ent_categorieEntreprise: string;
+  ent_anneeCategorieEntreprise: string;
+  ent_dateDebut: string;
+  ent_etatAdministratifUniteLegale: string;
+  ent_nomUniteLegale: string;
+  ent_nomUsageUniteLegale: string;
+  ent_denominationUniteLegale: string;
+  ent_denominationUsuelle1UniteLegale: string;
+  ent_denominationUsuelle2UniteLegale: string;
+  ent_denominationUsuelle3UniteLegale: string;
+  ent_categorieJuridiqueUniteLegale: string;
+  ent_activitePrincipaleUniteLegale: string;
+  ent_nomenclatureActivitePrincipaleUniteLegale: string;
+  ent_nicSiegeUniteLegale: string;
+  ent_economieSocialeSolidaireUniteLegale: string;
+  ent_caractereEmployeurUniteLegale: string;
+  eff_MOIS: string;
+  eff_SIRET: string;
+  eff_EFF_TOTAL: string;
+  eff_EFF_HOMME: string;
+  eff_EFF_FEMME: string;
+  eff_NB_CDD: string;
+  eff_NB_CDI: string;
+  eff_NB_CDI_INTER: string;
+  eff_NB_INTER_MISSION: string;
+  eff_NB_INTERIM: string;
+  eff_DATE_MAJ: string;
+  cc_MOIS: string;
+  cc_SIRET: string;
+  cc_IDCC: string;
+  cc_DATE_MAJ: string;
+  Tranche_effectif_DSN: string;
+  Departement: string;
+  Nombre_Eta: string;
+};
+
 export type Enterprise = {
   siren: string;
   trancheEffectifsUniteLegale: number;
@@ -11,7 +113,7 @@ export type Enterprise = {
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
   sigleUniteLegale: string;
-  etablissementSiege: boolean;
+  etablissementSiege: string;
 
   denominationUniteLegale: string;
   denominationUsuelle1UniteLegale: string;
@@ -56,54 +158,19 @@ export type Enterprise = {
 
 export const mappings = {
   properties: {
-    activitePrincipale: { type: "keyword" },
-    activitePrincipaleEtablissement: { type: "keyword" },
-    activitePrincipaleUniteLegale: { type: "keyword" },
+    domaineActivite: { type: "keyword" },
 
-    caractereEmployeurUniteLegale: { type: "keyword" },
-    categorieEntreprise: { type: "keyword" },
-
-    categorieJuridiqueUniteLegale: { type: "keyword" },
-    codePostalEtablissement: { type: "keyword" },
-    convention: { type: "keyword" },
-    cp: { type: "keyword" },
-    denominationUniteLegale: { type: "keyword" },
-
-    denominationUsuelle1UniteLegale: { type: "keyword" },
-    denominationUsuelle2UniteLegale: { type: "keyword" },
-    denominationUsuelle3UniteLegale: { type: "keyword" },
-    denominationUsuelleEtablissement: { type: "keyword" },
-
-    enseigne1Etablissement: { type: "keyword" },
-
-    enseigne2Etablissement: { type: "keyword" },
-    enseigne3Etablissement: { type: "keyword" },
+    denominationUniteLegale: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
 
     etablissements: { type: "rank_feature" },
 
     etatAdministratifEtablissement: { type: "keyword" },
-    etatAdministratifUniteLegale: { type: "keyword" },
     codeCommuneEtablissement: { type: "keyword" },
     departementEtablissement: { type: "keyword" },
-
-    geo_adresse: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
-
-    idcc: {
-      fields: {
-        number: {
-          type: "integer",
-        },
-      },
-      type: "keyword",
-    },
-
-    libelleCommuneEtablissement: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
 
     naming: {
       analyzer: "french_indexing",
@@ -111,123 +178,141 @@ export const mappings = {
       type: "text",
     },
 
-    nomUniteLegale: { type: "keyword" },
-
-    nomUsageUniteLegale: { type: "keyword" },
-
-    nomenclatureActivitePrincipaleUniteLegale: { type: "keyword" },
-    sigleUniteLegale: { type: "keyword" },
     etablissementSiege: { type: "boolean" },
     siren: { type: "keyword" },
     siret: { type: "keyword" },
 
     siretRank: { type: "rank_feature" },
-    trancheEffectifsUniteLegale: { type: "rank_feature" },
-
-    withIdcc: { type: "boolean" },
+    trancheEffectifsUniteLegale: { type: "keyword" },
+    trancheEffectifsUniteLegaleRank: { type: "rank_feature" },
   },
 };
 
-const buildAddress = (enterprise: Enterprise) => {
-  if (enterprise.geo_adresse) {
-    return enterprise.geo_adresse;
+const getTrancheEffectif = (effectif: string): string => {
+  if (effectif === "") {
+    return "0";
   }
 
-  const {
-    complementAdresseEtablissement,
-    numeroVoieEtablissement,
-    indiceRepetitionEtablissement,
-    typeVoieEtablissement,
-    libelleVoieEtablissement,
-    codePostalEtablissement,
-    libelleCommuneEtablissement,
-  } = enterprise;
+  const numEffectif = +effectif;
 
-  return [
-    complementAdresseEtablissement,
-    numeroVoieEtablissement,
-    indiceRepetitionEtablissement,
-    typeVoieEtablissement,
-    libelleVoieEtablissement,
-    codePostalEtablissement,
-    libelleCommuneEtablissement,
-  ]
-    .filter((e) => e)
-    .join(" ");
-};
+  if (numEffectif === 0) {
+    return "00";
+  }
 
-export const mapEnterprise = (enterprise: Enterprise) => {
+  if (numEffectif <= 2) {
+    return "01";
+  }
+
+  if (numEffectif <= 5) {
+    return "02";
+  }
+
+  if (numEffectif <= 9) {
+    return "03";
+  }
+
+  if (numEffectif <= 19) {
+    return "11";
+  }
+
+  if (numEffectif <= 49) {
+    return "12";
+  }
+
+  if (numEffectif <= 99) {
+    return "21";
+  }
+
+  if (numEffectif <= 199) {
+    return "22";
+  }
+
+  if (numEffectif <= 249) {
+    return "31";
+  }
+
+  if (numEffectif <= 499) {
+    return "32";
+  }
+
+  if (numEffectif <= 999) {
+    return "41";
+  }
+
+  if (numEffectif <= 1999) {
+    return "32";
+  }
+
+  if (numEffectif <= 4999) {
+    return "51";
+  }
+
+  if (numEffectif <= 9999) {
+    return "52";
+  }
+
+  if (numEffectif > 9999) {
+    return "53";
+  }
+
+  return "00";
+}
+
+export const mapEnterprise = (enterprise: BceEtablissement) => {
   // ranking feature cannot be 0
+  const trancheEffectifsUniteLegale = getTrancheEffectif(enterprise.eff_EFF_TOTAL);
 
-  enterprise.trancheEffectifsUniteLegale = Number.parseFloat(
-    enterprise.trancheEffectifsUniteLegale as unknown as string
-  ) || 0.1;
-
-  const siretRank = enterprise.siret;
+  const siretRank = enterprise.eta_siret;
 
   const naming = Array.from(
     new Set([
-      enterprise.nomUniteLegale,
-      enterprise.nomUsageUniteLegale,
-      enterprise.sigleUniteLegale,
+      enterprise.ent_nomUniteLegale,
+      enterprise.ent_nomUsageUniteLegale,
+      enterprise.ent_sigleUniteLegale,
 
-      enterprise.denominationUniteLegale,
-      enterprise.denominationUsuelle1UniteLegale,
-      enterprise.denominationUsuelle2UniteLegale,
-      enterprise.denominationUsuelle3UniteLegale,
+      enterprise.ent_denominationUniteLegale,
+      enterprise.ent_denominationUsuelle1UniteLegale,
+      enterprise.ent_denominationUsuelle2UniteLegale,
+      enterprise.ent_denominationUsuelle3UniteLegale,
 
-      enterprise.enseigne1Etablissement,
-      enterprise.enseigne2Etablissement,
-      enterprise.enseigne3Etablissement,
-      enterprise.denominationUsuelleEtablissement,
+      enterprise.eta_enseigne1Etablissement,
+      enterprise.eta_enseigne2Etablissement,
+      enterprise.eta_enseigne3Etablissement,
+      enterprise.eta_denominationUsuelleEtablissement,
     ])
   )
     .filter((t) => t)
     .join(" ");
 
   const codeActivitePrincipale = [
-    enterprise.activitePrincipaleEtablissement,
-    enterprise.activitePrincipaleUniteLegale,
+    enterprise.eta_activitePrincipaleEtablissement,
+    enterprise.ent_activitePrincipaleUniteLegale,
   ]
-    .map((code) => code.replace(/\w$/, ""))
     .find((s) => !s.startsWith("00.00")); // 00.00Z is a temporary code
 
-  const activitePrincipale =
-    codeActivitePrincipale !== undefined
-      ? codesNaf.get(codeActivitePrincipale)
-      : undefined;
-
-  const convention = enterprise.idcc
-    ? ccMap.get(parseInt(enterprise.idcc))?.shortTitle
-    : undefined;
-
-  // TODO should we filter deprecated IDCC ? #105
-  const withIdcc =
-    (enterprise.idcc &&
-      parseInt(enterprise.idcc) !== 0 &&
-      parseInt(enterprise.idcc) !== 9999) ||
-    false;
-
-  enterprise.idcc = enterprise.idcc?.trim();
-
-  enterprise.geo_adresse = buildAddress(enterprise);
-
-  const departementEtablissement = enterprise.codePostalEtablissement.slice(
+  const departementEtablissement = enterprise.eta_codePostalEtablissement.slice(
     0,
-    +enterprise.codePostalEtablissement.slice(0, 2) > 95 ? 3 : 2
+    +enterprise.eta_codePostalEtablissement.slice(0, 2) > 95 ? 3 : 2
   );
 
-  enterprise.etablissementSiege = Boolean(enterprise.etablissementSiege) || false;
+  const domaineActivite = codeActivitePrincipale?.slice(0, 2);
 
   return {
-    activitePrincipale,
-    convention,
+    siren: enterprise.ent_siren,
+    siret: enterprise.eta_siret,
     naming,
-    siretRank,
-    withIdcc,
+    trancheEffectifsUniteLegale,
+    trancheEffectifsUniteLegaleRank: Math.max(+trancheEffectifsUniteLegale, 0.1),
+    codeActivitePrincipale,
+    codePostalEtablissement: enterprise.eta_codePostalEtablissement,
+    libelleCommuneEtablissement: enterprise.eta_libelleCommuneEtablissement,
+    codeCommuneEtablissement: enterprise.eta_codeCommuneEtablissement || enterprise.eta_codeCommune2Etablissement,
+    etatAdministratifEtablissement: enterprise.eta_etatAdministratifEtablissement,
+    etablissementSiege: enterprise.eta_etablissementSiege === "true",
     departementEtablissement,
-    ...Object.fromEntries(
-      Object.entries(enterprise).filter(([k, v]) => k && v)
-    ),
+    denominationUniteLegale: enterprise.ent_denominationUniteLegale,
+    domaineActivite,
+    etablissements: enterprise.Nombre_Eta,
+    siretRank,
   };
 };
