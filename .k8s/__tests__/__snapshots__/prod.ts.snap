@@ -44,6 +44,196 @@ spec:
         team: recherche-entreprises
     spec:
       containers:
+        - image: harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-api:1.5.8
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: recherche-entreprises-api
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          envFrom:
+            - secretRef:
+                name: elastic-recherche-entreprises-read
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: elastic-recherche-entreprises-read
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  namespace: recherche-entreprises
+spec:
+  encryptedData:
+    ELASTICSEARCH_URL: >-
+      AgAjiLY8OLRszj3zw7ngLaY3auR33D6sJSDaLQJWekd3Y4aHg5duw8wbdkMSu3WUARDGbFqyfoRQsG57xAliVJVLz07vFhxe7TXOnVMkpWH9pYdVqbl0blAnqyxTI7Uly9GvYDF7OcM23IvGA0svXHyge+nIUqO/zgvEyiYL/jiIfjXwKjXg0mJnH6/WszPBf9oaZYpwl0HOYHUK5LNIWyE5/nSSzCEMPamlACCtHdyRf0EywK3hur8V7FvC8gKDnByxn7IhVboOTdCsIQhrSV1ZePbvV5wex0H58JQdJWPMJxq/rRQKsNj/9Xmy8c31j3D2nCNQs6aSDi6wN9d2057rsiwIwqCnA8gPPh6bT26T2nnFFnbNFE/BMajucxxrx3+6ctIwmbC/ZpLrabzxcvoanc8o8zTS8s7FZL3/q00mWjAVy/OgIDdLKI8B2LQp1S+FGFdTmtzTNyscxtkjiJoEQeo1Mf8tWL2+h1nfeUipRq2xiVOa8KxM8ZkDPLFIAInA9w64/Ddk3FWnm5ky1MzRioZcjKqWfT6XxxNG/+4wvDCEMyDTLZyVY56sglGSSmizxXdBUeSR/n08F2k8Vw9s+qjTch5O1g/Agv87CVl+fROV/a4ayrP/gyTmLBT0OIsh6ZZtgIx1UJexF7fF8obFUcCAo8rvcj0ZlyP/ZNfmFu6CPUqd374DZyvZpwtnbX9fzpC2I1ZYNvV9vCVs5+BFULhbldsQPo5VMiEK1T+hunQr08yl3c/gtGYBpt5c6nn5xsopBWkwjjttVnsVVRZEDEwiDhlKbaJ/hedY3mZJ2g==
+    ELASTICSEARCH_API_KEY: >-
+      AgCqtv233/TmTQR4P6bx+wGb0uKdVlKLI7gd+gRXuMBbyyCNmm565ulZFvZJOw+f0hS0KQ6lP84R3LLQTbm40KO71Al+UW0g/4L2eSqAvx3jmQEuLMPehlG7rwitoUDsAiuRPbclb0bfro9uhtWFXgLOTNU48mTT64Xq5mFsYKdNkwXXVgP7+wNg0UMsa2TlyDLMb7JW91MN5vOwsKtr7OfoPIKa5LwHvQIkFDcI4aWBuxsS2FGTBJ81xpgCAfBOnDVYz+ymon8FyQt6Y3SgSF0wjVZC7t8qkC0nPTRj6eCBc9loOt/NLUpSBqFhEYqO0FAl++sS0CZBgvsLnS8gAiiv3UwdLOz94QL0zqFdZBh5TZgdZUQLuW6aWkueAW+0ccKop3VyBJn8fZ1xAKfIszgldpfUBxHuDJ8keEr9aJM8nYiC/lXNMb7dKDJkRoyn/X4mLv6VTwnaqvj/NwVfkK9mnZAoxQg2kEmiDWYvqNL7yRForYIZKDjU7dGUPBWPqeqvpKJ8QLsDnve1Amvhe6wr8K7FYpCLcyrAC0huPaU4/d3IFd7P/neGqocGEh1pvQDp1BWGytkmZAqu2nRp4y6zeVyPzO/G5BbVwOhvqG2BUIdFM68ekL2xFe8yeHIktqJeadgifOtYNF7xnDmsi/v57E6MAFoFiqkVG+4vtUCxQTYZNbDS5YDAo3DBaiIsdOgO0cIM/TCCxjcDPh3pQGs6fsFdENcXzgj8zZQnE3SjbojejTXfVEI6dSoHaIY4WBg0MXEwsivDJ8Ctjrc=
+  template:
+    metadata:
+      name: elastic-recherche-entreprises-read
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        application: recherche-entreprises
+        component: recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+    type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: recherche-entreprises-api
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-api
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: recherche-entreprises
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: recherche-entreprises-api
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-api
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-api
+  namespace: recherche-entreprises
+spec:
+  rules:
+    - host: api-recherche-entreprises.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: recherche-entreprises-api
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - api-recherche-entreprises.fabrique.social.gouv.fr
+      secretName: recherche-entreprises-api-crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: recherche-entreprises-api
+    application: recherche-entreprises
+    component: recherche-entreprises
+    owner: recherche-entreprises
+    team: recherche-entreprises
+  name: recherche-entreprises-api
+  namespace: recherche-entreprises
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recherche-entreprises-api
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: recherche-entreprises-api
+        application: recherche-entreprises
+        component: recherche-entreprises
+        owner: recherche-entreprises
+        team: recherche-entreprises
+    spec:
+      containers:
         - image: ghcr.io/socialgouv/recherche-entreprises/search:1.2.3
           livenessProbe:
             failureThreshold: 6
