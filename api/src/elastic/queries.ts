@@ -78,7 +78,8 @@ export const mapHit = ({
       ) => {
         idccs?.forEach((idcc) => {
           const idccNum = parseInt(idcc);
-          if (idccNum) {
+          // ignore idcc 0 and 9999 : unkown ccs
+          if (idccNum && idccNum > 0 && idccNum < 9999) {
             const kaliData = conventionsSet[idccNum];
             const o = {
               idcc: idccNum,
@@ -121,7 +122,6 @@ export const mapHit = ({
     caractereEmployeurUniteLegale,
     conventions: Array.from(conventions.values()),
     etablissements: parseInt(etablissements),
-    etatAdministratifEtablissement,
     etatAdministratifUniteLegale,
     highlightLabel,
     label,
@@ -131,6 +131,7 @@ export const mapHit = ({
       idccs,
       categorieEntreprise,
       siret,
+      etatAdministratifEtablissement,
     },
     allMatchingEtablissements,
     simpleLabel,

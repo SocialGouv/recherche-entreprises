@@ -32,7 +32,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
     });
     ctx.body = { entreprises };
   } catch (err) {
-    console.log(JSON.stringify(err));
+    console.log(err);
     ctx.throw(500);
   }
 });
@@ -60,7 +60,7 @@ router.get(`${API_PREFIX}/etablissement/:siret`, async (ctx) => {
     if ((err as any).status) {
       throw err;
     } else {
-      console.log(JSON.stringify(err));
+      console.log(err);
       ctx.throw(500);
     }
   }
@@ -89,7 +89,7 @@ router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
     if ((err as any).status) {
       throw err;
     } else {
-      console.log(JSON.stringify(err));
+      console.log(err);
       ctx.throw(500);
     }
   }

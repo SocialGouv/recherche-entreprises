@@ -24,7 +24,7 @@ const searchCall = ({
   query: string;
   address?: string;
   limit?: number;
-  open?: boolean;
+  open?: string;
   employer?: boolean;
   convention?: boolean;
   ranked?: string;
@@ -37,11 +37,13 @@ const searchCall = ({
 
   const rankedQP = ranked ? `&ranked=${ranked}` : "";
 
-  return apptest.get(
-    `${API_PREFIX}/search?convention=${
-      convention || true
-    }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}${rankedQP}`
-  );
+  const url = `${API_PREFIX}/search?convention=${
+    convention?.toString() || true
+  }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}${rankedQP}`;
+
+  // console.log(url);
+
+  return apptest.get(url);
 };
 
 const michelinSiren = "855200507";
@@ -69,7 +71,7 @@ describe("Test search", () => {
   test("search with postal code and city", async () => {
     const { body: b1 } = await searchCall({ query: "michelin" });
     expect(b1.entreprises[0].firstMatchingEtablissement.address).not.toBe(
-      `"23 Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"23 PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
 
     const { body: b2 } = await searchCall({
@@ -79,7 +81,7 @@ describe("Test search", () => {
     expect(
       b2.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
 
     const { body: b3 } = await searchCall({
@@ -89,14 +91,14 @@ describe("Test search", () => {
     expect(
       b3.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
 
     const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
       b4.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"Place des Carmes Dechaux 63000 Clermont-Ferrand"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
   }, 15000);
 
@@ -114,19 +116,6 @@ describe("Test search", () => {
     expect(body.entreprises[0].firstMatchingEtablissement.siret).toEqual(
       michelinSiret
     );
-  });
-
-  test("unranked search", async () => {
-    const {
-      body: { entreprises: ranked },
-    } = await searchCall({ query: "michelin" });
-
-    const {
-      body: { entreprises: unranked },
-    } = await searchCall({ query: "michelin", ranked: "false" });
-
-    expect(unranked).not.toStrictEqual(ranked);
-    expect(unranked[0]).toMatchSnapshot();
   });
 
   // test with siret starting with 0
@@ -154,6 +143,14 @@ describe("Test etablissement search", () => {
       `${API_PREFIX}/etablissement/${michelinSiret + "123"}`
     );
     expect(status).toEqual(400);
+  });
+
+  test("multiple conventions for one etablissement", async () => {
+    const manyCCsSiret = "00572078400106";
+    const { body } = await apptest.get(
+      `${API_PREFIX}/etablissement/${manyCCsSiret}`
+    );
+    expect(body.conventions.length).toEqual(2);
   });
 });
 
@@ -185,30 +182,65 @@ describe("Test entreprise search", () => {
 
 describe("Test api params", () => {
   test("not only open", async () => {
-    const { body: b1 } = await searchCall({ open: false, query: "michelin" });
-    expect(b1).toMatchSnapshot();
+    const { body: b1 } = await searchCall({
+      open: "false",
+      query: "michelin",
+      limit: 1,
+      convention: false,
+    });
+    expect(
+      b1.entreprises[0].firstMatchingEtablissement
+        .etatAdministratifEtablissement
+    ).toEqual("F");
   });
 
-  test("not only employeur", async () => {
-    const { body: b1 } = await searchCall({
+  test("not only employer", async () => {
+    const getNotEmployer = (resp: any) =>
+      resp.entreprises.filter(
+        (e: any) => e.caractereEmployeurUniteLegale == "N"
+      );
+
+    const { body: notOnlyEmployer } = await searchCall({
       employer: false,
       query: "michelin",
     });
-    expect(b1).toMatchSnapshot();
+    expect(getNotEmployer(notOnlyEmployer).length).toBeGreaterThan(0);
+
+    const { body: onlyEmployer } = await searchCall({
+      employer: true,
+      query: "michelin",
+    });
+    expect(getNotEmployer(onlyEmployer).length).toBe(0);
   });
 
   test("not with convention", async () => {
-    const { body: b1 } = await searchCall({
-      convention: false,
-      query: "michelin",
+    const { body: withConvention } = await searchCall({
+      query: "truc",
+      limit: 1,
     });
-    expect(b1).toMatchSnapshot();
+    const { body: noConvention } = await searchCall({
+      convention: false,
+      query: "truc",
+      limit: 1,
+    });
+    expect(noConvention.entreprises[0].conventions).toEqual([]);
+    expect(withConvention.entreprises[0].conventions.length).toBeGreaterThan(0);
+  });
+
+  test("unranked search", async () => {
+    const {
+      body: { entreprises: ranked },
+    } = await searchCall({ query: "michelin" });
+
+    const {
+      body: { entreprises: unranked },
+    } = await searchCall({ query: "michelin", ranked: "false" });
+
+    expect(unranked).not.toStrictEqual(ranked);
+    expect(ranked[0].label).toEqual(
+      "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN"
+    );
+    expect(unranked[0].label).not.toEqual(ranked[0].label);
+    expect(unranked[2].label).toEqual("BOULANGERIE MICHELIN");
   });
 });
-
-/*
-TODO add tests :
-- addresses
-- multiple ccs
-- not ranked
- */
