@@ -62,7 +62,7 @@ wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr
 unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
 
 # WEEZ data
-wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e -O "${DATA_DIR}/WEEZ.csv"
+wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/bfc3a658-c054-4ecc-ba4b-22f3f5789dc7 -O "${DATA_DIR}/WEEZ.csv"
 
 echo "-- Import CSV datasets to sqlite"
 
