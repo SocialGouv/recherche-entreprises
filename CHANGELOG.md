@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.0...v1.6.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* update weez data.gouv datasource ([0fefe67](https://github.com/SocialGouv/recherche-entreprises/commit/0fefe67dbc902d9b65afa136616141216333e465))
+
 # [1.6.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.8...v1.6.0) (2021-12-03)
 
 
