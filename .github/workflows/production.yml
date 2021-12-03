@@ -5,9 +5,9 @@ on:
     tags:
       - v*
 
-#concurrency:
-#  group: production
-#  cancel-in-progress: true
+concurrency:
+  group: production
+  cancel-in-progress: true
 
 jobs:
   ##############################################################################
