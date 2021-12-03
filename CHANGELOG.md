@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.1...v1.6.2) (2021-12-03)
+
+
+### Bug Fixes
+
+* dumy ([b4d057b](https://github.com/SocialGouv/recherche-entreprises/commit/b4d057b6fd1566182c0120eb1b5f5de2358e278b))
+
 ## [1.6.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.0...v1.6.1) (2021-12-03)
 
 
