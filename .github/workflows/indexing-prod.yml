@@ -34,6 +34,7 @@ jobs:
           RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
           SOCIALGOUV_PRODUCTION_NAMESPACE: recherche-entreprises
+          SOCIALGOUV_PRODUCTION: true
 
       - name: Archive indexing job
         uses: actions/upload-artifact@v2
