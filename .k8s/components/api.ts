@@ -5,7 +5,7 @@ import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGi
 import { EnvVar } from "kubernetes-models/v1";
 
 const getManifests = async () => {
-  const manifests = await create("recherche-entreprises-api", {
+  const manifests = await create("recherche-entreprises-search", {
     config: {
       containerPort: 3000,
       subDomainPrefix: "search-",

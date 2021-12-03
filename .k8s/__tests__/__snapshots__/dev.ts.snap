@@ -234,19 +234,19 @@ metadata:
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    app: recherche-entreprises-api
+    app: recherche-entreprises-search
     application: recherche-entreprises
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-api
+  name: recherche-entreprises-search
   namespace: recherche-entreprises-mybranch
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: recherche-entreprises-api
+      app: recherche-entreprises-search
   template:
     metadata:
       annotations:
@@ -258,7 +258,7 @@ spec:
         app.github.com/run: '1234'
         app.github.com/sha: '0123456'
       labels:
-        app: recherche-entreprises-api
+        app: recherche-entreprises-search
         application: recherche-entreprises
         component: recherche-entreprises
         owner: recherche-entreprises
@@ -276,7 +276,7 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          name: recherche-entreprises-api
+          name: recherche-entreprises-search
           ports:
             - containerPort: 3000
               name: http
@@ -302,70 +302,21 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          envFrom:
-            - secretRef:
-                name: elastic-recherche-entreprises-read
           env:
             - name: ELASTICSEARCH_INDEX_NAME
               value: search-entreprises
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: elastic-recherche-entreprises-read
-  annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.github.com/job: '5678'
-    app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/recherche-entreprises
-    app.github.com/run: '1234'
-    app.github.com/sha: '0123456'
-  labels:
-    application: recherche-entreprises
-    component: recherche-entreprises
-    owner: recherche-entreprises
-    team: recherche-entreprises
-    cert: wildcard
-  namespace: recherche-entreprises-mybranch
-spec:
-  encryptedData:
-    ELASTICSEARCH_URL: >-
-      AgCxK1MqqVkCOHvMjjcieUsj1uE/ATUzAfYTYVEMqcWFxTnugOaYlXB2mTuZtzdjXNvINREzDynnVRBghPIJvrJm59vPgexC5FyQptdPf2XwQAG6n0yMLWAEBM+O8ieO1D6vBu6BYuq4QYoItq+SMTE6APNX+p6wi4/LP04cR8p8bVKNxckPMfyVfQGhUSTD+2gC5ow2x1Mx67odqqP3E8eK9tm5tU6ltzOpKqJKITUQIqTQbSKFr8p77DE4IrdbPn8MpvdP+VrT+ztF4thPkpVpuYWy9rABdQKeEuNdN2AuvmPeJs/2B80iApIgtWWQjV/iG+WlLGMohvWDZVsBGuBuYGzhjJlr5w8OljwKDihb2cG1M/Ot/LM1xRuCC85wvqH0oMhnnP/3DZts5aYAN+qjAezOkPT9kjT+gu0WoQB+E5r9ITcYYHYbJw/YSxS2z86Ul0amRRW4ovAWT5c/nFDZU6i74I8YyVh8oOtrieZgNF4ajJcIr5YpjT2LICKoZR0KExrQ4V30zZJ+wZcvd8W3e/KCmKsFxloTkLq/sjEiFQoe6ffYTQhSUXZynqrdUKZsdoSleprfctlJtf3rzxt5hZIpcLulXrYk7pPPiHkTcV3Zc4zkN3BFE1A9vsgTvh6xTXlvUekJHHMXU3t8ZyZD8vvemxv0FE8G33XWQF2DEkmyc3gXMlfPDLho4fHv0h0iId0c9klFkOpmp8REFWJyuRQjq+hOHvfoCSu1ymsCwA0CMAguJoX1XEhn0aA9QIgf0VyBe/cVJwu/GfW74UBi6x5feqzFovYIUXbDP6kW
-    ELASTICSEARCH_API_KEY: >-
-      AgCtqcSVac6ptXOzSGqrBps1Uz6elTOnheaAf8cqAb1G960NCqmmkx1L1FDhfSKCuhBUAp0mT/3rokX3cg/pLIqImIVlPEhq/n+ZaKPHqGt0UT9QpD3r1C4nYan/WJ1PnBlCTXYlA/dtmCakNjtf2ikvWg/6Keu1OGlHt/ymVc2guxqGl++caxPiEIQAiVHDZksc09RM2Z6jU/WnI5gzTPQjgucb2yiHBLWZsEcoCIsA2nXrp2/vQ/ATMtITKb1223jyHnJiargNnQrRVRA7Geuz5FyaqSXjqvjG1HrqVxAlVNzFPb/N3fN8C6KHCjtOuu/pOM+cqC4cFvzyzqGymcDOKGC5Ax47j5v0KsVlJZ93dfO2yD/Fi2txeuNdmQ42bvhpGbPJu/iYLXmaETvu6/qpL3UrU4i2KVyxXW0CbUzBVh1fTmCClAMDgETpWNvnRXgAuu0jbgTnWjN0zSmjia0/BJmY1Z5uct7T4Lli4Dz/vJucBthIBVgYaVX/jLqfaNWpD1TuWkTHsf4gR5HErzQp60NDej/I7TespFMqRMhrroc6VaH/Wl6wV4msRM3sYaxcHPd4kJxrOeA7cQnfqQsWs4/RG++p+TCmD18qgevVBV1z11vFu2R6KE+c1YRANE5e6EBMO8yUly1yarrx6jOo6E5kAdKqPGkNUyq3BgOvGWmkbV32slQ4hXm7zUuyVnXBmpmoryowHhqV7iW8Si6CSMKACCENVqJPrk55VaL8sw8dZfQF0aekJoEqf/UqAv/DZUTYOAg4QI+4iD4=
-  template:
-    metadata:
-      annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
-        kapp.k14s.io/disable-default-ownership-label-rules: ''
-        kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.github.com/job: '5678'
-        app.github.com/ref: refs/heads/mybranch
-        app.github.com/repo: socialgouv/recherche-entreprises
-        app.github.com/run: '1234'
-        app.github.com/sha: '0123456'
-      name: elastic-recherche-entreprises-read
-      labels:
-        application: recherche-entreprises
-        component: recherche-entreprises
-        owner: recherche-entreprises
-        team: recherche-entreprises
-        cert: wildcard
-    type: Opaque
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: recherche-entreprises-api
+    app: recherche-entreprises-search
     application: recherche-entreprises
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-api
+  name: recherche-entreprises-search
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -381,7 +332,7 @@ spec:
       port: 80
       targetPort: 3000
   selector:
-    app: recherche-entreprises-api
+    app: recherche-entreprises-search
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
@@ -397,13 +348,13 @@ metadata:
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    app: recherche-entreprises-api
+    app: recherche-entreprises-search
     application: recherche-entreprises
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  name: recherche-entreprises-api
+  name: recherche-entreprises-search
   namespace: recherche-entreprises-mybranch
 spec:
   rules:
@@ -412,7 +363,7 @@ spec:
         paths:
           - backend:
               service:
-                name: recherche-entreprises-api
+                name: recherche-entreprises-search
                 port:
                   name: http
             path: /
