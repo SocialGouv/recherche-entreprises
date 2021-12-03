@@ -21,7 +21,7 @@ read_payload()
       "cluster": ["all"],
       "index": [
         {
-          "names": ["recherche-entreprises*"],
+          "names": ["recherche-entreprises*", "search-entreprises*"],
           "privileges": ["read"]
         }
       ]
@@ -41,7 +41,7 @@ ingest_payload()
       "cluster": ["all"],
       "index": [
         {
-          "names": ["recherche-entreprises*"],
+          "names": ["recherche-entreprises*", "search-entreprises*"],
           "privileges": ["create", "create_index", "delete_index", "manage"]
         }
       ]

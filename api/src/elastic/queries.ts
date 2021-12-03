@@ -7,12 +7,12 @@ const defaultLimit = 20;
 
 const conventionsSet = Object.fromEntries(
   kaliConventions.map((c) => {
-    const { num, etat, id, mtime, texte_de_base, url, title } = c;
-    return [num, { etat, id, mtime, texte_de_base, title, url }];
+    const { num, etat, id, mtime, texte_de_base, url, title, shortTitle } = c;
+    return [num, { etat, id, mtime, texte_de_base, title, url, shortTitle }];
   })
 );
 
-// we remove deduplicate tokens to compose company's label
+// we remove duplicated tokens to compose company's label
 const formatLabel = (naming: string[]) => {
   const labelTokens = naming
     .join(" ")
@@ -46,11 +46,16 @@ export const mapHit = ({
     denominationUsuelle1UniteLegale,
     denominationUsuelle2UniteLegale,
     denominationUsuelle3UniteLegale,
+    etatAdministratifEtablissement,
+    categorieEntreprise,
+    etatAdministratifUniteLegale,
+    caractereEmployeurUniteLegale,
     activitePrincipale,
     etablissements,
     siret,
-    address,
+    geo_adresse,
     naming,
+    idccs,
   },
   inner_hits,
   highlight,
@@ -68,21 +73,38 @@ export const mapHit = ({
       (
         acc: any,
         {
-          fields: { convention, idcc },
-        }: { fields: { convention: string[]; idcc: string } }
+          fields: { convention, idccs },
+        }: { fields: { convention: string[]; idccs: string[] } }
       ) => {
-        const kaliData = idcc ? conventionsSet[idcc] : undefined;
-        const o = {
-          idcc: parseInt(idcc),
-          shortTitle: convention ? convention[0] : "",
-          ...kaliData,
-        };
-        if (!acc.has(o.idcc)) {
-          acc.set(o.idcc, o);
-        }
+        idccs?.forEach((idcc) => {
+          const idccNum = parseInt(idcc);
+          // ignore idcc 0 and 9999 : unkown ccs
+          if (idccNum && idccNum > 0 && idccNum < 9999) {
+            const kaliData = conventionsSet[idccNum];
+            const o = {
+              idcc: idccNum,
+              // shortTitle: convention ? convention[0] : "",
+              ...kaliData,
+            };
+            if (!acc.has(o.idcc)) {
+              acc.set(o.idcc, o);
+            }
+          }
+        });
+
         return acc;
       },
       new Map()
+    );
+
+  const allMatchingEtablissements = inner_hits.matchingEtablissements.hits.hits
+    .filter((h: any) => h.fields)
+    .map(
+      ({ fields: { "geo_adresse.keyword": address, siret, idccs } }: any) => ({
+        address: address[0],
+        siret: siret[0],
+        idccs,
+      })
     );
 
   // take first by priority
@@ -97,49 +119,57 @@ export const mapHit = ({
 
   return {
     activitePrincipale,
+    caractereEmployeurUniteLegale,
     conventions: Array.from(conventions.values()),
     etablissements: parseInt(etablissements),
+    etatAdministratifUniteLegale,
     highlightLabel,
     label,
     matching,
-    matchingEtablissement: {
-      address,
+    firstMatchingEtablissement: {
+      address: geo_adresse,
+      idccs,
+      categorieEntreprise,
       siret,
+      etatAdministratifEtablissement,
     },
+    allMatchingEtablissements,
     simpleLabel,
     siren,
   };
 };
 
+// rank by "effectif"
 const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
 
 const collapse = (withAllConventions: boolean) => ({
   field: "siren",
   inner_hits: {
     _source: false,
-    docvalue_fields: ["idcc", "convention"],
+    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs"],
     name: "matchingEtablissements",
     size: withAllConventions ? 10000 : 1,
   },
 });
 
-const addressFilter = (address: string | undefined) =>
-  address
-    ? [
-        {
-          prefix: {
-            cp: address ? address.replace(/\D/g, "") : "",
+const addressFilter = (address: string) => {
+  // check if address filter is code postal or commune
+  const cp = parseInt(address);
+
+  return cp
+    ? {
+        prefix: {
+          codePostalEtablissement: cp.toString(),
+        },
+      }
+    : {
+        match: {
+          libelleCommuneEtablissement: {
+            query: address,
           },
         },
-        {
-          match: {
-            ville: {
-              query: address,
-            },
-          },
-        },
-      ]
-    : [{ match_all: {} }];
+      };
+};
 
 export type SearchArgs = {
   query: string;
@@ -147,16 +177,65 @@ export type SearchArgs = {
   // return convention of every etablissements associated to the main company
   addAllConventions?: boolean;
   // only search for etablissements with convention attached
-  onlyWithConvention?: boolean;
+  convention: boolean;
   limit?: number | undefined;
+  // etablissement still open
+  open: boolean;
+  // etablissement employeur
+  employer: boolean;
+  // rank by effectif ?
+  ranked: boolean;
+};
+
+const onlyConventionFilter = { term: { withIdcc: true } };
+
+const openFilters = [
+  { term: { etatAdministratifUniteLegale: "A" } },
+  { term: { etatAdministratifEtablissement: "A" } },
+];
+
+const employerFilter = {
+  term: {
+    caractereEmployeurUniteLegale: "O",
+  },
+};
+
+const makeFilters = (
+  convention: boolean,
+  open: boolean,
+  employer: boolean,
+  address: string | undefined
+) => {
+  const filters = [];
+
+  if (convention) {
+    filters.push(onlyConventionFilter);
+  }
+
+  if (open) {
+    filters.push(...openFilters);
+  }
+
+  if (employer) {
+    filters.push(employerFilter);
+  }
+
+  if (address) {
+    filters.push(addressFilter(address));
+  }
+
+  return filters;
 };
 
 export const entrepriseSearchBody = ({
   query,
   address,
   addAllConventions = true,
-  onlyWithConvention = true,
+  convention,
   limit = defaultLimit,
+  open,
+  employer,
+  ranked,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -166,18 +245,8 @@ export const entrepriseSearchBody = ({
   },
   query: {
     bool: {
-      filter: onlyWithConvention
-        ? [
-            { term: { withIdcc: onlyWithConvention } },
-            { range: { "idcc.number": { lt: 5001 } } },
-          ]
-        : undefined,
+      filter: makeFilters(convention, open, employer, address),
       must: [
-        {
-          bool: {
-            should: addressFilter(address),
-          },
-        },
         {
           bool: {
             should: [
@@ -190,7 +259,7 @@ export const entrepriseSearchBody = ({
         },
       ],
       should: [
-        { rank_feature },
+        ranked ? { rank_feature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },

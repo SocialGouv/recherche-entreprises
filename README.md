@@ -14,7 +14,7 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ## Étapes :
 
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5QeUFzc2VtYmx5wqBcbmdlb19zaXJldC5jc3YtLT5QeUFzc2VtYmx5wqBcbnNpcmV0MmlkY2MuY3N2LS0-UHlBc3NlbWJsecKgXG5QeUFzc2VtYmx5LS0-YXNzZW1ibHkuY3N2LS0-aW5kZXgtLT5FbGFzdGljU2VhcmNoLS0-QVBJW0FQSSBIVFRQMV1cbkVsYXN0aWNTZWFyY2gtLT5BUEkyW0FQSSBIVFRQMl1cbkVsYXN0aWNTZWFyY2gtLT5DbGllbnRbQ2xpZW50IEVTXSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjoie30iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
 
 ## Données :
 
@@ -28,19 +28,11 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ## Assemblage
 
-Le CSV est généré en deux étapes dans le dossier `assembly/` :
+Le script `sqlite.sh` permet de permet de télécharger les CSV, les importer dans SQLite pour les aggréger et les re-exporter en CSV.
 
-- Téléchargement des datasets (8GB)
+Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
-  `DATA_DIR=./data/ scripts/get-data.sh`
-
-- Assemblage des fichiers avec Python (numpy & pandas)
-
-  `pip install -r requirements.txt`
-
-  `DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh`
-
-Au final, le fichier `./output/assembly.csv` fait environ 600Mo
+Cette opération dure environ 30 minutes.
 
 ## Indexation Elastic Search
 
@@ -48,14 +40,16 @@ Le dossier `index/` contient les scripts qui injectent le fichier `assembly.csv`
 
 La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-aliases.html) d'ElasticSearch pour éviter les downtimes.
 
-Le script `scripts/create-es-keys.sh` permet de créer des token pour lire/écrire sur ces index.
-
 Pour lancer une indexation :
 
 ```sh
-yarn install
-
-ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./output/assembly.csv yarn start
+yarn
+ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./data/assembly.csv yarn start
 ```
 
-The default `ELASTICSEARCH_INDEX_NAME` is `recherche-entreprises`
+Le script `scripts/create-es-keys.sh` permet de créer des token pour lire/écrire sur ces index.
+
+## Projets relatifs
+
+- Annuaire-entreprises : https://annuaire-entreprises.data.gouv.fr
+- API Entreprise : https://entreprise.api.gouv.fr/catalogue/

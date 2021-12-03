@@ -6,8 +6,8 @@ const API_KEY = process.env.ELASTICSEARCH_API_KEY;
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
-export const ELASTICSEARCH_INDEX =
-  process.env.ELASTICSEARCH_INDEX || "recherche-entreprises";
+export const ELASTICSEARCH_INDEX_NAME =
+  process.env.ELASTICSEARCH_INDEX_NAME || "recherche-entreprises";
 
 const esClientConfig = {
   auth,

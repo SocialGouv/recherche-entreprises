@@ -1,0 +1,7 @@
+name: "CodeQL config"
+
+paths:
+  - index
+  - api
+paths-ignore: 
+  - api/swagger-ui
