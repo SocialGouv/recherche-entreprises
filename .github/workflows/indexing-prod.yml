@@ -11,6 +11,9 @@ jobs:
   index:
     name: Index Prod
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://recherche-entreprises.fabrique.social.gouv.fr
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,8 +29,7 @@ jobs:
 
       - name: Generate indexing job
         shell: bash
-        # HACK: we use preprod to run the job on the dev cluster
-        run: yarn --cwd .k8s --silent generate --env preprod jobs/indexing > indexing.yml
+        run: yarn --cwd .k8s --silent generate --env prod jobs/indexing > indexing.yml
         env:
           RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
