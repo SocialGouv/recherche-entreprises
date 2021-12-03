@@ -1,3 +1,16 @@
+# [1.6.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.8...v1.6.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* **k8s:** adjust requests/limits ([#96](https://github.com/SocialGouv/recherche-entreprises/issues/96)) ([9655358](https://github.com/SocialGouv/recherche-entreprises/commit/9655358495c29ab7320e9eb8624ac1cd3186777d))
+* **k8s:** rm useless ([#97](https://github.com/SocialGouv/recherche-entreprises/issues/97)) ([ee0972f](https://github.com/SocialGouv/recherche-entreprises/commit/ee0972f35c790530cf641b414738969574d58d7d))
+
+
+### Features
+
+* use sqlite and more ([#108](https://github.com/SocialGouv/recherche-entreprises/issues/108)) ([b8168f0](https://github.com/SocialGouv/recherche-entreprises/commit/b8168f0465c61c09a14abcda3da79698dfc5bf80)), closes [#73](https://github.com/SocialGouv/recherche-entreprises/issues/73) [#112](https://github.com/SocialGouv/recherche-entreprises/issues/112) [#50](https://github.com/SocialGouv/recherche-entreprises/issues/50)
+
 ## [1.5.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.7...v1.5.8) (2021-09-28)
 
 
