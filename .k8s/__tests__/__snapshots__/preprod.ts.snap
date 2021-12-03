@@ -300,6 +300,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
+          envFrom:
+            - secretRef:
+                name: elastic-recherche-entreprises-read
           env:
             - name: ELASTICSEARCH_INDEX_NAME
               value: search-entreprises

@@ -20,6 +20,14 @@ const getManifests = async () => {
   });
   const deployment = getDeployment(manifests);
 
+  // todo: use legacy API secret
+  if (deployment.spec?.template.spec?.containers.length) {
+    const container = deployment.spec?.template.spec?.containers[0];
+    container.envFrom = [
+      { secretRef: { name: "elastic-recherche-entreprises-read" } },
+    ];
+  }
+
   addEnv({
     deployment,
     data: new EnvVar({
