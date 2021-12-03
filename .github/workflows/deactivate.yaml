@@ -9,7 +9,7 @@ jobs:
     name: 🪦 Review
     runs-on: ubuntu-latest
     steps:
-      - uses: SocialGouv/actions/autodevops-deactivate@V1
+      - uses: SocialGouv/actions/autodevops-deactivate@v1
         with:
           kube-config: ${{ secrets.KUBECONFIG }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
