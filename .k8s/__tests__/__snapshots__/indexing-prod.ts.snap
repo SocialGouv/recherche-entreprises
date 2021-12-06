@@ -17,8 +17,7 @@ metadata:
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
-  namespace: recherche-entreprises-preprod
+  namespace: recherche-entreprises
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
@@ -39,7 +38,6 @@ spec:
         component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
-        cert: wildcard
     type: Opaque
 ---
 apiVersion: v1
@@ -365,8 +363,7 @@ metadata:
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
-  namespace: recherche-entreprises-preprod
+  namespace: recherche-entreprises
 ---
 apiVersion: batch/v1
 kind: Job
@@ -383,8 +380,7 @@ metadata:
     component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
-    cert: wildcard
-  namespace: recherche-entreprises-preprod
+  namespace: recherche-entreprises
 spec:
   backoffLimit: 3
   template:
@@ -453,6 +449,5 @@ spec:
         component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
-        cert: wildcard
 "
 `;

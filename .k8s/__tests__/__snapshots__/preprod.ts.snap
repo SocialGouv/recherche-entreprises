@@ -265,7 +265,8 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: ghcr.io/socialgouv/recherche-entreprises/search:1.2.3
+        - image: >-
+            ghcr.io/socialgouv/recherche-entreprises/search:preprod-0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -418,7 +419,8 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: ghcr.io/socialgouv/recherche-entreprises/front:1.2.3
+        - image: >-
+            ghcr.io/socialgouv/recherche-entreprises/front:preprod-0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -524,5 +526,26 @@ spec:
     - hosts:
         - recherche-entreprises-preprod.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-recherche-entreprises-preprod
+  namespace: recherche-entreprises-preprod
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
 "
 `;

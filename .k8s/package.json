@@ -9,8 +9,8 @@
   "dependencies": {
     "@kosko/env": "^2.0.1",
     "@kubernetes-models/sealed-secrets": "^2.0.2",
-    "@socialgouv/kosko-charts": "^9.5.14",
-    "@types/node": "^15.12.2",
+    "@socialgouv/kosko-charts": "^9.8.9",
+    "@types/node": "^16.11.11",
     "kosko": "^1.1.5",
     "kubernetes-models": "^2.0.2",
     "ts-node": "^10.0.0",

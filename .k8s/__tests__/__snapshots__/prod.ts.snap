@@ -495,14 +495,12 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default
+  name: netpol-recherche-entreprises
   namespace: recherche-entreprises
 spec:
   ingress:
     - from:
-        - namespaceSelector:
-            matchLabels:
-              network-policy/namespace: recherche-entreprises
+        - podSelector: {}
     - from:
         - namespaceSelector:
             matchLabels:
