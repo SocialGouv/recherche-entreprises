@@ -16,8 +16,8 @@ schemes:
 paths:
   /search:
     get:
-      summary: "Recherche entreprise"
-      description: "Reherche d'entreprise par nom d'établissement, raison sociale"
+      summary: "Recherche d'entreprise par nom"
+      description: "Reherche d'entreprise par nom d'établissement, raison sociale, siret, siren"
       operationId: "search"
       tags:
         - "Recherche"
@@ -81,7 +81,41 @@ paths:
       responses:
         "500":
           description: "Unexpexted error occured"
-
+  /etablissement/{siret}:
+    get:
+      summary: "Recherche d'entreprise par SIRET"
+      description: "Reherche d'entreprise par numéro SIRET"
+      operationId: "siret"
+      tags:
+        - "Recherche"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "siret"
+          description: "Numéro de SIRET (9 caractères)"
+          required: true
+          type: string
+          example: "323841353"
+          value: "323841353"
+  /entreprise/{siren}:
+    get:
+      summary: "Recherche d'entreprise par SIREN"
+      description: "Reherche d'entreprise par numéro SIREN  (14 caractères)"
+      operationId: "siren"
+      tags:
+        - "Recherche"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "siren"
+          description: "Numéro de SIREN"
+          required: true
+          type: string
+          length: 14
+          example: "32384135300911"
+          value: "32384135300911"
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: "Source sur GitHub"
+  url: "https://github.com/socialgouv/recherche-enterprises"

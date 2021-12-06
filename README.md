@@ -6,9 +6,9 @@ Les données sont issues de [plusieurs jeux de données data.gouv.fr](./assembly
 
 Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qui exploite cet index Elastic Search avec différentes requêtes.
 
-Un frontend de démo est disponible ici : https://p8dyl.csb.app/
+Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
-Et vous pouvez utiliser librement l'API disponible sur https://api-recherche-entreprises.fabrique.social.gouv.fr cf [doc API](./api/README.md)
+Et vous pouvez utiliser librement l'API disponible sur https://api-recherche-entreprises.fabrique.social.gouv.fr cf [documentation API](./api/README.md)
 
 Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fabrique.social.gouv.fr/api/v1/search?q=plume&a=paris)
 
@@ -40,11 +40,11 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 
 ### Assemblage des données
 
-Le script `sqlite.sh` permet de permet de télécharger les CSV, les importer dans SQLite pour les aggréger et les re-exporter en CSV.
+Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger les données pour les re-exporter dans CSV "plat".
 
 Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
-Cette opération dure environ 30 minutes.
+Cette opération dure environ 45 minutes.
 
 
 ### Indexation dans Elastic Search
@@ -77,6 +77,8 @@ yarn build
 
 ELASTICSEARCH_URL=http://localhost:9200 yarn start
 ```
+
+Le temps d'indexation est d'environ 1h.
 
 ## Projets relatifs
 
