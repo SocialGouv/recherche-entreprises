@@ -1,3 +1,10 @@
+## [1.6.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.4...v1.6.5) (2021-12-06)
+
+
+### Bug Fixes
+
+* **secu:** add netpol ([#119](https://github.com/SocialGouv/recherche-entreprises/issues/119)) ([d5c598b](https://github.com/SocialGouv/recherche-entreprises/commit/d5c598b226dd99cea479e28353be96f32ec4d367))
+
 ## [1.6.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.3...v1.6.4) (2021-12-06)
 
 
