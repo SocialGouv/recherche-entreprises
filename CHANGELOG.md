@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.3...v1.6.4) (2021-12-06)
+
+
+### Bug Fixes
+
+* **docs:** update API docs ([#118](https://github.com/SocialGouv/recherche-entreprises/issues/118)) ([8f6d23d](https://github.com/SocialGouv/recherche-entreprises/commit/8f6d23d4274764756a5abe4ce152392547bf21f0))
+
 ## [1.6.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.2...v1.6.3) (2021-12-03)
 
 
