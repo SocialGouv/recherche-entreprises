@@ -36,6 +36,7 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 - yarn
 - docker et docker-compose
 - wget
+- sqlite3
 
 ### Assemblage des données
 
