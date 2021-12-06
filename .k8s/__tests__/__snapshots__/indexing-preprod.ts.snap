@@ -391,7 +391,8 @@ spec:
     spec:
       containers:
         - name: update-index
-          image: ghcr.io/socialgouv/recherche-entreprises/index:1.2.3
+          image: >-
+            ghcr.io/socialgouv/recherche-entreprises/index:preprod-0123456789abcdefghijklmnopqrstuvwxyz0123
           volumeMounts:
             - name: data
               mountPath: /data
