@@ -1,6 +1,6 @@
 import * as React from "react";
 import useSWR from "swr";
-import { Row, Col, Spinner, Form } from "react-bootstrap";
+import { Row, Col, Spinner, Form, Alert } from "react-bootstrap";
 import { useDebounce } from "use-debounce";
 
 import { Result } from "./Result";
@@ -19,13 +19,19 @@ const Results = ({ query, address, open, convention, employer }) => {
       address
     )}&open=${open}&convention=${convention}&employer=${employer}`
   );
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <div>
+        <br />
+        <Alert variant="danger">Impossible de charger les résultats...</Alert>
+      </div>
+    );
   if (!data)
     return (
       <div>
         <br />
         <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
+          <span className="visually-hidden">Recherche...</span>
         </Spinner>
       </div>
     );
@@ -92,7 +98,7 @@ export const Search = () => {
   return (
     <div>
       <Row>
-        <Col sm={12} lg={6}>
+        <Col lg={12}>
           <Form.Control
             style={{ flex: "1 0 50%" }}
             size="lg"
@@ -109,7 +115,7 @@ export const Search = () => {
             }}
           />
         </Col>
-        <Col sm={12} lg={6}>
+        <Col sm={12} lg={12}>
           <Form.Control
             style={{ flex: "1 0 50%" }}
             size="lg"
@@ -117,6 +123,7 @@ export const Search = () => {
             type="text"
             placeholder="Précisez une ville ou code postal"
           />
+          <br />
         </Col>
         <Col sm={12}>
           <Form.Check
