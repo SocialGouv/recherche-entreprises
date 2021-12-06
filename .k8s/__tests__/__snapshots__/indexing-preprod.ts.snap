@@ -7,32 +7,36 @@ kind: SealedSecret
 metadata:
   name: elastic-recherche-entreprises-write
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   encryptedData:
     ELASTICSEARCH_URL: >-
-      AgB82d7LnDA/6RxRlks/7cRtmWuz6Ql1p4gCwdghu3X85Ek4FqSL6ui1tIBiuM1pZcaiwM6ZizsKA0ofq5iBafUwRQOzTFc3XAMy7XltrymG/QwBRmYKS4w4Ub1DPuYpVxEUC6Jngyex7OvhCKUK7pugjG6Q8FXO6i9iyVVEpKnAcSVLaUe+olmlOrO2RMjIK3mgKX/xOFT+2FYiN5/LJob+w/+p0hPlZaMsLrLOl/i5N4LuI5ckg+FawifD2MnN057fsLbwt0m63g7ZHvXtGT66tbTcQgpWfy5kLe2m7oIbzdk+oPoh4FS8PnyU6nMC8sOkC3v/GUMK91qCas01RBoyPRTTs11yX3gbYHti5Nc3zDt36YHPhrqfRQHQ8xONYkx5SkAylnDr1JoXyfrKDwZUBvLQ6Xh3gGI7qu909LxZ2ryWd9WRslpB1+8bOLN0tV20slAesGYFC/W6e5GT0AhwWqwJ9usGLf0dM7GE+IXJegIlconcM+2x/FW3RQ5XnK5kI/coiha5pxBkK0p8pbwmLnOwH5c2QoBD5xgLCZ3wleMcbTWdSynzm/LSYkWZzL15M3dy4m8c+qXc88LCbAHTZ2UaAH/XF7pcuMvOF33ZesjgaWLumFoUvhtaG1gZN97eU2/K1xLwo+x/vt06P6vUbU2Emj9cEziTaQqx1ZPUI4Hsp5ZNpbAGRsLMhCf7G7YvxZkpxh+7GAKvW1JmhF1DYgBapCen2bxQN/XK/pNniL89T0hiKSwh/Fo8yDOnqAGova3T1Nq6fLFcRYNxtKFVlsn5zsUgyVPCtyn+cUKIFw==
+      AgCxK1MqqVkCOHvMjjcieUsj1uE/ATUzAfYTYVEMqcWFxTnugOaYlXB2mTuZtzdjXNvINREzDynnVRBghPIJvrJm59vPgexC5FyQptdPf2XwQAG6n0yMLWAEBM+O8ieO1D6vBu6BYuq4QYoItq+SMTE6APNX+p6wi4/LP04cR8p8bVKNxckPMfyVfQGhUSTD+2gC5ow2x1Mx67odqqP3E8eK9tm5tU6ltzOpKqJKITUQIqTQbSKFr8p77DE4IrdbPn8MpvdP+VrT+ztF4thPkpVpuYWy9rABdQKeEuNdN2AuvmPeJs/2B80iApIgtWWQjV/iG+WlLGMohvWDZVsBGuBuYGzhjJlr5w8OljwKDihb2cG1M/Ot/LM1xRuCC85wvqH0oMhnnP/3DZts5aYAN+qjAezOkPT9kjT+gu0WoQB+E5r9ITcYYHYbJw/YSxS2z86Ul0amRRW4ovAWT5c/nFDZU6i74I8YyVh8oOtrieZgNF4ajJcIr5YpjT2LICKoZR0KExrQ4V30zZJ+wZcvd8W3e/KCmKsFxloTkLq/sjEiFQoe6ffYTQhSUXZynqrdUKZsdoSleprfctlJtf3rzxt5hZIpcLulXrYk7pPPiHkTcV3Zc4zkN3BFE1A9vsgTvh6xTXlvUekJHHMXU3t8ZyZD8vvemxv0FE8G33XWQF2DEkmyc3gXMlfPDLho4fHv0h0iId0c9klFkOpmp8REFWJyuRQjq+hOHvfoCSu1ymsCwA0CMAguJoX1XEhn0aA9QIgf0VyBe/cVJwu/GfW74UBi6x5feqzFovYIUXbDP6kW
     ELASTICSEARCH_API_KEY: >-
-      AgCWc+7OMggEJuNUXxL8CufezAMvJaT3svLkFi9KiKost/avFQNBoXDGixl7vERoCDVvDxnPlcn7m7MIjveP5oIfewhJzYQua9WmQrSMTab1soqUIjMHWj+2A8y0qSYg4s21w/X6bc+H0/O4+ax0QNVtm/MWc30vnCOF+uVibM2WcDkSY/FGE2bE7hcmQWeDbsmnRxDaZTY10ME2ycZpv9eAMoXshCQ98k4LFT9DM0D51az4BibLJjUtsW/vMn/FNKv9/teOGiCAFE/pfoyeZ4QN7ZsoFzCSHwj++Rd0hWScX8VCvbS5pgmfioz8SHmQFrxrN994CAPlr2Rw7mxfkzSETrDgzQVmzKD+j49PZL6cz77cCh9DGE70Pco91szWbsaUQ/lcWUTlFm39Z0Xmf6uV1eCSbyPcM3ogMx95Rjb3MnGa2zrt4OPLMMA2YfyqMtrrVTcq2aJ4fGvWAmVZHH3k2QMcPiYLGHQ8gnVsjI6LYGJEM27RVj99/ppZpoPWeims00fBHMclr3/4czfQCBKcr8GFouxfcKVYGJ4gRNdH0Qn5gZIPXOOiRKUVS0ik0zuT1Xu9u9kU6Df2RVOQawiIOy14+5RrMqt0li1PuCFZjRTqbsLGogOzJQfaXKOafNjxswUqXSn4gR3pVBmm0tPJx+9iFdSrkavvGBrQeSDrNzY5UjeZwIgz9hveUUe1dxARBK8iXu0Q8P6W+VnFActyQs0gnoc4Zzb3jJNfxgDWv1LF/MK22b5G2YcZ3bk5LSsGxP1KICJ0J1MMSL8=
+      AgANlBsYYlxFPxOSitnqdZ4LhP822km9ijYFc46pkpkSKoYGRHNm7gbpaPTRNWJ4u647IYI8Hl8E63GrtACnhntEIvJlHTE8ZwOw7kIA7NuPj/xma4nN3RTlazH8dmaGskd/wCD8mDZS2R3MhXxqSy6DVGbNJyRAmrgLnzCOgp5/aJkQAC3sZ9GOce0x+X7ngd+qKrOzf+CZS/hnf4/aQvEj6Caq141nl74jpuwpfjb3PWKl9aATJocZkyNw92ITRmfnGu5oE0VIf+BJe8tyBvLN7dcPQ5txBEfDh/XBX3eCwpAJMeyN6XHioJKX9BbN1rCG5lt8jAurB6WAxeAVtt5maytoX9aYAWZMiK7FQ3HubkrDHvDPBJyaeyzLWgcXeox077xiCti7BaKssVO2itM6BO9gMyvC2hwnw5LjtItj1mY25wGRmMz5B8/9vMYMZ6Xmjf3DaczAUwL3RcW3NYqjbUc03pz45uAavC2ImNXtIBIoaaXh0T0rX6ZcQaJZxpax29KydecKDoDnkkx3owpVZoZryebXgG/sW34ddaoHsLwgKwBdxVoNO+L04g46JdXoJclPA/7GVPDz0voMCHIZymrBfRPf/xdqtq5w0EdiIAf7d6GogOjaUU9ujKMJJKw//nu3RmYziVWcaAHzkgKJZahRe+k2Kb8o+YsGFPFYoR936GAnJRnLn8sEMppuP2tHrij6SN/jSRbJll0HgsA/BKzPDhwSu0tiDt81HDZdxXusre5MRNzyiESOoKGSq7hc7ABHCIHSWyhbVNU=
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: elastic-recherche-entreprises-write
       labels:
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard
@@ -41,43 +45,89 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 data:
-  get-data.sh: >
+  sqlite.sh: >
     #!/bin/bash
 
 
-    # borrowed from annuaire entreprise  :
+    # exit when any command fails
 
-    # https://github.com/etalab/api-annuaire-entreprises/tree/master/db/init
-
-
-    geodir=\${DATA_DIR}/geo
+    set -e
 
 
-    mkdir -p $geodir
+    # download files, convert to SQLite and export to CSV
+
+
+    DATA_DIR=\${DATA_DIR:-\\"./data\\"}
+
+
+    mkdir -p \\"$DATA_DIR\\" || true
+
+
+    echo \\"-- Working in $(dirname \\"$0\\")\\"
+
+    cd \\"$(dirname \\"$0\\")\\" || exit
 
 
     echo \\"-- Download datasets\\"
 
 
-    for d in \`seq -w 1 19\` 2A 2B \`seq 21 74\` \`seq 76 95\` 98 \\"\\"; do
-      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_$d.csv.gz --directory-prefix=$geodir
-      gunzip \${geodir}/geo_siret_$d.csv.gz
+
+    if command -v apt-get &> /dev/null
+
+    then
+      apt-get update -y
+    fi
+
+
+    # install sqlite3 if not exists
+
+    if ! command -v sqlite3 &> /dev/null
+
+    then
+        echo \\"sqlite3 could not be found\\"
+        apt-get install -y sqlite3
+    fi
+
+    # install wget if not exists
+
+    if ! command -v wget &> /dev/null
+
+    then
+        echo \\"wget could not be found\\"
+        apt-get install -y wget
+    fi
+
+    # install unzip if not exists
+
+    if ! command -v unzip &> /dev/null
+
+    then
+        echo \\"unzip could not be found\\"
+        apt-get install -y unzip
+    fi
+
+
+    # geo siret par département
+
+    for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 \\"\\"; do
+      wget --progress=bar:force:noscroll -q --show-progress \\"https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_$d.csv.gz\\" --directory-prefix=\\"$DATA_DIR\\"
+      gunzip \\"\${DATA_DIR}/geo_siret_$d.csv.gz\\"
     done
 
 
-    #Cas particulier Paris
+    # Cas particulier Paris 75101-75120
 
-    for d in \`seq -w 1 20\`; do
-      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_751$d.csv.gz --directory-prefix=$geodir
-      gunzip \${geodir}/geo_siret_751$d.csv.gz
+    for d in $(seq -w 1 20); do
+      wget --progress=bar:force:noscroll -q --show-progress \\"https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_751$d.csv.gz\\" --directory-prefix=\\"$DATA_DIR\\"
+      gunzip \\"\${DATA_DIR}/geo_siret_751$d.csv.gz\\"
     done
 
 
-    #Cas particulier DOM
+    # Cas particulier DOM 971->978
 
-    for d in \`seq -w 1 8\`; do
-      wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_97$d.csv.gz --directory-prefix=$geodir
-      gunzip \${geodir}/geo_siret_97$d.csv.gz
+    for d in $(seq -w 1 8); do
+      wget --progress=bar:force:noscroll -q --show-progress \\"https://files.data.gouv.fr/geo-sirene/last/dep/geo_siret_97$d.csv.gz\\" --directory-prefix=\\"$DATA_DIR\\"
+      gunzip \\"\${DATA_DIR}/geo_siret_97$d.csv.gz\\"
     done
 
 
@@ -85,303 +135,322 @@ data:
 
     wget --progress=bar:force:noscroll -q --show-progress
     https://files.data.gouv.fr/insee-sirene/StockUniteLegale_utf8.zip
-    --directory-prefix=$DATA_DIR
+    --directory-prefix=\\"$DATA_DIR\\"
+
+    unzip \\"\${DATA_DIR}/StockUniteLegale_utf8.zip\\" -d \\"\${DATA_DIR}\\"
 
 
     # WEEZ data
 
     wget --progress=bar:force:noscroll -q --show-progress
-    https://www.data.gouv.fr/fr/datasets/r/a785345a-6e8c-4961-ae0a-bc00878e4f2e
-    -O \${DATA_DIR}/WEEZ.csv
-  assemble_data.py: |
-    \\"\\"\\"CDTN Entreprises data assembler
-
-    This script assembles data from different places and creates a new file that
-    will be used as source for our search index.
-
-    \\"\\"\\"
-    import argparse
-    import pandas as pd
-    import numpy as np
-    from os import listdir
-    from os.path import isfile, join
+    https://www.data.gouv.fr/fr/datasets/r/bfc3a658-c054-4ecc-ba4b-22f3f5789dc7
+    -O \\"\${DATA_DIR}/WEEZ.csv\\"
 
 
-    def read_siren(stock_unite_legale_file):
-        \\"\\"\\" Read SIREN Stock Unite Legale
-
-        Parameters
-        ----------
-        stock_unite_legale_file: str
-            The location of the CSV or ZIP file
-
-        Returns
-        -------
-        employeurs
-            a Pandas dataframe containing the list of all companies that are still open
-            and employ people
-        \\"\\"\\"
-        trancheEffectifsUniteLegale = \\"trancheEffectifsUniteLegale\\"
-        categorieJuridiqueUniteLegale = \\"categorieJuridiqueUniteLegale\\"
-        nomenclatureActivitePrincipaleUniteLegale = \\"nomenclatureActivitePrincipaleUniteLegale\\"
-        categorieEntreprise = \\"categorieEntreprise\\"
-        activitePrincipaleUniteLegale = \\"activitePrincipaleUniteLegale\\"
-
-        selection = [\\"siren\\", \\"sigleUniteLegale\\", \\"nomUniteLegale\\", \\"nomUsageUniteLegale\\",
-                     'denominationUniteLegale', \\"denominationUsuelle1UniteLegale\\", \\"denominationUsuelle2UniteLegale\\",
-                     \\"denominationUsuelle3UniteLegale\\", activitePrincipaleUniteLegale,
-                     trancheEffectifsUniteLegale, categorieJuridiqueUniteLegale,
-                     nomenclatureActivitePrincipaleUniteLegale, categorieEntreprise]
-
-        etatAdmin = \\"etatAdministratifUniteLegale\\"
-        caractereEmployeur = \\"caractereEmployeurUniteLegale\\"
-
-        # we only select columns in use and convert to categorical dtype
-        # in order to decrease the dataframe memory footprint
-        cols = selection + [etatAdmin, caractereEmployeur]
-        raw = pd.read_csv(stock_unite_legale_file, usecols=cols,
-                          dtype={ \\"siren\\": np.dtype(str), etatAdmin: \\"category\\", caractereEmployeur: \\"category\\",
-                                 trancheEffectifsUniteLegale: \\"category\\",
-                                 categorieJuridiqueUniteLegale: \\"category\\",
-                                 nomenclatureActivitePrincipaleUniteLegale: \\"category\\",
-                                 activitePrincipaleUniteLegale: \\"category\\",
-                                 categorieEntreprise: \\"category\\"}, )
-
-        is_ouvert = raw[etatAdmin] == \\"A\\"
-        is_employeur = raw[caractereEmployeur] == \\"O\\"
-        is_admin = raw[etatAdmin] == \\"A\\"
-
-        employeurs = raw[is_ouvert & is_employeur & is_admin]
-
-        return employeurs[selection]
+    echo \\"-- Import CSV datasets to sqlite\\"
 
 
-    def read_geo(geo_directory):
-        \\"\\"\\" Read GEO data
-
-        Parameters
-        ----------
-        geo_directory: str
-            The directory containing geo data for all regions
-
-        Returns
-        -------
-        all_geo
-            a Pandas dataframe containing geo information for all open companies
-        \\"\\"\\"
-        geo_files = [f for f in listdir(
-            geo_directory) if isfile(join(geo_directory, f))]
-        geo_selection = [\\"enseigne1Etablissement\\", \\"enseigne2Etablissement\\", \\"enseigne3Etablissement\\", \\"denominationUsuelleEtablissement\\", \\"activitePrincipaleEtablissement\\",
-                         'siren', 'siret', 'codePostalEtablissement', 'libelleCommuneEtablissement', \\"etatAdministratifEtablissement\\", \\"geo_adresse\\"]
-        geo = {}
-        for file in geo_files:
-            geo[file] = pd.read_csv(
-                geo_directory + file, dtype={\\"codePostalEtablissement\\": np.dtype(str),
-                                             \\"etatAdministratifEtablissement\\": \\"category\\",
-                                             \\"activitePrincipaleEtablissement\\": \\"category\\",
-                                             \\"siret\\": np.dtype(str),
-                                             \\"siren\\": np.dtype(str),
-                                             }, usecols=geo_selection
-            )
-
-        all_geo = pd.concat(geo.values(), ignore_index=True).dropna(
-            subset=['siret'])
-
-        all_geo = all_geo.astype(dtype={\\"codePostalEtablissement\\": np.dtype(str),
-                                        \\"etatAdministratifEtablissement\\": \\"category\\",
-                                        \\"activitePrincipaleEtablissement\\": \\"category\\",
-                                        \\"siret\\": np.dtype(str),
-                                        \\"siren\\": np.dtype(str),
-                                        })
-
-        all_geo = all_geo[all_geo[\\"etatAdministratifEtablissement\\"] == \\"A\\"]
-
-        return all_geo
+    sqlite3 -echo \\"\${DATA_DIR}/db.sqlite\\" \\".read import.sql\\"
 
 
-    def read_idcc(idcc_file):
-        \\"\\"\\" Read IDCC data
-
-        Parameters
-        ----------
-        idcc_file: str
-            The location of the CSV file containing associations between companies and their \\"convention collectives\\", (aka WEEZ)
-
-        Returns
-        -------
-        idccs
-            a Pandas dataframe containing siret / idcc associations
-        \\"\\"\\"
-        idccs = pd.read_csv(idcc_file, dtype={\\"SIRET\\": np.dtype(str)}, usecols=[\\"SIRET\\", \\"IDCC\\"]).rename(
-            columns={\\"SIRET\\": \\"siret\\", \\"IDCC\\": \\"idcc\\"})
-      
-        return idccs
+    echo \\"-- Export sqlite data to \${DATA_DIR}/assembly.csv\\"
 
 
-    def assemble(siren, geo, idcc, output):
-        sirenGeo = pd.merge(siren, geo, on='siren') 
-        merged = pd.merge(sirenGeo, idcc, how='left', on='siret') 
+    sqlite3 -header -csv \\"\${DATA_DIR}/db.sqlite\\" \\".read export.sql\\" >
+    \\"\${DATA_DIR}/assembly.csv\\"
+  import.sql: |-
+    --- sqlite3 -echo db.sqlite \\".read import.sql\\"
+    ---
+    --- import local CSVs to sqlite database
+    ---
 
-        # add etablissement counts
-        etsCounts = merged.siren.value_counts().rename_axis(
-            'siren').reset_index(name='etablissements')
-        withEts = pd.merge(merged, etsCounts, on='siren')
+    PRAGMA synchronous = OFF;
 
-        # persits as CSV file
-        withEts.astype({'idcc': 'Int64'}).to_csv(output)
+    DROP TABLE IF EXISTS weez;
+    DROP TABLE IF EXISTS geo_siret;
+    DROP TABLE IF EXISTS stock;
+
+    .mode csv
+    .import data/WEEZ.csv weez
+    .import data/StockUniteLegale_utf8.csv stock
+    .import data/geo_siret_.csv geo_siret
+    .import data/geo_siret_01.csv geo_siret
+    .import data/geo_siret_02.csv geo_siret
+    .import data/geo_siret_03.csv geo_siret
+    .import data/geo_siret_04.csv geo_siret
+    .import data/geo_siret_05.csv geo_siret
+    .import data/geo_siret_06.csv geo_siret
+    .import data/geo_siret_07.csv geo_siret
+    .import data/geo_siret_08.csv geo_siret
+    .import data/geo_siret_09.csv geo_siret
+    .import data/geo_siret_10.csv geo_siret
+    .import data/geo_siret_11.csv geo_siret
+    .import data/geo_siret_12.csv geo_siret
+    .import data/geo_siret_13.csv geo_siret
+    .import data/geo_siret_14.csv geo_siret
+    .import data/geo_siret_15.csv geo_siret
+    .import data/geo_siret_16.csv geo_siret
+    .import data/geo_siret_17.csv geo_siret
+    .import data/geo_siret_18.csv geo_siret
+    .import data/geo_siret_19.csv geo_siret
+    .import data/geo_siret_21.csv geo_siret
+    .import data/geo_siret_22.csv geo_siret
+    .import data/geo_siret_23.csv geo_siret
+    .import data/geo_siret_24.csv geo_siret
+    .import data/geo_siret_25.csv geo_siret
+    .import data/geo_siret_26.csv geo_siret
+    .import data/geo_siret_27.csv geo_siret
+    .import data/geo_siret_28.csv geo_siret
+    .import data/geo_siret_29.csv geo_siret
+    .import data/geo_siret_2A.csv geo_siret
+    .import data/geo_siret_2B.csv geo_siret
+    .import data/geo_siret_30.csv geo_siret
+    .import data/geo_siret_31.csv geo_siret
+    .import data/geo_siret_32.csv geo_siret
+    .import data/geo_siret_33.csv geo_siret
+    .import data/geo_siret_34.csv geo_siret
+    .import data/geo_siret_35.csv geo_siret
+    .import data/geo_siret_36.csv geo_siret
+    .import data/geo_siret_37.csv geo_siret
+    .import data/geo_siret_38.csv geo_siret
+    .import data/geo_siret_39.csv geo_siret
+    .import data/geo_siret_40.csv geo_siret
+    .import data/geo_siret_41.csv geo_siret
+    .import data/geo_siret_42.csv geo_siret
+    .import data/geo_siret_43.csv geo_siret
+    .import data/geo_siret_44.csv geo_siret
+    .import data/geo_siret_45.csv geo_siret
+    .import data/geo_siret_46.csv geo_siret
+    .import data/geo_siret_47.csv geo_siret
+    .import data/geo_siret_48.csv geo_siret
+    .import data/geo_siret_49.csv geo_siret
+    .import data/geo_siret_50.csv geo_siret
+    .import data/geo_siret_51.csv geo_siret
+    .import data/geo_siret_52.csv geo_siret
+    .import data/geo_siret_53.csv geo_siret
+    .import data/geo_siret_54.csv geo_siret
+    .import data/geo_siret_55.csv geo_siret
+    .import data/geo_siret_56.csv geo_siret
+    .import data/geo_siret_57.csv geo_siret
+    .import data/geo_siret_58.csv geo_siret
+    .import data/geo_siret_59.csv geo_siret
+    .import data/geo_siret_60.csv geo_siret
+    .import data/geo_siret_61.csv geo_siret
+    .import data/geo_siret_62.csv geo_siret
+    .import data/geo_siret_63.csv geo_siret
+    .import data/geo_siret_64.csv geo_siret
+    .import data/geo_siret_65.csv geo_siret
+    .import data/geo_siret_66.csv geo_siret
+    .import data/geo_siret_67.csv geo_siret
+    .import data/geo_siret_68.csv geo_siret
+    .import data/geo_siret_69.csv geo_siret
+    .import data/geo_siret_70.csv geo_siret
+    .import data/geo_siret_71.csv geo_siret
+    .import data/geo_siret_72.csv geo_siret
+    .import data/geo_siret_73.csv geo_siret
+    .import data/geo_siret_74.csv geo_siret
+    .import data/geo_siret_75101.csv geo_siret
+    .import data/geo_siret_75102.csv geo_siret
+    .import data/geo_siret_75103.csv geo_siret
+    .import data/geo_siret_75104.csv geo_siret
+    .import data/geo_siret_75105.csv geo_siret
+    .import data/geo_siret_75106.csv geo_siret
+    .import data/geo_siret_75107.csv geo_siret
+    .import data/geo_siret_75108.csv geo_siret
+    .import data/geo_siret_75109.csv geo_siret
+    .import data/geo_siret_75110.csv geo_siret
+    .import data/geo_siret_75111.csv geo_siret
+    .import data/geo_siret_75112.csv geo_siret
+    .import data/geo_siret_75113.csv geo_siret
+    .import data/geo_siret_75114.csv geo_siret
+    .import data/geo_siret_75115.csv geo_siret
+    .import data/geo_siret_75116.csv geo_siret
+    .import data/geo_siret_75117.csv geo_siret
+    .import data/geo_siret_75118.csv geo_siret
+    .import data/geo_siret_75119.csv geo_siret
+    .import data/geo_siret_75120.csv geo_siret
+    .import data/geo_siret_76.csv geo_siret
+    .import data/geo_siret_77.csv geo_siret
+    .import data/geo_siret_78.csv geo_siret
+    .import data/geo_siret_79.csv geo_siret
+    .import data/geo_siret_80.csv geo_siret
+    .import data/geo_siret_81.csv geo_siret
+    .import data/geo_siret_82.csv geo_siret
+    .import data/geo_siret_83.csv geo_siret
+    .import data/geo_siret_84.csv geo_siret
+    .import data/geo_siret_85.csv geo_siret
+    .import data/geo_siret_86.csv geo_siret
+    .import data/geo_siret_87.csv geo_siret
+    .import data/geo_siret_88.csv geo_siret
+    .import data/geo_siret_89.csv geo_siret
+    .import data/geo_siret_90.csv geo_siret
+    .import data/geo_siret_91.csv geo_siret
+    .import data/geo_siret_92.csv geo_siret
+    .import data/geo_siret_93.csv geo_siret
+    .import data/geo_siret_94.csv geo_siret
+    .import data/geo_siret_95.csv geo_siret
+    .import data/geo_siret_971.csv geo_siret
+    .import data/geo_siret_972.csv geo_siret
+    .import data/geo_siret_973.csv geo_siret
+    .import data/geo_siret_974.csv geo_siret
+    .import data/geo_siret_975.csv geo_siret
+    .import data/geo_siret_976.csv geo_siret
+    .import data/geo_siret_977.csv geo_siret
+    .import data/geo_siret_978.csv geo_siret
+    .import data/geo_siret_98.csv geo_siret
+
+    CREATE INDEX 'geo_siret_idx' ON 'geo_siret' ('siret');
+    CREATE INDEX 'geo_siren_idx' ON 'geo_siret' ('siren');
+    CREATE INDEX 'weez_siret_idx' ON 'weez' ('SIRET');
+    CREATE INDEX 'stock_siren_idx' ON 'stock' ('siren');
+
+    SELECT \\"weez\\", count(*) from weez;
+    SELECT \\"stock\\", count(*) from stock;
+    SELECT \\"geo_siret\\", count(*) from geo_siret;
+  export.sql: |+
+    --- Output index data
+    --- sqlite3 -header -csv db.sqlite \\".read export.sql\\" > output.csv
+
+    PRAGMA synchronous = OFF;
+
+    SELECT 
+        stock.siren,
+        stock.sigleUniteLegale,
+        stock.nomUniteLegale,
+        stock.prenom1UniteLegale,
+        stock.nomUsageUniteLegale,
+        stock.denominationUniteLegale,
+        stock.denominationUsuelle1UniteLegale,
+        stock.denominationUsuelle2UniteLegale,
+        stock.denominationUsuelle3UniteLegale,
+        stock.activitePrincipaleUniteLegale,
+        stock.trancheEffectifsUniteLegale,
+        stock.categorieJuridiqueUniteLegale,
+        stock.nomenclatureActivitePrincipaleUniteLegale,
+        stock.categorieEntreprise,
+        stock.etatAdministratifUniteLegale,
+        stock.caractereEmployeurUniteLegale,
+        geo_siret.siret,
+        geo_siret.codePostalEtablissement,
+        geo_siret.libelleCommuneEtablissement,
+        geo_siret.etatAdministratifEtablissement,
+        geo_siret.enseigne1Etablissement,
+        geo_siret.enseigne2Etablissement,
+        geo_siret.enseigne3Etablissement,
+        geo_siret.denominationUsuelleEtablissement,
+        geo_siret.activitePrincipaleEtablissement,
+        geo_siret.geo_adresse,
+        geo_siret.complementAdresseEtablissement,
+        geo_siret.numeroVoieEtablissement,
+        geo_siret.indiceRepetitionEtablissement,
+        geo_siret.typeVoieEtablissement,
+        geo_siret.libelleVoieEtablissement,
+        weez.IDCC as idcc,
+        (select count(*) FROM geo_siret where siren=stock.siren) etablissements
+        from stock, geo_siret
+            left join weez on weez.SIRET=geo_siret.siret
+            where stock.siren=geo_siret.siren;
 
 
-    def main():
-        parser = argparse.ArgumentParser(description=__doc__)
-        parser.add_argument(
-            'siren_file',
-            type=str,
-            help=\\"Location of the StockUniteLegale CSV or ZIP file\\"
-        )
-        parser.add_argument(
-            'geo_directory',
-            type=str,
-            help=\\"Location of the directory containing all the Geo CSV files\\"
-        )
-        parser.add_argument(
-            'idcc_file',
-            type=str,
-            help=\\"Location of the siret/idcc CSV file (aka WEEZ)\\"
-        )
-        parser.add_argument(
-            'output_file',
-            type=str,
-            help=\\"Location of the output file\\"
-        )
-
-        args = parser.parse_args()
-
-        print(\\"Read SIREN data\\")
-        siren = read_siren(args.siren_file)
-
-        print(\\"Read GEO data\\")
-        geo = read_geo(args.geo_directory)
-
-        print(\\"Read IDCC data\\")
-        idcc = read_idcc(args.idcc_file)
-
-        print(\\"Assemble datasets\\")
-        assemble(siren, geo, idcc, args.output_file)
-
-
-    if __name__ == \\"__main__\\":
-        main()
-  requirements.txt: |
-    numpy
-    pandas
 metadata:
-  name: config-map-files-0123456
+  name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-0123456
+  name: update-index-0123456789abcdefghijklmnopqrstuvwxyz0123
   annotations:
-    app.gitlab.com/app: socialgouv-recherche-entreprises
-    app.gitlab.com/env: preprod-dev42
-    app.gitlab.com/env.name: preprod-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/recherche-entreprises
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: v1-2-3-recherche-entreprises
-    component: v1-2-3-recherche-entreprises
+    application: recherche-entreprises
+    component: recherche-entreprises
     owner: recherche-entreprises
     team: recherche-entreprises
     cert: wildcard
-  namespace: recherche-entreprises-85-preprod-dev42
+  namespace: recherche-entreprises-preprod
 spec:
   backoffLimit: 3
   template:
     spec:
       containers:
         - name: update-index
-          image: >-
-            harbor.fabrique.social.gouv.fr/cdtn/recherche-entreprises-index:1.2.3
+          image: ghcr.io/socialgouv/recherche-entreprises/index:1.2.3
           volumeMounts:
             - name: data
               mountPath: /data
           env:
             - name: ASSEMBLY_FILE
               value: /data/assembly.csv
+            - name: ELASTICSEARCH_INDEX_NAME
+              value: search-entreprises
           envFrom:
             - secretRef:
                 name: elastic-recherche-entreprises-write
           resources:
             limits:
-              cpu: '2'
-              memory: 18Gi
+              cpu: '4'
+              memory: 5Gi
             requests:
-              cpu: '1'
-              memory: 14Gi
+              cpu: '2'
+              memory: 2Gi
       restartPolicy: Never
       volumes:
         - name: data
           emptyDir: {}
         - configMap:
-            name: config-map-files-0123456
+            name: config-map-files-0123456789abcdefghijklmnopqrstuvwxyz0123
             defaultMode: 511
           name: local-files
       initContainers:
         - args:
-            - '-c'
-            - >
-
-              apt-get update -y && apt-get install -y wget 
-
-
-              export DATA_DIR=\\"/data\\"
-
-
-              cd /data
-
-
-              echo \\"running get-data.sh...\\"
-
-
-              /mnt/scripts/get-data.sh
-
-
-              pip3 install -r /mnt/scripts/requirements.txt
-
-
-              echo \\"running assemble_data.py...\\"
-
-
-              python3 /mnt/scripts/assemble_data.py
-              $DATA_DIR/StockUniteLegale_utf8.zip  $DATA_DIR/geo/
-              $DATA_DIR/WEEZ.csv $DATA_DIR/assembly.csv
+            - /mnt/scripts/sqlite.sh
           command:
             - sh
-          image: python:3.9.4
+          image: ubuntu:18.04
           imagePullPolicy: Always
-          name: download-data
+          name: download-build-data
+          env:
+            - name: DATA_DIR
+              value: /mnt/scripts/data
+          resources:
+            limits:
+              cpu: '4'
+              memory: 2Gi
+            requests:
+              cpu: '2'
+              memory: 1Gi
           volumeMounts:
             - name: data
-              mountPath: /data
+              mountPath: /mnt/scripts/data
             - mountPath: /mnt/scripts
               name: local-files
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-recherche-entreprises
-        app.gitlab.com/env: preprod-dev42
-        app.gitlab.com/env.name: preprod-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/recherche-entreprises
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
-        application: v1-2-3-recherche-entreprises
-        component: v1-2-3-recherche-entreprises
+        application: recherche-entreprises
+        component: recherche-entreprises
         owner: recherche-entreprises
         team: recherche-entreprises
         cert: wildcard

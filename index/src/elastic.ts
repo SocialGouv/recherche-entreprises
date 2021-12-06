@@ -12,9 +12,15 @@ const indexPattern = `${INDEX_NAME}-*`;
 
 const auth = API_KEY ? { apiKey: API_KEY } : undefined;
 
+// https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/master/basic-config.html
+
 const esClientConfig: ClientOptions = {
   auth,
   node: ELASTICSEARCH_URL,
+  agent: false,
+  maxRetries: 50,
+  requestTimeout: 30000,
+  disablePrototypePoisoningProtection: true,
 };
 
 export const esClient = new Client(esClientConfig);
@@ -99,8 +105,10 @@ export const deleteOldIndices = async (indexToKeep: string): Promise<void> => {
     );
 };
 
-export const updateAlias = (newIndexName: string) =>
-  esClient.indices.updateAliases({
+export const updateAlias = (newIndexName: string) => {
+  console.log(`Remove alias ${indexPattern} for ${INDEX_NAME}`);
+  console.log(`Set Alias ${INDEX_NAME} to ${newIndexName}`);
+  return esClient.indices.updateAliases({
     body: {
       actions: [
         {
@@ -118,6 +126,7 @@ export const updateAlias = (newIndexName: string) =>
       ],
     },
   });
+};
 
 export const createIndex = async (): Promise<string> => {
   const id = Math.floor(Math.random() * 10e8);

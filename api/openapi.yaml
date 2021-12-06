@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  description: "Document de l'API recherche-entreprises"
+  version: "1.0.0"
+  title: "API recherche-entreprises"
+  contact:
+    email: "codedutravailnumerique@travail.gouv.fr"
+  license:
+    name: "Apache-2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api.recherche-entreprises.fabrique.social.gouv.fr"
+basePath: "/api/v1"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /search:
+    get:
+      summary: "Recherche entreprise"
+      description: "Reherche d'entreprise par nom d'établissement, raison sociale"
+      operationId: "search"
+      tags:
+        - "Recherche"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          name: "query"
+          description: "Texte de la recherche"
+          required: true
+          type: string
+          example: "Michelin"
+          value: "Michelin"
+        - in: "query"
+          name: "address"
+          description: "Localisation de l'entreprise"
+          required: false
+          example: "Lyon"
+          value: "Lyon"
+          type: string
+        - in: "query"
+          name: "limit"
+          description: "Nombre de résultats max"
+          required: false
+          example: 100
+          value: 100
+          default: 100
+          type: integer
+        - in: "query"
+          name: "open"
+          description: "Retourne uniquement les établissements ouverts"
+          required: false
+          example: false
+          value: false
+          default: true
+          type: boolean
+        - in: "query"
+          name: "employer"
+          description: "Retourne uniquement les établissements avec des employés déclarés"
+          required: false
+          example: false
+          value: false
+          default: false
+          type: boolean
+        - in: "query"
+          name: "convention"
+          description: "Retourne uniquement les établissements avec une convention collective déclarée"
+          required: false
+          example: false
+          value: false
+          default: false
+          type: boolean
+        - in: "query"
+          name: "ranked"
+          description: "Si 'true', ordonne les résultats par taille d'établissement, basée sur la tranche effectif de l'unité légale. Si 'false', ordonné par SIRET décroissant."
+          required: false
+          example: true
+          value: true
+          default: true
+          type: boolean
+      responses:
+        "500":
+          description: "Unexpexted error occured"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

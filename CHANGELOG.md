@@ -1,3 +1,37 @@
+## [1.6.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.2...v1.6.3) (2021-12-03)
+
+
+### Bug Fixes
+
+* **ci:** fix api ([aeababf](https://github.com/SocialGouv/recherche-entreprises/commit/aeababf1d99a7a80a02da8b0f8ea0252d5dc371e))
+
+## [1.6.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.1...v1.6.2) (2021-12-03)
+
+
+### Bug Fixes
+
+* dumy ([b4d057b](https://github.com/SocialGouv/recherche-entreprises/commit/b4d057b6fd1566182c0120eb1b5f5de2358e278b))
+
+## [1.6.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.0...v1.6.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* update weez data.gouv datasource ([0fefe67](https://github.com/SocialGouv/recherche-entreprises/commit/0fefe67dbc902d9b65afa136616141216333e465))
+
+# [1.6.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.8...v1.6.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* **k8s:** adjust requests/limits ([#96](https://github.com/SocialGouv/recherche-entreprises/issues/96)) ([9655358](https://github.com/SocialGouv/recherche-entreprises/commit/9655358495c29ab7320e9eb8624ac1cd3186777d))
+* **k8s:** rm useless ([#97](https://github.com/SocialGouv/recherche-entreprises/issues/97)) ([ee0972f](https://github.com/SocialGouv/recherche-entreprises/commit/ee0972f35c790530cf641b414738969574d58d7d))
+
+
+### Features
+
+* use sqlite and more ([#108](https://github.com/SocialGouv/recherche-entreprises/issues/108)) ([b8168f0](https://github.com/SocialGouv/recherche-entreprises/commit/b8168f0465c61c09a14abcda3da79698dfc5bf80)), closes [#73](https://github.com/SocialGouv/recherche-entreprises/issues/73) [#112](https://github.com/SocialGouv/recherche-entreprises/issues/112) [#50](https://github.com/SocialGouv/recherche-entreprises/issues/50)
+
 ## [1.5.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.5.7...v1.5.8) (2021-09-28)
 
 

@@ -2,7 +2,7 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
-  "activitePrincipale": "Édition de livres",
+  "caractereEmployeurUniteLegale": "O",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -24,15 +24,12 @@ Object {
       "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987. ",
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
     },
-    Object {
-      "idcc": 9999,
-      "shortTitle": "",
-    },
   ],
-  "etablissements": 35,
+  "etablissements": 133,
+  "etatAdministratifUniteLegale": "A",
   "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
-  "matching": 35,
+  "matching": 133,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "siren": "855200507",
 }
@@ -41,19 +38,28 @@ Object {
 exports[`Test etablissement search correct siret 1`] = `
 Object {
   "activitePrincipale": "Traitement de données, hébergement et activités connexes",
-  "address": "107 Rue Servient 69003 Lyon",
-  "convention": Object {
-    "etat": "VIGUEUR_ETEN",
-    "id": "KALICONT000005635597",
-    "idcc": 45,
-    "mtime": 1562873918,
-    "shortTitle": "Caoutchouc",
-    "texte_de_base": "KALITEXT000005673838",
-    "title": "Convention collective nationale du caoutchouc du 6 mars 1953. Étendue par arrêté du 29 mai 1969 JORF 18 juin 1969 ",
-    "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635597",
-  },
-  "etablissements": 35,
+  "address": "107 RUE SERVIENT 69003 LYON",
+  "caractereEmployeurUniteLegale": "O",
+  "categorieEntreprise": "GE",
+  "conventions": Array [
+    Object {
+      "etat": "VIGUEUR_ETEN",
+      "id": "KALICONT000005635597",
+      "idcc": 45,
+      "mtime": 1562873918,
+      "shortTitle": "Caoutchouc",
+      "texte_de_base": "KALITEXT000005673838",
+      "title": "Convention collective nationale du caoutchouc du 6 mars 1953. Étendue par arrêté du 29 mai 1969 JORF 18 juin 1969 ",
+      "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635597",
+    },
+  ],
+  "etablissements": 133,
+  "etatAdministratifEtablissement": "A",
+  "etatAdministratifUniteLegale": "A",
   "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
+  "idccs": Array [
+    "0045",
+  ],
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "matching": 1,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
@@ -64,7 +70,146 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Édition de livres",
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "allMatchingEtablissements": Array [
+    Object {
+      "address": "7 AVENUE DU PRÉSIDENT RENÉ COTY 10600 LA CHAPELLE-SAINT-LUC",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050701171",
+    },
+    Object {
+      "address": "PLACE ALEXANDRE DIEU 18230 SAINT-DOULCHARD",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701106",
+    },
+    Object {
+      "address": "ZAC DE L’ARNAHURT 33650 LA BRÈDE",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050702823",
+    },
+    Object {
+      "address": "RUE DE CHARLIEU 42300 ROANNE",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050701445",
+    },
+    Object {
+      "address": "ZI BLAVOZY-ST GERM LAPRADE 43700 BLAVOZY",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701866",
+    },
+    Object {
+      "address": "AVENUE EDOUARD MICHELIN 56000 VANNES",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700637",
+    },
+    Object {
+      "address": "ZA PLATEAU D’HERIN 59220 ROUVIGNIES",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703086",
+    },
+    Object {
+      "address": "107 RUE SERVIENT 69003 LYON",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703169",
+    },
+    Object {
+      "address": "21 RUE MARCELLIN BERTHELOT 86000 POITIERS",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700132",
+    },
+    Object {
+      "address": "ROUTE D’ARLES 13300 SALON-DE-PROVENCE",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703094",
+    },
+    Object {
+      "address": "1 RUE GUTENBERG 37300 JOUÉ-LÈS-TOURS",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050700850",
+    },
+    Object {
+      "address": "16 RUE DE TOUTLEMONDE 49300 CHOLET",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050700710",
+    },
+    Object {
+      "address": "PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND",
+      "idccs": Array [
+        "0045",
+        "1486",
+        "9999",
+      ],
+      "siret": "85520050700017",
+    },
+    Object {
+      "address": "ZI DE FELET 63300 THIERS",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050702278",
+    },
+    Object {
+      "address": "USINE MICHELIN DE BLANZY LA FIOLLE (ZONE INDUSTRIELLE) BLANZY",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050700306",
+    },
+    Object {
+      "address": "ROUTE DE NANTES 85000 LA ROCHE-SUR-YON",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701379",
+    },
+    Object {
+      "address": "RUE DU XAY 88190 GOLBEY",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700108",
+    },
+    Object {
+      "address": "27 COURS DE L’ILE SEGUIN 92100 BOULOGNE-BILLANCOURT",
+      "idccs": Array [
+        "0045",
+        "1486",
+        "9999",
+      ],
+      "siret": "85520050703144",
+    },
+  ],
+  "caractereEmployeurUniteLegale": "O",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -87,10 +232,11 @@ Object {
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
     },
   ],
-  "etablissements": 35,
+  "etablissements": 133,
+  "etatAdministratifUniteLegale": "A",
   "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES <b><u>MICHELIN</b></u>",
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
-  "matching": 20,
+  "matching": 18,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "siren": "855200507",
 }

@@ -8,7 +8,7 @@ export type Enterprise = {
   siren: string;
   trancheEffectifsUniteLegale: number;
 
-  // categorieEntreprise: 'PME',
+  prenom1UniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
   sigleUniteLegale: string;
@@ -25,80 +25,140 @@ export type Enterprise = {
 
   etablissements: number;
 
-  // categorieJuridiqueUniteLegale: '5599',
+  categorieJuridiqueUniteLegale: string;
   activitePrincipaleUniteLegale: string;
   activitePrincipaleEtablissement: string;
 
-  // nomenclatureActivitePrincipaleUniteLegale: 'NAFRev2',
+  nomenclatureActivitePrincipaleUniteLegale: string;
   siret: string;
   codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
 
-  // etatAdministratifEtablissement: 'A',
   // MOIS: '2020-07',
+  // DATE_MAJ: '2020/08/28'
 
-  idcc: string | undefined;
+  idccs: string[];
+
   geo_adresse: string;
 
-  // DATE_MAJ: '2020/08/28'
+  categorieEntreprise: string;
+  etatAdministratifUniteLegale: string;
+  caractereEmployeurUniteLegale: string;
+  etatAdministratifEtablissement: string;
+
+  complementAdresseEtablissement: string;
+  numeroVoieEtablissement: string;
+  indiceRepetitionEtablissement: string;
+  typeVoieEtablissement: string;
+  libelleVoieEtablissement: string;
 };
 
 export const mappings = {
   properties: {
     activitePrincipale: { type: "keyword" },
-    address: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
+    activitePrincipaleEtablissement: { type: "keyword" },
+    activitePrincipaleUniteLegale: { type: "keyword" },
+
+    caractereEmployeurUniteLegale: { type: "keyword" },
+    categorieEntreprise: { type: "keyword" },
+
+    categorieJuridiqueUniteLegale: { type: "keyword" },
     codePostalEtablissement: { type: "keyword" },
-
     convention: { type: "keyword" },
-    cp: { type: "keyword" },
     denominationUniteLegale: { type: "keyword" },
-    denominationUsuelle1UniteLegale: { type: "keyword" },
 
+    denominationUsuelle1UniteLegale: { type: "keyword" },
     denominationUsuelle2UniteLegale: { type: "keyword" },
     denominationUsuelle3UniteLegale: { type: "keyword" },
     denominationUsuelleEtablissement: { type: "keyword" },
 
     enseigne1Etablissement: { type: "keyword" },
+
     enseigne2Etablissement: { type: "keyword" },
     enseigne3Etablissement: { type: "keyword" },
+
     etablissements: { type: "rank_feature" },
 
-    idcc: {
+    etatAdministratifEtablissement: { type: "keyword" },
+    etatAdministratifUniteLegale: { type: "keyword" },
+
+    geo_adresse: {
+      analyzer: "french_indexing",
+      type: "text",
       fields: {
-        number: {
-          type: "integer",
+        keyword: {
+          type: "keyword",
         },
       },
+    },
+
+    idccs: {
       type: "keyword",
     },
-    libelleCommuneEtablissement: { type: "keyword" },
+
+    conventions: {
+      type: "keyword",
+    },
+
+    libelleCommuneEtablissement: {
+      analyzer: "french_indexing",
+      type: "text",
+      fields: {
+        keyword: {
+          type: "keyword",
+        },
+      },
+    },
+
     naming: {
       analyzer: "french_indexing",
       similarity: "bm25_no_norm_length",
       type: "text",
     },
+
+    prenom1UniteLegale: { type: "keyword" },
     nomUniteLegale: { type: "keyword" },
-
     nomUsageUniteLegale: { type: "keyword" },
+
+    nomenclatureActivitePrincipaleUniteLegale: { type: "keyword" },
     sigleUniteLegale: { type: "keyword" },
-
     siren: { type: "keyword" },
-
     siret: { type: "keyword" },
 
     siretRank: { type: "rank_feature" },
-
     trancheEffectifsUniteLegale: { type: "rank_feature" },
 
-    ville: {
-      analyzer: "french_indexing",
-      type: "text",
-    },
     withIdcc: { type: "boolean" },
   },
+};
+
+const buildAddress = (enterprise: Enterprise) => {
+  if (enterprise.geo_adresse) {
+    // the second option is upper case, so we make it uppercase too
+    return enterprise.geo_adresse.toUpperCase();
+  } else {
+    const {
+      complementAdresseEtablissement,
+      numeroVoieEtablissement,
+      indiceRepetitionEtablissement,
+      typeVoieEtablissement,
+      libelleVoieEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
+    } = enterprise;
+
+    return [
+      complementAdresseEtablissement,
+      numeroVoieEtablissement,
+      indiceRepetitionEtablissement,
+      typeVoieEtablissement,
+      libelleVoieEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
+    ]
+      .filter((e) => e)
+      .join(" ");
+  }
 };
 
 export const mapEnterprise = (enterprise: Enterprise) => {
@@ -115,6 +175,8 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   const naming = Array.from(
     new Set([
+      enterprise.prenom1UniteLegale,
+
       enterprise.nomUniteLegale,
       enterprise.nomUsageUniteLegale,
       enterprise.sigleUniteLegale,
@@ -145,24 +207,26 @@ export const mapEnterprise = (enterprise: Enterprise) => {
       ? codesNaf.get(codeActivitePrincipale)
       : undefined;
 
-  const convention = enterprise.idcc
-    ? ccMap.get(parseInt(enterprise.idcc))?.shortTitle
+  const conventions = enterprise.idccs
+    ? enterprise.idccs.map((idcc) => ccMap.get(parseInt(idcc))?.shortTitle)
     : undefined;
 
+  // TODO should we filter deprecated IDCC ? #105
+  // for now, filter lower than 5001
   const withIdcc =
-    (enterprise.idcc &&
-      parseInt(enterprise.idcc) !== 0 &&
-      parseInt(enterprise.idcc) !== 9999) ||
+    (enterprise.idccs &&
+      enterprise.idccs
+        .map((idcc) => parseInt(idcc))
+        .find((idcc) => idcc < 5001 && idcc > 0) !== undefined) ||
     false;
+
+  enterprise.geo_adresse = buildAddress(enterprise);
 
   return {
     activitePrincipale,
-    address: enterprise.geo_adresse,
-    convention,
-    cp: enterprise.codePostalEtablissement || undefined,
+    conventions,
     naming,
     siretRank,
-    ville: enterprise.libelleCommuneEtablissement,
     withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)

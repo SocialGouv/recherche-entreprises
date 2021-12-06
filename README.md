@@ -14,7 +14,7 @@ Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fab
 
 ## Étapes :
 
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5QeUFzc2VtYmx5wqBcbmdlb19zaXJldC5jc3YtLT5QeUFzc2VtYmx5wqBcbnNpcmV0MmlkY2MuY3N2LS0-UHlBc3NlbWJsecKgXG5QeUFzc2VtYmx5LS0-YXNzZW1ibHkuY3N2LS0-aW5kZXgtLT5FbGFzdGljU2VhcmNoLS0-QVBJW0FQSSBIVFRQMV1cbkVsYXN0aWNTZWFyY2gtLT5BUEkyW0FQSSBIVFRQMl1cbkVsYXN0aWNTZWFyY2gtLT5DbGllbnRbQ2xpZW50IEVTXSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjoie30iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
 
 ## Données :
 
@@ -35,32 +35,16 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 - node
 - yarn
 - docker et docker-compose
-- python3 et pip
 - wget
 
 ### Assemblage des données
 
-Cette étape génère un fichier CSV qui aggrège les différentes sources de données.
+Le script `sqlite.sh` permet de permet de télécharger les CSV, les importer dans SQLite pour les aggréger et les re-exporter en CSV.
 
-Cette étape doit être réalisée dans le répertoire `assembly`
+Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
-```sh
-cd assembly
+Cette opération dure environ 30 minutes.
 
-# Téléchargement des datasets (8GB)
-DATA_DIR=./data scripts/get-data.sh
-
-# installation des dépendance
-python3 -m pip install -r requirements.txt
-
-# Création du répertoire qui va recevoir le fichier assemblé
-mkdir output
-
-# Assemblage des fichiers avec Python (numpy & pandas)
-DATA_DIR=./data/ OUTPUT_DIR=./output scripts/assemble.sh
-```
-
-Au final, le fichier `./output/assembly.csv` fait environ 600Mo
 
 ### Indexation dans Elastic Search
 
@@ -70,44 +54,18 @@ Cette étape se déroule dans le répertoire `index`.
 
 La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-aliases.html) d'ElasticSearch pour éviter les downtimes.
 
-Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écrire sur ces index. **Cette étape n'est pas nécessaire pour le développement local.**
-
-Pour lancer le serveur :
-
-```sh
-# en partant de la racine du projet
-
-# Lancement avec logs
-docker-compose up
-
-# ou pour lancer le serveur en mode démon
-docker-compose up --detach
-```
-
 Pour lancer une indexation :
 
 ```sh
-# en partant de la racine du projet
-cd assembly
-
-yarn install
-yarn start
+yarn
+ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./data/assembly.csv yarn start
 ```
 
-Le script lancé avec `yarn start` peut être configuré avec des variables d'énvironements :
-
-| Nom                      | Description                      | Valeur par défaut                 |
-| ------------------------ | -------------------------------- | --------------------------------- |
-| ELASTICSEARCH_URL        | URL d'ES                         | http://localhost:92000            |
-| ELASTICSEARCH_API_KEY    | API avec droit d'écriture        | '' _ne pas utiliser en local_     |
-| ELASTICSEARCH_INDEX_NAME | Nom de l'index                   | 'recherche-entreprises'           |
-| ASSEMBLY_FILE            | chemin vers le fichier consolidé | `../assembly/output/assembly.csv` |
+Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écrire sur ces index. **Cette étape n'est pas nécessaire pour le développement local.**
 
 ### Lancement de l'API
 
-Cette étape permet de lancer l'API qui va servir les requêtes jusqu'à ElasticSearch.
-
-Cette étape s'effectue dans le dossier `api` et le serveur doit être préalablement lancé (voir étape précédente)
+Cette étape permet de lancer l'API de démo qui va servir les requêtes jusqu'à ElasticSearch.
 
 ```sh
 # En partant de la racine du projet
@@ -118,3 +76,9 @@ yarn build
 
 ELASTICSEARCH_URL=http://localhost:9200 yarn start
 ```
+
+## Projets relatifs
+
+- Annuaire-entreprises : https://annuaire-entreprises.data.gouv.fr
+- API Entreprise : https://entreprise.api.gouv.fr/catalogue/
+

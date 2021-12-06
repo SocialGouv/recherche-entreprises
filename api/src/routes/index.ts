@@ -1,4 +1,5 @@
 import Router from "koa-router";
+import yamljs from "yamljs";
 
 import pkg from "../../package.json";
 import { search, searchEntreprise, searchEtablissement } from "../lib";
@@ -7,24 +8,31 @@ export const router = new Router();
 
 export const API_PREFIX = "/api/v1";
 
+const parseBoolean = (param: string, defaultz = true) =>
+  param === undefined ? defaultz : param.toLowerCase() !== "false";
+
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { q: query, a: address, l: limit, onlyWithConvention } = ctx.query;
+  const { query, address, limit, convention, open, employer, ranked } =
+    ctx.query;
 
   if (!query) {
-    ctx.throw(400, `query parameter q is required`);
+    ctx.throw(400, `query parameter query is required`);
   }
 
   try {
     const entreprises = await search({
       addAllConventions: true,
       address: address as string,
+      convention: parseBoolean(convention as string, false),
+      employer: parseBoolean(employer as string, false),
       limit: parseInt(limit as string),
-      onlyWithConvention: !!onlyWithConvention,
+      open: parseBoolean(open as string, true),
       query: query as string,
+      ranked: parseBoolean(ranked as string, true),
     });
     ctx.body = { entreprises };
   } catch (err) {
-    console.log(JSON.stringify(err));
+    console.log(err);
     ctx.throw(500);
   }
 });
@@ -52,7 +60,7 @@ router.get(`${API_PREFIX}/etablissement/:siret`, async (ctx) => {
     if ((err as any).status) {
       throw err;
     } else {
-      console.log(JSON.stringify(err));
+      console.log(err);
       ctx.throw(500);
     }
   }
@@ -81,7 +89,7 @@ router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
     if ((err as any).status) {
       throw err;
     } else {
-      console.log(JSON.stringify(err));
+      console.log(err);
       ctx.throw(500);
     }
   }
@@ -92,10 +100,16 @@ router.get(`/healthz`, (ctx) => {
   ctx.body = { hello: "world" };
 });
 
-router.get(`/`, (ctx) => {
+router.get(`/version`, (ctx) => {
   ctx.body = {
     about: "https://github.com/SocialGouv/recherche-entreprises",
     success: true,
     version: pkg.version,
   };
+});
+
+const spec = yamljs.load("./openapi.yaml");
+
+router.get("/swagger.json", (ctx) => {
+  ctx.body = spec;
 });
