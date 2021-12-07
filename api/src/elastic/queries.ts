@@ -254,6 +254,13 @@ export const entrepriseSearchBody = ({
               { match: { naming: query } },
               { match: { siret: query.replace(/\D/g, "") } },
               { match: { siren: query.replace(/\D/g, "") } },
+              {
+                match_phrase: {
+                  naming: {
+                    query,
+                  },
+                },
+              },
             ],
           },
         },

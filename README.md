@@ -46,7 +46,6 @@ Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
 Cette opération dure environ 45 minutes.
 
-
 ### Indexation dans Elastic Search
 
 Cette étape permet de mettre à jour les données dans l'index ElasticSearch à partir du fichier `assembly.csv` généré à l'étape précédente.
@@ -62,6 +61,8 @@ yarn
 ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writing_rights ASSEMBLY_FILE=./data/assembly.csv yarn start
 ```
 
+Le temps d'indexation est d'environ 1h.
+
 Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écrire sur ces index. **Cette étape n'est pas nécessaire pour le développement local.**
 
 ### Lancement de l'API
@@ -75,7 +76,21 @@ cd api
 yarn install
 yarn build
 
-ELASTICSEARCH_URL=http://localhost:9200 yarn start
+ELASTICSEARCH_URL=http://localhost:9200 yarn dev
+```
+
+### Lancement du front de démo
+
+Cette étape permet de lancer l'interface de démo
+
+```sh
+# En partant de la racine du projet
+cd front
+
+yarn install
+
+# pour mettre l'URL de votre API en local
+REACT_APP_API_URL=http://localhost:3000 yarn start
 ```
 
 Le temps d'indexation est d'environ 1h.
@@ -84,4 +99,3 @@ Le temps d'indexation est d'environ 1h.
 
 - Annuaire-entreprises : https://annuaire-entreprises.data.gouv.fr
 - API Entreprise : https://entreprise.api.gouv.fr/catalogue/
-
