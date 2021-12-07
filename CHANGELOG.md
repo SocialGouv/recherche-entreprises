@@ -1,3 +1,10 @@
+## [1.6.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.6...v1.6.7) (2021-12-07)
+
+
+### Bug Fixes
+
+* **front:** cosmetics ([#122](https://github.com/SocialGouv/recherche-entreprises/issues/122)) ([174a199](https://github.com/SocialGouv/recherche-entreprises/commit/174a1998ab8431e5faed37470d8b80f2c9e0ae92))
+
 ## [1.6.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.5...v1.6.6) (2021-12-06)
 
 
