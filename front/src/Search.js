@@ -1,6 +1,6 @@
 import * as React from "react";
 import useSWR from "swr";
-import { Row, Col, Spinner, Form, Alert } from "react-bootstrap";
+import { Row, Col, Spinner, Form, Alert, CardGroup } from "react-bootstrap";
 import { useDebounce } from "use-debounce";
 
 import { Result } from "./Result";
@@ -11,13 +11,13 @@ const API_URL =
 
 // make the API call and show results accordingly
 // using SWR magic https://swr.vercel.app
-const Results = ({ query, address, open, convention, employer }) => {
+const Results = ({ query, address, open, convention, employer, ranked }) => {
   const { data, error } = useSWR(
     `${API_URL}/search?query=${encodeURIComponent(
       query
     )}&address=${encodeURIComponent(
       address
-    )}&open=${open}&convention=${convention}&employer=${employer}`
+    )}&open=${open}&convention=${convention}&employer=${employer}&ranked=${ranked}`
   );
   if (error)
     return (
@@ -36,19 +36,21 @@ const Results = ({ query, address, open, convention, employer }) => {
       </div>
     );
   return (
-    <div style={{ marginTop: 20 }}>
+    <Row style={{ marginTop: 20 }} className="g-4">
       {(data &&
         data.entreprises &&
         data.entreprises.length &&
         data.entreprises.map((entreprise) => (
-          <Result key={entreprise.siren} {...entreprise} />
+          <Col className="col-12 col-md-6 col-xl-4" key={entreprise.siren}>
+            <Result {...entreprise} />
+          </Col>
         ))) || (
         <div>
           <br />
           Aucun résultat avec cette recherche 😢
         </div>
       )}
-    </div>
+    </Row>
   );
 };
 
@@ -62,6 +64,7 @@ export const Search = () => {
     open: false,
     convention: false,
     employer: false,
+    ranked: false,
   });
 
   //  const [debouncedQuery] = useDebounce(query, 250);
@@ -138,12 +141,17 @@ export const Search = () => {
             onChange={onCheckBoxChange("employer")}
             label="Uniquement les entreprises avec des employés"
           />
-
           <Form.Check
             type="checkbox"
             id="convention"
             onChange={onCheckBoxChange("convention")}
             label="Uniquement les entreprises avec une convention collective connue"
+          />{" "}
+          <Form.Check
+            type="checkbox"
+            id="ranked"
+            onChange={onCheckBoxChange("ranked")}
+            label="Trier par effectif décroissant"
           />
         </Col>
       </Row>
