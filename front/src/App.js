@@ -22,7 +22,7 @@ const Hero = () => (
 
 const ForkRibbon = () => (
   <a
-    class="github-fork-ribbon"
+    className="github-fork-ribbon"
     href="https://github.com/socialgouv/recherche-entreprises"
     data-ribbon="Code source"
     title="Code source du projet"
