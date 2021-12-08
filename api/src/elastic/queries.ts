@@ -1,7 +1,7 @@
 import kaliConventions from "@socialgouv/kali-data/data/index.json";
 
 const pre = "<b><u>";
-const post = "</b></u>";
+const post = "</u></b>";
 
 const defaultLimit = 20;
 
