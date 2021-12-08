@@ -1,3 +1,10 @@
+## [1.6.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.7...v1.6.8) (2021-12-08)
+
+
+### Bug Fixes
+
+* **search:** highlight tags balance ([#124](https://github.com/SocialGouv/recherche-entreprises/issues/124)) ([e03410b](https://github.com/SocialGouv/recherche-entreprises/commit/e03410b2f25344367b7da6693d23d529d826b51d)), closes [#123](https://github.com/SocialGouv/recherche-entreprises/issues/123)
+
 ## [1.6.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.6...v1.6.7) (2021-12-07)
 
 
