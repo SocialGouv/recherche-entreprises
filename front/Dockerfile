@@ -17,6 +17,6 @@ ENV REACT_APP_API_URL="%%REACT_APP_API_URL%%"
 
 RUN yarn build
 
-FROM ghcr.io/socialgouv/docker/nginx4spa:6.47.9
+FROM ghcr.io/socialgouv/docker/nginx4spa:6.64.2
 
 COPY --from=builder /app/build /usr/share/nginx/html
