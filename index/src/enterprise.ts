@@ -42,6 +42,8 @@ export type Enterprise = {
 
   idccs: string[];
 
+  is_siege: boolean;
+
   geo_adresse: string;
 
   categorieEntreprise: string;
@@ -86,6 +88,8 @@ export const mappings = {
 
     etatAdministratifEtablissement: { type: "keyword" },
     etatAdministratifUniteLegale: { type: "keyword" },
+
+    is_siege: { type: "boolean" },
 
     geo_adresse: {
       analyzer: "french_indexing",
@@ -240,5 +244,6 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
+    is_siege: (enterprise.is_siege as unknown as string) === "1",
   };
 };
