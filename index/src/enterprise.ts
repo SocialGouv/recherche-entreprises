@@ -35,6 +35,7 @@ export type Enterprise = {
   siret: string;
   codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
+  codeCommuneEtablissement: string;
 
   // MOIS: '2020-07',
   // DATE_MAJ: '2020/08/28'
@@ -112,6 +113,10 @@ export const mappings = {
           type: "keyword",
         },
       },
+    },
+
+    codeCommuneEtablissement: {
+      type: "keyword",
     },
 
     naming: {
