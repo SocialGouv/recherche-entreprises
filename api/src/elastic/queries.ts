@@ -58,6 +58,7 @@ export const mapHit = ({
     geo_adresse,
     naming,
     idccs,
+    is_siege,
   },
   inner_hits,
   highlight,
@@ -102,10 +103,13 @@ export const mapHit = ({
   const allMatchingEtablissements = inner_hits.matchingEtablissements.hits.hits
     .filter((h: any) => h.fields)
     .map(
-      ({ fields: { "geo_adresse.keyword": address, siret, idccs } }: any) => ({
+      ({
+        fields: { "geo_adresse.keyword": address, siret, idccs, is_siege },
+      }: any) => ({
         address: address[0],
         siret: siret[0],
         idccs,
+        is_siege: is_siege[0],
       })
     );
 
@@ -136,6 +140,7 @@ export const mapHit = ({
       categorieEntreprise,
       siret,
       etatAdministratifEtablissement,
+      is_siege,
     },
     allMatchingEtablissements,
     simpleLabel,
@@ -150,7 +155,7 @@ const collapse = (withAllConventions: boolean) => ({
   field: "siren",
   inner_hits: {
     _source: false,
-    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs"],
+    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs", "is_siege"],
     name: "matchingEtablissements",
     size: withAllConventions ? 10000 : 1,
   },

@@ -1,5 +1,4 @@
 import agreements from "@socialgouv/kali-data/data/index.json";
-
 import { codesNaf } from "./naf";
 
 const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
@@ -41,6 +40,8 @@ export type Enterprise = {
   // DATE_MAJ: '2020/08/28'
 
   idccs: string[];
+
+  is_siege: string;
 
   geo_adresse: string;
 
@@ -86,6 +87,8 @@ export const mappings = {
 
     etatAdministratifEtablissement: { type: "keyword" },
     etatAdministratifUniteLegale: { type: "keyword" },
+
+    is_siege: { type: "boolean" },
 
     geo_adresse: {
       analyzer: "french_indexing",
@@ -240,5 +243,6 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
+    is_siege: enterprise.is_siege === "1",
   };
 };

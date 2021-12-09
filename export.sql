@@ -37,6 +37,7 @@ SELECT
     geo_siret.indiceRepetitionEtablissement,
     geo_siret.typeVoieEtablissement,
     geo_siret.libelleVoieEtablissement,
+    stock.nicSiegeUniteLegale == geo_siret.nic as is_siege,
     weez.IDCC as idcc,
     (select count(*) FROM geo_siret where siren=stock.siren) etablissements
     from stock, geo_siret
