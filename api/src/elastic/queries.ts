@@ -40,6 +40,7 @@ const formatLabel = (naming: string[]) => {
 export const mapHit = ({
   _source: {
     siren,
+    categorieJuridiqueUniteLegale,
     denominationUniteLegale,
     dateCreationUniteLegale,
     nomUniteLegale,
@@ -125,6 +126,7 @@ export const mapHit = ({
 
   return {
     activitePrincipale,
+    categorieJuridiqueUniteLegale,
     dateCreationUniteLegale,
     caractereEmployeurUniteLegale,
     conventions: Array.from(conventions.values()),
