@@ -20,6 +20,7 @@ SELECT
     stock.categorieEntreprise,
     stock.etatAdministratifUniteLegale,
     stock.caractereEmployeurUniteLegale,
+    stock.dateCreationUniteLegale,
     geo_siret.siret,
     geo_siret.codePostalEtablissement,
     geo_siret.libelleCommuneEtablissement,

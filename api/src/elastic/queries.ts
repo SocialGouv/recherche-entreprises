@@ -41,6 +41,7 @@ export const mapHit = ({
   _source: {
     siren,
     denominationUniteLegale,
+    dateCreationUniteLegale,
     nomUniteLegale,
     nomUsageUniteLegale,
     denominationUsuelle1UniteLegale,
@@ -119,6 +120,7 @@ export const mapHit = ({
 
   return {
     activitePrincipale,
+    dateCreationUniteLegale,
     caractereEmployeurUniteLegale,
     conventions: Array.from(conventions.values()),
     etablissements: parseInt(etablissements),
