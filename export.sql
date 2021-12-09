@@ -24,6 +24,7 @@ SELECT
     geo_siret.siret,
     geo_siret.codePostalEtablissement,
     geo_siret.libelleCommuneEtablissement,
+    geo_siret.codeCommuneEtablissement,
     geo_siret.etatAdministratifEtablissement,
     geo_siret.enseigne1Etablissement,
     geo_siret.enseigne2Etablissement,

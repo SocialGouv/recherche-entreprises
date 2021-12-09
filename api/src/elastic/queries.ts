@@ -48,6 +48,7 @@ export const mapHit = ({
     denominationUsuelle2UniteLegale,
     denominationUsuelle3UniteLegale,
     etatAdministratifEtablissement,
+    codeCommuneEtablissement,
     categorieEntreprise,
     etatAdministratifUniteLegale,
     caractereEmployeurUniteLegale,
@@ -130,6 +131,7 @@ export const mapHit = ({
     matching,
     firstMatchingEtablissement: {
       address: geo_adresse,
+      codeCommuneEtablissement,
       idccs,
       categorieEntreprise,
       siret,
