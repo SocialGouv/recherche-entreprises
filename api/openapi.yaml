@@ -93,15 +93,15 @@ paths:
       parameters:
         - in: "path"
           name: "siret"
-          description: "Numéro de SIRET (9 caractères)"
+          description: "Numéro de SIRET (14 caractères)"
           required: true
           type: string
-          example: "323841353"
-          value: "323841353"
+          example: "32384135300911"
+          value: "32384135300911"
   /entreprise/{siren}:
     get:
       summary: "Recherche d'entreprise par SIREN"
-      description: "Reherche d'entreprise par numéro SIREN  (14 caractères)"
+      description: "Recherche d'entreprise par numéro SIREN  (9 caractères)"
       operationId: "siren"
       tags:
         - "Recherche"
@@ -114,8 +114,8 @@ paths:
           required: true
           type: string
           length: 14
-          example: "32384135300911"
-          value: "32384135300911"
+          example: "323841353"
+          value: "323841353"
 externalDocs:
   description: "Source sur GitHub"
   url: "https://github.com/socialgouv/recherche-enterprises"
