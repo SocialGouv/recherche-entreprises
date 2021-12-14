@@ -1,3 +1,10 @@
+## [1.6.9](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.8...v1.6.9) (2021-12-14)
+
+
+### Bug Fixes
+
+* typo dans swagger ([#127](https://github.com/SocialGouv/recherche-entreprises/issues/127)) ([fe5dedb](https://github.com/SocialGouv/recherche-entreprises/commit/fe5dedb2b72d42ea57d8125fe352c999dfaae238))
+
 ## [1.6.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.7...v1.6.8) (2021-12-08)
 
 
