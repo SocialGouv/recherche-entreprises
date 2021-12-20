@@ -1,9 +1,3 @@
-import agreements from "@socialgouv/kali-data/data/index.json";
-
-import { codesNaf } from "./naf";
-
-const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
-
 export type BceEtablissement = {
   eta_nic: string;
   eta_siren: string;
@@ -301,6 +295,7 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
     siren: enterprise.ent_siren,
     siret: enterprise.eta_siret,
     naming,
+    enseigneEtablissement: enterprise.eta_enseigne1Etablissement,
     trancheEffectifsUniteLegale,
     trancheEffectifsUniteLegaleRank: Math.max(+trancheEffectifsUniteLegale, 0.1),
     codeActivitePrincipale,

@@ -1,7 +1,6 @@
 import * as csv from "fast-csv";
 import * as fs from "fs";
 import * as path from "path";
-import { Transform } from "stream";
 
 import {
   createIndex,
@@ -46,9 +45,10 @@ let lastRow = "";
 // then bulk insert with Es client
 const insertEntreprises = async (indexName: string) => {
   const stream = fs.createReadStream(path.resolve(ASSEMBLY_FILE));
-  
+
   const csvStream = csv
-    .parseStream(stream, { headers: true }).on("error", (err) => {
+    .parseStream(stream, { headers: true })
+    .on("error", (err) => {
       console.error(prevSiret, err.name, err.message);
       console.error(err);
       console.error(lastRow);
@@ -83,33 +83,35 @@ const insertEntreprises = async (indexName: string) => {
   //
 };
 
+const main = async () => {
+  try {
+    console.log(`Creating index`);
+
+    const indexName = await createIndex()
+
+    console.log(`Starting indexation in index ${indexName}...`);
+
+    await insertEntreprises(indexName)
+
+    console.log(`Indexation complete`);
+    // ensure we have some data
+    const docsCount = await getDocsCount(indexName);
+    if (!docsCount) {
+      throw new Error(
+        `No document created in index ${indexName}, skip aliasing`
+      );
+    } else {
+      console.log(`Created ${docsCount} documents in index ${indexName}`);
+    }
+
+    await updateAlias(indexName);
+    await deleteOldIndices(indexName);
+  } catch (err) {
+    console.log("Error " + JSON.stringify(err, null, 2));
+    throw err;
+  }
+}
+
 if (require.main === module) {
-  console.log(`Creating index`);
-  createIndex()
-    .then(async (indexName) => {
-      console.log(`Starting indexation in index ${indexName}...`);
-      return insertEntreprises(indexName)
-        .then(async () => {
-          console.log(`Indexation complete`);
-          // ensure we have some data
-          const docsCount = await getDocsCount(indexName);
-          if (!docsCount) {
-            throw new Error(
-              `No document created in index ${indexName}, skip aliasing`
-            );
-          } else {
-            console.log(`Created ${docsCount} documents in index ${indexName}`);
-          }
-        })
-        .catch((err) => {
-          console.log("Error " + JSON.stringify(err, null, 2));
-          throw err;
-        })
-        .then(() => updateAlias(indexName))
-        .then(() => deleteOldIndices(indexName));
-    })
-    .catch((err) => {
-      console.log("Error " + JSON.stringify(err, null, 2));
-      throw err;
-    });
+  main()
 }
