@@ -80,9 +80,7 @@ describe("Test search", () => {
     });
     expect(
       b2.entreprises[0].firstMatchingEtablissement.address
-    ).toMatchInlineSnapshot(
-      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
-    );
+    ).toMatchInlineSnapshot(`"ZI DE FELET 63300 THIERS"`);
 
     const { body: b3 } = await searchCall({
       address: "clermont",
@@ -97,9 +95,7 @@ describe("Test search", () => {
     const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
       b4.entreprises[0].firstMatchingEtablissement.address
-    ).toMatchInlineSnapshot(
-      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
-    );
+    ).toMatchInlineSnapshot(`"ZI DE FELET 63300 THIERS"`);
   }, 15000);
 
   test("search with diatrics", async () => {

@@ -27,8 +27,8 @@ Object {
   ],
   "etablissements": 133,
   "etatAdministratifUniteLegale": "A",
-  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
-  "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
+  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN PAYS NON TROPICAUX",
+  "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN PAYS NON TROPICAUX",
   "matching": 133,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "siren": "855200507",
@@ -70,14 +70,14 @@ Object {
 
 exports[`Test search generic search 1`] = `
 Object {
-  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "activitePrincipale": "Activités de contrôle et analyses techniques",
   "allMatchingEtablissements": Array [
     Object {
-      "address": "7 AVENUE DU PRÉSIDENT RENÉ COTY 10600 LA CHAPELLE-SAINT-LUC",
+      "address": "ROUTE D’ARLES 13300 SALON-DE-PROVENCE",
       "idccs": Array [
         "0045",
       ],
-      "siret": "85520050701171",
+      "siret": "85520050703094",
     },
     Object {
       "address": "PLACE ALEXANDRE DIEU 18230 SAINT-DOULCHARD",
@@ -88,20 +88,6 @@ Object {
       "siret": "85520050701106",
     },
     Object {
-      "address": "ZAC DE L’ARNAHURT 33650 LA BRÈDE",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050702823",
-    },
-    Object {
-      "address": "RUE DE CHARLIEU 42300 ROANNE",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050701445",
-    },
-    Object {
       "address": "ZI BLAVOZY-ST GERM LAPRADE 43700 BLAVOZY",
       "idccs": Array [
         "0045",
@@ -110,64 +96,12 @@ Object {
       "siret": "85520050701866",
     },
     Object {
-      "address": "AVENUE EDOUARD MICHELIN 56000 VANNES",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050700637",
-    },
-    Object {
-      "address": "ZA PLATEAU D’HERIN 59220 ROUVIGNIES",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050703086",
-    },
-    Object {
-      "address": "107 RUE SERVIENT 69003 LYON",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050703169",
-    },
-    Object {
-      "address": "21 RUE MARCELLIN BERTHELOT 86000 POITIERS",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050700132",
-    },
-    Object {
-      "address": "ROUTE D’ARLES 13300 SALON-DE-PROVENCE",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050703094",
-    },
-    Object {
-      "address": "1 RUE GUTENBERG 37300 JOUÉ-LÈS-TOURS",
-      "idccs": Array [
-        "0045",
-        "9999",
-      ],
-      "siret": "85520050700850",
-    },
-    Object {
       "address": "16 RUE DE TOUTLEMONDE 49300 CHOLET",
       "idccs": Array [
         "0045",
         "9999",
       ],
       "siret": "85520050700710",
-    },
-    Object {
-      "address": "PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND",
-      "idccs": Array [
-        "0045",
-        "1486",
-        "9999",
-      ],
-      "siret": "85520050700017",
     },
     Object {
       "address": "ZI DE FELET 63300 THIERS",
@@ -198,6 +132,72 @@ Object {
         "0045",
       ],
       "siret": "85520050700108",
+    },
+    Object {
+      "address": "7 AVENUE DU PRÉSIDENT RENÉ COTY 10600 LA CHAPELLE-SAINT-LUC",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050701171",
+    },
+    Object {
+      "address": "ZAC DE L’ARNAHURT 33650 LA BRÈDE",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050702823",
+    },
+    Object {
+      "address": "1 RUE GUTENBERG 37300 JOUÉ-LÈS-TOURS",
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050700850",
+    },
+    Object {
+      "address": "RUE DE CHARLIEU 42300 ROANNE",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050701445",
+    },
+    Object {
+      "address": "AVENUE EDOUARD MICHELIN 56000 VANNES",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700637",
+    },
+    Object {
+      "address": "ZA PLATEAU D’HERIN 59220 ROUVIGNIES",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703086",
+    },
+    Object {
+      "address": "PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND",
+      "idccs": Array [
+        "0045",
+        "1486",
+        "9999",
+      ],
+      "siret": "85520050700017",
+    },
+    Object {
+      "address": "107 RUE SERVIENT 69003 LYON",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703169",
+    },
+    Object {
+      "address": "21 RUE MARCELLIN BERTHELOT 86000 POITIERS",
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700132",
     },
     Object {
       "address": "27 COURS DE L’ILE SEGUIN 92100 BOULOGNE-BILLANCOURT",
@@ -234,7 +234,7 @@ Object {
   ],
   "etablissements": 133,
   "etatAdministratifUniteLegale": "A",
-  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES <b><u>MICHELIN</b></u>",
+  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES <b><u>MICHELIN</u></b>",
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "matching": 18,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
