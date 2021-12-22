@@ -148,23 +148,11 @@ export type Enterprise = {
   libelleVoieEtablissement: string;
 };
 
-// geo_siret.geo_adresse,
-
 export const mappings = {
   properties: {
-    domaineActivite: { type: "keyword" },
-
-    denominationUniteLegale: {
-      analyzer: "french_indexing",
-      similarity: "bm25_no_norm_length",
-      type: "text",
-    },
-
-    etablissementsUniteLegale: { type: "rank_feature" },
-
-    etatAdministratifEtablissement: { type: "keyword" },
-    codeCommuneEtablissement: { type: "keyword" },
-    departementEtablissement: { type: "keyword" },
+    siren: { type: "keyword" },
+    siret: { type: "keyword" },
+    siretRank: { type: "rank_feature" },
 
     naming: {
       analyzer: "french_indexing",
@@ -172,13 +160,26 @@ export const mappings = {
       type: "text",
     },
 
-    etablissementSiege: { type: "boolean" },
-    siren: { type: "keyword" },
-    siret: { type: "keyword" },
+    denominationUniteLegale: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
 
-    siretRank: { type: "rank_feature" },
     trancheEffectifsUniteLegale: { type: "keyword" },
     trancheEffectifsUniteLegaleRank: { type: "rank_feature" },
+    trancheEffectifsEtablissement: { type: "keyword" },
+    trancheEffectifsEtablissementRank: { type: "rank_feature" },
+
+    domaineActivite: { type: "keyword" },
+
+    codeCommuneEtablissement: { type: "keyword" },
+    departementEtablissement: { type: "keyword" },
+
+    etatAdministratifEtablissement: { type: "keyword" },
+    etablissementSiege: { type: "boolean" },
+
+    etablissementsUniteLegale: { type: "rank_feature" },
   },
 };
 
@@ -189,65 +190,21 @@ const getTrancheEffectif = (effectif: string): string => {
 
   const numEffectif = +effectif;
 
-  if (numEffectif === 0) {
-    return "00";
-  }
-
-  if (numEffectif <= 2) {
-    return "01";
-  }
-
-  if (numEffectif <= 5) {
-    return "02";
-  }
-
-  if (numEffectif <= 9) {
-    return "03";
-  }
-
-  if (numEffectif <= 19) {
-    return "11";
-  }
-
-  if (numEffectif <= 49) {
-    return "12";
-  }
-
-  if (numEffectif <= 99) {
-    return "21";
-  }
-
-  if (numEffectif <= 199) {
-    return "22";
-  }
-
-  if (numEffectif <= 249) {
-    return "31";
-  }
-
-  if (numEffectif <= 499) {
-    return "32";
-  }
-
-  if (numEffectif <= 999) {
-    return "41";
-  }
-
-  if (numEffectif <= 1999) {
-    return "32";
-  }
-
-  if (numEffectif <= 4999) {
-    return "51";
-  }
-
-  if (numEffectif <= 9999) {
-    return "52";
-  }
-
-  if (numEffectif > 9999) {
-    return "53";
-  }
+  if (numEffectif === 0) return "00";
+  if (numEffectif <= 2) return "01";
+  if (numEffectif <= 5) return "02";
+  if (numEffectif <= 9) return "03";
+  if (numEffectif <= 19) return "11";
+  if (numEffectif <= 49) return "12";
+  if (numEffectif <= 99) return "21";
+  if (numEffectif <= 199) return "22";
+  if (numEffectif <= 249) return "31";
+  if (numEffectif <= 499) return "32";
+  if (numEffectif <= 999) return "41";
+  if (numEffectif <= 1999) return "32";
+  if (numEffectif <= 4999) return "51";
+  if (numEffectif <= 9999) return "52";
+  if (numEffectif > 9999) return "53";
 
   return "00";
 }
@@ -279,6 +236,13 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
   ]
     .find((s) => !s.startsWith("00.00")); // 00.00Z is a temporary code
 
+  const adresseEtablissement = [
+    enterprise.eta_numeroVoieEtablissement,
+    enterprise.eta_indiceRepetitionEtablissement,
+    enterprise.eta_typeVoieEtablissement,
+    enterprise.eta_libelleVoieEtablissement,
+  ].join(' ').trim().replace(/  /, ' ');
+
   const departementEtablissement = enterprise.eta_codePostalEtablissement.slice(
     0,
     +enterprise.eta_codePostalEtablissement.slice(0, 2) > 95 ? 3 : 2
@@ -293,22 +257,31 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
   return {
     siren: enterprise.ent_siren,
     siret: enterprise.eta_siret,
+    siretRank: enterprise.eta_siret,
+
     naming,
     enseigneEtablissement: enterprise.eta_enseigne1Etablissement,
+
+    denominationUniteLegale: enterprise.ent_denominationUniteLegale,
+
     trancheEffectifsUniteLegale,
     trancheEffectifsUniteLegaleRank: Math.max(+trancheEffectifsUniteLegale, 0.1),
     trancheEffectifsEtablissement: trancheEffectifsEtablissement,
     trancheEffectifsEtablissementRank: Math.max(+trancheEffectifsEtablissement, 0.1),
+
     codeActivitePrincipale,
+    domaineActivite,
+
+    adresseEtablissement: adresseEtablissement,
+    complementAdresseEtablissement: enterprise.eta_complementAdresseEtablissement,
     codePostalEtablissement: enterprise.eta_codePostalEtablissement,
     libelleCommuneEtablissement: enterprise.eta_libelleCommuneEtablissement,
     codeCommuneEtablissement: enterprise.eta_codeCommuneEtablissement || enterprise.eta_codeCommune2Etablissement,
+    departementEtablissement,
+
     etatAdministratifEtablissement: enterprise.eta_etatAdministratifEtablissement,
     etablissementSiege: enterprise.eta_etablissementSiege === "true",
-    departementEtablissement,
-    denominationUniteLegale: enterprise.ent_denominationUniteLegale,
-    domaineActivite,
+
     etablissementsUniteLegale: enterprise.Nombre_Eta,
-    siretRank: enterprise.eta_siret,
   };
 };
