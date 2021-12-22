@@ -160,7 +160,7 @@ export const mappings = {
       type: "text",
     },
 
-    etablissements: { type: "rank_feature" },
+    etablissementsUniteLegale: { type: "rank_feature" },
 
     etatAdministratifEtablissement: { type: "keyword" },
     codeCommuneEtablissement: { type: "keyword" },
@@ -253,11 +253,6 @@ const getTrancheEffectif = (effectif: string): string => {
 }
 
 export const mapEnterprise = (enterprise: BceEtablissement) => {
-  // ranking feature cannot be 0
-  const trancheEffectifsUniteLegale = getTrancheEffectif(enterprise.eff_EFF_TOTAL);
-
-  const siretRank = enterprise.eta_siret;
-
   const naming = Array.from(
     new Set([
       enterprise.ent_nomUniteLegale,
@@ -291,6 +286,10 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
 
   const domaineActivite = codeActivitePrincipale?.slice(0, 2);
 
+  // ranking feature cannot be 0
+  const trancheEffectifsUniteLegale = getTrancheEffectif(enterprise.ent_trancheEffectifsUniteLegale);
+  const trancheEffectifsEtablissement = getTrancheEffectif(enterprise.eff_EFF_TOTAL);
+
   return {
     siren: enterprise.ent_siren,
     siret: enterprise.eta_siret,
@@ -298,6 +297,8 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
     enseigneEtablissement: enterprise.eta_enseigne1Etablissement,
     trancheEffectifsUniteLegale,
     trancheEffectifsUniteLegaleRank: Math.max(+trancheEffectifsUniteLegale, 0.1),
+    trancheEffectifsEtablissement: trancheEffectifsEtablissement,
+    trancheEffectifsEtablissementRank: Math.max(+trancheEffectifsEtablissement, 0.1),
     codeActivitePrincipale,
     codePostalEtablissement: enterprise.eta_codePostalEtablissement,
     libelleCommuneEtablissement: enterprise.eta_libelleCommuneEtablissement,
@@ -307,7 +308,7 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
     departementEtablissement,
     denominationUniteLegale: enterprise.ent_denominationUniteLegale,
     domaineActivite,
-    etablissements: enterprise.Nombre_Eta,
-    siretRank,
+    etablissementsUniteLegale: enterprise.Nombre_Eta,
+    siretRank: enterprise.eta_siret,
   };
 };
