@@ -80,6 +80,7 @@ export type BceEtablissement = {
   ent_nicSiegeUniteLegale: string;
   ent_economieSocialeSolidaireUniteLegale: string;
   ent_caractereEmployeurUniteLegale: string;
+  ent_raisonSociale: string;
   eff_MOIS: string;
   eff_SIRET: string;
   eff_EFF_TOTAL: string;
@@ -114,6 +115,8 @@ export type Enterprise = {
   denominationUsuelle2UniteLegale: string;
   denominationUsuelle3UniteLegale: string;
 
+  raisonSociale: string;
+
   enseigne1Etablissement: string;
   enseigne2Etablissement: string;
   enseigne3Etablissement: string;
@@ -140,6 +143,7 @@ export type Enterprise = {
   etatAdministratifUniteLegale: string;
   caractereEmployeurUniteLegale: string;
   etatAdministratifEtablissement: string;
+  caractereEmployeurEtablissement: string;
 
   complementAdresseEtablissement: string;
   numeroVoieEtablissement: string;
@@ -154,13 +158,17 @@ export const mappings = {
     siret: { type: "keyword" },
     siretRank: { type: "rank_feature" },
 
-    naming: {
+    raisonSociale: {
       analyzer: "french_indexing",
       similarity: "bm25_no_norm_length",
       type: "text",
     },
-
-    denominationUniteLegale: {
+    denominationUsuelleUniteLegale: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
+    enseigneEtablissement: {
       analyzer: "french_indexing",
       similarity: "bm25_no_norm_length",
       type: "text",
@@ -178,14 +186,15 @@ export const mappings = {
 
     etatAdministratifEtablissement: { type: "keyword" },
     etablissementSiege: { type: "boolean" },
+    caractereEmployeurEtablissementRank: { type: "rank_feature" },
 
-    etablissementsUniteLegale: { type: "rank_feature" },
+    etablissementsUniteLegaleRank: { type: "rank_feature" },
   },
 };
 
 const getTrancheEffectif = (effectif: string): string => {
   if (effectif === "") {
-    return "0";
+    return "-";
   }
 
   const numEffectif = +effectif;
@@ -197,21 +206,38 @@ const getTrancheEffectif = (effectif: string): string => {
   if (numEffectif <= 19) return "11";
   if (numEffectif <= 49) return "12";
   if (numEffectif <= 99) return "21";
-  if (numEffectif <= 199) return "22";
-  if (numEffectif <= 249) return "31";
-  if (numEffectif <= 499) return "32";
-  if (numEffectif <= 999) return "41";
-  if (numEffectif <= 1999) return "32";
-  if (numEffectif <= 4999) return "51";
-  if (numEffectif <= 9999) return "52";
-  if (numEffectif > 9999) return "53";
+  if (numEffectif <= 249) return "22";
+  if (numEffectif <= 499) return "31";
+  if (numEffectif <= 999) return "32";
+  if (numEffectif <= 1999) return "41";
+  if (numEffectif <= 4999) return "42";
+  if (numEffectif > 4999) return "51";
 
   return "00";
+}
+
+const removeEmpty = (document: any): object =>
+  Object.keys(document)
+    .reduce((res: any, key: string) => {
+      const value = document[key];
+
+      if (value !== undefined && value !== null && value !== "") {
+        res[key] = value
+      }
+
+      return res;
+    }, {});
+
+const getRank = (effectif: string) => {
+  const effectifNumber = +effectif;
+
+  return isNaN(effectifNumber) ? 0.1 : Math.max(effectifNumber, 0.1);
 }
 
 export const mapEnterprise = (enterprise: BceEtablissement) => {
   const naming = Array.from(
     new Set([
+      enterprise.ent_prenom1UniteLegale,
       enterprise.ent_nomUniteLegale,
       enterprise.ent_nomUsageUniteLegale,
       enterprise.ent_sigleUniteLegale,
@@ -254,20 +280,23 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
   const trancheEffectifsUniteLegale = getTrancheEffectif(enterprise.ent_trancheEffectifsUniteLegale);
   const trancheEffectifsEtablissement = getTrancheEffectif(enterprise.eff_EFF_TOTAL);
 
-  return {
+  const document = {
     siren: enterprise.ent_siren,
     siret: enterprise.eta_siret,
     siretRank: enterprise.eta_siret,
 
     naming,
-    enseigneEtablissement: enterprise.eta_enseigne1Etablissement,
-
     denominationUniteLegale: enterprise.ent_denominationUniteLegale,
+    denominationUsuelleUniteLegale: enterprise.ent_denominationUsuelle1UniteLegale,
+    prenomUniteLegale: enterprise.ent_prenom1UniteLegale,
+    nomUniteLegale: enterprise.ent_nomUniteLegale,
+    enseigneEtablissement: enterprise.eta_enseigne1Etablissement,
+    raisonSociale: enterprise.ent_raisonSociale,
 
     trancheEffectifsUniteLegale,
-    trancheEffectifsUniteLegaleRank: Math.max(+trancheEffectifsUniteLegale, 0.1),
+    trancheEffectifsUniteLegaleRank: getRank(trancheEffectifsUniteLegale),
     trancheEffectifsEtablissement: trancheEffectifsEtablissement,
-    trancheEffectifsEtablissementRank: Math.max(+trancheEffectifsEtablissement, 0.1),
+    trancheEffectifsEtablissementRank: getRank(trancheEffectifsEtablissement),
 
     codeActivitePrincipale,
     domaineActivite,
@@ -282,6 +311,11 @@ export const mapEnterprise = (enterprise: BceEtablissement) => {
     etatAdministratifEtablissement: enterprise.eta_etatAdministratifEtablissement,
     etablissementSiege: enterprise.eta_etablissementSiege === "true",
 
-    etablissementsUniteLegale: enterprise.Nombre_Eta,
+    caractereEmployeurEtablissementRank: enterprise.eta_caractereEmployeurEtablissement === "O" ? 1 : 0.1,
+
+    etablissementsUniteLegaleRank: getRank(enterprise.Nombre_Eta),
+    statutDiffusionEtablissement: enterprise.eta_statutDiffusionEtablissement
   };
+
+  return removeEmpty(document);
 };
