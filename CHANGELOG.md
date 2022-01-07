@@ -1,3 +1,10 @@
+## [1.6.10](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.9...v1.6.10) (2022-01-07)
+
+
+### Bug Fixes
+
+* release ([96c9298](https://github.com/SocialGouv/recherche-entreprises/commit/96c92988ee654f15872baedcc61a967fe28d63da))
+
 ## [1.6.9](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.8...v1.6.9) (2021-12-14)
 
 
