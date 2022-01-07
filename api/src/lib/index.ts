@@ -1,4 +1,4 @@
-import { ELASTICSEARCH_INDEX_NAME, elasticsearchClient } from "../elastic";
+import { elasticsearchClient, ELASTICSEARCH_INDEX_NAME } from "../elastic";
 import type { SearchArgs } from "../elastic/queries";
 import { entrepriseSearchBody, mapHit } from "../elastic/queries";
 

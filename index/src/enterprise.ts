@@ -1,5 +1,4 @@
 import agreements from "@socialgouv/kali-data/data/index.json";
-
 import { codesNaf } from "./naf";
 
 const ccMap = new Map(agreements.map((agg) => [agg.num, agg]));
@@ -12,6 +11,8 @@ export type Enterprise = {
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
   sigleUniteLegale: string;
+
+  dateCreationUniteLegale: string;
 
   denominationUniteLegale: string;
   denominationUsuelle1UniteLegale: string;
@@ -33,11 +34,14 @@ export type Enterprise = {
   siret: string;
   codePostalEtablissement: string;
   libelleCommuneEtablissement: string;
+  codeCommuneEtablissement: string;
 
   // MOIS: '2020-07',
   // DATE_MAJ: '2020/08/28'
 
   idccs: string[];
+
+  is_siege: string;
 
   geo_adresse: string;
 
@@ -62,6 +66,8 @@ export const mappings = {
     caractereEmployeurUniteLegale: { type: "keyword" },
     categorieEntreprise: { type: "keyword" },
 
+    dateCreationUniteLegale: { type: "date" },
+
     categorieJuridiqueUniteLegale: { type: "keyword" },
     codePostalEtablissement: { type: "keyword" },
     convention: { type: "keyword" },
@@ -81,6 +87,8 @@ export const mappings = {
 
     etatAdministratifEtablissement: { type: "keyword" },
     etatAdministratifUniteLegale: { type: "keyword" },
+
+    is_siege: { type: "boolean" },
 
     geo_adresse: {
       analyzer: "french_indexing",
@@ -108,6 +116,10 @@ export const mappings = {
           type: "keyword",
         },
       },
+    },
+
+    codeCommuneEtablissement: {
+      type: "keyword",
     },
 
     naming: {
@@ -231,5 +243,6 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
+    is_siege: enterprise.is_siege === "1",
   };
 };

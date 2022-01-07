@@ -20,9 +20,11 @@ SELECT
     stock.categorieEntreprise,
     stock.etatAdministratifUniteLegale,
     stock.caractereEmployeurUniteLegale,
+    stock.dateCreationUniteLegale,
     geo_siret.siret,
     geo_siret.codePostalEtablissement,
     geo_siret.libelleCommuneEtablissement,
+    geo_siret.codeCommuneEtablissement,
     geo_siret.etatAdministratifEtablissement,
     geo_siret.enseigne1Etablissement,
     geo_siret.enseigne2Etablissement,
@@ -35,6 +37,7 @@ SELECT
     geo_siret.indiceRepetitionEtablissement,
     geo_siret.typeVoieEtablissement,
     geo_siret.libelleVoieEtablissement,
+    stock.nicSiegeUniteLegale == geo_siret.nic as is_siege,
     weez.IDCC as idcc,
     (select count(*) FROM geo_siret where siren=stock.siren) etablissements
     from stock, geo_siret
