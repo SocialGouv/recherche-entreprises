@@ -84,4 +84,3 @@ Le temps d'indexation est d'environ 1h.
 
 - Annuaire-entreprises : https://annuaire-entreprises.data.gouv.fr
 - API Entreprise : https://entreprise.api.gouv.fr/catalogue/
-
