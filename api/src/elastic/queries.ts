@@ -110,7 +110,7 @@ export const mapHit = ({
         address: address[0],
         siret: siret[0],
         idccs,
-        is_siege: is_siege[0],
+        is_siege: (is_siege && is_siege.length && is_siege[0]) || false,
       })
     );
 
