@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Document de l'API recherche-entreprises"
+  description: "Documentation de l'API recherche-entreprises"
   version: "1.0.0"
   title: "API recherche-entreprises"
   contact:
@@ -17,7 +17,7 @@ paths:
   /search:
     get:
       summary: "Recherche d'entreprise par nom"
-      description: "Reherche d'entreprise par nom d'établissement, raison sociale, siret, siren"
+      description: "Recherche d'entreprise par nom d'établissement, raison sociale, siret, siren"
       operationId: "search"
       tags:
         - "Recherche"
@@ -84,7 +84,7 @@ paths:
   /etablissement/{siret}:
     get:
       summary: "Recherche d'entreprise par SIRET"
-      description: "Reherche d'entreprise par numéro SIRET"
+      description: "Recherche d'entreprise par numéro SIRET"
       operationId: "siret"
       tags:
         - "Recherche"
@@ -118,4 +118,4 @@ paths:
           value: "323841353"
 externalDocs:
   description: "Source sur GitHub"
-  url: "https://github.com/socialgouv/recherche-enterprises"
+  url: "https://github.com/socialgouv/recherche-entreprises"
