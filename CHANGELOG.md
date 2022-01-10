@@ -1,3 +1,10 @@
+## [1.6.12](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.11...v1.6.12) (2022-01-10)
+
+
+### Bug Fixes
+
+* typo + url ([#135](https://github.com/SocialGouv/recherche-entreprises/issues/135)) ([7d2d9d6](https://github.com/SocialGouv/recherche-entreprises/commit/7d2d9d62b78caa628da2fbf1fdcaca8641d1f177))
+
 ## [1.6.11](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.10...v1.6.11) (2022-01-10)
 
 
