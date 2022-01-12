@@ -1,3 +1,10 @@
+## [1.6.14](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.13...v1.6.14) (2022-01-12)
+
+
+### Bug Fixes
+
+* **secu:** PSP: use unprivilegied docker user ([#139](https://github.com/SocialGouv/recherche-entreprises/issues/139)) ([d521151](https://github.com/SocialGouv/recherche-entreprises/commit/d52115196b45dfcf545674f8855f504185e9848e))
+
 ## [1.6.13](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.12...v1.6.13) (2022-01-12)
 
 
