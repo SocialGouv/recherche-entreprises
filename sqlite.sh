@@ -14,7 +14,6 @@ cd "$(dirname "$0")" || exit
 
 echo "-- Download datasets"
 
-
 if command -v apt-get &> /dev/null
 then
   apt-get update -y
@@ -38,6 +37,7 @@ then
     echo "unzip could not be found"
     apt-get install -y unzip
 fi
+
 
 # geo siret par département
 for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 ""; do
@@ -64,6 +64,11 @@ unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
 # WEEZ data
 wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/bfc3a658-c054-4ecc-ba4b-22f3f5789dc7 -O "${DATA_DIR}/WEEZ.csv"
 
+echo "-- Data files md5 : "
+for file in "$DATA_DIR"/*.csv; do
+   md5sum "$file";
+done
+
 echo "-- Import CSV datasets to sqlite"
 
 sqlite3 -echo "${DATA_DIR}/db.sqlite" ".read import.sql"
@@ -71,3 +76,7 @@ sqlite3 -echo "${DATA_DIR}/db.sqlite" ".read import.sql"
 echo "-- Export sqlite data to ${DATA_DIR}/assembly.csv"
 
 sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/assembly.csv"
+
+echo "-- Total lines in assembly.csv : "
+wc -l "${DATA_DIR}/assembly.csv"
+md5sum "${DATA_DIR}/assembly.csv"
