@@ -80,6 +80,10 @@ ELASTICSEARCH_URL=http://localhost:9200 yarn start
 
 Le temps d'indexation est d'environ 1h.
 
+### Wokflows GitHub
+
+Des workflows GitHub permettent de mettre à jour les index et sont lancés manuellement
+
 ## Projets relatifs
 
 - Annuaire-entreprises : https://annuaire-entreprises.data.gouv.fr
