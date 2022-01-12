@@ -37,12 +37,7 @@ then
     echo "unzip could not be found"
     apt-get install -y unzip
 fi
-# install md5 if not exists
-if ! command -v md5 &> /dev/null
-then
-    echo "md5 could not be found"
-    apt-get install -y md5
-fi
+
 
 # geo siret par département
 for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 ""; do
@@ -71,7 +66,7 @@ wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/f
 
 echo "-- Data files md5 : "
 for file in "$DATA_DIR"/*.csv; do
-   md5 "$file";
+   md5sum "$file";
 done
 
 echo "-- Import CSV datasets to sqlite"
@@ -84,4 +79,4 @@ sqlite3 -header -csv "${DATA_DIR}/db.sqlite" ".read export.sql" > "${DATA_DIR}/a
 
 echo "-- Total lines in assembly.csv : "
 wc -l "${DATA_DIR}/assembly.csv"
-md5 "${DATA_DIR}/assembly.csv"
+md5sum "${DATA_DIR}/assembly.csv"
