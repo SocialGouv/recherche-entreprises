@@ -1,3 +1,10 @@
+## [1.6.13](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.12...v1.6.13) (2022-01-12)
+
+
+### Bug Fixes
+
+* add more debug info in indexing job ([#137](https://github.com/SocialGouv/recherche-entreprises/issues/137)) ([1dcb98e](https://github.com/SocialGouv/recherche-entreprises/commit/1dcb98eb7a33d6aad5a87e106281ae3a9cf388cd))
+
 ## [1.6.12](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.11...v1.6.12) (2022-01-10)
 
 
