@@ -12,7 +12,7 @@ import api from "./api";
 const getManifests = async () => {
   const manifests = await create("recherche-entreprises-front", {
     config: {
-      containerPort: 80,
+      containerPort: 3000,
     },
     deployment: {
       image: getGithubRegistryImagePath({

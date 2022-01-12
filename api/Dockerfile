@@ -19,6 +19,6 @@ COPY --from=builder /app/node_modules ./node_modules
 
 WORKDIR /app/dist
 
-USER node
+USER 1000
 
 ENTRYPOINT ["node", "./src/index.js"]
