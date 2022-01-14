@@ -1,3 +1,10 @@
+## [1.6.15](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.14...v1.6.15) (2022-01-14)
+
+
+### Bug Fixes
+
+* **front:** fix docker permissions ([#140](https://github.com/SocialGouv/recherche-entreprises/issues/140)) ([9b6ed74](https://github.com/SocialGouv/recherche-entreprises/commit/9b6ed749ca461ab5e548f4c68b1d38c471119171))
+
 ## [1.6.14](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.13...v1.6.14) (2022-01-12)
 
 
