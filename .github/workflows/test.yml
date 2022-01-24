@@ -20,3 +20,4 @@ jobs:
           cd api
           yarn
           yarn test
+
