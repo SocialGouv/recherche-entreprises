@@ -31,11 +31,11 @@ export const search = async ({
     index: ELASTICSEARCH_INDEX_NAME,
   });
 
-  if (matchingLimit == 5) console.log(JSON.stringify(body, null, 2));
+  // console.log(JSON.stringify(body, null, 2));
 
   const entreprises = response.body.hits.hits.map(mapHit(matchingLimit));
 
-  if (matchingLimit == 5) console.log(JSON.stringify(response, null, 2));
+  // console.log(JSON.stringify(response, null, 2));
 
   return entreprises;
 };
@@ -53,6 +53,7 @@ export const searchEntreprise = async (
     query: siren,
     ranked: true,
     matchingLimit,
+    boostSiege: true,
   });
 
   const response = await elasticsearchClient.search({

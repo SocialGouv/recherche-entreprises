@@ -128,7 +128,7 @@ export const mapHit =
             activitePrincipaleEtablissement: getFirstIfSet(
               activitePrincipaleEtablissement
             ),
-            etablissementSiege: getFirstIfSet(etablissementSiege),
+            etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
           })
         );
@@ -171,7 +171,9 @@ export const mapHit =
   };
 
 // rank by "effectif"
-const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
+const effectifRankFeature = { boost: 10, field: "trancheEffectifsUniteLegale" };
+// rank by number of etablisseements
+const etablissementsRankFeature = { boost: 5, field: "etablissements" };
 
 const collapse = (withAllConventions: boolean) => ({
   field: "siren",
@@ -225,6 +227,8 @@ export type SearchArgs = {
   ranked: boolean;
   // limit matching etablissements to reduce response size
   matchingLimit: number;
+  // boost etablissement siege
+  boostSiege?: boolean;
 };
 
 const onlyConventionFilter = { term: { withIdcc: true } };
@@ -276,6 +280,7 @@ export const entrepriseSearchBody = ({
   open,
   employer,
   ranked,
+  boostSiege,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -290,6 +295,7 @@ export const entrepriseSearchBody = ({
         {
           bool: {
             should: [
+              boostSiege ? { term: { etablissementSiege: true } } : undefined,
               { fuzzy: { naming: { boost: 0.6, value: query } } },
               { match: { naming: query } },
               { match: { siret: query.replace(/\D/g, "") } },
@@ -299,7 +305,8 @@ export const entrepriseSearchBody = ({
         },
       ],
       should: [
-        ranked ? { rank_feature } : undefined,
+        ranked ? { rank_feature: etablissementsRankFeature } : undefined,
+        ranked ? { rank_feature: effectifRankFeature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },
