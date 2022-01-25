@@ -37,6 +37,19 @@ jobs:
           name: indexing.yml
           path: indexing.yml
 
+      - name: Generate namespace
+        shell: bash
+        run: yarn --cwd .k8s --silent generate --env dev _namespace > namespace.yml
+        env:
+          RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
+          SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
+
+      - name: Archive namespace
+        uses: actions/upload-artifact@v2
+        with:
+          name: namespace.yml
+          path: namespace.yml
+
       - name: Get namespace name
         uses: mikefarah/yq@master
         id: namespace
@@ -49,6 +62,11 @@ jobs:
           mkdir ~/.kube
           touch ~/.kube/config
           echo ${{ secrets.KUBECONFIG }} | base64 -d > ~/.kube/config
+
+      - name: Create k8s namespace
+        shell: bash
+        run: |
+          kubectl create -f namespace.yml || true
 
       - name: Launch indexing Job
         shell: bash
