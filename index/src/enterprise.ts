@@ -41,7 +41,7 @@ export type Enterprise = {
 
   idccs: string[];
 
-  is_siege: string;
+  etablissementSiege: string;
 
   geo_adresse: string;
 
@@ -234,15 +234,18 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   enterprise.geo_adresse = buildAddress(enterprise);
 
+  const etablissementSiege = enterprise.etablissementSiege == "true";
+
   return {
+    ...Object.fromEntries(
+      Object.entries(enterprise).filter(([k, v]) => k && v)
+    ),
     activitePrincipale,
+    codeActivitePrincipale,
     conventions,
     naming,
     siretRank,
     withIdcc,
-    ...Object.fromEntries(
-      Object.entries(enterprise).filter(([k, v]) => k && v)
-    ),
-    is_siege: enterprise.is_siege === "1",
+    etablissementSiege,
   };
 };

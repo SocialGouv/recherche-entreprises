@@ -11,9 +11,22 @@ export const API_PREFIX = "/api/v1";
 const parseBoolean = (param: string, defaultz = true) =>
   param === undefined ? defaultz : param.toLowerCase() !== "false";
 
+const parseInteger = (param: string, defaultz: number) => {
+  const parsed = parseInt(param);
+  return isNaN(parsed) ? defaultz : parsed;
+};
+
 router.get(`${API_PREFIX}/search`, async (ctx) => {
-  const { query, address, limit, convention, open, employer, ranked } =
-    ctx.query;
+  const {
+    query,
+    address,
+    limit,
+    convention,
+    open,
+    employer,
+    ranked,
+    matchingLimit,
+  } = ctx.query;
 
   if (!query) {
     ctx.throw(400, `query parameter query is required`);
@@ -28,6 +41,7 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       limit: parseInt(limit as string),
       open: parseBoolean(open as string, true),
       query: query as string,
+      matchingLimit: parseInteger(matchingLimit as string, 20),
       ranked: parseBoolean(ranked as string, true),
     });
     ctx.body = { entreprises };
@@ -70,7 +84,7 @@ const sirenRE = new RegExp(/^\d{9}$/);
 const validateSirenFormat = (siren: string) => siren.match(sirenRE);
 
 router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
-  const { siren } = ctx.params;
+  const { siren, matchingLimit } = ctx.params;
 
   if (!siren) {
     ctx.throw(400, "siren required");
@@ -79,7 +93,10 @@ router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
   }
 
   try {
-    const entreprise = await searchEntreprise(siren as string);
+    const entreprise = await searchEntreprise(
+      siren as string,
+      parseInteger(matchingLimit as string, 20)
+    );
     if (entreprise) {
       ctx.body = entreprise;
     } else {

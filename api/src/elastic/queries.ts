@@ -37,118 +37,138 @@ const formatLabel = (naming: string[]) => {
   return labelTokens.map(({ fmt }) => fmt).join(" ");
 };
 
-export const mapHit = ({
-  _source: {
-    siren,
-    categorieJuridiqueUniteLegale,
-    denominationUniteLegale,
-    dateCreationUniteLegale,
-    nomUniteLegale,
-    nomUsageUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
-    etatAdministratifEtablissement,
-    codeCommuneEtablissement,
-    categorieEntreprise,
-    etatAdministratifUniteLegale,
-    caractereEmployeurUniteLegale,
-    activitePrincipale,
-    etablissements,
-    siret,
-    geo_adresse,
-    naming,
-    idccs,
-    is_siege,
-  },
-  inner_hits,
-  highlight,
-}: any) => {
-  const label = formatLabel(naming.split(" "));
-
-  const highlightLabel =
-    highlight && highlight.naming ? formatLabel(highlight.naming) : label;
-
-  const matching = inner_hits.matchingEtablissements.hits.total.value;
-
-  const conventions = inner_hits.matchingEtablissements.hits.hits
-    .filter((h: any) => h.fields)
-    .reduce(
-      (
-        acc: any,
-        {
-          fields: { convention, idccs },
-        }: { fields: { convention: string[]; idccs: string[] } }
-      ) => {
-        idccs?.forEach((idcc) => {
-          const idccNum = parseInt(idcc);
-          // ignore idcc 0 and 9999 : unkown ccs
-          if (idccNum && idccNum > 0 && idccNum < 9999) {
-            const kaliData = conventionsSet[idccNum];
-            const o = {
-              idcc: idccNum,
-              // shortTitle: convention ? convention[0] : "",
-              ...kaliData,
-            };
-            if (!acc.has(o.idcc)) {
-              acc.set(o.idcc, o);
-            }
-          }
-        });
-
-        return acc;
-      },
-      new Map()
-    );
-
-  const allMatchingEtablissements = inner_hits.matchingEtablissements.hits.hits
-    .filter((h: any) => h.fields)
-    .map(
-      ({
-        fields: { "geo_adresse.keyword": address, siret, idccs, is_siege },
-      }: any) => ({
-        address: address[0],
-        siret: siret[0],
-        idccs,
-        is_siege: (is_siege && is_siege.length && is_siege[0]) || false,
-      })
-    );
-
-  // take first by priority
-  const simpleLabel = [
-    denominationUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
-    nomUniteLegale,
-    nomUsageUniteLegale,
-  ].find((l) => l);
-
-  return {
-    activitePrincipale,
-    categorieJuridiqueUniteLegale,
-    dateCreationUniteLegale,
-    caractereEmployeurUniteLegale,
-    conventions: Array.from(conventions.values()),
-    etablissements: parseInt(etablissements),
-    etatAdministratifUniteLegale,
-    highlightLabel,
-    label,
-    matching,
-    firstMatchingEtablissement: {
-      address: geo_adresse,
-      codeCommuneEtablissement,
-      idccs,
-      categorieEntreprise,
-      siret,
+export const mapHit =
+  (matchingLimit: number) =>
+  ({
+    _source: {
+      siren,
+      categorieJuridiqueUniteLegale,
+      denominationUniteLegale,
+      dateCreationUniteLegale,
+      nomUniteLegale,
+      nomUsageUniteLegale,
+      denominationUsuelle1UniteLegale,
+      denominationUsuelle2UniteLegale,
+      denominationUsuelle3UniteLegale,
       etatAdministratifEtablissement,
-      is_siege,
+      codeCommuneEtablissement,
+      categorieEntreprise,
+      etatAdministratifUniteLegale,
+      caractereEmployeurUniteLegale,
+      activitePrincipale,
+      etablissements,
+      siret,
+      geo_adresse,
+      naming,
+      idccs,
+      etablissementSiege,
+      activitePrincipaleEtablissement,
     },
-    allMatchingEtablissements,
-    simpleLabel,
-    siren,
+    inner_hits,
+    highlight,
+  }: any) => {
+    const label = formatLabel(naming.split(" "));
+
+    const highlightLabel =
+      highlight && highlight.naming ? formatLabel(highlight.naming) : label;
+
+    const matching = inner_hits.matchingEtablissements.hits.total.value;
+
+    const conventions = inner_hits.matchingEtablissements.hits.hits
+      .filter((h: any) => h.fields)
+      .reduce(
+        (
+          acc: any,
+          {
+            fields: { convention, idccs },
+          }: { fields: { convention: string[]; idccs: string[] } }
+        ) => {
+          idccs?.forEach((idcc) => {
+            const idccNum = parseInt(idcc);
+            // ignore idcc 0 and 9999 : unkown ccs
+            if (idccNum && idccNum > 0 && idccNum < 9999) {
+              const kaliData = conventionsSet[idccNum];
+              const o = {
+                idcc: idccNum,
+                // shortTitle: convention ? convention[0] : "",
+                ...kaliData,
+              };
+              if (!acc.has(o.idcc)) {
+                acc.set(o.idcc, o);
+              }
+            }
+          });
+
+          return acc;
+        },
+        new Map()
+      );
+
+    const getFirstIfSet = (a?: string[]): string | undefined =>
+      a && a[0] ? a[0] : undefined;
+
+    const allMatchingEtablissements =
+      inner_hits.matchingEtablissements.hits.hits
+        .filter((h: any) => h.fields)
+        .slice(0, matchingLimit)
+        .map(
+          ({
+            fields: {
+              "geo_adresse.keyword": address,
+              siret,
+              idccs,
+              activitePrincipaleEtablissement,
+              codeCommuneEtablissement,
+              etablissementSiege,
+            },
+          }: any) => ({
+            address: address[0],
+            siret: siret[0],
+            idccs,
+            activitePrincipaleEtablissement: getFirstIfSet(
+              activitePrincipaleEtablissement
+            ),
+            etablissementSiege: getFirstIfSet(etablissementSiege),
+            codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
+          })
+        );
+
+    // take first by priority
+    const simpleLabel = [
+      denominationUniteLegale,
+      denominationUsuelle1UniteLegale,
+      denominationUsuelle2UniteLegale,
+      denominationUsuelle3UniteLegale,
+      nomUniteLegale,
+      nomUsageUniteLegale,
+    ].find((l) => l);
+
+    return {
+      activitePrincipale,
+      categorieJuridiqueUniteLegale,
+      dateCreationUniteLegale,
+      caractereEmployeurUniteLegale,
+      conventions: Array.from(conventions.values()),
+      etablissements: parseInt(etablissements),
+      etatAdministratifUniteLegale,
+      highlightLabel,
+      label,
+      matching,
+      firstMatchingEtablissement: {
+        address: geo_adresse,
+        codeCommuneEtablissement,
+        idccs,
+        categorieEntreprise,
+        siret,
+        etatAdministratifEtablissement,
+        etablissementSiege,
+        activitePrincipaleEtablissement,
+      },
+      allMatchingEtablissements,
+      simpleLabel,
+      siren,
+    };
   };
-};
 
 // rank by "effectif"
 const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
@@ -157,7 +177,14 @@ const collapse = (withAllConventions: boolean) => ({
   field: "siren",
   inner_hits: {
     _source: false,
-    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs", "is_siege"],
+    docvalue_fields: [
+      "siret",
+      "geo_adresse.keyword",
+      "idccs",
+      "etablissementSiege",
+      "activitePrincipaleEtablissement",
+      "codeCommuneEtablissement",
+    ],
     name: "matchingEtablissements",
     size: withAllConventions ? 10000 : 1,
   },
@@ -196,6 +223,8 @@ export type SearchArgs = {
   employer: boolean;
   // rank by effectif ?
   ranked: boolean;
+  // limit matching etablissements to reduce response size
+  matchingLimit: number;
 };
 
 const onlyConventionFilter = { term: { withIdcc: true } };

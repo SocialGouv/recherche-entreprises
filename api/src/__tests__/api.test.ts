@@ -20,6 +20,7 @@ const searchCall = ({
   employer,
   convention,
   ranked,
+  matchingLimit,
 }: {
   query: string;
   address?: string;
@@ -28,9 +29,12 @@ const searchCall = ({
   employer?: boolean;
   convention?: boolean;
   ranked?: string;
+  matchingLimit?: number;
 }) => {
   const addressQP = address ? `&address=${address}` : "";
   const limitQP = limit ? `&limit=${limit}` : "";
+  const matchingLimitQP =
+    matchingLimit != undefined ? `&matchingLimit=${matchingLimit}` : "";
 
   const openQP = open ? `&open=${open}` : "";
   const employerQP = employer ? `&employer=${employer}` : "";
@@ -39,9 +43,7 @@ const searchCall = ({
 
   const url = `${API_PREFIX}/search?convention=${
     convention?.toString() || true
-  }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}${rankedQP}`;
-
-  // console.log(url);
+  }&query=${query}${addressQP}${limitQP}${openQP}${employerQP}${rankedQP}${matchingLimitQP}`;
 
   return apptest.get(url);
 };
@@ -242,5 +244,24 @@ describe("Test api params", () => {
     );
     expect(unranked[0].label).not.toEqual(ranked[0].label);
     expect(unranked[2].label).toEqual("BOULANGERIE MICHELIN");
+  });
+
+  test("test with or without etablissements", async () => {
+    const {
+      body: { entreprises },
+    } = await searchCall({ query: "michelin", matchingLimit: 0 });
+    expect(entreprises[0].allMatchingEtablissements.length).toBe(0);
+
+    const {
+      body: { entreprises: resp2 },
+    } = await searchCall({ query: "michelin", matchingLimit: 5 });
+    expect(resp2[0].allMatchingEtablissements.length).toBe(5);
+
+    console.log(JSON.stringify(resp2[0].allMatchingEtablissements, null, 2));
+
+    const {
+      body: { entreprises: resp3 },
+    } = await searchCall({ query: "carrefour", matchingLimit: -1 });
+    expect(resp3[1].allMatchingEtablissements.length).toBe(17);
   });
 });
