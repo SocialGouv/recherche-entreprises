@@ -84,7 +84,8 @@ const sirenRE = new RegExp(/^\d{9}$/);
 const validateSirenFormat = (siren: string) => siren.match(sirenRE);
 
 router.get(`${API_PREFIX}/entreprise/:siren`, async (ctx) => {
-  const { siren, matchingLimit } = ctx.params;
+  const { siren } = ctx.params;
+  const { matchingLimit } = ctx.query;
 
   if (!siren) {
     ctx.throw(400, "siren required");

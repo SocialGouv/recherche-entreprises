@@ -51,10 +51,12 @@ export const searchEntreprise = async (
     limit: 1,
     open: false,
     query: siren,
-    ranked: true,
+    ranked: false,
     matchingLimit,
     boostSiege: true,
   });
+
+  // console.log(JSON.stringify(body, null, 2));
 
   const response = await elasticsearchClient.search({
     body,
@@ -78,7 +80,7 @@ export const searchEtablissement = async (siret: string) => {
     limit: 1,
     open: false,
     query: siret,
-    ranked: true,
+    ranked: false,
     matchingLimit: 1,
   });
 

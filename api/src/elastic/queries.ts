@@ -256,6 +256,9 @@ const makeFilters = (
   return filters;
 };
 
+const onlyDigits = (query: string) =>
+  query.replace(/\s/g, "").match(/^[0-9]+$/) != null;
+
 export const entrepriseSearchBody = ({
   query,
   address,
@@ -281,20 +284,18 @@ export const entrepriseSearchBody = ({
           bool: {
             should: [
               boostSiege ? { term: { etablissementSiege: true } } : undefined,
-              {
-                multi_match: {
-                  query,
-                  type: "most_fields",
-                  fields: ["naming", "namingMain"],
-                  fuzziness: "AUTO",
-                },
-              },
-              {
-                multi_match: {
-                  query: query.replace(/\D/g, ""),
-                  fields: ["siret", "siren"],
-                },
-              },
+              !onlyDigits(query)
+                ? {
+                    multi_match: {
+                      query,
+                      type: "most_fields",
+                      fields: ["naming", "namingMain"],
+                      fuzziness: "AUTO",
+                    },
+                  }
+                : undefined,
+              { term: { siren: query.replace(/\D/g, "") } },
+              { term: { siret: query.replace(/\D/g, "") } },
             ],
           },
         },
