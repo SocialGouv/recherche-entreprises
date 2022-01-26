@@ -102,7 +102,7 @@ export const mapHit =
       );
 
     const getFirstIfSet = (a?: string[]): string | undefined =>
-      a && a[0] ? a[0] : undefined;
+      a && a[0] != undefined ? a[0] : undefined;
 
     const allMatchingEtablissements =
       inner_hits.matchingEtablissements.hits.hits
