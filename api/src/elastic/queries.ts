@@ -54,7 +54,7 @@ export const mapHit =
       siret,
       geo_adresse,
       naming,
-      mainNaming,
+      namingMain,
       idccs,
       etablissementSiege,
       activitePrincipaleEtablissement,
@@ -63,6 +63,8 @@ export const mapHit =
     highlight,
   }: any) => {
     const label = formatLabel(naming.split(" "));
+
+    const simpleLabel = namingMain;
 
     const highlightLabel =
       highlight && highlight.naming ? formatLabel(highlight.naming) : label;
@@ -127,8 +129,6 @@ export const mapHit =
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
           })
         );
-
-    const simpleLabel = mainNaming;
 
     return {
       activitePrincipale,
@@ -281,16 +281,20 @@ export const entrepriseSearchBody = ({
           bool: {
             should: [
               boostSiege ? { term: { etablissementSiege: true } } : undefined,
-              { fuzzy: { naming: { boost: 0.3, value: query } } },
-              { fuzzy: { mainNaming: { boost: 0.6, value: query } } },
               {
                 multi_match: {
                   query,
-                  fields: ["naming", "mainNaming^4"],
+                  type: "most_fields",
+                  fields: ["naming", "namingMain"],
+                  fuzziness: "AUTO",
                 },
               },
-              { match: { siret: query.replace(/\D/g, "") } },
-              { match: { siren: query.replace(/\D/g, "") } },
+              {
+                multi_match: {
+                  query: query.replace(/\D/g, ""),
+                  fields: ["siret", "siren"],
+                },
+              },
             ],
           },
         },
