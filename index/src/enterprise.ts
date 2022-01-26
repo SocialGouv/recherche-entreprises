@@ -128,6 +128,12 @@ export const mappings = {
       type: "text",
     },
 
+    namingMain: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
+
     prenom1UniteLegale: { type: "keyword" },
     nomUniteLegale: { type: "keyword" },
     nomUsageUniteLegale: { type: "keyword" },
@@ -236,6 +242,16 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   const etablissementSiege = enterprise.etablissementSiege == "true";
 
+  // take first by priority
+  const namingMain = [
+    enterprise.denominationUniteLegale,
+    enterprise.denominationUsuelle1UniteLegale,
+    enterprise.denominationUsuelle2UniteLegale,
+    enterprise.denominationUsuelle3UniteLegale,
+    enterprise.nomUniteLegale,
+    enterprise.nomUsageUniteLegale,
+  ].find((l) => l);
+
   return {
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
@@ -244,6 +260,7 @@ export const mapEnterprise = (enterprise: Enterprise) => {
     codeActivitePrincipale,
     conventions,
     naming,
+    namingMain,
     siretRank,
     withIdcc,
     etablissementSiege,

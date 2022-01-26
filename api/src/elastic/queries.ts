@@ -43,13 +43,7 @@ export const mapHit =
     _source: {
       siren,
       categorieJuridiqueUniteLegale,
-      denominationUniteLegale,
       dateCreationUniteLegale,
-      nomUniteLegale,
-      nomUsageUniteLegale,
-      denominationUsuelle1UniteLegale,
-      denominationUsuelle2UniteLegale,
-      denominationUsuelle3UniteLegale,
       etatAdministratifEtablissement,
       codeCommuneEtablissement,
       categorieEntreprise,
@@ -60,6 +54,7 @@ export const mapHit =
       siret,
       geo_adresse,
       naming,
+      mainNaming,
       idccs,
       etablissementSiege,
       activitePrincipaleEtablissement,
@@ -133,15 +128,7 @@ export const mapHit =
           })
         );
 
-    // take first by priority
-    const simpleLabel = [
-      denominationUniteLegale,
-      denominationUsuelle1UniteLegale,
-      denominationUsuelle2UniteLegale,
-      denominationUsuelle3UniteLegale,
-      nomUniteLegale,
-      nomUsageUniteLegale,
-    ].find((l) => l);
+    const simpleLabel = mainNaming;
 
     return {
       activitePrincipale,
@@ -170,10 +157,8 @@ export const mapHit =
     };
   };
 
-// rank by "effectif"
-const effectifRankFeature = { boost: 10, field: "trancheEffectifsUniteLegale" };
 // rank by number of etablisseements
-const etablissementsRankFeature = { boost: 5, field: "etablissements" };
+const etablissementsRankFeature = { boost: 4, field: "etablissements" };
 
 const collapse = (withAllConventions: boolean) => ({
   field: "siren",
@@ -296,8 +281,14 @@ export const entrepriseSearchBody = ({
           bool: {
             should: [
               boostSiege ? { term: { etablissementSiege: true } } : undefined,
-              { fuzzy: { naming: { boost: 0.6, value: query } } },
-              { match: { naming: query } },
+              { fuzzy: { naming: { boost: 0.3, value: query } } },
+              { fuzzy: { mainNaming: { boost: 0.6, value: query } } },
+              {
+                multi_match: {
+                  query,
+                  fields: ["naming", "mainNaming^4"],
+                },
+              },
               { match: { siret: query.replace(/\D/g, "") } },
               { match: { siren: query.replace(/\D/g, "") } },
             ],
@@ -306,7 +297,6 @@ export const entrepriseSearchBody = ({
       ],
       should: [
         ranked ? { rank_feature: etablissementsRankFeature } : undefined,
-        ranked ? { rank_feature: effectifRankFeature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },
