@@ -3,6 +3,7 @@ import Koa from "koa";
 import supertest from "supertest";
 
 import { API_PREFIX, router } from "../routes";
+import { ELASTICSEARCH_INDEX_NAME } from "../elastic";
 
 const app = new Koa();
 app.use(router.routes());
@@ -50,6 +51,13 @@ const searchCall = ({
 
 const michelinSiren = "855200507";
 const michelinSiret = `${michelinSiren}03169`;
+
+console.log(
+  `Running tests on ${JSON.stringify({
+    ELASTICSEARCH_INDEX_NAME,
+    ELASTICSEARCH_URL: process.env.ELASTICSEARCH_URL,
+  })}`
+);
 
 describe("Test search", () => {
   test("generic search", async () => {
