@@ -52,12 +52,12 @@ const searchCall = ({
 const michelinSiren = "855200507";
 const michelinSiret = `${michelinSiren}03169`;
 
-console.log(
+/*console.log(
   `Running tests on ${JSON.stringify({
     ELASTICSEARCH_INDEX_NAME,
     ELASTICSEARCH_URL: process.env.ELASTICSEARCH_URL,
   })}`
-);
+);*/
 
 describe("Test search", () => {
   test("generic search", async () => {
@@ -169,11 +169,11 @@ describe("Test entreprise search", () => {
     const { body, status } = await apptest.get(
       `${API_PREFIX}/entreprise/${michelinSiren}`
     );
-    // We delete matching etablissement since it comes from collapse which is non deterministic
-    delete body.firstMatchingEtablissement;
-    delete body.allMatchingEtablissements;
     expect(status).toEqual(200);
     expect(body.siren).toEqual(michelinSiren);
+    // we should return siege as first etablissement
+    expect(body.firstMatchingEtablissement.etablissementSiege).toBe(true);
+    delete body.allMatchingEtablissements;
     expect(body).toMatchSnapshot();
   });
 
