@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.15...v1.7.0) (2022-01-27)
+
+
+### Features
+
+* siege and more fields ([#143](https://github.com/SocialGouv/recherche-entreprises/issues/143)) ([e786683](https://github.com/SocialGouv/recherche-entreprises/commit/e7866837cc7fd30e277bf2955b14605b7a0ec32d))
+
 ## [1.6.15](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.14...v1.6.15) (2022-01-14)
 
 
