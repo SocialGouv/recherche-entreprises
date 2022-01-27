@@ -15,6 +15,7 @@ jobs:
         env:
           ELASTICSEARCH_URL: ${{ secrets.ELASTICSEARCH_URL }}
           ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          ELASTICSEARCH_INDEX_NAME: search-entreprises
         run: |
           cd api
           yarn
