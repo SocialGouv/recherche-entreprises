@@ -23,7 +23,10 @@ description:
     apiDocumentation: 'https://api-recherche-entreprises.fabrique.social.gouv.fr'
     shortDescription: API pour la recherche d'entreprise
     longDescription: |
-      Le dépôt recherche-entreprises propose plusieurs modules :
+      
+      Le dépôt recherche-entreprises permet d'assembler et indexer toutes les données utiles pour une recherche d'entreprises efficace.
+      
+      Plusieurs modules sont proposés :
 
        - Création d'un index ElasticSearch à partir de jeux de données data.gouv.fr
 
@@ -31,9 +34,5 @@ description:
 
        - Frontend de démonstration
 
-      Des images docker sont également disponibles
-
-
-      ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     features:
       - recherche d'entreprise
