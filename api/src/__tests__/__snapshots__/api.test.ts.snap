@@ -2,7 +2,9 @@
 
 exports[`Test entreprise search correct siren 1`] = `
 Object {
+  "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "caractereEmployeurUniteLegale": "O",
+  "categorieJuridiqueUniteLegale": "5308",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -25,8 +27,23 @@ Object {
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
     },
   ],
+  "dateCreationUniteLegale": "1955-01-01",
   "etablissements": 133,
   "etatAdministratifUniteLegale": "A",
+  "firstMatchingEtablissement": Object {
+    "activitePrincipaleEtablissement": "22.11Z",
+    "address": "PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND",
+    "categorieEntreprise": "GE",
+    "codeCommuneEtablissement": "63113",
+    "etablissementSiege": true,
+    "etatAdministratifEtablissement": "A",
+    "idccs": Array [
+      "0045",
+      "9999",
+      "1486",
+    ],
+    "siret": "85520050700017",
+  },
   "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "matching": 133,
@@ -38,9 +55,12 @@ Object {
 exports[`Test etablissement search correct siret 1`] = `
 Object {
   "activitePrincipale": "Traitement de données, hébergement et activités connexes",
+  "activitePrincipaleEtablissement": "63.11Z",
   "address": "107 RUE SERVIENT 69003 LYON",
   "caractereEmployeurUniteLegale": "O",
   "categorieEntreprise": "GE",
+  "categorieJuridiqueUniteLegale": "5308",
+  "codeCommuneEtablissement": "69383",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -53,6 +73,8 @@ Object {
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635597",
     },
   ],
+  "dateCreationUniteLegale": "1955-01-01",
+  "etablissementSiege": false,
   "etablissements": 133,
   "etatAdministratifEtablissement": "A",
   "etatAdministratifUniteLegale": "A",
@@ -73,87 +95,40 @@ Object {
   "activitePrincipale": "Fabrication et rechapage de pneumatiques",
   "allMatchingEtablissements": Array [
     Object {
+      "activitePrincipaleEtablissement": "22.11Z",
       "address": "7 AVENUE DU PRÉSIDENT RENÉ COTY 10600 LA CHAPELLE-SAINT-LUC",
+      "codeCommuneEtablissement": "10081",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
       ],
       "siret": "85520050701171",
     },
     Object {
-      "address": "PLACE ALEXANDRE DIEU 18230 SAINT-DOULCHARD",
-      "idccs": Array [
-        "0045",
-        "9999",
-      ],
-      "siret": "85520050701106",
-    },
-    Object {
-      "address": "ZAC DE L’ARNAHURT 33650 LA BRÈDE",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050702823",
-    },
-    Object {
-      "address": "RUE DE CHARLIEU 42300 ROANNE",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050701445",
-    },
-    Object {
-      "address": "ZI BLAVOZY-ST GERM LAPRADE 43700 BLAVOZY",
-      "idccs": Array [
-        "0045",
-        "9999",
-      ],
-      "siret": "85520050701866",
-    },
-    Object {
-      "address": "AVENUE EDOUARD MICHELIN 56000 VANNES",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050700637",
-    },
-    Object {
-      "address": "ZA PLATEAU D’HERIN 59220 ROUVIGNIES",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050703086",
-    },
-    Object {
-      "address": "107 RUE SERVIENT 69003 LYON",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050703169",
-    },
-    Object {
-      "address": "21 RUE MARCELLIN BERTHELOT 86000 POITIERS",
-      "idccs": Array [
-        "0045",
-      ],
-      "siret": "85520050700132",
-    },
-    Object {
+      "activitePrincipaleEtablissement": "71.20B",
       "address": "ROUTE D’ARLES 13300 SALON-DE-PROVENCE",
+      "codeCommuneEtablissement": "13103",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
       ],
       "siret": "85520050703094",
     },
     Object {
-      "address": "1 RUE GUTENBERG 37300 JOUÉ-LÈS-TOURS",
+      "activitePrincipaleEtablissement": "22.11Z",
+      "address": "RUE DE CHARLIEU 42300 ROANNE",
+      "codeCommuneEtablissement": "42187",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
-        "9999",
       ],
-      "siret": "85520050700850",
+      "siret": "85520050701445",
     },
     Object {
+      "activitePrincipaleEtablissement": "22.11Z",
       "address": "16 RUE DE TOUTLEMONDE 49300 CHOLET",
+      "codeCommuneEtablissement": "49099",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
         "9999",
@@ -161,7 +136,116 @@ Object {
       "siret": "85520050700710",
     },
     Object {
+      "activitePrincipaleEtablissement": "63.11Z",
+      "address": "107 RUE SERVIENT 69003 LYON",
+      "codeCommuneEtablissement": "69383",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703169",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "22.11Z",
+      "address": "ROUTE DE NANTES 85000 LA ROCHE-SUR-YON",
+      "codeCommuneEtablissement": "85191",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701379",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "25.93Z",
+      "address": "RUE DU XAY 88190 GOLBEY",
+      "codeCommuneEtablissement": "88209",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700108",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "58.11Z",
+      "address": "27 COURS DE L’ILE SEGUIN 92100 BOULOGNE-BILLANCOURT",
+      "codeCommuneEtablissement": "92012",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+        "1486",
+        "9999",
+      ],
+      "siret": "85520050703144",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "22.11Z",
+      "address": "PLACE ALEXANDRE DIEU 18230 SAINT-DOULCHARD",
+      "codeCommuneEtablissement": "18205",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701106",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "45.31Z",
+      "address": "ZAC DE L’ARNAHURT 33650 LA BRÈDE",
+      "codeCommuneEtablissement": "33213",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050702823",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "22.11Z",
+      "address": "1 RUE GUTENBERG 37300 JOUÉ-LÈS-TOURS",
+      "codeCommuneEtablissement": "37122",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050700850",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "22.11Z",
+      "address": "ZI BLAVOZY-ST GERM LAPRADE 43700 BLAVOZY",
+      "codeCommuneEtablissement": "43032",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+        "9999",
+      ],
+      "siret": "85520050701866",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "25.93Z",
+      "address": "AVENUE EDOUARD MICHELIN 56000 VANNES",
+      "codeCommuneEtablissement": "56260",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050700637",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "52.10B",
+      "address": "ZA PLATEAU D’HERIN 59220 ROUVIGNIES",
+      "codeCommuneEtablissement": "59515",
+      "etablissementSiege": false,
+      "idccs": Array [
+        "0045",
+      ],
+      "siret": "85520050703086",
+    },
+    Object {
+      "activitePrincipaleEtablissement": "22.11Z",
       "address": "PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND",
+      "codeCommuneEtablissement": "63113",
+      "etablissementSiege": true,
       "idccs": Array [
         "0045",
         "1486",
@@ -170,14 +254,20 @@ Object {
       "siret": "85520050700017",
     },
     Object {
+      "activitePrincipaleEtablissement": "22.11Z",
       "address": "ZI DE FELET 63300 THIERS",
+      "codeCommuneEtablissement": "63430",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
       ],
       "siret": "85520050702278",
     },
     Object {
+      "activitePrincipaleEtablissement": "22.11Z",
       "address": "USINE MICHELIN DE BLANZY LA FIOLLE (ZONE INDUSTRIELLE) BLANZY",
+      "codeCommuneEtablissement": "71040",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
         "9999",
@@ -185,31 +275,18 @@ Object {
       "siret": "85520050700306",
     },
     Object {
-      "address": "ROUTE DE NANTES 85000 LA ROCHE-SUR-YON",
-      "idccs": Array [
-        "0045",
-        "9999",
-      ],
-      "siret": "85520050701379",
-    },
-    Object {
-      "address": "RUE DU XAY 88190 GOLBEY",
+      "activitePrincipaleEtablissement": "52.10B",
+      "address": "21 RUE MARCELLIN BERTHELOT 86000 POITIERS",
+      "codeCommuneEtablissement": "86194",
+      "etablissementSiege": false,
       "idccs": Array [
         "0045",
       ],
-      "siret": "85520050700108",
-    },
-    Object {
-      "address": "27 COURS DE L’ILE SEGUIN 92100 BOULOGNE-BILLANCOURT",
-      "idccs": Array [
-        "0045",
-        "1486",
-        "9999",
-      ],
-      "siret": "85520050703144",
+      "siret": "85520050700132",
     },
   ],
   "caractereEmployeurUniteLegale": "O",
+  "categorieJuridiqueUniteLegale": "5308",
   "conventions": Array [
     Object {
       "etat": "VIGUEUR_ETEN",
@@ -232,9 +309,10 @@ Object {
       "url": "https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000005635173",
     },
   ],
+  "dateCreationUniteLegale": "1955-01-01",
   "etablissements": 133,
   "etatAdministratifUniteLegale": "A",
-  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES <b><u>MICHELIN</b></u>",
+  "highlightLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES <b><u>MICHELIN</u></b>",
   "label": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",
   "matching": 18,
   "simpleLabel": "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN",

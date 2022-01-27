@@ -41,7 +41,7 @@ export type Enterprise = {
 
   idccs: string[];
 
-  is_siege: string;
+  etablissementSiege: string;
 
   geo_adresse: string;
 
@@ -123,6 +123,12 @@ export const mappings = {
     },
 
     naming: {
+      analyzer: "french_indexing",
+      similarity: "bm25_no_norm_length",
+      type: "text",
+    },
+
+    namingMain: {
       analyzer: "french_indexing",
       similarity: "bm25_no_norm_length",
       type: "text",
@@ -234,15 +240,29 @@ export const mapEnterprise = (enterprise: Enterprise) => {
 
   enterprise.geo_adresse = buildAddress(enterprise);
 
+  const etablissementSiege = enterprise.etablissementSiege == "true";
+
+  // take first by priority
+  const namingMain = [
+    enterprise.denominationUniteLegale,
+    enterprise.denominationUsuelle1UniteLegale,
+    enterprise.denominationUsuelle2UniteLegale,
+    enterprise.denominationUsuelle3UniteLegale,
+    enterprise.nomUniteLegale,
+    enterprise.nomUsageUniteLegale,
+  ].find((l) => l);
+
   return {
-    activitePrincipale,
-    conventions,
-    naming,
-    siretRank,
-    withIdcc,
     ...Object.fromEntries(
       Object.entries(enterprise).filter(([k, v]) => k && v)
     ),
-    is_siege: enterprise.is_siege === "1",
+    activitePrincipale,
+    codeActivitePrincipale,
+    conventions,
+    naming,
+    namingMain,
+    siretRank,
+    withIdcc,
+    etablissementSiege,
   };
 };

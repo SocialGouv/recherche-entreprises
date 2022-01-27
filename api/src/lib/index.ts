@@ -11,6 +11,7 @@ export const search = async ({
   open,
   employer,
   ranked,
+  matchingLimit,
 }: SearchArgs) => {
   const body = entrepriseSearchBody({
     addAllConventions,
@@ -21,7 +22,10 @@ export const search = async ({
     open,
     query,
     ranked,
+    matchingLimit,
   });
+
+  // console.log(JSON.stringify(body, null, 2));
 
   const response = await elasticsearchClient.search({
     body,
@@ -29,16 +33,17 @@ export const search = async ({
     index: ELASTICSEARCH_INDEX_NAME,
   });
 
-  // console.log(JSON.stringify(body, null, 2));
-
-  const entreprises = response.body.hits.hits.map(mapHit);
+  const entreprises = response.body.hits.hits.map(mapHit(matchingLimit));
 
   // console.log(JSON.stringify(response, null, 2));
 
   return entreprises;
 };
 
-export const searchEntreprise = async (siren: string) => {
+export const searchEntreprise = async (
+  siren: string,
+  matchingLimit: number
+) => {
   const body = entrepriseSearchBody({
     addAllConventions: true,
     convention: false,
@@ -46,15 +51,19 @@ export const searchEntreprise = async (siren: string) => {
     limit: 1,
     open: false,
     query: siren,
-    ranked: true,
+    ranked: false,
+    matchingLimit,
+    boostSiege: true,
   });
+
+  // console.log(JSON.stringify(body, null, 2));
 
   const response = await elasticsearchClient.search({
     body,
     index: ELASTICSEARCH_INDEX_NAME,
   });
 
-  const matches = response.body.hits.hits.map(mapHit);
+  const matches = response.body.hits.hits.map(mapHit(matchingLimit));
 
   if (matches && matches.length >= 1) {
     return matches[0];
@@ -71,7 +80,8 @@ export const searchEtablissement = async (siret: string) => {
     limit: 1,
     open: false,
     query: siret,
-    ranked: true,
+    ranked: false,
+    matchingLimit: 1,
   });
 
   const response = await elasticsearchClient.search({
@@ -79,7 +89,7 @@ export const searchEtablissement = async (siret: string) => {
     index: ELASTICSEARCH_INDEX_NAME,
   });
 
-  const matches = response.body.hits.hits.map(mapHit);
+  const matches = response.body.hits.hits.map(mapHit(1));
 
   if (matches && matches.length >= 1) {
     const raw = matches[0];

@@ -37,127 +37,141 @@ const formatLabel = (naming: string[]) => {
   return labelTokens.map(({ fmt }) => fmt).join(" ");
 };
 
-export const mapHit = ({
-  _source: {
-    siren,
-    categorieJuridiqueUniteLegale,
-    denominationUniteLegale,
-    dateCreationUniteLegale,
-    nomUniteLegale,
-    nomUsageUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
-    etatAdministratifEtablissement,
-    codeCommuneEtablissement,
-    categorieEntreprise,
-    etatAdministratifUniteLegale,
-    caractereEmployeurUniteLegale,
-    activitePrincipale,
-    etablissements,
-    siret,
-    geo_adresse,
-    naming,
-    idccs,
-    is_siege,
-  },
-  inner_hits,
-  highlight,
-}: any) => {
-  const label = formatLabel(naming.split(" "));
-
-  const highlightLabel =
-    highlight && highlight.naming ? formatLabel(highlight.naming) : label;
-
-  const matching = inner_hits.matchingEtablissements.hits.total.value;
-
-  const conventions = inner_hits.matchingEtablissements.hits.hits
-    .filter((h: any) => h.fields)
-    .reduce(
-      (
-        acc: any,
-        {
-          fields: { convention, idccs },
-        }: { fields: { convention: string[]; idccs: string[] } }
-      ) => {
-        idccs?.forEach((idcc) => {
-          const idccNum = parseInt(idcc);
-          // ignore idcc 0 and 9999 : unkown ccs
-          if (idccNum && idccNum > 0 && idccNum < 9999) {
-            const kaliData = conventionsSet[idccNum];
-            const o = {
-              idcc: idccNum,
-              // shortTitle: convention ? convention[0] : "",
-              ...kaliData,
-            };
-            if (!acc.has(o.idcc)) {
-              acc.set(o.idcc, o);
-            }
-          }
-        });
-
-        return acc;
-      },
-      new Map()
-    );
-
-  const allMatchingEtablissements = inner_hits.matchingEtablissements.hits.hits
-    .filter((h: any) => h.fields)
-    .map(
-      ({
-        fields: { "geo_adresse.keyword": address, siret, idccs, is_siege },
-      }: any) => ({
-        address: address[0],
-        siret: siret[0],
-        idccs,
-        is_siege: (is_siege && is_siege.length && is_siege[0]) || false,
-      })
-    );
-
-  // take first by priority
-  const simpleLabel = [
-    denominationUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
-    nomUniteLegale,
-    nomUsageUniteLegale,
-  ].find((l) => l);
-
-  return {
-    activitePrincipale,
-    categorieJuridiqueUniteLegale,
-    dateCreationUniteLegale,
-    caractereEmployeurUniteLegale,
-    conventions: Array.from(conventions.values()),
-    etablissements: parseInt(etablissements),
-    etatAdministratifUniteLegale,
-    highlightLabel,
-    label,
-    matching,
-    firstMatchingEtablissement: {
-      address: geo_adresse,
-      codeCommuneEtablissement,
-      idccs,
-      categorieEntreprise,
-      siret,
+export const mapHit =
+  (matchingLimit: number) =>
+  ({
+    _source: {
+      siren,
+      categorieJuridiqueUniteLegale,
+      dateCreationUniteLegale,
       etatAdministratifEtablissement,
-      is_siege,
+      codeCommuneEtablissement,
+      categorieEntreprise,
+      etatAdministratifUniteLegale,
+      caractereEmployeurUniteLegale,
+      activitePrincipale,
+      etablissements,
+      siret,
+      geo_adresse,
+      naming,
+      namingMain,
+      idccs,
+      etablissementSiege,
+      activitePrincipaleEtablissement,
     },
-    allMatchingEtablissements,
-    simpleLabel,
-    siren,
-  };
-};
+    inner_hits,
+    highlight,
+  }: any) => {
+    const label = formatLabel(naming.split(" "));
 
-// rank by "effectif"
-const rank_feature = { boost: 10, field: "trancheEffectifsUniteLegale" };
+    const simpleLabel = namingMain;
+
+    const highlightLabel =
+      highlight && highlight.naming ? formatLabel(highlight.naming) : label;
+
+    const matching = inner_hits.matchingEtablissements.hits.total.value;
+
+    const conventions = inner_hits.matchingEtablissements.hits.hits
+      .filter((h: any) => h.fields)
+      .reduce(
+        (
+          acc: any,
+          {
+            fields: { convention, idccs },
+          }: { fields: { convention: string[]; idccs: string[] } }
+        ) => {
+          idccs?.forEach((idcc) => {
+            const idccNum = parseInt(idcc);
+            // ignore idcc 0 and 9999 : unkown ccs
+            if (idccNum && idccNum > 0 && idccNum < 9999) {
+              const kaliData = conventionsSet[idccNum];
+              const o = {
+                idcc: idccNum,
+                // shortTitle: convention ? convention[0] : "",
+                ...kaliData,
+              };
+              if (!acc.has(o.idcc)) {
+                acc.set(o.idcc, o);
+              }
+            }
+          });
+
+          return acc;
+        },
+        new Map()
+      );
+
+    const getFirstIfSet = (a?: string[]): string | undefined =>
+      a && a[0] != undefined ? a[0] : undefined;
+
+    const allMatchingEtablissements =
+      inner_hits.matchingEtablissements.hits.hits
+        .filter((h: any) => h.fields)
+        .slice(0, matchingLimit)
+        .map(
+          ({
+            fields: {
+              "geo_adresse.keyword": address,
+              siret,
+              idccs,
+              activitePrincipaleEtablissement,
+              codeCommuneEtablissement,
+              etablissementSiege,
+            },
+          }: any) => ({
+            address: address[0],
+            siret: siret[0],
+            idccs,
+            activitePrincipaleEtablissement: getFirstIfSet(
+              activitePrincipaleEtablissement
+            ),
+            etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
+            codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
+          })
+        );
+
+    return {
+      activitePrincipale,
+      categorieJuridiqueUniteLegale,
+      dateCreationUniteLegale,
+      caractereEmployeurUniteLegale,
+      conventions: Array.from(conventions.values()),
+      etablissements: parseInt(etablissements),
+      etatAdministratifUniteLegale,
+      highlightLabel,
+      label,
+      matching,
+      firstMatchingEtablissement: {
+        address: geo_adresse,
+        codeCommuneEtablissement,
+        idccs,
+        categorieEntreprise,
+        siret,
+        etatAdministratifEtablissement,
+        etablissementSiege,
+        activitePrincipaleEtablissement,
+      },
+      allMatchingEtablissements,
+      simpleLabel,
+      siren,
+    };
+  };
+
+// rank by number of etablisseements
+const etablissementsRankFeature = { boost: 4, field: "etablissements" };
 
 const collapse = (withAllConventions: boolean) => ({
   field: "siren",
   inner_hits: {
     _source: false,
-    docvalue_fields: ["siret", "geo_adresse.keyword", "idccs", "is_siege"],
+    docvalue_fields: [
+      "siret",
+      "geo_adresse.keyword",
+      "idccs",
+      "etablissementSiege",
+      "activitePrincipaleEtablissement",
+      "codeCommuneEtablissement",
+    ],
     name: "matchingEtablissements",
     size: withAllConventions ? 10000 : 1,
   },
@@ -196,6 +210,10 @@ export type SearchArgs = {
   employer: boolean;
   // rank by effectif ?
   ranked: boolean;
+  // limit matching etablissements to reduce response size
+  matchingLimit: number;
+  // boost etablissement siege
+  boostSiege?: boolean;
 };
 
 const onlyConventionFilter = { term: { withIdcc: true } };
@@ -238,6 +256,9 @@ const makeFilters = (
   return filters;
 };
 
+const onlyDigits = (query: string) =>
+  query.replace(/\s/g, "").match(/^[0-9]+$/) != null;
+
 export const entrepriseSearchBody = ({
   query,
   address,
@@ -247,6 +268,7 @@ export const entrepriseSearchBody = ({
   open,
   employer,
   ranked,
+  boostSiege,
 }: SearchArgs) => ({
   collapse: collapse(addAllConventions),
   highlight: {
@@ -261,20 +283,29 @@ export const entrepriseSearchBody = ({
         {
           bool: {
             should: [
-              { fuzzy: { naming: { boost: 0.6, value: query } } },
-              { match: { naming: query } },
-              { match: { siret: query.replace(/\D/g, "") } },
-              { match: { siren: query.replace(/\D/g, "") } },
-            ],
+              { term: { siren: query.replace(/\D/g, "") } },
+              { term: { siret: query.replace(/\D/g, "") } },
+              !onlyDigits(query)
+                ? {
+                    multi_match: {
+                      query,
+                      type: "most_fields",
+                      fields: ["naming", "namingMain"],
+                      fuzziness: "AUTO",
+                    },
+                  }
+                : undefined,
+            ].filter((s) => s),
           },
         },
       ],
       should: [
-        ranked ? { rank_feature } : undefined,
+        boostSiege ? { term: { etablissementSiege: true } } : undefined,
+        ranked ? { rank_feature: etablissementsRankFeature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },
-      ],
+      ].filter((s) => s),
     },
   },
   size: limit ? limit : defaultLimit,

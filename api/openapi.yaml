@@ -78,6 +78,14 @@ paths:
           value: true
           default: true
           type: boolean
+        - in: "query"
+          name: "matchingLimit"
+          description: "Nombre d'établissements connexes inclus dans la réponse, -1 pour tous les établissements"
+          required: false
+          example: 100
+          value: 100
+          default: 20
+          type: integer
       responses:
         "500":
           description: "Unexpexted error occured"
