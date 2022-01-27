@@ -1,10 +1,10 @@
 # recherche-entreprises
 
-Ce projet permet de générer un index Elastic Search qui regroupe toutes les informations utiles pour rechercher une entreprise par établissement, raison sociale, code postal, ville, siret/siren, effectif, convention collective...
+Ce projet permet de générer un index Elasticsearch qui regroupe toutes les informations utiles pour rechercher une entreprise par établissement, raison sociale, code postal, ville, siret/siren, effectif, convention collective...
 
 Les données sont issues de [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data).
 
-Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qui exploite cet index Elastic Search avec différentes requêtes.
+Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qui exploite cet index Elasticsearch avec différentes requêtes.
 
 Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
@@ -49,11 +49,11 @@ Cette opération dure environ 45 minutes.
 
 ### Indexation dans Elastic Search
 
-Cette étape permet de mettre à jour les données dans l'index ElasticSearch à partir du fichier `assembly.csv` généré à l'étape précédente.
+Cette étape permet de mettre à jour les données dans l'index Elasticsearch à partir du fichier `assembly.csv` généré à l'étape précédente.
 
 Cette étape se déroule dans le répertoire `index`.
 
-La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-aliases.html) d'ElasticSearch pour éviter les downtimes.
+La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/aliases.html) d'Elasticsearch pour éviter les downtimes.
 
 Pour lancer une indexation :
 
@@ -66,7 +66,7 @@ Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écr
 
 ### Lancement de l'API
 
-Cette étape permet de lancer l'API de démo qui va servir les requêtes jusqu'à ElasticSearch.
+Cette étape permet de lancer l'API de démo qui va servir les requêtes jusqu'à Elasticsearch.
 
 ```sh
 # En partant de la racine du projet
