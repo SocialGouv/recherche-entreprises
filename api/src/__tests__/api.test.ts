@@ -169,12 +169,14 @@ describe("Test entreprise search", () => {
     expect(body).toMatchSnapshot();
   });
 
-  test("unexisting siret", async () => {
-    const { status } = await apptest.get(`${API_PREFIX}/entreprise/111111111`);
+  test("unexisting siren", async () => {
+    const { status, body } = await apptest.get(
+      `${API_PREFIX}/entreprise/111111111`
+    );
     expect(status).toEqual(404);
   });
 
-  test("incorrect siret", async () => {
+  test("incorrect siren", async () => {
     const { status } = await apptest.get(
       `${API_PREFIX}/entreprise/${michelinSiren + "123"}`
     );
@@ -205,12 +207,15 @@ describe("Test api params", () => {
     const { body: notOnlyEmployer } = await searchCall({
       employer: false,
       query: "michelin",
+      limit: 50,
     });
+
     expect(getNotEmployer(notOnlyEmployer).length).toBeGreaterThan(0);
 
     const { body: onlyEmployer } = await searchCall({
       employer: true,
       query: "michelin",
+      limit: 50,
     });
     expect(getNotEmployer(onlyEmployer).length).toBe(0);
   });
@@ -243,7 +248,7 @@ describe("Test api params", () => {
       "MANUFACTURE FRANCAISE DES PNEUMATIQUES MICHELIN"
     );
     expect(unranked[0].label).not.toEqual(ranked[0].label);
-    expect(unranked[2].label).toEqual("BOULANGERIE MICHELIN");
+    expect(unranked[2].label).toEqual("MICHELIN EDITIONS");
   });
 
   test("test with or without etablissements", async () => {
@@ -257,11 +262,9 @@ describe("Test api params", () => {
     } = await searchCall({ query: "michelin", matchingLimit: 5 });
     expect(resp2[0].allMatchingEtablissements.length).toBe(5);
 
-    console.log(JSON.stringify(resp2[0].allMatchingEtablissements, null, 2));
-
     const {
       body: { entreprises: resp3 },
     } = await searchCall({ query: "carrefour", matchingLimit: -1 });
-    expect(resp3[1].allMatchingEtablissements.length).toBe(17);
+    expect(resp3[0].allMatchingEtablissements.length).toBe(194);
   });
 });

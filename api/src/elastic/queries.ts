@@ -283,7 +283,8 @@ export const entrepriseSearchBody = ({
         {
           bool: {
             should: [
-              boostSiege ? { term: { etablissementSiege: true } } : undefined,
+              { term: { siren: query.replace(/\D/g, "") } },
+              { term: { siret: query.replace(/\D/g, "") } },
               !onlyDigits(query)
                 ? {
                     multi_match: {
@@ -294,18 +295,17 @@ export const entrepriseSearchBody = ({
                     },
                   }
                 : undefined,
-              { term: { siren: query.replace(/\D/g, "") } },
-              { term: { siret: query.replace(/\D/g, "") } },
-            ],
+            ].filter((s) => s),
           },
         },
       ],
       should: [
+        boostSiege ? { term: { etablissementSiege: true } } : undefined,
         ranked ? { rank_feature: etablissementsRankFeature } : undefined,
         // rank by siret with minimum boosting in order to ensure results appear in the same order
         // useful to always have the same first etablissement when no address passed
         { rank_feature: { boost: 0.1, field: "siretRank" } },
-      ],
+      ].filter((s) => s),
     },
   },
   size: limit ? limit : defaultLimit,

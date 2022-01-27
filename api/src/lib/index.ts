@@ -25,13 +25,13 @@ export const search = async ({
     matchingLimit,
   });
 
+  // console.log(JSON.stringify(body, null, 2));
+
   const response = await elasticsearchClient.search({
     body,
     // explain: true,
     index: ELASTICSEARCH_INDEX_NAME,
   });
-
-  // console.log(JSON.stringify(body, null, 2));
 
   const entreprises = response.body.hits.hits.map(mapHit(matchingLimit));
 
