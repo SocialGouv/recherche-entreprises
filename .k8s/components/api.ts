@@ -36,6 +36,10 @@ const getManifests = async () => {
     }),
   });
 
+  if (env.env === "prod" && deployment.spec) {
+    deployment.spec.replicas = 2;
+  }
+
   return manifests;
 };
 

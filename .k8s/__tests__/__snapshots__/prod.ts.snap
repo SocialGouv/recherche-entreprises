@@ -212,7 +212,7 @@ metadata:
   name: recherche-entreprises-search
   namespace: recherche-entreprises
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: recherche-entreprises-search
@@ -396,7 +396,7 @@ spec:
             timeoutSeconds: 5
           name: recherche-entreprises-front
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               name: http
           readinessProbe:
             failureThreshold: 15
@@ -448,7 +448,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 3000
   selector:
     app: recherche-entreprises-front
   type: ClusterIP
