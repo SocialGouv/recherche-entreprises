@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.1...v1.7.2) (2022-01-31)
+
+
+### Bug Fixes
+
+* **api:** add codePostalEtablissement, libelleCommuneEtablissement ([#149](https://github.com/SocialGouv/recherche-entreprises/issues/149)) ([695fe5c](https://github.com/SocialGouv/recherche-entreprises/commit/695fe5c5b2e0dcebc31012744c8412fc846dea6e))
+
 ## [1.7.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.0...v1.7.1) (2022-01-31)
 
 
