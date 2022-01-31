@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.0...v1.7.1) (2022-01-31)
+
+
+### Bug Fixes
+
+* **ci:** create namespace before indexing ([#145](https://github.com/SocialGouv/recherche-entreprises/issues/145)) ([1311901](https://github.com/SocialGouv/recherche-entreprises/commit/131190178bdd6869d14047aea9986cd4ed65b43f))
+
 # [1.7.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.6.15...v1.7.0) (2022-01-27)
 
 
