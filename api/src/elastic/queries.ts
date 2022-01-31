@@ -58,6 +58,8 @@ export const mapHit =
       idccs,
       etablissementSiege,
       activitePrincipaleEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
     },
     inner_hits,
     highlight,
@@ -127,6 +129,8 @@ export const mapHit =
             ),
             etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
+            codePostalEtablissement,
+            libelleCommuneEtablissement,
           })
         );
 
@@ -144,6 +148,8 @@ export const mapHit =
       firstMatchingEtablissement: {
         address: geo_adresse,
         codeCommuneEtablissement,
+        codePostalEtablissement,
+        libelleCommuneEtablissement,
         idccs,
         categorieEntreprise,
         siret,
