@@ -1,0 +1,38 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: recherche-entreprises
+url: 'https://github.com/SocialGouv/recherche-entreprises'
+landingURL: 'https://recherche-entreprises.fabrique.social.gouv.fr'
+releaseDate: '2021-04-16'
+softwareVersion: 1.7.0
+developmentStatus: stable
+softwareType: standalone/other
+legal:
+  license: Apache-2.0
+  repoOwner: Fabrique numérique des ministères sociaux
+localisation:
+  localisationReady: false
+fr:
+  sample: fr
+description:
+  fr:
+    genericName: recherche-entreprises
+    apiDocumentation: 'https://api-recherche-entreprises.fabrique.social.gouv.fr'
+    shortDescription: API pour la recherche d'entreprise
+    longDescription: |
+      
+      Le dépôt recherche-entreprises permet d'assembler et indexer toutes les données utiles pour une recherche d'entreprises efficace.
+      
+      Plusieurs modules sont proposés :
+
+       - Création d'un index ElasticSearch à partir de jeux de données data.gouv.fr
+
+       - API NodeJS pour interroger cet index
+
+       - Frontend de démonstration
+
+    features:
+      - recherche d'entreprise
