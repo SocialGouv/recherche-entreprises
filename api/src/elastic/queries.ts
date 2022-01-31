@@ -129,6 +129,10 @@ export const mapHit =
             ),
             etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
+            codePostalEtablissement: getFirstIfSet(codePostalEtablissement),
+            libelleCommuneEtablissement: getFirstIfSet(
+              libelleCommuneEtablissement
+            ),
           })
         );
 
@@ -146,6 +150,8 @@ export const mapHit =
       firstMatchingEtablissement: {
         address: geo_adresse,
         codeCommuneEtablissement,
+        codePostalEtablissement,
+        libelleCommuneEtablissement,
         idccs,
         categorieEntreprise,
         siret,
