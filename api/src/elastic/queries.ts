@@ -58,6 +58,8 @@ export const mapHit =
       idccs,
       etablissementSiege,
       activitePrincipaleEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement,
     },
     inner_hits,
     highlight,
