@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.2...v1.7.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* **api:** use 2 replicas in production ([#150](https://github.com/SocialGouv/recherche-entreprises/issues/150)) ([1ae9d7d](https://github.com/SocialGouv/recherche-entreprises/commit/1ae9d7dc12832b31b0e43758761edb3b885a5803))
+
 ## [1.7.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.1...v1.7.2) (2022-01-31)
 
 
