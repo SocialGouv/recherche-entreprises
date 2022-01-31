@@ -129,10 +129,8 @@ export const mapHit =
             ),
             etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
-            codePostalEtablissement: getFirstIfSet(codePostalEtablissement),
-            libelleCommuneEtablissement: getFirstIfSet(
-              libelleCommuneEtablissement
-            ),
+            codePostalEtablissement,
+            libelleCommuneEtablissement,
           })
         );
 
