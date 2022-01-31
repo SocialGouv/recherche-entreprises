@@ -60,6 +60,7 @@ export const mapHit =
       activitePrincipaleEtablissement,
       codePostalEtablissement,
       libelleCommuneEtablissement,
+      codePaysEtrangerEtablissement,
     },
     inner_hits,
     highlight,
@@ -131,6 +132,7 @@ export const mapHit =
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
             codePostalEtablissement,
             libelleCommuneEtablissement,
+            codePaysEtrangerEtablissement,
           })
         );
 
@@ -150,6 +152,7 @@ export const mapHit =
         codeCommuneEtablissement,
         codePostalEtablissement,
         libelleCommuneEtablissement,
+        codePaysEtrangerEtablissement,
         idccs,
         categorieEntreprise,
         siret,
