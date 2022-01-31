@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.3...v1.7.4) (2022-01-31)
+
+
+### Bug Fixes
+
+* **data:** add codePaysEtrangerEtablissement ([#151](https://github.com/SocialGouv/recherche-entreprises/issues/151)) ([6d5ab1d](https://github.com/SocialGouv/recherche-entreprises/commit/6d5ab1d6b569dedcf9152c165043a613a7a4b814))
+
 ## [1.7.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.2...v1.7.3) (2022-01-31)
 
 
