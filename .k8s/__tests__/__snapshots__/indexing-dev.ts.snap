@@ -47,7 +47,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 data:
-  sqlite.sh: >
+  sqlite.sh: >-
     #!/bin/bash
 
 
@@ -71,7 +71,6 @@ data:
 
 
     echo \\"-- Download datasets\\"
-
 
 
     if command -v apt-get &> /dev/null
@@ -107,6 +106,7 @@ data:
         echo \\"unzip could not be found\\"
         apt-get install -y unzip
     fi
+
 
 
     # geo siret par département
@@ -149,6 +149,13 @@ data:
     -O \\"\${DATA_DIR}/WEEZ.csv\\"
 
 
+    echo \\"-- Data files md5 : \\"
+
+    for file in \\"$DATA_DIR\\"/*.csv; do
+       md5sum \\"$file\\";
+    done
+
+
     echo \\"-- Import CSV datasets to sqlite\\"
 
 
@@ -160,6 +167,13 @@ data:
 
     sqlite3 -header -csv \\"\${DATA_DIR}/db.sqlite\\" \\".read export.sql\\" >
     \\"\${DATA_DIR}/assembly.csv\\"
+
+
+    echo \\"-- Total lines in assembly.csv : \\"
+
+    wc -l \\"\${DATA_DIR}/assembly.csv\\"
+
+    md5sum \\"\${DATA_DIR}/assembly.csv\\"
   import.sql: |-
     --- sqlite3 -echo db.sqlite \\".read import.sql\\"
     ---
@@ -332,9 +346,11 @@ data:
         stock.categorieEntreprise,
         stock.etatAdministratifUniteLegale,
         stock.caractereEmployeurUniteLegale,
+        stock.dateCreationUniteLegale,
         geo_siret.siret,
         geo_siret.codePostalEtablissement,
         geo_siret.libelleCommuneEtablissement,
+        geo_siret.codeCommuneEtablissement,
         geo_siret.etatAdministratifEtablissement,
         geo_siret.enseigne1Etablissement,
         geo_siret.enseigne2Etablissement,
@@ -347,6 +363,7 @@ data:
         geo_siret.indiceRepetitionEtablissement,
         geo_siret.typeVoieEtablissement,
         geo_siret.libelleVoieEtablissement,
+        geo_siret.etablissementSiege,
         weez.IDCC as idcc,
         (select count(*) FROM geo_siret where siren=stock.siren) etablissements
         from stock, geo_siret
