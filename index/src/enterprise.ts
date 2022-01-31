@@ -55,6 +55,7 @@ export type Enterprise = {
   indiceRepetitionEtablissement: string;
   typeVoieEtablissement: string;
   libelleVoieEtablissement: string;
+  codePaysEtrangerEtablissement: string;
 };
 
 export const mappings = {
@@ -147,6 +148,8 @@ export const mappings = {
     trancheEffectifsUniteLegale: { type: "rank_feature" },
 
     withIdcc: { type: "boolean" },
+
+    codePaysEtrangerEtablissement: { type: "keyword" },
   },
 };
 

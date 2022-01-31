@@ -38,6 +38,7 @@ SELECT
     geo_siret.typeVoieEtablissement,
     geo_siret.libelleVoieEtablissement,
     geo_siret.etablissementSiege,
+    geo_siret.codePaysEtrangerEtablissement,
     weez.IDCC as idcc,
     (select count(*) FROM geo_siret where siren=stock.siren) etablissements
     from stock, geo_siret
