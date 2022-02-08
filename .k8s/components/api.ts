@@ -8,7 +8,7 @@ const getManifests = async () => {
   const manifests = await create("recherche-entreprises-search", {
     config: {
       containerPort: 3000,
-      subDomainPrefix: "search-",
+      subDomainPrefix: env.env === "prod" ? "api." : "api-",
     },
     deployment: {
       image: getGithubRegistryImagePath({
