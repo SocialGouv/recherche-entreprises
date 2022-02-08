@@ -516,22 +516,38 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/permanent-redirect: https://api.recherche-entreprises.fabrique.social.gouv.fr$request_uri
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: 'true'
   labels:
-    app.kubernetes.io/component: redirect
-    app.kubernetes.io/name: www
-  name: recherche-entreprises-redirect
+    app: recherche-entreprises-search
+  name: recherche-entreprises-search-alias
 spec:
   rules:
     - host: search-recherche-entreprises.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: recherche-entreprises-search
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
     - host: api-recherche-entreprises.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: recherche-entreprises-search
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - search-recherche-entreprises.fabrique.social.gouv.fr
         - api-recherche-entreprises.fabrique.social.gouv.fr
-      secretName: recherche-entreprises-redirect
+      secretName: recherche-entreprises-search-alias-crt
 "
 `;
