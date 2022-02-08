@@ -9,8 +9,8 @@ metadata:
   labels:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: www
-  name: www-redirect
-  namespace: incubateur
+  name: recherche-entreprises-redirect
+  namespace: recherche-entreprises
 spec:
   rules:
     - host: search-recherche-entreprises.fabrique.social.gouv.fr
@@ -19,4 +19,4 @@ spec:
     - hosts:
         - search-recherche-entreprises.fabrique.social.gouv.fr
         - api-recherche-entreprises.fabrique.social.gouv.fr
-      secretName: www-redirect
+      secretName: recherche-entreprises-redirect
