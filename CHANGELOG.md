@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.5...v1.7.6) (2022-02-08)
+
+
+### Bug Fixes
+
+* dont redirect API ([#154](https://github.com/SocialGouv/recherche-entreprises/issues/154)) ([8c7cb4d](https://github.com/SocialGouv/recherche-entreprises/commit/8c7cb4d5e4cd471acd72daef9ac168dd93e09ea2))
+
 ## [1.7.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.4...v1.7.5) (2022-02-08)
 
 
