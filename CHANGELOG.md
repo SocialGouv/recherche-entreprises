@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.4...v1.7.5) (2022-02-08)
+
+
+### Bug Fixes
+
+* cleanup urls ([#152](https://github.com/SocialGouv/recherche-entreprises/issues/152)) ([7cab5a4](https://github.com/SocialGouv/recherche-entreprises/commit/7cab5a4789ba842191488b74ba87471eb285e76a))
+
 ## [1.7.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.3...v1.7.4) (2022-01-31)
 
 
