@@ -8,9 +8,9 @@ Le dossier [`api`](./api) présente un exemple d'implémentation d'API NodeJS qu
 
 Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
-Et vous pouvez utiliser librement l'API disponible sur https://api-recherche-entreprises.fabrique.social.gouv.fr cf [documentation API](./api/README.md)
+Et vous pouvez utiliser librement l'API disponible sur https://api.recherche-entreprises.fabrique.social.gouv.fr cf [documentation API](./api/README.md)
 
-Exemple : [/api/v1/search?q=plume&a=paris](https://api-recherche-entreprises.fabrique.social.gouv.fr/api/v1/search?q=plume&a=paris)
+Exemple : [/api/v1/search?q=plume&a=paris](https://api.recherche-entreprises.fabrique.social.gouv.fr/api/v1/search?q=plume&a=paris)
 
 ## Étapes :
 
@@ -45,7 +45,6 @@ Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger l
 Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
 Cette opération dure environ 45 minutes.
-
 
 ### Indexation dans Elastic Search
 

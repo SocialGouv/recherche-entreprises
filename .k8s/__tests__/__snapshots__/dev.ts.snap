@@ -207,7 +207,7 @@ metadata:
   namespace: recherche-entreprises-mybranch
 spec:
   rules:
-    - host: api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+    - host: api-legacy-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -219,7 +219,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+        - api-legacy-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: apps/v1
@@ -361,7 +361,7 @@ metadata:
   namespace: recherche-entreprises-mybranch
 spec:
   rules:
-    - host: search-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+    - host: api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -373,7 +373,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - search-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
+        - api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: apps/v1
@@ -459,7 +459,7 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: >-
-                https://search-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr/api/v1
+                https://api-recherche-entreprises-mybranch.dev2.fabrique.social.gouv.fr/api/v1
 ---
 apiVersion: v1
 kind: Service
