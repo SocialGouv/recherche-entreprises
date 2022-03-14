@@ -2,7 +2,9 @@ name: Indexing (prod)
 
 on:
   workflow_dispatch:
-
+  schedule: 
+    - cron:  '30 0 * * 0'
+    
 concurrency:
   cancel-in-progress: true
   group: indexing-prod
