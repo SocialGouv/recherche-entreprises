@@ -17,7 +17,7 @@ ENV REACT_APP_API_URL="%%REACT_APP_API_URL%%"
 
 RUN yarn build
 
-FROM ghcr.io/socialgouv/docker/nginx4spa:6.65.0
+FROM ghcr.io/socialgouv/docker/nginx4spa:6.70.1
 
 ## switch to non-root user
 USER 101
