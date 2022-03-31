@@ -32,7 +32,7 @@ jobs:
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
 
       - name: Archive indexing job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: indexing.yml
           path: indexing.yml
@@ -45,7 +45,7 @@ jobs:
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
 
       - name: Archive namespace
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: namespace.yml
           path: namespace.yml

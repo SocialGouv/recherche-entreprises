@@ -39,7 +39,7 @@ jobs:
           SOCIALGOUV_PRODUCTION: true
 
       - name: Archive indexing job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: indexing.yml
           path: indexing.yml
