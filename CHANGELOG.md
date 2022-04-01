@@ -1,3 +1,10 @@
+## [1.7.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.6...v1.7.7) (2022-04-01)
+
+
+### Bug Fixes
+
+* prevent exception when no known address ([#171](https://github.com/SocialGouv/recherche-entreprises/issues/171)) ([d6c2140](https://github.com/SocialGouv/recherche-entreprises/commit/d6c21402ac887410fd9472f445b2157fb62f008b))
+
 ## [1.7.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.5...v1.7.6) (2022-02-08)
 
 
