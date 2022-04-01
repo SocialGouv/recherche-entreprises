@@ -122,8 +122,8 @@ export const mapHit =
               etablissementSiege,
             },
           }: any) => ({
-            address: address[0],
-            siret: siret[0],
+            address: address && address[0],
+            siret: siret && siret[0],
             idccs,
             activitePrincipaleEtablissement: getFirstIfSet(
               activitePrincipaleEtablissement
