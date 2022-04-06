@@ -148,6 +148,8 @@ export const mapHit =
       conventions: Array.from(conventions.values()),
       etablissements: parseInt(etablissements),
       etatAdministratifUniteLegale,
+      dateCessation:
+        etatAdministratifUniteLegale === "C" ? dateDebut : undefined,
       highlightLabel,
       label,
       matching,

@@ -99,9 +99,6 @@ export const searchEtablissement = async (siret: string) => {
     const etablissement = {
       ...raw,
       ...firstMatching,
-      dateCessation:
-        (raw.etatAdministratifUniteLegale === "C" && raw.dateDebut) ||
-        undefined,
     };
     delete etablissement.firstMatchingEtablissement;
     delete etablissement.allMatchingEtablissements;
