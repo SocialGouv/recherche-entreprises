@@ -3,6 +3,7 @@
 exports[`Test entreprise search correct siren 1`] = `
 Object {
   "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "activitePrincipaleUniteLegale": "70.22Z",
   "caractereEmployeurUniteLegale": "O",
   "categorieJuridiqueUniteLegale": "5308",
   "conventions": Array [
@@ -58,6 +59,7 @@ exports[`Test etablissement search correct siret 1`] = `
 Object {
   "activitePrincipale": "Traitement de données, hébergement et activités connexes",
   "activitePrincipaleEtablissement": "63.11Z",
+  "activitePrincipaleUniteLegale": "70.22Z",
   "address": "107 RUE SERVIENT 69003 LYON",
   "caractereEmployeurUniteLegale": "O",
   "categorieEntreprise": "GE",
@@ -97,6 +99,7 @@ Object {
 exports[`Test search generic search 1`] = `
 Object {
   "activitePrincipale": "Fabrication et rechapage de pneumatiques",
+  "activitePrincipaleUniteLegale": "70.22Z",
   "allMatchingEtablissements": Array [
     Object {
       "activitePrincipaleEtablissement": "22.11Z",
