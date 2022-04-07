@@ -22,7 +22,7 @@ Les scripts d'assemblage et d'indexation pour ElasticSearch sont fournis si vous
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjoie30iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
 
-### Données :
+## Données :
 
 | Dataset                                                                                                                                                                        | usage                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
@@ -32,9 +32,9 @@ Les scripts d'assemblage et d'indexation pour ElasticSearch sont fournis si vous
 | [kali-data](https://github.com/SocialGouv/kali-data)                                                                                                                           | Informations sur les conventions collectives             |
 | [codes-naf](https://github.com/SocialGouv/codes-naf)                                                                                                                           | Liste des codes NAF (Nomenclature d’activités française) |
 
-### Développement
+## Développement
 
-#### Pré-requis
+### Pré-requis
 
 Pour lancer les différentes parties du projet, un certain nombre d'outil doivent être présent sur la machine:
 
@@ -44,7 +44,7 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 - wget
 - sqlite3
 
-#### Assemblage des données
+### Assemblage des données
 
 Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger les données pour les re-exporter dans CSV "plat".
 
@@ -52,7 +52,7 @@ Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
 Cette opération dure environ 45 minutes.
 
-#### Indexation dans Elastic Search
+### Indexation dans Elastic Search
 
 Cette étape permet de mettre à jour les données dans l'index Elasticsearch à partir du fichier `assembly.csv` généré à l'étape précédente.
 
@@ -69,7 +69,7 @@ ELASTICSEARCH_URL=https://elastic_url:9200 ELASTICSEARCH_API_KEY=key_with_writin
 
 Le script `scripts/create-es-keys.sh` permet de créer des tokens pour lire/écrire sur ces index. **Cette étape n'est pas nécessaire pour le développement local.**
 
-#### Lancement de l'API
+### Lancement de l'API
 
 Cette étape permet de lancer l'API de démo qui va servir les requêtes jusqu'à Elasticsearch.
 
@@ -85,7 +85,7 @@ ELASTICSEARCH_URL=http://localhost:9200 yarn start
 
 Le temps d'indexation est d'environ 1h.
 
-#### Wokflows GitHub
+### Wokflows GitHub
 
 Des workflows GitHub permettent de mettre à jour les index et sont lancés manuellement
 
