@@ -13,6 +13,7 @@ export type Enterprise = {
   sigleUniteLegale: string;
 
   dateCreationUniteLegale: string;
+  dateDebut: string;
 
   denominationUniteLegale: string;
   denominationUsuelle1UniteLegale: string;
@@ -68,6 +69,7 @@ export const mappings = {
     categorieEntreprise: { type: "keyword" },
 
     dateCreationUniteLegale: { type: "date" },
+    dateDebut: { type: "date" },
 
     categorieJuridiqueUniteLegale: { type: "keyword" },
     codePostalEtablissement: { type: "keyword" },

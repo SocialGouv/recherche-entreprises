@@ -19,6 +19,7 @@ SELECT
     stock.nomenclatureActivitePrincipaleUniteLegale,
     stock.categorieEntreprise,
     stock.etatAdministratifUniteLegale,
+    stock.dateDebut,
     stock.caractereEmployeurUniteLegale,
     stock.dateCreationUniteLegale,
     geo_siret.siret,

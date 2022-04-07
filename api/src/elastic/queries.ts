@@ -48,6 +48,7 @@ export const mapHit =
       codeCommuneEtablissement,
       categorieEntreprise,
       etatAdministratifUniteLegale,
+      dateDebut,
       caractereEmployeurUniteLegale,
       activitePrincipale,
       etablissements,
@@ -58,6 +59,7 @@ export const mapHit =
       idccs,
       etablissementSiege,
       activitePrincipaleEtablissement,
+      activitePrincipaleUniteLegale,
       codePostalEtablissement,
       libelleCommuneEtablissement,
       codePaysEtrangerEtablissement,
@@ -138,12 +140,16 @@ export const mapHit =
 
     return {
       activitePrincipale,
+      activitePrincipaleUniteLegale,
       categorieJuridiqueUniteLegale,
       dateCreationUniteLegale,
+      dateDebut,
       caractereEmployeurUniteLegale,
       conventions: Array.from(conventions.values()),
       etablissements: parseInt(etablissements),
       etatAdministratifUniteLegale,
+      dateCessation:
+        etatAdministratifUniteLegale === "C" ? dateDebut : undefined,
       highlightLabel,
       label,
       matching,

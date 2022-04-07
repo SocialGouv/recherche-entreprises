@@ -96,7 +96,10 @@ export const searchEtablissement = async (siret: string) => {
 
     // update some fields related to etablissement
     const firstMatching = raw.firstMatchingEtablissement;
-    const etablissement = { ...raw, ...firstMatching };
+    const etablissement = {
+      ...raw,
+      ...firstMatching,
+    };
     delete etablissement.firstMatchingEtablissement;
     delete etablissement.allMatchingEtablissements;
 
