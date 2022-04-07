@@ -1,0 +1,16 @@
+app-front:
+  enabled: true
+  env:
+    - name: REACT_APP_API_URL
+      value: "https://api-{{ .Values.global.host }}/api/v1"
+
+app-api:
+  enabled: true
+  host: "api-{{ .Values.global.host }}"
+  envFrom:
+    - secretRef:
+        name: elastic-recherche-entreprises-read
+
+jobs:
+  enabled: true
+  runs:
