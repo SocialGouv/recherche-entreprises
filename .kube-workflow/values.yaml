@@ -13,7 +13,3 @@ app-api:
   envFrom:
     - secretRef:
         name: elastic-recherche-entreprises-read
-
-jobs:
-  enabled: true
-  runs:
