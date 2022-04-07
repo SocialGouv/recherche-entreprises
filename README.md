@@ -50,7 +50,7 @@ Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger l
 
 Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
-Cette opération durer ~45 minutes selon votre setup
+Cette opération peut durer ~45 minutes selon votre setup
 
 #### Indexation dans Elastic Search
 
