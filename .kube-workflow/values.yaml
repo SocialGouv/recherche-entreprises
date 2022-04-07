@@ -1,11 +1,13 @@
 app-front:
   enabled: true
+  imagePackage: front
   env:
     - name: REACT_APP_API_URL
       value: "https://api-{{ .Values.global.host }}/api/v1"
 
 app-api:
   enabled: true
+  imagePackage: api
   host: "api-{{ .Values.global.host }}"
   envFrom:
     - secretRef:

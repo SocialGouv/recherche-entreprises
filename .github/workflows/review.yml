@@ -27,7 +27,7 @@ jobs:
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
           project: ${{ env.project }}
-          imageName: ${{ env.project }}/search
+          imageName: ${{ env.project }}/api
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./api/Dockerfile
           dockercontext: ./api
