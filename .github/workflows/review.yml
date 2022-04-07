@@ -56,7 +56,7 @@ jobs:
   deploy:
     name: Deploy application
     runs-on: ubuntu-latest
-    needs: [register, manifests]
+    needs: [register]
     steps:
       - uses: SocialGouv/kube-workflow@v1
         with:
