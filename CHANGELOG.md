@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.7...v1.8.0) (2022-04-07)
+
+
+### Features
+
+* add dateDebut, dateCessation and activitePrincipaleUniteLegale ([#174](https://github.com/SocialGouv/recherche-entreprises/issues/174)) ([81e2282](https://github.com/SocialGouv/recherche-entreprises/commit/81e22822fb75f1f726f75c690dbd37ff60b108a7)), closes [#162](https://github.com/SocialGouv/recherche-entreprises/issues/162)
+
 ## [1.7.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.6...v1.7.7) (2022-04-01)
 
 
