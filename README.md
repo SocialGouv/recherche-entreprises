@@ -1,22 +1,20 @@
 # recherche-entreprises
 
-Ce projet met à disposition les donnéees et scripts nécessaires pour réaliser une recherche d'entreprise d'après la [base SIRENE de l'INSEE](https://www.insee.fr/fr/information/3591226).
-
-Les données sont issues de [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data).
+API de recherche d'entreprise basée sur ElasticSearch basée avec les données de la [base SIRENE de l'INSEE](https://www.insee.fr/fr/information/3591226) et [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data) pour les conventions collectives.
 
 Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
-## Usage
+Une API de démo est disponible sur https://api.recherche-entreprises.fabrique.social.gouv.fr 
 
-### API HTTP
+## Composants
 
-Une API ouverte est dispnonible sur https://api.recherche-entreprises.fabrique.social.gouv.fr 
+Le dépôt de code contient plusieurs composants utilisables indépendamment :
 
-Le code source de l'API est disponible dans [./api](./api)
-
-### Indexation ElasticSearch
-
-Les scripts d'assemblage et d'indexation pour ElasticSearch sont fournis si vous souhaitez intégrer cette API dans votre SI.
+composant | description
+----------|--------------
+index     | Indexation des jeux de données dans Elastic Search
+api       | API NodeJS pour interroger l'index Elastic
+front     | Frontend de démo en ReactJS
 
 ## Fonctionnement 
 
@@ -50,13 +48,11 @@ Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger l
 
 Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
 
-Cette opération dure environ 45 minutes.
+Cette opération durer ~45 minutes selon votre setup
 
 #### Indexation dans Elastic Search
 
 Cette étape permet de mettre à jour les données dans l'index Elasticsearch à partir du fichier `assembly.csv` généré à l'étape précédente.
-
-Cette étape se déroule dans le répertoire `index`.
 
 La mise à jour exploite la fonctionnalité [alias](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/aliases.html) d'Elasticsearch pour éviter les downtimes.
 
