@@ -1,6 +1,6 @@
 # recherche-entreprises
 
-API de recherche d'entreprise basée sur ElasticSearch basée avec les données de la [base SIRENE de l'INSEE](https://www.insee.fr/fr/information/3591226) et [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data) pour les conventions collectives.
+API de recherche d'entreprise basée sur ElasticSearch et exploitant les données de la [base SIRENE de l'INSEE](https://www.insee.fr/fr/information/3591226), de [plusieurs jeux de données data.gouv.fr](./assembly/scripts/get-data.sh) et de [kali-data](https://github.com/SocialGouv/kali-data) pour les conventions collectives.
 
 Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
