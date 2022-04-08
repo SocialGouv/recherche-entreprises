@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: assembly-scripts
+data:
+  sqlite.sh: |
+    {{- .Files.Get "files/sqlite.sh" | nindent 4 }}
+  import.sql: |
+    {{- .Files.Get "files/import.sql" | nindent 4 }}
+  export.sql: |
+    {{- .Files.Get "files/export.sql" | nindent 4 }}

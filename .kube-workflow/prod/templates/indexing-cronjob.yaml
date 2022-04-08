@@ -4,64 +4,11 @@ metadata:
   name: update-index
 spec:
   concurrencyPolicy: Forbid
+  schedule: "0 */1 * * *"
   jobTemplate:
-    metadata:
-      creationTimestamp: null
     spec:
       backoffLimit: 3
       template:
         metadata:
-          spec:
-            metadata:
-              name: update-index
-            containers:
-              - name: update-index
-                image: >-
-                  {{ $.Values.global.registry}}/recherche-entreprises/index:{{ $.Values.global.imageTag}}
-                volumeMounts:
-                  - name: data
-                    mountPath: /data
-                env:
-                  - name: ASSEMBLY_FILE
-                    value: /data/assembly.csv
-                envFrom:
-                  - secretRef:
-                    name: elastic-recherche-entreprises-write
-                resources:
-                  limits:
-                    cpu: "4"
-                    memory: 5Gi
-                  requests:
-                    cpu: "2"
-                    memory: 2Gi
-            restartPolicy: Never
-            volumes:
-              - name: data
-                emptyDir: {}
-              - configMap:
-                  name: config-map-files
-                  defaultMode: 511
-                name: local-files
-            initContainers:
-              - args:
-                  - /mnt/scripts/sqlite.sh
-                command:
-                  - sh
-                image: ubuntu:18.04
-                imagePullPolicy: Always
-                name: download-build-data
-                env:
-                  - name: DATA_DIR
-                    value: /mnt/scripts/data
-                resources:
-                  limits:
-                    cpu: "4"
-                    memory: 2Gi
-                  requests:
-                    cpu: "2"
-                    memory: 1Gi
-                volumeMounts:
-                  - name: data
-                    mountPath: /mnt/scripts/data
-                  - mountPath: /mnt/scripts
-                    name: local-files
+          {{- include "indexing-job-spec" . | nindent 10 }}
+         
