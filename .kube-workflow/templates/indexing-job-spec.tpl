@@ -26,21 +26,17 @@ spec:
   volumes:
     - name: data
       emptyDir: {}
-    - configMap:
-        name: assembly-scripts
-        defaultMode: 511
-      name: assembly-scripts
   initContainers:
     - args:
-        - /mnt/scripts/sqlite.sh
+        - /app/sqlite/build.sh
       command:
         - sh
-      image: ubuntu:18.04
+      image: {{ $.Values.global.registry}}/recherche-entreprises/index:{{ $.Values.global.imageTag }}
       imagePullPolicy: Always
       name: download-build-data
       env:
         - name: DATA_DIR
-          value: /mnt/scripts/data
+          value: /app/sqlite/data
       resources:
         limits:
           cpu: "4"
@@ -50,7 +46,5 @@ spec:
           memory: 1Gi
       volumeMounts:
         - name: data
-          mountPath: /mnt/scripts/data
-        - mountPath: /mnt/scripts
-          name: assembly-scripts
+          mountPath: /app/sqlite/data
 {{- end -}}

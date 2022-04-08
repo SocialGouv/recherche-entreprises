@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # exit when any command fails
 set -e
@@ -37,6 +37,8 @@ then
     echo "unzip could not be found"
     apt-get install -y unzip
 fi
+
+
 
 
 # geo siret par département

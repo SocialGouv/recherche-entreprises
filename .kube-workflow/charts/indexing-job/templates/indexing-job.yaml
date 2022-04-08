@@ -1,0 +1,6 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: update-index-{{ randAlphaNum 5 }}
+{{- include "indexing-job-spec" . | nindent 0 }}
+  

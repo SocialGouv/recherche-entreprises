@@ -13,11 +13,3 @@ app-api:
   envFrom:
     - secretRef:
         name: elastic-recherche-entreprises-read
-
-# jobs-indexing:
-#   enabled: false
-#   runs:
-#     - name: indexing
-#       image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/index:{{ .Values.global.imageTag }}"
-#       run: "yarn db:init"
-  

@@ -1,0 +1,1 @@
+../../../templates/indexing-job-spec.tpl

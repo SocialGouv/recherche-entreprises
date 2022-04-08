@@ -12,63 +12,11 @@ jobs:
     name: Index Dev
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Yarn cache setup
-        uses: c-hive/gha-yarn-cache@v2
+      - uses: SocialGouv/kube-workflow@v1
         with:
-          directory: .k8s
-
-      - name: Install kosko-charts dependencies
-        shell: bash
-        run: yarn --cwd .k8s install --frozen-lockfile --prefer-offline
-
-      - name: Generate indexing job
-        shell: bash
-        run: yarn --cwd .k8s --silent generate --env dev jobs/indexing > indexing.yml
-        env:
-          RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
-          SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
-
-      - name: Archive indexing job
-        uses: actions/upload-artifact@v2
-        with:
-          name: indexing.yml
-          path: indexing.yml
-
-      - name: Generate namespace
-        shell: bash
-        run: yarn --cwd .k8s --silent generate --env dev _namespace > namespace.yml
-        env:
-          RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
-          SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
-
-      - name: Archive namespace
-        uses: actions/upload-artifact@v2
-        with:
-          name: namespace.yml
-          path: namespace.yml
-
-      - name: Get namespace name
-        uses: mikefarah/yq@master
-        id: namespace
-        with:
-          cmd: yq eval ".metadata.namespace" indexing.yml | head -n 1
-
-      - name: Create kubernetes config
-        shell: bash
-        run: |
-          mkdir ~/.kube
-          touch ~/.kube/config
-          echo ${{ secrets.KUBECONFIG }} | base64 -d > ~/.kube/config
-
-      - name: Create k8s namespace
-        shell: bash
-        run: |
-          kubectl create -f namespace.yml || true
-
-      - name: Launch indexing Job
-        shell: bash
-        run: |
-          kubectl apply -f indexing.yml --namespace ${{ steps.namespace.outputs.result }}
+          environment: dev
+          charts: indexing-job
+          token: ${{ secrets.GITHUB_TOKEN }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
+          rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
