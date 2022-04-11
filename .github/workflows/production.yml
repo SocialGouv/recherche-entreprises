@@ -24,6 +24,7 @@ jobs:
       - name: Register API
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
+          environment: prod
           project: ${{ env.project }}
           imageName: ${{ env.project }}/api
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,6 +34,7 @@ jobs:
       - name: Register Frontend (demo)
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
+          environment: prod
           project: ${{ env.project }}
           imageName: ${{ env.project }}/front
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,6 +46,7 @@ jobs:
       - name: Register Indexing
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
+          environment: prod
           project: ${{ env.project }}
           imageName: ${{ env.project }}/index
           token: ${{ secrets.GITHUB_TOKEN }}
