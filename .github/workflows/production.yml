@@ -38,6 +38,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./front/Dockerfile
           dockercontext: ./front
+          dockerbuildargs: |
+            REACT_APP_API_URL=https://api.recherche-entreprises.fabrique.social.gouv.fr/api/v1
 
       - name: Register Indexing
         uses: SocialGouv/actions/autodevops-build-register@v1

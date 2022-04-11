@@ -1,8 +1,5 @@
 app-front:
   host: recherche-entreprises.fabrique.social.gouv.fr
-  env:
-    - name: REACT_APP_API_URL
-      value: "https://api.recherche-entreprises.fabrique.social.gouv.fr/api/v1"
 
 app-api:
   replicas: 2

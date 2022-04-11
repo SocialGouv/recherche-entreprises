@@ -21,7 +21,16 @@ jobs:
     steps:
       - name: Get project name
         run: |
-          echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          REPOSITORY=${GITHUB_REPOSITORY#*/}
+          BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          HOST=$(npx kube-workflow slugify $REPOSITORY-$BRANCH)
+          echo $REPOSITORY
+          echo $BRANCH
+          echo $HOST
+
+          echo "project=${REPOSITORY}" >> $GITHUB_ENV
+          echo "branch=${BRANCH}" >> $GITHUB_ENV
+          echo "host=${HOST}" >> $GITHUB_ENV
 
       - name: Register API
         uses: SocialGouv/actions/autodevops-build-register@v1
@@ -40,6 +49,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./front/Dockerfile
           dockercontext: ./front
+          dockerbuildargs: |
+            REACT_APP_API_URL=https://api-${{ env.host }}.dev.fabrique.social.gouv.fr/api/v1
 
       - name: Register Indexing
         uses: SocialGouv/actions/autodevops-build-register@v1
