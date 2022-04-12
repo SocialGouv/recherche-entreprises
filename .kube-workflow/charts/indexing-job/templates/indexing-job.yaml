@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: update-index-{{ .Values.global.shortSha }}
+  annotations:
+    kapp.k14s.io/nonce: ""
+    kapp.k14s.io/update-strategy: fallback-on-replace
 spec:
   template:
     {{- include "indexing-job-spec" . | nindent 4 }}
