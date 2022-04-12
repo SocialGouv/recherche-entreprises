@@ -1,6 +1,6 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: update-index-{{ randAlphaNum 5 }}
+  name: update-index-{{ .Values.global.shortSha }}
 {{- include "indexing-job-spec" . | nindent 0 }}
   
