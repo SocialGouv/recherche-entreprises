@@ -1,7 +1,7 @@
 {{- define "indexing-job-spec" -}}
 spec:
   metadata:
-    name: update-index
+    name: update-index-{{ .Values.global.shortSha }}
   containers:
     - name: update-index
       image: >-
