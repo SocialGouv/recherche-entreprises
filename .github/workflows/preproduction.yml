@@ -59,8 +59,8 @@ jobs:
   ##############################################################################
   ## DEPLOY PRODUCTION APPLICATION
   ##############################################################################
-  deploy-prod:
-    name: Deploy production
+  deploy-preprod:
+    name: Deploy preproduction
     runs-on: ubuntu-latest
     needs: [register]
     environment:
