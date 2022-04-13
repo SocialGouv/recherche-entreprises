@@ -8,7 +8,6 @@ metadata:
   labels:
     app: recherche-entreprises-search
   name: recherche-entreprises-search-alias
-  namespace: recherche-entreprises
 spec:
   rules:
   - host: search-recherche-entreprises.fabrique.social.gouv.fr
