@@ -1,0 +1,8 @@
+app-front:
+  host: recherche-entreprises-preprod.dev.fabrique.social.gouv.fr
+  certSecretName: recherche-entreprises-front-crt
+
+app-api:
+  replicas: 2
+  host: api-recherche-entreprises-preprod.dev.fabrique.social.gouv.fr
+  certSecretName: recherche-entreprises-search-crt
