@@ -65,7 +65,7 @@ jobs:
     needs: [register]
     environment:
       name: preproduction
-      url: https://recherche-entreprises-preprod.fabrique.social.gouv.fr
+      url: https://recherche-entreprises-preprod.dev.fabrique.social.gouv.fr
     steps:
       - uses: SocialGouv/kube-workflow@v1
         with:
