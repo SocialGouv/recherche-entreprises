@@ -21,6 +21,7 @@ jobs:
         with:
           environment: prod
           charts: indexing-job
+          timeout: 180m15s
           token: ${{ secrets.GITHUB_TOKEN }}
           kubeconfig: ${{ secrets.KUBECONFIG }}
           rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
