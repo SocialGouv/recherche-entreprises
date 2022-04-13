@@ -6,5 +6,7 @@ metadata:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
 spec:
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 3600
   template:
     {{- include "indexing-job-spec" . | nindent 4 }}
