@@ -1,3 +1,10 @@
+## [1.8.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.5...v1.8.6) (2022-04-13)
+
+
+### Bug Fixes
+
+* cronjob ([279ceb1](https://github.com/SocialGouv/recherche-entreprises/commit/279ceb10162d23e8a031203737f268fcd637e643))
+
 ## [1.8.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.4...v1.8.5) (2022-04-13)
 
 
