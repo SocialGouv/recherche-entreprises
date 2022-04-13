@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.1...v1.8.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* add preprod workflow ([8e6bb98](https://github.com/SocialGouv/recherche-entreprises/commit/8e6bb987b39ef6bc56874fbd38173e09fc93f24f))
+
 ## [1.8.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.0...v1.8.1) (2022-04-13)
 
 
