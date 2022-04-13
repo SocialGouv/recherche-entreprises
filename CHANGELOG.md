@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.0...v1.8.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* use kube-workflow ([#179](https://github.com/SocialGouv/recherche-entreprises/issues/179)) ([625dc81](https://github.com/SocialGouv/recherche-entreprises/commit/625dc811c61cc24aeb8a77a019535b5360362d3e))
+
 # [1.8.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.7.7...v1.8.0) (2022-04-07)
 
 
