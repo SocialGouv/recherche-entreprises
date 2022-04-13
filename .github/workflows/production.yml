@@ -25,7 +25,6 @@ jobs:
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
           environment: prod
-          project: ${{ env.project }}
           imageName: ${{ env.project }}/api
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./api/Dockerfile
@@ -35,7 +34,6 @@ jobs:
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
           environment: prod
-          project: ${{ env.project }}
           imageName: ${{ env.project }}/front
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./front/Dockerfile
@@ -47,7 +45,6 @@ jobs:
         uses: SocialGouv/actions/autodevops-build-register@v1
         with:
           environment: prod
-          project: ${{ env.project }}
           imageName: ${{ env.project }}/index
           token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: ./index/Dockerfile
