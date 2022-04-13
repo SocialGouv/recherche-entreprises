@@ -16,7 +16,7 @@ spec:
       paths:
       - backend:
           service:
-            name: recherche-entreprises-search
+            name: app-api
             port:
               name: http
         path: /
@@ -26,7 +26,7 @@ spec:
       paths:
       - backend:
           service:
-            name: recherche-entreprises-search
+            name: app-api
             port:
               name: http
         path: /
@@ -36,4 +36,3 @@ spec:
     - search-recherche-entreprises.fabrique.social.gouv.fr
     - api-recherche-entreprises.fabrique.social.gouv.fr
     secretName: recherche-entreprises-search-alias-crt
-

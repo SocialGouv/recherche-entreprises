@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: update-index
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "0 */1 * * *"
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      template:
+        metadata:
+          {{- include "indexing-job-spec" . | nindent 10 }}
+         

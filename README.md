@@ -46,9 +46,7 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 
 ### Assemblage des données
 
-Le script `sqlite.sh` permet de permet de télécharger les CSV puis aggréger les données pour les re-exporter dans CSV "plat".
-
-Le fichier `./data/assembly.csv` fait +6Go avec plus de 30 millions de lignes.
+Le script `index/sqlite/build.sh` permet de permet de télécharger les CSV puis aggréger les données pour les re-exporter dans CSV "plat". Le fichier `./data/assembly.csv` généré fait +6Go avec plus de 30 millions de lignes.
 
 Cette opération peut durer ~45 minutes selon votre setup
 
