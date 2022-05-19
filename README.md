@@ -6,6 +6,8 @@ Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique
 
 Une API de démo est disponible sur https://api.recherche-entreprises.fabrique.social.gouv.fr 
 
+Les données sont mise à jour toutes les semaines
+
 ## Composants
 
 Le dépôt de code contient plusieurs composants utilisables indépendamment :
