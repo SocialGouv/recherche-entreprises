@@ -2,8 +2,8 @@ import * as http from "http";
 import Koa from "koa";
 import supertest from "supertest";
 
-import { API_PREFIX, router } from "../routes";
 import { ELASTICSEARCH_INDEX_NAME } from "../elastic";
+import { API_PREFIX, router } from "../routes";
 
 const app = new Koa();
 app.use(router.routes());
@@ -195,10 +195,10 @@ describe("Test entreprise search", () => {
 describe("Test api params", () => {
   test("not only open", async () => {
     const { body: b1 } = await searchCall({
+      convention: false,
+      limit: 1,
       open: "false",
       query: "michelin",
-      limit: 1,
-      convention: false,
     });
     expect(
       b1.entreprises[0].firstMatchingEtablissement
@@ -214,29 +214,29 @@ describe("Test api params", () => {
 
     const { body: notOnlyEmployer } = await searchCall({
       employer: false,
-      query: "michelin",
       limit: 50,
+      query: "michelin",
     });
 
     expect(getNotEmployer(notOnlyEmployer).length).toBeGreaterThan(0);
 
     const { body: onlyEmployer } = await searchCall({
       employer: true,
-      query: "michelin",
       limit: 50,
+      query: "michelin",
     });
     expect(getNotEmployer(onlyEmployer).length).toBe(0);
   });
 
   test("not with convention", async () => {
     const { body: withConvention } = await searchCall({
-      query: "truc",
       limit: 1,
+      query: "truc",
     });
     const { body: noConvention } = await searchCall({
       convention: false,
-      query: "truc",
       limit: 1,
+      query: "truc",
     });
     expect(noConvention.entreprises[0].conventions).toEqual([]);
     expect(withConvention.entreprises[0].conventions.length).toBeGreaterThan(0);
@@ -259,20 +259,20 @@ describe("Test api params", () => {
     expect(unranked[2].label).toEqual("MICHELIN EDITIONS");
   });
 
-  test("test with or without etablissements", async () => {
+  test("with or without etablissements", async () => {
     const {
       body: { entreprises },
-    } = await searchCall({ query: "michelin", matchingLimit: 0 });
+    } = await searchCall({ matchingLimit: 0, query: "michelin" });
     expect(entreprises[0].allMatchingEtablissements.length).toBe(0);
 
     const {
       body: { entreprises: resp2 },
-    } = await searchCall({ query: "michelin", matchingLimit: 5 });
+    } = await searchCall({ matchingLimit: 5, query: "michelin" });
     expect(resp2[0].allMatchingEtablissements.length).toBe(5);
 
     const {
       body: { entreprises: resp3 },
-    } = await searchCall({ query: "carrefour", matchingLimit: -1 });
+    } = await searchCall({ matchingLimit: -1, query: "carrefour" });
     expect(resp3[0].allMatchingEtablissements.length).toBe(194);
   });
 });

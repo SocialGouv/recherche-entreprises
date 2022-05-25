@@ -1,4 +1,4 @@
-import { elasticsearchClient, ELASTICSEARCH_INDEX_NAME } from "../elastic";
+import { ELASTICSEARCH_INDEX_NAME, elasticsearchClient } from "../elastic";
 import type { SearchArgs } from "../elastic/queries";
 import { entrepriseSearchBody, mapHit } from "../elastic/queries";
 
@@ -19,10 +19,10 @@ export const search = async ({
     convention,
     employer,
     limit,
+    matchingLimit,
     open,
     query,
     ranked,
-    matchingLimit,
   });
 
   // console.log(JSON.stringify(body, null, 2));
@@ -46,14 +46,14 @@ export const searchEntreprise = async (
 ) => {
   const body = entrepriseSearchBody({
     addAllConventions: true,
+    boostSiege: true,
     convention: false,
     employer: false,
     limit: 1,
+    matchingLimit,
     open: false,
     query: siren,
     ranked: false,
-    matchingLimit,
-    boostSiege: true,
   });
 
   // console.log(JSON.stringify(body, null, 2));
@@ -78,10 +78,10 @@ export const searchEtablissement = async (siret: string) => {
     convention: false,
     employer: false,
     limit: 1,
+    matchingLimit: 1,
     open: false,
     query: siret,
     ranked: false,
-    matchingLimit: 1,
   });
 
   const response = await elasticsearchClient.search({
