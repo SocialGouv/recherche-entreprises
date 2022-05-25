@@ -53,6 +53,7 @@ export const mapHit =
       activitePrincipale,
       etablissements,
       siret,
+      complementAdresseEtablissement,
       geo_adresse,
       naming,
       namingMain,
@@ -92,7 +93,6 @@ export const mapHit =
               const kaliData = conventionsSet[idccNum];
               const o = {
                 idcc: idccNum,
-                // shortTitle: convention ? convention[0] : "",
                 ...kaliData,
               };
               if (!acc.has(o.idcc)) {

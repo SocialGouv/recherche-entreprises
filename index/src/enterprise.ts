@@ -156,32 +156,23 @@ export const mappings = {
 };
 
 const buildAddress = (enterprise: Enterprise) => {
-  if (enterprise.geo_adresse) {
-    // the second option is upper case, so we make it uppercase too
-    return enterprise.geo_adresse.toUpperCase();
-  } else {
-    const {
-      complementAdresseEtablissement,
-      numeroVoieEtablissement,
-      indiceRepetitionEtablissement,
-      typeVoieEtablissement,
-      libelleVoieEtablissement,
-      codePostalEtablissement,
-      libelleCommuneEtablissement,
-    } = enterprise;
+  const {
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+  } = enterprise;
 
-    return [
-      complementAdresseEtablissement,
-      numeroVoieEtablissement,
-      indiceRepetitionEtablissement,
-      typeVoieEtablissement,
-      libelleVoieEtablissement,
-      codePostalEtablissement,
-      libelleCommuneEtablissement,
-    ]
-      .filter((e) => e)
-      .join(" ");
-  }
+  return [
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+  ]
+    .filter((e) => e)
+    .join(" ");
 };
 
 export const mapEnterprise = (enterprise: Enterprise) => {
