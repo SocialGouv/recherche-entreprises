@@ -162,6 +162,8 @@ const buildAddress = (enterprise: Enterprise) => {
     indiceRepetitionEtablissement,
     typeVoieEtablissement,
     libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
   } = enterprise;
 
   return [
@@ -170,6 +172,8 @@ const buildAddress = (enterprise: Enterprise) => {
     indiceRepetitionEtablissement,
     typeVoieEtablissement,
     libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
   ]
     .filter((e) => e)
     .join(" ");
