@@ -39,9 +39,9 @@ router.get(`${API_PREFIX}/search`, async (ctx) => {
       convention: parseBoolean(convention as string, false),
       employer: parseBoolean(employer as string, false),
       limit: parseInt(limit as string),
+      matchingLimit: parseInteger(matchingLimit as string, 20),
       open: parseBoolean(open as string, true),
       query: query as string,
-      matchingLimit: parseInteger(matchingLimit as string, 20),
       ranked: parseBoolean(ranked as string, true),
     });
     ctx.body = { entreprises };

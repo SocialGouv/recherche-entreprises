@@ -8,7 +8,7 @@ const defaultLimit = 20;
 const conventionsSet = Object.fromEntries(
   kaliConventions.map((c) => {
     const { num, etat, id, mtime, texte_de_base, url, title, shortTitle } = c;
-    return [num, { etat, id, mtime, texte_de_base, title, url, shortTitle }];
+    return [num, { etat, id, mtime, shortTitle, texte_de_base, title, url }];
   })
 );
 
@@ -82,7 +82,7 @@ export const mapHit =
         (
           acc: any,
           {
-            fields: { convention, idccs },
+            fields: { idccs },
           }: { fields: { convention: string[]; idccs: string[] } }
         ) => {
           idccs?.forEach((idcc) => {
@@ -92,7 +92,6 @@ export const mapHit =
               const kaliData = conventionsSet[idccNum];
               const o = {
                 idcc: idccNum,
-                // shortTitle: convention ? convention[0] : "",
                 ...kaliData,
               };
               if (!acc.has(o.idcc)) {
@@ -124,49 +123,52 @@ export const mapHit =
               etablissementSiege,
             },
           }: any) => ({
-            address: address && address[0],
-            siret: siret && siret[0],
-            idccs,
             activitePrincipaleEtablissement: getFirstIfSet(
               activitePrincipaleEtablissement
             ),
-            etablissementSiege: getFirstIfSet(etablissementSiege), //|| false,
+            address: address && address[0],
+            //|| false,
             codeCommuneEtablissement: getFirstIfSet(codeCommuneEtablissement),
-            codePostalEtablissement,
-            libelleCommuneEtablissement,
+
             codePaysEtrangerEtablissement,
+
+            codePostalEtablissement,
+            etablissementSiege: getFirstIfSet(etablissementSiege),
+            idccs,
+            libelleCommuneEtablissement,
+            siret: siret && siret[0],
           })
         );
 
     return {
       activitePrincipale,
       activitePrincipaleUniteLegale,
-      categorieJuridiqueUniteLegale,
-      dateCreationUniteLegale,
-      dateDebut,
+      allMatchingEtablissements,
       caractereEmployeurUniteLegale,
+      categorieJuridiqueUniteLegale,
       conventions: Array.from(conventions.values()),
-      etablissements: parseInt(etablissements),
-      etatAdministratifUniteLegale,
       dateCessation:
         etatAdministratifUniteLegale === "C" ? dateDebut : undefined,
+      dateCreationUniteLegale,
+      dateDebut,
+      etablissements: parseInt(etablissements),
+      etatAdministratifUniteLegale,
+      firstMatchingEtablissement: {
+        activitePrincipaleEtablissement,
+        address: geo_adresse,
+        categorieEntreprise,
+        codeCommuneEtablissement,
+        codePaysEtrangerEtablissement,
+        codePostalEtablissement,
+        etablissementSiege,
+        etatAdministratifEtablissement,
+        idccs,
+        libelleCommuneEtablissement,
+        siret,
+      },
       highlightLabel,
       label,
       matching,
-      firstMatchingEtablissement: {
-        address: geo_adresse,
-        codeCommuneEtablissement,
-        codePostalEtablissement,
-        libelleCommuneEtablissement,
-        codePaysEtrangerEtablissement,
-        idccs,
-        categorieEntreprise,
-        siret,
-        etatAdministratifEtablissement,
-        etablissementSiege,
-        activitePrincipaleEtablissement,
-      },
-      allMatchingEtablissements,
       simpleLabel,
       siren,
     };
@@ -303,10 +305,10 @@ export const entrepriseSearchBody = ({
               !onlyDigits(query)
                 ? {
                     multi_match: {
-                      query,
-                      type: "most_fields",
                       fields: ["naming", "namingMain"],
                       fuzziness: "AUTO",
+                      query,
+                      type: "most_fields",
                     },
                   }
                 : undefined,
