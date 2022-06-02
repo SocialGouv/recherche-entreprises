@@ -53,7 +53,6 @@ export const mapHit =
       activitePrincipale,
       etablissements,
       siret,
-      complementAdresseEtablissement,
       geo_adresse,
       naming,
       namingMain,
