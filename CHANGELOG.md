@@ -1,3 +1,10 @@
+## [1.8.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.7...v1.8.8) (2022-06-02)
+
+
+### Bug Fixes
+
+* use user defined adresse ([#188](https://github.com/SocialGouv/recherche-entreprises/issues/188)) ([28e1efe](https://github.com/SocialGouv/recherche-entreprises/commit/28e1efe2033a96838646bd35c17f79dcda756307))
+
 ## [1.8.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.6...v1.8.7) (2022-04-19)
 
 
