@@ -8,7 +8,7 @@ on:
 
 jobs:
   liste-des-conventions-collectives-par-entreprise-siret:
-    name: Check last update
+    name: Check last update on data.gouv.fr
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
