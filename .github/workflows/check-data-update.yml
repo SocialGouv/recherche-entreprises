@@ -1,0 +1,35 @@
+# This workflow check if the data (https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/) has regular update which is done manually.
+# Alerts are sent to https://mattermost.fabrique.social.gouv.fr/default/channels/cdtn-alerts
+name: Check agreements by enterprise has been updated (CRON)
+on:
+  schedule:
+    - cron: "00 09 * * 1"
+  workflow_dispatch:
+
+jobs:
+  liste-des-conventions-collectives-par-entreprise-siret:
+    name: Check last update on data.gouv.fr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Test SDR urls
+        run: |
+          last=$(curl 'https://www.data.gouv.fr/api/1/datasets/liste-des-conventions-collectives-par-entreprise-siret/' | jq -r '.resources[0].last_modified' | sed 's/\..*//')
+          current=$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
+          last_update=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$last" "+%s")
+          days_diff=$(( ($current - $last_update) / (24*3600) ))
+          echo "Data has not been updated since $days_diff days"
+          if [ $days_diff -gt 31 ]
+          then
+            exit 1
+          fi
+
+      - name: Create the Mattermost Message
+        if: failure()
+        run: |
+          echo "{\"text\":\"La liste des conventions collectives par entreprise siret n'a pas été mise à jour depuis plus de 1 mois (WEEZ) : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}" > mattermost.json
+      - uses: mattermost/action-mattermost-notify@master
+        if: failure()
+        env:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}

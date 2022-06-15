@@ -12,11 +12,11 @@ Les données sont mise à jour toutes les semaines
 
 Le dépôt de code contient plusieurs composants utilisables indépendamment :
 
-composant | description
-----------|--------------
-index     | Indexation des jeux de données dans Elastic Search
-api       | API NodeJS pour interroger l'index Elastic
-front     | Frontend de démo en ReactJS
+| composant | description                                        |
+|-----------|----------------------------------------------------|
+| index     | Indexation des jeux de données dans Elastic Search |
+| api       | API NodeJS pour interroger l'index Elastic         |
+| front     | Frontend de démo en ReactJS                        |
 
 L'étape d'indexation peut être automatisée pour maintenir les données à jour en continu (ex: hebdomadaire).
 
