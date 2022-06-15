@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.8...v1.9.0) (2022-06-15)
+
+
+### Features
+
+* **alert:** add an alert to check the data is regularly updated ([#191](https://github.com/SocialGouv/recherche-entreprises/issues/191)) ([4758bdf](https://github.com/SocialGouv/recherche-entreprises/commit/4758bdf30bfa5bdfecd66875300bc3f398559421))
+
 ## [1.8.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.7...v1.8.8) (2022-06-02)
 
 
