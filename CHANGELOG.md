@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.0...v1.9.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* upgrade nginx ([#192](https://github.com/SocialGouv/recherche-entreprises/issues/192)) ([3e17538](https://github.com/SocialGouv/recherche-entreprises/commit/3e17538171329436982ce51fdaf17378af161df8))
+
 # [1.9.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.8.8...v1.9.0) (2022-06-15)
 
 
