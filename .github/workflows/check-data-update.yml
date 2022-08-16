@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Test SDR urls
+      - name: Check agreements by enterprise has been updated
         run: |
           last=$(curl 'https://www.data.gouv.fr/api/1/datasets/liste-des-conventions-collectives-par-entreprise-siret/' | jq -r '.resources[0].last_modified' | sed 's/\..*//')
           current=$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
-          last_update=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$last" "+%s")
+          last_update=$(date -d '$last' +"%s")
           days_diff=$(( ($current - $last_update) / (24*3600) ))
           echo "Data has not been updated since $days_diff days"
           if [ $days_diff -gt 31 ]
