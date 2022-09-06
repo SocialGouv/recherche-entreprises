@@ -64,6 +64,7 @@ export const mapHit =
       libelleCommuneEtablissement,
       codePaysEtrangerEtablissement,
     },
+    _score,
     inner_hits,
     highlight,
   }: any) => {
@@ -169,6 +170,7 @@ export const mapHit =
       highlightLabel,
       label,
       matching,
+      score: _score,
       simpleLabel,
       siren,
     };
