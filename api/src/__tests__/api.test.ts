@@ -91,7 +91,7 @@ describe("Test search", () => {
     expect(
       b2.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 PL DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
 
     const { body: b3 } = await searchCall({
@@ -101,14 +101,14 @@ describe("Test search", () => {
     expect(
       b3.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 PL DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
 
     const { body: b4 } = await searchCall({ address: "63", query: "michelin" });
     expect(
       b4.entreprises[0].firstMatchingEtablissement.address
     ).toMatchInlineSnapshot(
-      `"23 PL DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
+      `"PLACE DES CARMES DECHAUX 63000 CLERMONT-FERRAND"`
     );
   }, 15000);
 
@@ -273,6 +273,6 @@ describe("Test api params", () => {
     const {
       body: { entreprises: resp3 },
     } = await searchCall({ matchingLimit: -1, query: "carrefour" });
-    expect(resp3[0].allMatchingEtablissements.length).toBe(158);
+    expect(resp3[0].allMatchingEtablissements.length).toBe(194);
   });
 });
