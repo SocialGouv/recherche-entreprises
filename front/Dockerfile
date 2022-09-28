@@ -19,7 +19,7 @@ ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 RUN yarn build
 
-FROM ghcr.io/socialgouv/docker/nginx:7.0.1
+FROM ghcr.io/socialgouv/docker/nginx:7.1.0
 
 ARG REACT_APP_API_URL
 
