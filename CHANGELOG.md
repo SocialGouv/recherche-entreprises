@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.2...v1.9.3) (2022-10-04)
+
+
+### Bug Fixes
+
+* **es:** upgrade clusters to 8.4.2 ([#199](https://github.com/SocialGouv/recherche-entreprises/issues/199)) ([cec5be8](https://github.com/SocialGouv/recherche-entreprises/commit/cec5be86e59356040025d868daec129b4f034147))
+
 ## [1.9.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.1...v1.9.2) (2022-10-03)
 
 
