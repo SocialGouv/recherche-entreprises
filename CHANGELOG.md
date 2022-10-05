@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.3...v1.9.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* use geo_siren last version ([890657b](https://github.com/SocialGouv/recherche-entreprises/commit/890657bfe2e0916fd3a8e6c6625136e12d64674f))
+
 ## [1.9.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.2...v1.9.3) (2022-10-04)
 
 
