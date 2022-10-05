@@ -22,8 +22,18 @@ L'étape d'indexation peut être automatisée pour maintenir les données à jou
 
 ## Fonctionnement 
 
-[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggTFJcblxuU3RvY2tVbml0ZUxlZ2FsZS5jc3YtLT5TUUxpdGVcbmdlb19zaXJldC5jc3YtLT5TUUxpdGVcbnNpcmV0MmlkY2MuY3N2LS0-U1FMaXRlXG5TUUxpdGUtLT5hc3NlbWJseS5jc3ZcbmFzc2VtYmx5LmNzdi0tPmluZGV4LS0-RWxhc3RpY1NlYXJjaC0tPkFQSVtBUEkgSFRUUDFdXG5FbGFzdGljU2VhcmNoLS0-QVBJMltBUEkgSFRUUDJdXG5FbGFzdGljU2VhcmNoLS0-Q2xpZW50W0NsaWVudCBFU10iLCJtZXJtYWlkIjoie30iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
+```mermaid
+graph LR
 
+StockUniteLegale.csv-->SQLite
+geo_siren.csv-->SQLite
+siret2idcc.csv-->SQLite
+SQLite-->assembly.csv
+assembly.csv-->index-->ElasticSearch-->API[API HTTP1]
+ElasticSearch-->API2[API HTTP2]
+ElasticSearch-->Client[Client ES]
+```
+ 
 ## Données :
 
 | Dataset                                                                                                                                                                        | usage                                                    |
