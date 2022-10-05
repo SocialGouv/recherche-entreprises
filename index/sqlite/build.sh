@@ -38,7 +38,7 @@ then
     apt-get install -y unzip
 fi
 
-GEO_SIREN_VERSION="2022-09"
+GEO_SIREN_VERSION="last"
 
 
 # geo siret par département
