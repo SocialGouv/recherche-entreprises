@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.4...v1.9.5) (2022-10-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-feather to v2.0.10 ([#190](https://github.com/SocialGouv/recherche-entreprises/issues/190)) ([4d88108](https://github.com/SocialGouv/recherche-entreprises/commit/4d88108b0168bc8431041ec9f69c5a9a9093aa8b))
+
 ## [1.9.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.3...v1.9.4) (2022-10-05)
 
 
