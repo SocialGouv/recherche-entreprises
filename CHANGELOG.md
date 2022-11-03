@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.5...v1.9.6) (2022-11-03)
+
+
+### Bug Fixes
+
+* **ci:** format date error in check data action ([#200](https://github.com/SocialGouv/recherche-entreprises/issues/200)) ([e1bc58e](https://github.com/SocialGouv/recherche-entreprises/commit/e1bc58e9d09d3f9cc7784a0e65d5dc46d3ddbfa4))
+
 ## [1.9.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.4...v1.9.5) (2022-10-05)
 
 
