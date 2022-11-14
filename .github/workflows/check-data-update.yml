@@ -17,14 +17,14 @@ jobs:
         run: |
           last=$(curl 'https://www.data.gouv.fr/api/1/datasets/liste-des-conventions-collectives-par-entreprise-siret/' | jq -r '.resources[0].last_modified' | sed 's/\..*//')
           current=$(date -d "`date`" +"%s")
-          last_update=$(date -d '$last' +"%s")
+          last_update=$(date -d $last +"%s")
           days_diff=$(( ($current - $last_update) / (24*3600) ))
-          echo "Data has not been updated since $days_diff days"
           if [ $days_diff -gt 31 ]
           then
+            echo "/!\ Data has not been updated since $days_diff days!"
             exit 1
           fi
-
+          echo "Data has been updated $days_diff days ago"
       - name: Create the Mattermost Message
         if: failure()
         run: |
