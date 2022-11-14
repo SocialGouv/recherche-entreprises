@@ -1,3 +1,10 @@
+## [1.9.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.6...v1.9.7) (2022-11-14)
+
+
+### Bug Fixes
+
+* **ci:** issues on alerting scripts on Weez data ([#201](https://github.com/SocialGouv/recherche-entreprises/issues/201)) ([8d02fa7](https://github.com/SocialGouv/recherche-entreprises/commit/8d02fa7af30d60c1dc38adda5b47e80372b43a72))
+
 ## [1.9.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.5...v1.9.6) (2022-11-03)
 
 
