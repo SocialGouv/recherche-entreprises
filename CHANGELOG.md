@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.0...v1.10.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* ingress alias ([1ef38f9](https://github.com/SocialGouv/recherche-entreprises/commit/1ef38f9a5fecd60f0b3f7d2a685eeba50583265d))
+
 # [1.10.0](https://github.com/SocialGouv/recherche-entreprises/compare/v1.9.7...v1.10.0) (2023-05-30)
 
 
