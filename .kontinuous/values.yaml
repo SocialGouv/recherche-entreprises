@@ -1,0 +1,39 @@
+front:
+  ~chart: app
+  ~needs:
+    - build-front
+  imagePackage: front
+  containerPort: 8080
+
+api:
+  ~chart: app
+  ~needs:
+    - build-api
+  imagePackage: api
+  host: "api-{{ .Values.global.host }}"
+  envFrom:
+    - secretRef:
+        name: elastic-recherche-entreprises-read
+
+jobs:
+  ~chart: jobs
+  runs:
+    build-front:
+      use: build
+      with:
+        imagePackage: front
+        context: front
+        buildArgs:
+          REACT_APP_API_URL: "https://api-${{ .Values.global.host }}.dev.fabrique.social.gouv.fr/api/v1"
+    
+    build-api:
+      use: build
+      with:
+        imagePackage: api
+        context: api
+
+    build-index:
+      use: build
+      with:
+        imagePackage: index
+        context: index

@@ -1,15 +1,23 @@
-name: Deactivate
-
+name: ♻️ Deactivate
 on:
   pull_request:
     types: [closed]
+  delete:
+    branches:
+      - "**"
+      - "!v*"
+      - "!master"
+      - "!main"
+      - "!dev"
+      - "!develop"
+      - "!**/persist"
+      - "!persist/**"
+      - "!**/persist/**"
+      - "!persist-**"
+      - "!**-persist"
+      - "!**-persist-**"
 
 jobs:
-  bury_review_env:
-    name: 🪦 Review
-    runs-on: ubuntu-latest
-    steps:
-      - uses: SocialGouv/actions/autodevops-deactivate@v1
-        with:
-          kube-config: ${{ secrets.KUBECONFIG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  socialgouv:
+    uses: socialgouv/workflows/.github/workflows/use-ks-gh-deactivate.yaml@v1
+    secrets: inherit

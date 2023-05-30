@@ -1,0 +1,8 @@
+apiVersion: v2
+name: project
+version: 0.0.0
+dependencies:
+  - name: indexing-job
+    repository: file://./charts/indexing-job
+    version: 0.0.0
+    condition: indexing-job.enabled
