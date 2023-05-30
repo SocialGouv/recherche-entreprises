@@ -9,6 +9,5 @@ spec:
     spec:
       backoffLimit: 3
       template:
-        metadata:
-        {{- include "indexing-job-spec" . | nindent 8 }}
+        {{- include "indexing-job-template" . | nindent 8 }}
          
