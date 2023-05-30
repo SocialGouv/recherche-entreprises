@@ -1,13 +1,13 @@
 front:
   ~chart: app
-  needs:
+  ~needs:
     - build-front
   imagePackage: front
   containerPort: 8080
 
 api:
   ~chart: app
-  needs:
+  ~needs:
     - build-api
   imagePackage: api
   host: "api-{{ .Values.global.host }}"
