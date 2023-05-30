@@ -15,7 +15,7 @@ spec:
       paths:
       - backend:
           service:
-            name: app-api
+            name: api
             port:
               name: http
         path: /
@@ -25,7 +25,7 @@ spec:
       paths:
       - backend:
           service:
-            name: app-api
+            name: api
             port:
               name: http
         path: /
