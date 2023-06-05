@@ -1,26 +1,17 @@
-name: Indexing (prod)
+name: #️⃣ Indexing (prod)
 
 on:
   workflow_dispatch:
-    
+
 concurrency:
   cancel-in-progress: true
-  group: indexing-prod
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.ref }}
 
 jobs:
-  index:
-    name: Index Prod
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://recherche-entreprises.fabrique.social.gouv.fr
-    steps:
-      - uses: SocialGouv/kube-workflow@v1
-        with:
-          environment: prod
-          charts: indexing-job
-          timeout: 180m15s
-          token: ${{ secrets.GITHUB_TOKEN }}
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
-          rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
+  indexing-job:
+    name: "#️⃣ Indexing prod"
+    uses: socialgouv/workflows/.github/workflows/use-ks-gh-manual.yaml@v1
+    secrets: inherit
+    with:
+      environment: prod
+      charts: indexing-job
