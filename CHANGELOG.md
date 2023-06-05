@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.1...v1.10.2) (2023-06-05)
+
+
+### Bug Fixes
+
+* indexing-jobs github wf ([4a3d2d4](https://github.com/SocialGouv/recherche-entreprises/commit/4a3d2d4b0b3e66dccc38ba15d3563884a6ac81e2))
+
 ## [1.10.1](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.0...v1.10.1) (2023-05-30)
 
 
