@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.2...v1.10.3) (2023-06-12)
+
+
+### Bug Fixes
+
+* **k8s:** fix indexing job image ([#220](https://github.com/SocialGouv/recherche-entreprises/issues/220)) ([c73ea3a](https://github.com/SocialGouv/recherche-entreprises/commit/c73ea3a139f6418c08b91b407ec026104b7ff7ec))
+
 ## [1.10.2](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.1...v1.10.2) (2023-06-05)
 
 
