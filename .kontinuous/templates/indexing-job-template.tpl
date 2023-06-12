@@ -5,7 +5,7 @@ spec:
   containers:
     - name: update-index
       image: >-
-        {{ $.Values.global.registry}}/recherche-entreprises/index:{{ $.Values.global.imageTag }}
+        {{ $.Values.global.registry}}/cdtn/recherche-entreprises/index:{{ $.Values.global.imageTag }}
       volumeMounts:
         - name: data
           mountPath: /data
@@ -31,7 +31,7 @@ spec:
         - /app/sqlite/build.sh
       command:
         - sh
-      image: {{ $.Values.global.registry}}/recherche-entreprises/index:{{ $.Values.global.imageTag }}
+      image: {{ $.Values.global.registry}}/cdtn/recherche-entreprises/index:{{ $.Values.global.imageTag }}
       imagePullPolicy: Always
       name: download-build-data
       env:
