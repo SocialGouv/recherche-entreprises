@@ -4,9 +4,13 @@ API de recherche d'entreprise basée sur ElasticSearch et exploitant les donnée
 
 Un frontend de démo est disponible ici : https://recherche-entreprises.fabrique.social.gouv.fr
 
-Une API de démo est disponible sur https://api.recherche-entreprises.fabrique.social.gouv.fr 
-
 Les données sont mise à jour toutes les semaines
+
+---
+
+⚠️ LA DINUM propose une autre API similaire, officielle et disponible à cette adresse : https://api.gouv.fr/les-api/api-recherche-entreprises
+
+---
 
 ## Composants
 
