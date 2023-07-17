@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.3...v1.10.4) (2023-07-17)
+
+
+### Bug Fixes
+
+* up k8s cronjob apiversion ([#222](https://github.com/SocialGouv/recherche-entreprises/issues/222)) ([c1c4441](https://github.com/SocialGouv/recherche-entreprises/commit/c1c44419589f273ae9ab340f417fefbd3acf2a85))
+
 ## [1.10.3](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.2...v1.10.3) (2023-06-12)
 
 
