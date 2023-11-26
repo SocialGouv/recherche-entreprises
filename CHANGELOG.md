@@ -1,3 +1,10 @@
+## [1.10.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.4...v1.10.5) (2023-11-26)
+
+
+### Bug Fixes
+
+* weez url ([#225](https://github.com/SocialGouv/recherche-entreprises/issues/225)) ([c71212d](https://github.com/SocialGouv/recherche-entreprises/commit/c71212d82237050ebd3278e511d331afabd1a9c3))
+
 ## [1.10.4](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.3...v1.10.4) (2023-07-17)
 
 
