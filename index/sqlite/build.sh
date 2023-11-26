@@ -64,7 +64,7 @@ wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr
 unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
 
 # WEEZ data
-wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/bfc3a658-c054-4ecc-ba4b-22f3f5789dc7 -O "${DATA_DIR}/WEEZ.csv"
+wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a22e54f7-b937-4483-9a72-aad2ea1316f1 -O "${DATA_DIR}/WEEZ.csv"
 
 echo "-- Data files md5 : "
 for file in "$DATA_DIR"/*.csv; do
