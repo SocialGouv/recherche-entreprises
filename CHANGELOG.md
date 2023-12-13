@@ -1,3 +1,10 @@
+## [1.10.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.5...v1.10.6) (2023-12-13)
+
+
+### Bug Fixes
+
+* use OVH ([#227](https://github.com/SocialGouv/recherche-entreprises/issues/227)) ([8610b24](https://github.com/SocialGouv/recherche-entreprises/commit/8610b242da1ab6cd7c38d56fb0a7c3dce4f23c32))
+
 ## [1.10.5](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.4...v1.10.5) (2023-11-26)
 
 
