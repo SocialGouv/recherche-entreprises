@@ -1,0 +1,8 @@
+projectName: cdtn
+ciNamespace: ci-cdtn
+
+dependencies:
+  fabrique:
+    extends:
+      - name: ovh
+      - name: buildkit-service
