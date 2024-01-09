@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
-RUN yarn fetch --immutable
+RUN yarn fetch
 
 COPY ./tsconfig.json tsconfig.json
 COPY ./src/ src/
