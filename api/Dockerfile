@@ -2,12 +2,12 @@ FROM node:16-alpine as builder
 
 WORKDIR /app
 RUN chown node:node /app
-COPY package.json .
-COPY yarn.lock .
-RUN yarn --frozen-lockfile
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+RUN yarn fetch --immutable
 COPY . .
 RUN yarn build
-RUN yarn --frozen-lockfile --production
+RUN yarn workspaces focus --production && yarn cache clean
 # ---
 
 FROM node:16-alpine
