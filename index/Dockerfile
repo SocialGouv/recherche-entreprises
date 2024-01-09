@@ -8,6 +8,7 @@ RUN yarn fetch
 
 COPY ./tsconfig.json tsconfig.json
 COPY ./src/ src/
+COPY ./package.json package.json
 
 RUN yarn build
 
