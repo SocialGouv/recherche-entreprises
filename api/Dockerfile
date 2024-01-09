@@ -4,7 +4,7 @@ WORKDIR /app
 RUN chown node:node /app
 COPY yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
-RUN yarn fetch --immutable
+RUN yarn fetch
 COPY . .
 RUN yarn build
 RUN yarn workspaces focus --production && yarn cache clean
