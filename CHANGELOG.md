@@ -1,3 +1,10 @@
+## [1.10.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.6...v1.10.7) (2024-01-22)
+
+
+### Bug Fixes
+
+* yarn berry + yarn fetch + docker opti ([#229](https://github.com/SocialGouv/recherche-entreprises/issues/229)) ([477ce08](https://github.com/SocialGouv/recherche-entreprises/commit/477ce0881a07a1db98a4b246ccd6fb1eb91af9f4))
+
 ## [1.10.6](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.5...v1.10.6) (2023-12-13)
 
 
