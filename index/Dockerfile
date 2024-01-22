@@ -2,15 +2,17 @@ FROM node:16-alpine as builder
 
 WORKDIR /app
 
-COPY ./package.json package.json
-COPY ./yarn.lock yarn.lock
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+RUN yarn fetch
+
 COPY ./tsconfig.json tsconfig.json
 COPY ./src/ src/
-
-
-RUN yarn install --frozen-lockfile
+COPY ./package.json package.json
 
 RUN yarn build
+
+RUN yarn workspaces focus --production && yarn cache clean
 
 FROM node:16-alpine
 
@@ -24,6 +26,3 @@ COPY package.json .
 USER node
 
 CMD ["yarn", "start"]
-
-
-

@@ -9,15 +9,17 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-
-RUN yarn install --frozen-lockfile
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+RUN yarn fetch
 
 COPY . .
 
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 RUN yarn build
+
+RUN yarn workspaces focus --production && yarn cache clean
 
 FROM ghcr.io/socialgouv/docker/nginx:7.1.0
 

@@ -60,5 +60,6 @@
       "ts",
       "json"
     ]
-  }
+  },
+  "packageManager": "yarn@3.7.0"
 }
