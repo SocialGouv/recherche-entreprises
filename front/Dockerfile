@@ -21,7 +21,7 @@ RUN yarn build
 
 RUN yarn workspaces focus --production && yarn cache clean
 
-FROM ghcr.io/socialgouv/docker/nginx:7.1.0
+FROM ghcr.io/socialgouv/docker/nginx:7.6.1
 
 ARG REACT_APP_API_URL
 
