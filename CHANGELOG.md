@@ -1,3 +1,10 @@
+## [1.10.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.7...v1.10.8) (2024-03-20)
+
+
+### Bug Fixes
+
+* Dockerfile rootless kube compliant ([e8ef4d4](https://github.com/SocialGouv/recherche-entreprises/commit/e8ef4d443b3b79662a69f2b955c42e99feb75b6a))
+
 ## [1.10.7](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.6...v1.10.7) (2024-01-22)
 
 
