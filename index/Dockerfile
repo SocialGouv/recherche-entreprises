@@ -23,6 +23,6 @@ ENV NODE_ENV=production
 COPY --from=builder /app/dist ./dist
 COPY --chown=node:node ./sqlite/ sqlite/
 COPY package.json .
-USER node
+USER 1000
 
 CMD ["yarn", "start"]
