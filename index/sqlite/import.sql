@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS stock;
 
 .mode csv
 .import data/WEEZ.csv weez
-.import data/StockUniteLegale_utf8.csv stock
+.import data/StockUniteLegaleS4F3_utf8.csv stock
 .import data/geo_siret_.csv geo_siret
 .import data/geo_siret_01.csv geo_siret
 .import data/geo_siret_02.csv geo_siret
