@@ -1,3 +1,10 @@
+## [1.10.9](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.8...v1.10.9) (2024-04-03)
+
+
+### Bug Fixes
+
+* changed CSV name ([#231](https://github.com/SocialGouv/recherche-entreprises/issues/231)) ([1afe88c](https://github.com/SocialGouv/recherche-entreprises/commit/1afe88cf4c1e532d8ea8034dfe88d94a85d5dfb6))
+
 ## [1.10.8](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.7...v1.10.8) (2024-03-20)
 
 
