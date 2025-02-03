@@ -3,13 +3,21 @@ on:
   workflow_dispatch:
   push:
     branches: [master, main, alpha, beta, next]
+permissions:
+  id-token: write  # Required for OIDC token generation
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
+    - name: Get GitHub App Token
+      id: token
+      uses: SocialGouv/token-bureau@main
+      with:
+        token-bureau-url: https://token-bureau.fabrique.social.gouv.fr
+        audience: socialgouv
     - uses: socialgouv/workflows/actions/semantic-release@v1
       with:
-        github-token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+        github-token: ${{ steps.token.outputs.token }}
         author-name: ${{ secrets.SOCIALGROOVYBOT_NAME }}
         author-email: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
