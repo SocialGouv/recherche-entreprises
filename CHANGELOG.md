@@ -1,3 +1,10 @@
+## [1.10.11](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.10...v1.10.11) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ci-cd:** use token-bureau ([#233](https://github.com/SocialGouv/recherche-entreprises/issues/233)) ([bdbba29](https://github.com/SocialGouv/recherche-entreprises/commit/bdbba2903eb3d21f51d5a772051101ab818262ac))
+
 ## [1.10.10](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.9...v1.10.10) (2024-04-04)
 
 
