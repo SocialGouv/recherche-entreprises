@@ -29,10 +29,6 @@ jobs:
             type=sha,prefix=preprod-,format=long,priority=850
             type=sha,prefix=sha-,format=long,priority=890
 
-      - name: Env
-        id: env
-        uses: socialgouv/kontinuous/.github/actions/env@v1
-
       - name: 📦 Build and push Docker image for front
         uses: socialgouv/workflows/actions/buildkit@v1
         with:
