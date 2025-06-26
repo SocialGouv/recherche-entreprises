@@ -37,7 +37,6 @@ jobs:
         uses: socialgouv/workflows/actions/buildkit@v1
         with:
           context: "front"
-          dockerfile: "front/Dockerfile"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           registry: "${{ vars.REGISTRY_URL }}"
@@ -74,7 +73,6 @@ jobs:
         uses: socialgouv/workflows/actions/buildkit@v1
         with:
           context: "api"
-          dockerfile: "api/Dockerfile"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           registry: "${{ vars.REGISTRY_URL }}"
@@ -109,7 +107,6 @@ jobs:
         uses: socialgouv/workflows/actions/buildkit@v1
         with:
           context: "index"
-          dockerfile: "index/Dockerfile"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           registry: "${{ vars.REGISTRY_URL }}"
