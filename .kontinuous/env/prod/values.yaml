@@ -4,12 +4,3 @@ front:
 api:
   replicas: 2
   host: api.recherche-entreprises.fabrique.social.gouv.fr
-
-jobs:
-  runs:
-    build-front:
-      with:
-        imagePackage: front
-        context: front
-        buildArgs:
-          REACT_APP_API_URL: https://api.recherche-entreprises.fabrique.social.gouv.fr/api/v1
