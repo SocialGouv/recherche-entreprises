@@ -1,3 +1,10 @@
+## [1.10.12](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.11...v1.10.12) (2025-06-26)
+
+
+### Bug Fixes
+
+* buildkit in gh ([#236](https://github.com/SocialGouv/recherche-entreprises/issues/236)) ([415188b](https://github.com/SocialGouv/recherche-entreprises/commit/415188bc409e000aea7c3cda7213c77da3c608a0))
+
 ## [1.10.11](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.10...v1.10.11) (2025-02-03)
 
 
