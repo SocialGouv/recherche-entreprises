@@ -1,3 +1,10 @@
+## [1.10.13](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.12...v1.10.13) (2025-07-01)
+
+
+### Bug Fixes
+
+* **ci:** subdomain typo ([afbe448](https://github.com/SocialGouv/recherche-entreprises/commit/afbe4481ae9af33fa97918d23847847538d07f65))
+
 ## [1.10.12](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.11...v1.10.12) (2025-06-26)
 
 
