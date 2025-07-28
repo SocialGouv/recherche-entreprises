@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Check agreements by enterprise has been updated
         run: |
           last=$(curl 'https://www.data.gouv.fr/api/1/datasets/liste-des-conventions-collectives-par-entreprise-siret/' | jq -r '.resources[0].last_modified' | sed 's/\..*//')
