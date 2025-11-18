@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.100.0",
-    "@types/jest": "^27.0.3",
+    "@types/jest": "^30.0.0",
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
     "@types/koa-static": "^4.0.2",
@@ -38,11 +38,11 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27",
+    "jest": "^30.0.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "supertest": "^6.1.6",
-    "ts-jest": "^27",
+    "ts-jest": "^29.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   },
