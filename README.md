@@ -64,6 +64,9 @@ Pour lancer les différentes parties du projet, un certain nombre d'outil doiven
 
 Le script `index/sqlite/build.sh` permet de permet de télécharger les CSV puis aggréger les données pour les re-exporter dans CSV "plat". Le fichier `./data/assembly.csv` généré fait +6Go avec plus de 30 millions de lignes.
 
+⚠️ Note (févr. 2026) : certains fichiers SIRENE ont été migrés depuis `files.data.gouv.fr` vers l'infrastructure objet `object.files.data.gouv.fr`.
+Si vous rencontrez des erreurs 404 lors du téléchargement du stock, référez-vous à [`index/sqlite/build.sh`](index/sqlite/build.sh:37) pour l'URL à jour.
+
 Cette opération peut durer ~45 minutes selon votre setup
 
 ### Indexation dans Elastic Search

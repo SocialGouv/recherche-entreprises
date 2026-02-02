@@ -14,32 +14,7 @@ cd "$(dirname "$0")" || exit
 
 echo "-- Download datasets"
 
-if command -v apt-get &> /dev/null
-then
-  apt-get update -y
-fi
-
-# install sqlite3 if not exists
-if ! command -v sqlite3 &> /dev/null
-then
-    echo "sqlite3 could not be found"
-    apt-get install -y sqlite3
-fi
-# install wget if not exists
-if ! command -v wget &> /dev/null
-then
-    echo "wget could not be found"
-    apt-get install -y wget
-fi
-# install unzip if not exists
-if ! command -v unzip &> /dev/null
-then
-    echo "unzip could not be found"
-    apt-get install -y unzip
-fi
-
 GEO_SIREN_VERSION="last"
-
 
 # geo siret par département
 for d in $(seq -w 1 19) 2A 2B $(seq 21 74) $(seq 76 95) 98 ""; do
@@ -60,8 +35,14 @@ for d in $(seq -w 1 8); do
 done
 
 # SIRET data
-wget --progress=bar:force:noscroll -q --show-progress https://files.data.gouv.fr/insee-sirene/StockUniteLegale_utf8.zip --directory-prefix="$DATA_DIR"
-unzip "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
+# NOTE: historical SIRENE files have been migrated away from files.data.gouv.fr
+# See: https://files.data.gouv.fr/insee-sirene/migration-fichiers-sirene.txt
+STOCK_UNITE_LEGALE_URL="https://object.files.data.gouv.fr/data-pipeline-open/siren/stock/StockUniteLegale_utf8.zip"
+wget --progress=bar:force:noscroll -q --show-progress "$STOCK_UNITE_LEGALE_URL" -O "${DATA_DIR}/StockUniteLegale_utf8.zip"
+unzip -o "${DATA_DIR}/StockUniteLegale_utf8.zip" -d "${DATA_DIR}"
+
+# Fail fast if the expected CSV is not present (required by import.sql)
+test -f "${DATA_DIR}/StockUniteLegale_utf8.csv"
 
 # WEEZ data
 wget --progress=bar:force:noscroll -q --show-progress https://www.data.gouv.fr/fr/datasets/r/a22e54f7-b937-4483-9a72-aad2ea1316f1 -O "${DATA_DIR}/WEEZ.csv"
