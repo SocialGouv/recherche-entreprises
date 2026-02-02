@@ -1,3 +1,10 @@
+## [1.10.14](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.13...v1.10.14) (2026-02-02)
+
+
+### Bug Fixes
+
+* **up:** new url for StockUniteLegale_utf8.zip (+cleanup) ([739c692](https://github.com/SocialGouv/recherche-entreprises/commit/739c692e10a4aa342c16062137f2ebde99adcde5))
+
 ## [1.10.13](https://github.com/SocialGouv/recherche-entreprises/compare/v1.10.12...v1.10.13) (2025-07-01)
 
 
